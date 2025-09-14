@@ -34,9 +34,34 @@ text = "Join"
 layout_mode = 2
 text = "Host"
 
+[node name="refresh" type="Button" parent="menu"]
+layout_mode = 2
+text = "Refresh"
+
+[node name="chat" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="chatbox" type="Label" parent="chat"]
+layout_mode = 2
+
+[node name="chatinput" type="TextEdit" parent="chat"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+placeholder_text = "chat"
+
+[node name="send" type="Button" parent="chat"]
+layout_mode = 2
+text = "Send"
+
 [node name="players" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 
 [connection signal="pressed" from="menu/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="menu/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="menu/refresh" to="." method="_on_refresh_pressed"]
+[connection signal="pressed" from="chat/send" to="." method="_on_join_pressed"]
