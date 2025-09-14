@@ -48,7 +48,7 @@ grow_vertical = 0
 [node name="chatbox" type="Label" parent="chat"]
 layout_mode = 2
 
-[node name="chatinput" type="TextEdit" parent="chat"]
+[node name="chatinput" type="LineEdit" parent="chat"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 placeholder_text = "chat"
@@ -64,4 +64,5 @@ anchors_preset = -1
 [connection signal="pressed" from="menu/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="menu/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="menu/refresh" to="." method="_on_refresh_pressed"]
-[connection signal="pressed" from="chat/send" to="." method="_on_join_pressed"]
+[connection signal="text_submitted" from="chat/chatinput" to="." method="_on_chatinput_text_submitted"]
+[connection signal="pressed" from="chat/send" to="." method="_on_send_pressed"]

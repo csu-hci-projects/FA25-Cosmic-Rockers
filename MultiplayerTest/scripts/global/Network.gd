@@ -7,6 +7,9 @@ var lobby_id: int = 0
 var lobby_members: Array = []
 var lobby_members_max: int = 8
 
+signal lobby_members_updated(lobby_members: Array)
+signal chat_received(username: String, message: String)
+
 func _ready():
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
@@ -36,8 +39,11 @@ func join_lobby(this_lobby_id: int):
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int):
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		lobby_id = this_lobby_id
+		
+		print("lobby joined: ", lobby_id)
+		
 		get_lobby_members()
-		make_p2p_handshake()
+		send_user_packet("handshake")
 
 func get_lobby_members():
 	lobby_members.clear()
@@ -47,6 +53,8 @@ func get_lobby_members():
 		var member_steam_id: int = Steam.getLobbyMemberByIndex(lobby_id, member)
 		var member_steam_name: String = Steam.getFriendPersonaName(member_steam_id)
 		lobby_members.append({"steam_id": member_steam_id, "steam_name": member_steam_name})
+	
+	emit_signal("lobby_members_updated", lobby_members)
 
 func send_p2p_packet(this_target: int, packet_data: Dictionary, send_type: int = 0):
 	var channel: int = 0
@@ -65,8 +73,9 @@ func _on_p2p_session_request(remote_id: int):
 	var this_requester: String = Steam.getFriendPersonaName(remote_id)
 	Steam.acceptP2PSessionWithUser(remote_id)
 
-func make_p2p_handshake():
-	send_user_packet("handshake")
+func send_chat(message: String):
+	emit_signal("chat_received", Global.steam_username, message)
+	send_user_packet("chat", {"chat": message})
 
 func send_user_packet(message: String, data: Dictionary = {}):
 	data['message'] = message
@@ -79,10 +88,9 @@ func read_all_p2p_packets(read_count: int = 0):
 		return
 	
 	if Steam.getAvailableP2PPacketSize(0) > 0:
-		print(read_count)
 		read_p2p_packet()
 		read_all_p2p_packets(read_count + 1)
-#109775243909915749
+
 func read_p2p_packet():
 	var packet_size: int = Steam.getAvailableP2PPacketSize(0)
 	
@@ -95,7 +103,7 @@ func read_p2p_packet():
 		if readable_data.has("message"):
 			match readable_data["message"]:
 				"handshake":
-					print("player: ", readable_data["steam_username"]," has joined.")
+					emit_signal("chat_received", readable_data["steam_username"], " JOINED")
 					get_lobby_members()
 				"chat":
-					print("player: ", readable_data["steam_username"]," says ",readable_data["chat"])
+					emit_signal("chat_received", readable_data["steam_username"], readable_data["chat"])
