@@ -46,6 +46,7 @@ grow_vertical = 0
 
 [node name="ready" type="Button" parent="lobby_menu"]
 layout_mode = 2
+toggle_mode = true
 text = "Ready"
 
 [node name="start" type="Button" parent="lobby_menu"]

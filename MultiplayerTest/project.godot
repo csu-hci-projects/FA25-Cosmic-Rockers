@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global/Global.gd"
 Network="*res://scripts/global/Network.gd"
+NetworkState="*res://scripts/global/NetworkState.gd"
 
 [dotnet]
 

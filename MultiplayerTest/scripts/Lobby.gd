@@ -59,10 +59,11 @@ func _add_chat_message(username: String, message: String):
 	chatbox.text = chatbox.text + '\n' + new_chat
 
 func _on_ready_toggled(toggled_on: bool) -> void:
-	Network.send_update("ready", { "status": toggled_on })
+	Network.send_update("ready_status", { "status": toggled_on })
 
-func _on_start_pressed(toggled_on: bool) -> void:
-	pass # Replace with function body.
+func _on_start_pressed() -> void:
+	if NetworkState.all_ready():
+		print("ready")
 
 func _on_disconnect_pressed() -> void:
 	Network.disconnect_lobby()

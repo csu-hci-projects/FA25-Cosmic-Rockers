@@ -9,9 +9,10 @@ var lobby_members_max: int = 8
 
 signal lobby_members_updated(lobby_members: Array)
 signal chat_received(username: String, message: String)
-signal update_received(type: String, id: int, data: Dictionary)
 signal lobby_joined()
 signal lobby_left()
+
+signal update_ready_status(id: int, data: Dictionary)
 
 func _ready():
 	Steam.lobby_created.connect(_on_lobby_created)
@@ -45,19 +46,25 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		lobby_id = this_lobby_id
 		
+		NetworkState.set_player_data(Global.steam_id, {"steam_username": Global.steam_username})
+		
 		emit_signal("lobby_joined")
 		get_lobby_members()
 		send_user_packet("handshake")
 
 func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
+	var steam_username = NetworkState.get_player_data(changed_id)["steam_username"]
+	
 	if chat_state == 2:  # Left
-		emit_signal("chat_received", "SYSTEM", "user left")
+		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" left")
 	elif chat_state == 4:  # Disconnected
-		emit_signal("chat_received", "SYSTEM", "user disconnected")
+		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" disconnected")
 	elif chat_state == 8:  # Kicked
-		emit_signal("chat_received", "SYSTEM", "user kicked")
+		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" kicked")
 	elif chat_state == 16: # Banned
-		emit_signal("chat_received", "SYSTEM", "user banned")
+		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" banned")
+	
+	NetworkState.remove_player(changed_id)
 
 func disconnect_lobby():
 	Steam.leaveLobby(lobby_id)
@@ -106,11 +113,12 @@ func send_chat(message: String) -> bool:
 
 # USAGE
 # Network.send_update("position", {"x": 1, "y":2, "z":3})
-func send_update(type: String, data: Dictionary = {}) -> bool:
-	return send_user_packet("update", {"data": data})
+func send_update(type: String, data: Dictionary) -> bool:
+	NetworkState.set_player_data(Global.steam_id, {type: data})
+	return send_user_packet("update_" + type, {"data": data})
 
 func send_user_packet(type: String, data: Dictionary = {}) -> bool:
-	data['message'] = type
+	data['type'] = type
 	data['steam_id'] = Global.steam_id
 	data['steam_username'] = Global.steam_username
 	return send_p2p_packet(0, data)
@@ -130,18 +138,38 @@ func read_all_p2p_packets(read_count: int = 0):
 func read_p2p_packet():
 	var packet_size: int = Steam.getAvailableP2PPacketSize(0)
 	
-	if packet_size > 0:
-		var this_packet: Dictionary = Steam.readP2PPacket(packet_size, 0)
-		var packet_sender: int = this_packet['remote_steam_id']
-		var packet_code: PackedByteArray = this_packet['data']
-		var readable_data: Dictionary = bytes_to_var(packet_code)
-		
-		if readable_data.has("message"):
-			match readable_data["message"]:
-				"handshake":
-					emit_signal("chat_received", "SYSTEM", readable_data["steam_username"] + " joined")
-					get_lobby_members()
-				"chat":
-					emit_signal("chat_received", readable_data["steam_username"], readable_data["chat"])
-				"update":
-					emit_signal("update_received", readable_data["type"], readable_data["steam_id"], readable_data["data"])
+	if packet_size == 0:
+		return
+	
+	var this_packet: Dictionary = Steam.readP2PPacket(packet_size, 0)
+	var packet_sender: int = this_packet['remote_steam_id']
+	var packet_code: PackedByteArray = this_packet['data']
+	var readable_data: Dictionary = bytes_to_var(packet_code)
+	
+	if !readable_data.has("type"):
+		return
+	
+	var data_type = readable_data["type"]
+	
+	match data_type:
+		"handshake":
+			emit_signal("chat_received", "SYSTEM", readable_data["steam_username"] + " joined")
+			NetworkState.set_player_data(readable_data["steam_id"], {"steam_username": readable_data["steam_username"]})
+			get_lobby_members()
+			if is_host:
+				var data = {}
+				data['type'] = "initialize_state"
+				data['players'] = NetworkState.get_all_players_data()
+				send_p2p_packet(0, data)
+		"initialize_state":
+			for steam_id in readable_data["players"]:
+				NetworkState.set_player_data(steam_id, readable_data["players"][steam_id])
+		"chat":
+			emit_signal("chat_received", readable_data["steam_username"], readable_data["chat"])
+	
+	if data_type.begins_with("update_"):
+		if has_signal(data_type):
+			emit_signal(data_type, readable_data["steam_id"], readable_data["data"])
+			NetworkState.set_player_data(readable_data["steam_id"], { data_type.replace("update_", ""): readable_data["data"] })
+		else:
+			push_warning("No signal called %s exists!" % readable_data["type"])
