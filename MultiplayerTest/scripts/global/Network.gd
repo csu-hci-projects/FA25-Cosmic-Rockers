@@ -11,6 +11,7 @@ signal lobby_members_updated(lobby_members: Array)
 signal chat_received(username: String, message: String)
 signal update_received(type: String, id: int, data: Dictionary)
 signal lobby_joined()
+signal lobby_left()
 
 func _ready():
 	Steam.lobby_created.connect(_on_lobby_created)
@@ -48,14 +49,14 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		get_lobby_members()
 		send_user_packet("handshake")
 
-func _on_lobby_chat_update(lobby_id: int, steam_id: int, state_change: int):
-	if state_change == 2:  # Left
+func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
+	if chat_state == 2:  # Left
 		emit_signal("chat_received", "SYSTEM", "user left")
-	elif state_change == 4:  # Disconnected
+	elif chat_state == 4:  # Disconnected
 		emit_signal("chat_received", "SYSTEM", "user disconnected")
-	elif state_change == 8:  # Kicked
+	elif chat_state == 8:  # Kicked
 		emit_signal("chat_received", "SYSTEM", "user kicked")
-	elif state_change == 16: # Banned
+	elif chat_state == 16: # Banned
 		emit_signal("chat_received", "SYSTEM", "user banned")
 
 func disconnect_lobby():
@@ -63,7 +64,7 @@ func disconnect_lobby():
 	lobby_id = 0
 	is_host = false
 	lobby_members.clear()
-	emit_signal("lobby_members_updated", lobby_members)
+	emit_signal("lobby_left")
 
 func get_lobby_members():
 	lobby_members.clear()

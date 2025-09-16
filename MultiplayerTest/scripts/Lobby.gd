@@ -15,6 +15,7 @@ func _ready():
 	Network.chat_received.connect(_add_chat_message)
 	Network.lobby_members_updated.connect(_update_lobby)
 	Network.lobby_joined.connect(_on_lobby_joined)
+	Network.lobby_left.connect(_on_lobby_left)
 	
 	chat.visible = false
 	lobby_menu.visible = false
@@ -65,6 +66,9 @@ func _on_start_pressed(toggled_on: bool) -> void:
 
 func _on_disconnect_pressed() -> void:
 	Network.disconnect_lobby()
+
+func _on_lobby_left():
 	menu.visible = true
 	lobby_menu.visible = false
 	chat.visible = false
+	chatbox.text = ""
