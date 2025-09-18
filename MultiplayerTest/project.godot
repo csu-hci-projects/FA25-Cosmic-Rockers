@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://scripts/global/Global.gd"
-Network="*res://scripts/global/Network.gd"
 NetworkState="*res://scripts/global/NetworkState.gd"
+Multiplayer="*res://scripts/global/Multiplayer.gd"
 
 [dotnet]
 

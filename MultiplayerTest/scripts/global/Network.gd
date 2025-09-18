@@ -1,3 +1,4 @@
+class_name Network
 extends Node
 
 const PACKET_READ_LIMIT: int = 32
@@ -11,8 +12,6 @@ signal lobby_members_updated(lobby_members: Array)
 signal chat_received(username: String, message: String)
 signal lobby_joined()
 signal lobby_left()
-
-signal update_ready_status(id: int, data: Dictionary)
 
 var game_scene = preload("res://scenes/game.tscn")
 
@@ -131,11 +130,9 @@ func send_chat(message: String) -> bool:
 		return true
 	return false
 
-# USAGE
-# Network.send_update("position", {"x": 1, "y":2, "z":3})
-func send_update(type: String, data: Dictionary) -> bool:
-	NetworkState.set_player_data(Global.steam_id, {type: data})
-	return send_user_packet("update_" + type, {"data": data})
+func send_update(key: String, value: Dictionary) -> bool:
+	NetworkState.set_player_data(Global.steam_id, {key: value})
+	return send_user_packet("update_" + key, {"data": value})
 
 func send_user_packet(type: String, data: Dictionary = {}) -> bool:
 	data['type'] = type
@@ -190,9 +187,10 @@ func read_p2p_packet():
 			start_game()
 	
 	if data_type.begins_with("update_"):
-		if has_signal(data_type):
-			emit_signal(data_type, readable_data["steam_id"], readable_data["data"])
-			NetworkState.set_player_data(readable_data["steam_id"], { data_type.replace("update_", ""): readable_data["data"] })
+		var type = data_type.replace("update_", "")
+		NetworkState.set_player_data(readable_data["steam_id"], { type: readable_data["data"] })
+		if has_signal("on_received_" + type):
+			emit_signal("on_received_" + type, readable_data["steam_id"], readable_data["data"])
 		else:
 			push_warning("No signal called %s exists!" % readable_data["type"])
 
