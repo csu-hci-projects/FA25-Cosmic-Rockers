@@ -63,7 +63,7 @@ func _on_ready_toggled(toggled_on: bool) -> void:
 
 func _on_start_pressed() -> void:
 	if NetworkState.all_ready():
-		print("ready")
+		Network.start_game()
 
 func _on_disconnect_pressed() -> void:
 	Network.disconnect_lobby()
@@ -73,3 +73,7 @@ func _on_lobby_left():
 	lobby_menu.visible = false
 	chat.visible = false
 	chatbox.text = ""
+
+
+func _on_invite_pressed() -> void:
+	Network.open_invite_tab()

@@ -53,6 +53,10 @@ text = "Ready"
 layout_mode = 2
 text = "Start Game"
 
+[node name="invite" type="Button" parent="lobby_menu"]
+layout_mode = 2
+text = "Invite"
+
 [node name="disconnect" type="Button" parent="lobby_menu"]
 layout_mode = 2
 text = "Disconnect"
@@ -84,6 +88,7 @@ anchors_preset = -1
 [connection signal="pressed" from="menu/host" to="." method="_on_host_pressed"]
 [connection signal="toggled" from="lobby_menu/ready" to="." method="_on_ready_toggled"]
 [connection signal="pressed" from="lobby_menu/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="lobby_menu/invite" to="." method="_on_invite_pressed"]
 [connection signal="pressed" from="lobby_menu/disconnect" to="." method="_on_disconnect_pressed"]
 [connection signal="text_submitted" from="chat/chatinput" to="." method="_on_chatinput_text_submitted"]
 [connection signal="pressed" from="chat/send" to="." method="_on_send_pressed"]

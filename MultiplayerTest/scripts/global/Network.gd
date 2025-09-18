@@ -14,6 +14,8 @@ signal lobby_left()
 
 signal update_ready_status(id: int, data: Dictionary)
 
+var game_scene = preload("res://scenes/game.tscn")
+
 func _ready():
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
@@ -27,6 +29,15 @@ func _process(delta):
 
 func _on_join_requested(this_lobby_id: int, steam_id: int):
 	join_lobby(this_lobby_id)
+
+func open_invite_tab():
+	if Steam.isOverlayEnabled():
+		if lobby_id > 0:
+			Steam.activateGameOverlayInviteDialog(lobby_id)
+		else:
+			print("No active lobby to invite friends to.")
+	else:
+		print("Steam overlay is not enabled or not available.")
 
 func create_lobby():
 	if lobby_id == 0:
@@ -175,6 +186,8 @@ func read_p2p_packet():
 				NetworkState.set_player_data(steam_id, readable_data["players"][steam_id])
 		"chat":
 			emit_signal("chat_received", readable_data["steam_username"], readable_data["chat"])
+		"start_game":
+			start_game()
 	
 	if data_type.begins_with("update_"):
 		if has_signal(data_type):
@@ -182,3 +195,8 @@ func read_p2p_packet():
 			NetworkState.set_player_data(readable_data["steam_id"], { data_type.replace("update_", ""): readable_data["data"] })
 		else:
 			push_warning("No signal called %s exists!" % readable_data["type"])
+
+func start_game():
+	if is_host:
+		send_p2p_packet(0, {"type": "start_game"})
+	get_tree().change_scene_to_packed(game_scene)
