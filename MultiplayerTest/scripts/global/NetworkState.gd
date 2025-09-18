@@ -20,7 +20,6 @@ func get_player_data(steam_id: int) -> Dictionary:
 func get_all_players_data() -> Dictionary:
 	var copy := {}
 	for steam_id in players.keys():
-		#print(players[steam_id])
 		copy[steam_id] = players[steam_id].duplicate(true)
 	return copy
 
@@ -30,6 +29,6 @@ func remove_player(steam_id: int):
 
 func all_ready() -> bool:
 	for steam_id in players.keys():
-		if !players[steam_id].has("ready_status") || !players[steam_id]["ready_status"]:
+		if !players[steam_id].has("ready_status") || !players[steam_id]["ready_status"]["status"]:
 			return false
 	return true

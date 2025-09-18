@@ -19,10 +19,14 @@ func _ready():
 	Steam.lobby_joined.connect(_on_lobby_joined)
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
+	Steam.join_requested.connect(_on_join_requested)
 
 func _process(delta):
 	if lobby_id > 0:
 		read_all_p2p_packets()
+
+func _on_join_requested(this_lobby_id: int, steam_id: int):
+	join_lobby(this_lobby_id)
 
 func create_lobby():
 	if lobby_id == 0:
@@ -34,6 +38,8 @@ func _on_lobby_created(connect: int, this_lobby_id: int):
 		is_host = true
 		Steam.setLobbyJoinable(lobby_id, true)
 		Steam.setLobbyData(lobby_id, "name", "My Lobby")
+		Steam.setLobbyData(lobby_id, "connect", str(lobby_id))
+		Steam.setRichPresence("connect", str(lobby_id))
 		
 		emit_signal("chat_received", "SYSTEM", "lobby created: " + str(lobby_id))
 		
@@ -53,6 +59,9 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		send_user_packet("handshake")
 
 func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
+	if chat_state == 1:
+		return
+	
 	var steam_username = NetworkState.get_player_data(changed_id)["steam_username"]
 	
 	if chat_state == 2:  # Left
