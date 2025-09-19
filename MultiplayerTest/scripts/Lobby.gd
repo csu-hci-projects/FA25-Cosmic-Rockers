@@ -59,10 +59,10 @@ func _add_chat_message(username: String, message: String):
 	chatbox.text = chatbox.text + '\n' + new_chat
 
 func _on_ready_toggled(toggled_on: bool) -> void:
-	Multiplayer.update_ready_status({ "status": toggled_on })
+	Multiplayer.update_ready_status(toggled_on)
 
 func _on_start_pressed() -> void:
-	if NetworkState.all_ready():
+	if PlayerState.all_ready():
 		Multiplayer.start_game()
 
 func _on_disconnect_pressed() -> void:

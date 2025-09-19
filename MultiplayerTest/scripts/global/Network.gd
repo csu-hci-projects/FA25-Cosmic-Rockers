@@ -62,7 +62,7 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		lobby_id = this_lobby_id
 		
-		NetworkState.set_player_data(Global.steam_id, {"steam_username": Global.steam_username})
+		PlayerState.set_player_data(Global.steam_id, {"steam_username": Global.steam_username})
 		
 		emit_signal("lobby_joined")
 		get_lobby_members()
@@ -72,7 +72,7 @@ func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: in
 	if chat_state == 1:
 		return
 	
-	var steam_username = NetworkState.get_player_data(changed_id)["steam_username"]
+	var steam_username = PlayerState.get_player_data(changed_id)["steam_username"]
 	
 	if chat_state == 2:  # Left
 		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" left")
@@ -83,7 +83,7 @@ func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: in
 	elif chat_state == 16: # Banned
 		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" banned")
 	
-	NetworkState.remove_player(changed_id)
+	PlayerState.remove_player(changed_id)
 
 func disconnect_lobby():
 	Steam.leaveLobby(lobby_id)
@@ -130,9 +130,13 @@ func send_chat(message: String) -> bool:
 		return true
 	return false
 
-func send_update(key: String, value: Dictionary) -> bool:
-	NetworkState.set_player_data(Global.steam_id, {key: value})
+func send_player_update(key: String, value: Dictionary) -> bool:
+	PlayerState.set_player_data(Global.steam_id, {key: value})
 	return send_user_packet("update_" + key, {"data": value})
+
+func send_world_update(cell: Vector2i, id: int) -> bool:
+	WorldState.update_tile(cell, id)
+	return send_user_packet("set_tile", {"data": {"cell": cell, "id": id}})
 
 func send_user_packet(type: String, data: Dictionary = {}) -> bool:
 	data['type'] = type
@@ -171,24 +175,28 @@ func read_p2p_packet():
 	match data_type:
 		"handshake":
 			emit_signal("chat_received", "SYSTEM", readable_data["steam_username"] + " joined")
-			NetworkState.set_player_data(readable_data["steam_id"], {"steam_username": readable_data["steam_username"]})
+			PlayerState.set_player_data(readable_data["steam_id"], {"steam_username": readable_data["steam_username"]})
 			get_lobby_members()
 			if is_host:
 				var data = {}
 				data['type'] = "initialize_state"
-				data['players'] = NetworkState.get_all_players_data()
+				data['players'] = PlayerState.get_all_players_data()
 				send_p2p_packet(0, data)
 		"initialize_state":
 			for steam_id in readable_data["players"]:
-				NetworkState.set_player_data(steam_id, readable_data["players"][steam_id])
+				PlayerState.set_player_data(steam_id, readable_data["players"][steam_id])
 		"chat":
 			emit_signal("chat_received", readable_data["steam_username"], readable_data["chat"])
 		"start_game":
 			start_game()
+		"set_tile":
+			var cell: Vector2i = readable_data["data"]["cell"]
+			var id: int = readable_data["data"]["id"]
+			emit_signal("on_received_tile", cell, id)
 	
 	if data_type.begins_with("update_"):
 		var type = data_type.replace("update_", "")
-		NetworkState.set_player_data(readable_data["steam_id"], { type: readable_data["data"] })
+		PlayerState.set_player_data(readable_data["steam_id"], { type: readable_data["data"] })
 		if has_signal("on_received_" + type):
 			emit_signal("on_received_" + type, readable_data["steam_id"], readable_data["data"])
 		else:
