@@ -199,6 +199,7 @@ func read_p2p_packet():
 			var map_height: int = readable_data["data"]["map_height"]
 			WorldState.set_map_data(map_data, map_width, map_height)
 	
+	#player specific functions
 	if data_type.begins_with("update_"):
 		var type = data_type.replace("update_", "")
 		PlayerState.set_player_data(readable_data["steam_id"], { type: readable_data["data"] })

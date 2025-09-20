@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ie515s35k8c"]
+
+[ext_resource type="Script" uid="uid://bojqf4p2v5cq6" path="res://scripts/LobbyPlayer.gd" id="1_6upnp"]
+[ext_resource type="Texture2D" uid="uid://bcob6wc2jimxn" path="res://icon.svg" id="2_v5tub"]
+
+[node name="lobby_player" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+script = ExtResource("1_6upnp")
+
+[node name="picture" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_v5tub")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="username" type="Label" parent="."]
+layout_mode = 2
+text = "username"
+
+[node name="ready_check" type="TextureRect" parent="."]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("2_v5tub")
+expand_mode = 2
+stretch_mode = 4

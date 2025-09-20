@@ -11,11 +11,14 @@ extends Control
 @onready var lobby_menu = $lobby_menu
 @onready var start_button = $lobby_menu/start
 
+var lobby_player = preload("res://scenes/lobby_player.tscn")
+
 func _ready():
 	Multiplayer.chat_received.connect(_add_chat_message)
 	Multiplayer.lobby_members_updated.connect(_update_lobby)
 	Multiplayer.lobby_joined.connect(_on_lobby_joined)
 	Multiplayer.lobby_left.connect(_on_lobby_left)
+	Multiplayer.on_received_ready_status.connect(_on_ready_status_changed)
 	
 	chat.visible = false
 	lobby_menu.visible = false
@@ -40,9 +43,9 @@ func _update_lobby(lobby_members: Array):
 		child.queue_free()
 	
 	for member in lobby_members:
-		var label = Label.new()
-		label.text = member['steam_name']
-		players.add_child(label)
+		var player = lobby_player.instantiate()
+		players.add_child(player)
+		player.load_player(member["steam_id"], member["steam_name"])
 
 func _on_lobby_joined():
 	menu.visible = false
@@ -59,7 +62,11 @@ func _add_chat_message(username: String, message: String):
 	chatbox.text = chatbox.text + '\n' + new_chat
 
 func _on_ready_toggled(toggled_on: bool) -> void:
+	_on_ready_status_changed(Global.steam_id, {"ready_status":{"status": toggled_on}})
 	Multiplayer.update_ready_status(toggled_on)
+
+func _on_ready_status_changed(steam_id: int, data: Dictionary):
+	pass
 
 func _on_start_pressed() -> void:
 	if PlayerState.all_ready():
