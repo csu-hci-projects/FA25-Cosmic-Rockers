@@ -4,14 +4,16 @@ var map_width: int = 0
 var map_height: int = 0
 var map_data: Array = []
 
-func _ready() -> void:
+func initialize() -> Dictionary:
 	map_width = 10
 	map_height = 10
 	map_data = []
 	
 	for j in range(map_height):
 		for i in range(map_width):
-			map_data.append(0)
+			map_data.append(randi_range(0,1))
+	
+	return {"map_data": map_data, "map_width": map_width, "map_height": map_height}
 
 func get_tile_id(cell: Vector2i):
 	return cell.x + cell.y * map_width

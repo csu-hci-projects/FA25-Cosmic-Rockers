@@ -193,6 +193,11 @@ func read_p2p_packet():
 			var cell: Vector2i = readable_data["data"]["cell"]
 			var id: int = readable_data["data"]["id"]
 			emit_signal("on_received_tile", cell, id)
+		"set_map_data":
+			var map_data: Array = readable_data["data"]["map_data"]
+			var map_width: int = readable_data["data"]["map_width"]
+			var map_height: int = readable_data["data"]["map_height"]
+			WorldState.set_map_data(map_data, map_width, map_height)
 	
 	if data_type.begins_with("update_"):
 		var type = data_type.replace("update_", "")
@@ -205,4 +210,6 @@ func read_p2p_packet():
 func start_game():
 	if is_host:
 		send_p2p_packet(0, {"type": "start_game"})
+		var map_data: Dictionary = WorldState.initialize()
+		send_p2p_packet(0, {"type": "set_map_data", "data":map_data})
 	get_tree().change_scene_to_packed(game_scene)

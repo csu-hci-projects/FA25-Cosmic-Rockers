@@ -8,3 +8,6 @@
 [node name="tilemap" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_yqjtg")
 script = ExtResource("2_lnu2h")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 325)
