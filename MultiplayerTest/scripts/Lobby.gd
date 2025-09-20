@@ -66,7 +66,9 @@ func _on_ready_toggled(toggled_on: bool) -> void:
 	Multiplayer.update_ready_status(toggled_on)
 
 func _on_ready_status_changed(steam_id: int, data: Dictionary):
-	pass
+	for player in players.get_children():
+		if player.steam_id == steam_id:
+			player.set_ready_status(data["ready_status"]["status"])
 
 func _on_start_pressed() -> void:
 	if PlayerState.all_ready():
