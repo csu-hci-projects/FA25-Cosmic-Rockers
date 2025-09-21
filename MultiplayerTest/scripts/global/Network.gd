@@ -186,6 +186,7 @@ func read_p2p_packet():
 		"initialize_state":
 			for steam_id in readable_data["players"]:
 				PlayerState.set_player_data(steam_id, readable_data["players"][steam_id])
+				get_lobby_members()
 		"chat":
 			emit_signal("chat_received", readable_data["steam_username"], readable_data["chat"])
 		"start_game":

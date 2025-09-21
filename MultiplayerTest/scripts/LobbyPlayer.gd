@@ -19,6 +19,7 @@ func load_player(this_steam_id: int, this_steam_name: String):
 	var ready_status: bool = false
 	if player_data.has("ready_status"):
 		ready_status = player_data["ready_status"]["status"]
+	
 	set_ready_status(ready_status)
 
 func load_avatar(steam_id: int):
