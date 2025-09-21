@@ -84,6 +84,7 @@ func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: in
 		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" banned")
 	
 	PlayerState.remove_player(changed_id)
+	get_lobby_members()
 
 func disconnect_lobby():
 	Steam.leaveLobby(lobby_id)

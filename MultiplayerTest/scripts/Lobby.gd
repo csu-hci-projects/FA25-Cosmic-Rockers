@@ -62,13 +62,13 @@ func _add_chat_message(username: String, message: String):
 	chatbox.text = chatbox.text + '\n' + new_chat
 
 func _on_ready_toggled(toggled_on: bool) -> void:
-	_on_ready_status_changed(Global.steam_id, {"ready_status":{"status": toggled_on}})
+	_on_ready_status_changed(Global.steam_id, {"status": toggled_on})
 	Multiplayer.update_ready_status(toggled_on)
 
 func _on_ready_status_changed(steam_id: int, data: Dictionary):
 	for player in players.get_children():
 		if player.steam_id == steam_id:
-			player.set_ready_status(data["ready_status"]["status"])
+			player.set_ready_status(data["status"])
 
 func _on_start_pressed() -> void:
 	if PlayerState.all_ready():

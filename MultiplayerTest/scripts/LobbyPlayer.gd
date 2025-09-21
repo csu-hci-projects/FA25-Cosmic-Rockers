@@ -10,9 +10,16 @@ var ready_sprite = preload("res://sprites/ui/green_check.png")
 var unready_sprite = preload("res://sprites/ui/red_cross.png")
 
 func load_player(this_steam_id: int, this_steam_name: String):
+	var player_data = PlayerState.get_player_data(this_steam_id)
+	
 	steam_id = this_steam_id
 	username.text = this_steam_name
 	load_avatar(steam_id)
+	
+	var ready_status: bool = false
+	if player_data.has("ready_status"):
+		ready_status = player_data["ready_status"]["status"]
+	set_ready_status(ready_status)
 
 func load_avatar(steam_id: int):
 	var avatar_id = Steam.getSmallFriendAvatar(steam_id)
