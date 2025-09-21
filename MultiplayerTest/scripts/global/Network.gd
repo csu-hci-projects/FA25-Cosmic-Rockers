@@ -29,19 +29,6 @@ func _process(delta):
 func _on_join_requested(this_lobby_id: int, steam_id: int):
 	join_lobby(this_lobby_id)
 
-func open_invite_tab():
-	if Steam.isOverlayEnabled():
-		if lobby_id > 0:
-			Steam.activateGameOverlayInviteDialog(lobby_id)
-		else:
-			print("No active lobby to invite friends to.")
-	else:
-		print("Steam overlay is not enabled or not available.")
-
-func create_lobby():
-	if lobby_id == 0:
-		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max) 
-
 func _on_lobby_created(connect: int, this_lobby_id: int):
 	if connect == 1:
 		lobby_id = this_lobby_id
@@ -55,9 +42,6 @@ func _on_lobby_created(connect: int, this_lobby_id: int):
 		
 		var set_relay: bool = Steam.allowP2PPacketRelay(true)
 
-func join_lobby(this_lobby_id: int):
-	Steam.joinLobby(this_lobby_id)
-
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int):
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		lobby_id = this_lobby_id
@@ -69,22 +53,42 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		send_user_packet("handshake")
 
 func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
-	if chat_state == 1:
+	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
 		return
 	
 	var steam_username = PlayerState.get_player_data(changed_id)["steam_username"]
 	
-	if chat_state == 2:  # Left
+	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT:
 		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" left")
-	elif chat_state == 4:  # Disconnected
+	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_DISCONNECTED:
 		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" disconnected")
-	elif chat_state == 8:  # Kicked
+	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_KICKED:
 		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" kicked")
-	elif chat_state == 16: # Banned
+	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_BANNED:
 		emit_signal("chat_received", "SYSTEM", "user "+steam_username+" banned")
 	
 	PlayerState.remove_player(changed_id)
 	get_lobby_members()
+
+func _on_p2p_session_request(remote_id: int):
+	var this_requester: String = Steam.getFriendPersonaName(remote_id)
+	Steam.acceptP2PSessionWithUser(remote_id)
+
+func open_invite_tab():
+	if Steam.isOverlayEnabled():
+		if lobby_id > 0:
+			Steam.activateGameOverlayInviteDialog(lobby_id)
+		else:
+			print("No active lobby to invite friends to.")
+	else:
+		print("Steam overlay is not enabled or not available.")
+
+func create_lobby():
+	if lobby_id == 0:
+		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max) 
+
+func join_lobby(this_lobby_id: int):
+	Steam.joinLobby(this_lobby_id)
 
 func disconnect_lobby():
 	Steam.leaveLobby(lobby_id)
@@ -144,10 +148,6 @@ func send_user_packet(type: String, data: Dictionary = {}) -> bool:
 	data['steam_id'] = Global.steam_id
 	data['steam_username'] = Global.steam_username
 	return send_p2p_packet(0, data)
-
-func _on_p2p_session_request(remote_id: int):
-	var this_requester: String = Steam.getFriendPersonaName(remote_id)
-	Steam.acceptP2PSessionWithUser(remote_id)
 
 func read_all_p2p_packets(read_count: int = 0):
 	if read_count > PACKET_READ_LIMIT:

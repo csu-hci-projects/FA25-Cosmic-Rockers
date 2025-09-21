@@ -31,3 +31,8 @@ func set_map_data(data: Array, width: int, height: int):
 
 func update_tile(cell: Vector2i, value: int):
 	map_data[get_tile_id(cell)] = value
+
+func clear():
+	map_width = 0
+	map_height = 0
+	map_data.clear()

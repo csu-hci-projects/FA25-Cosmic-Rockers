@@ -32,3 +32,6 @@ func all_ready() -> bool:
 		if !players[steam_id].has("ready_status") || !players[steam_id]["ready_status"]["status"]:
 			return false
 	return true
+
+func clear():
+	players.clear()

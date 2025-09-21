@@ -9,7 +9,8 @@ extends Control
 
 @onready var menu = $menu
 @onready var lobby_menu = $lobby_menu
-@onready var start_button = $lobby_menu/start
+@onready var start_button: Button = $lobby_menu/start
+@onready var ready_button: Button = $lobby_menu/ready
 
 var lobby_player = preload("res://scenes/lobby_player.tscn")
 
@@ -78,10 +79,15 @@ func _on_disconnect_pressed() -> void:
 	Multiplayer.disconnect_lobby()
 
 func _on_lobby_left():
+	PlayerState.clear()
+	WorldState.clear()
+	
 	menu.visible = true
 	lobby_menu.visible = false
 	chat.visible = false
 	chatbox.text = ""
+	ready_button.set_pressed_no_signal(false)
+	
 	_update_lobby([])
 
 func _on_invite_pressed() -> void:
