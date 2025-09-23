@@ -1,17 +1,20 @@
 extends TileMapLayer
 
 func _ready() -> void:
-	fill_tilemap()
+	create_tilemap()
 	Multiplayer.on_received_tile.connect(_update_tile)
 
-func fill_tilemap():
-	var width: int = WorldState.map_width 
-	var height: int = WorldState.map_height
-	
-	for j in range(height):
-		for i in range(width):
-			var cell: Vector2i = Vector2i(i, j)
-			set_cell(cell, WorldState.get_tile_data(cell), Vector2i.ZERO, 0)
+##for testing purposes
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_right"):
+		var width: int = 140
+		var height: int = 80
+		var map = TerrainGenerator.generate(width,height, [.2, .4], [0, 0], [-2, 2], [0, 0])
+		
+		for j in range(height):
+			for i in range(width):
+				var cell: Vector2i = Vector2i(i, j)
+				set_cell(cell, map[i + j * width], Vector2i.ZERO, 0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -20,6 +23,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		var cell: Vector2i = local_to_map(local_pos)
 		
 		update_tile(cell, -1)
+##testing end
+
+func create_tilemap():
+	var width: int = WorldState.map_width 
+	var height: int = WorldState.map_height
+	
+	for j in range(height):
+		for i in range(width):
+			var cell: Vector2i = Vector2i(i, j)
+			set_cell(cell, WorldState.get_tile_data(cell), Vector2i.ZERO, 0)
 
 func update_tile(cell: Vector2i, tile_id: int):
 	Multiplayer.update_tile(cell, tile_id)

@@ -1,12 +1,16 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c3qfekxo3qskl"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://c3qfekxo3qskl"]
 
-[ext_resource type="Texture2D" uid="uid://bcob6wc2jimxn" path="res://icon.svg" id="1_6h3gn"]
+[ext_resource type="Texture2D" uid="uid://bm76kcj8dysoa" path="res://sprites/ui/deafulttile.png" id="1_6h3gn"]
+[ext_resource type="Texture2D" uid="uid://jjnmodafmwkt" path="res://sprites/ui/deafulttile2.png" id="2_gqj8m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gqj8m"]
 texture = ExtResource("1_6h3gn")
-texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1d8aa"]
+texture = ExtResource("2_gqj8m")
 0:0/0 = 0
 
 [resource]
-tile_size = Vector2i(128, 128)
-sources/0 = SubResource("TileSetAtlasSource_gqj8m")
+sources/2 = SubResource("TileSetAtlasSource_1d8aa")
+sources/1 = SubResource("TileSetAtlasSource_gqj8m")

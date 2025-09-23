@@ -5,13 +5,9 @@ var map_height: int = 0
 var map_data: Array = []
 
 func initialize() -> Dictionary:
-	map_width = 10
-	map_height = 10
-	map_data = []
-	
-	for j in range(map_height):
-		for i in range(map_width):
-			map_data.append(randi_range(0,1))
+	map_width = 140
+	map_height = 80
+	map_data = TerrainGenerator.generate(map_width, map_height, [.2, .4], [0, 0], [-2, 2], [0, 0])
 	
 	return {"map_data": map_data, "map_width": map_width, "map_height": map_height}
 
