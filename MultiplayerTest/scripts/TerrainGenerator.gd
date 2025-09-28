@@ -1,9 +1,12 @@
 class_name TerrainGenerator
 
+const EMPTY_TILE: int = -1
+const CAVE_TILE: int = 0
+
 static func generate(width: int, height: int, floor_range: Array = [0, 0], roof_range: Array = [0, 0], x_offset_range: Array = [0, 0], y_offset_range: Array = [0, 0]) -> Array:
 	var noise = FastNoiseLite.new()
 	noise.seed = randi()
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX   # You can change this (PERLIN, CELLULAR, etc.)
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.frequency = .05                       # Controls zoom level
 	
 	var y_offsets = []
@@ -20,9 +23,9 @@ static func generate(width: int, height: int, floor_range: Array = [0, 0], roof_
 		for x in range(width):
 			var value = noise.get_noise_2d(x + x_offsets[y], y + y_offsets[x])    # Returns a float between -1 and 1
 			if value > 0.1:
-				row.append(0)
+				row.append(EMPTY_TILE)
 			else:
-				row.append(1)
+				row.append(CAVE_TILE)
 		result.append(row)
 	
 	result = add_border(result, 5)
@@ -43,13 +46,13 @@ static func add_border(data: Array, width: int) -> Array:
 	
 	for y in range(width):
 		for x in range(cols):
-			data[y][x] = 1
-			data[rows - 1 - y][x] = 1
+			data[y][x] = CAVE_TILE
+			data[rows - 1 - y][x] = CAVE_TILE
 
 	for y in range(rows):
 		for x in range(width):
-			data[y][x] = 1
-			data[y][cols - 1 - x] = 1
+			data[y][x] = CAVE_TILE
+			data[y][cols - 1 - x] = CAVE_TILE
 
 	return data
 
@@ -66,9 +69,9 @@ static func remove_islands(data: Array, min_size: int) -> Array:
 				visited[c] = true
 
 			if group.size() > 0 and group.size() < min_size:
-				var set_value = 0
-				if data[j][i] == 0:
-					set_value = 1
+				var set_value = EMPTY_TILE
+				if data[j][i] == EMPTY_TILE:
+					set_value = CAVE_TILE
 				
 				for c in group:
 					data[c.y][c.x] = set_value
@@ -80,7 +83,7 @@ static func create_flat_rooms(data: Array, floor_height_range: Array, roof_heigh
 	for j in data.size():
 		for i in data[j].size():
 			var cell = Vector2i(i,j)
-			if cell in visited or data[j][i] == 1:
+			if cell in visited or data[j][i] == CAVE_TILE:
 				continue
 			
 			var group = get_connected_tiles(data, cell, data[j][i])
@@ -100,7 +103,7 @@ static func create_flat_rooms(data: Array, floor_height_range: Array, roof_heigh
 			
 			for c in group:
 				if c.y >= floor_level or c.y <= roof_level:
-					data[c.y][c.x] = 1
+					data[c.y][c.x] = CAVE_TILE
 	
 	return data
 

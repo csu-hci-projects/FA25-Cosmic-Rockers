@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxpv8j6aghgg1"]
 
-[ext_resource type="TileSet" uid="uid://c3qfekxo3qskl" path="res://sprites/default_tile_map.tres" id="1_yqjtg"]
+[ext_resource type="TileSet" uid="uid://c3qfekxo3qskl" path="res://default_tile_map.tres" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/Tilemap.gd" id="2_lnu2h"]
 
 [node name="Game" type="Node"]
@@ -11,4 +11,4 @@ script = ExtResource("2_lnu2h")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1152, 642)
-zoom = Vector2(2, 2)
+zoom = Vector2(0.5, 0.5)
