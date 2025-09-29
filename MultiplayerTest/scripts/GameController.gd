@@ -13,6 +13,12 @@ func _ready() -> void:
 	if WorldState.level_loaded:
 		tilemap.create_tilemap()
 		spawn_players()
+	
+	Multiplayer.on_received_input.connect(_update_input)
+
+func _update_input(steam_id: int, data: Dictionary):
+	if remote_players.has(steam_id):
+		remote_players[steam_id]._update_input(data)
 
 func spawn_players():
 	var players = PlayerState.get_all_players_data()

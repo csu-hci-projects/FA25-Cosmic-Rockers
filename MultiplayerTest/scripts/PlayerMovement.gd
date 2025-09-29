@@ -47,12 +47,17 @@ func _process(delta: float):
 	
 	if Input.is_action_just_pressed("jump"):
 		jump()
+		Multiplayer.update_input({ "jump":true })
+	
 	if Input.is_action_just_released("jump"):
 		jump_release()
-		
+		Multiplayer.update_input({ "jump":false })
+	
 	if Input.is_action_just_pressed("move_right") or Input.is_action_just_pressed("move_left") \
 	or Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left"):
-		move(Input.get_axis("move_left", "move_right"))
+		var input = Input.get_axis("move_left", "move_right")
+		move(input)
+		Multiplayer.update_input({ "move":input })
 
 
 func jump():
@@ -66,3 +71,14 @@ func jump_release():
 
 func move(input: float):
 	input_dir = input
+
+
+func _update_input(data: Dictionary):
+	if data.has("jump"):
+		if data["jump"]:
+			jump()
+		else:
+			jump_release()
+	
+	if data.has("move"):
+		move(data["move"])
