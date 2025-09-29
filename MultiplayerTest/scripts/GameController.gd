@@ -15,8 +15,13 @@ func _ready() -> void:
 		spawn_players()
 	
 	Multiplayer.on_received_input.connect(_update_input)
+	Multiplayer.on_received_position.connect(_update_position)
 
 func _update_input(steam_id: int, data: Dictionary):
+	if remote_players.has(steam_id):
+		remote_players[steam_id]._update_input(data)
+
+func _update_position(steam_id: int, data: Dictionary):
 	if remote_players.has(steam_id):
 		remote_players[steam_id]._update_input(data)
 

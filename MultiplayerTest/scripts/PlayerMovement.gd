@@ -10,9 +10,10 @@ extends CharacterBody2D
 var coyote_timer : float = 0.0
 var jump_buffer : float = 0.0
 var input_dir: float = 0
+var position_sync_timer: int = 0
 
 var is_local_player: bool = false
-
+var position_sync_frames: int = 20
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
@@ -44,6 +45,11 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float):
 	if !is_local_player: #only local player controls their player
 		return
+	
+	if position_sync_timer <= 0:
+		position_sync_timer = position_sync_frames
+		Multiplayer.update_position(position)
+	position_sync_timer-=1
 	
 	if Input.is_action_just_pressed("jump"):
 		jump()
@@ -82,3 +88,7 @@ func _update_input(data: Dictionary):
 	
 	if data.has("move"):
 		move(data["move"])
+
+func _update_position(data: Dictionary):
+	if data.has("x") and data.has("y"):
+		position = Vector2(data["x"], data["y"])
