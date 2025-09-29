@@ -20,11 +20,18 @@ func spawn_players():
 		remote_players.set(key, remote_player)
 		add_child(remote_player)
 		
-		remote_player.move_to_empty_tile()
+		move_to_empty_tile(remote_player)
 	
+	get_local_player().is_local_player = true
 	camera.target = get_local_player()
 
 func get_local_player():
 	if !remote_players.has(Global.steam_id):
 		return null
 	return remote_players[Global.steam_id]
+
+func move_to_empty_tile(node: Node2D):
+	for i in range(WorldState.map_data.size()):
+		if WorldState.map_data[i] == -1:
+			node.position = WorldState.get_tile_position(i)
+			return

@@ -3,32 +3,25 @@ extends CharacterBody2D
 @export var move_speed : float = 200.0
 @export var jump_force : float = 400.0
 @export var gravity : float = 1200.0
-@export var coyote_time : float = 0.1   
-@export var jump_buffer_time : float = 0.1 
+@export var coyote_time : float = 0.1
+@export var jump_buffer_time : float = 0.1
 @export var air_control : float = 0.9
 
 var coyote_timer : float = 0.0
 var jump_buffer : float = 0.0
+var input_dir: float = 0
 
-func move_to_empty_tile():
-	for i in range(WorldState.map_data.size()):
-		if WorldState.map_data[i] == -1:
-			position = WorldState.get_tile_position(i)
-			return
+var is_local_player: bool = false
+
 
 func _physics_process(delta: float) -> void:
-	var input_dir := Input.get_axis("ui_left", "ui_right")
-
 	if is_on_floor():
 		coyote_timer = coyote_time
 	else:
 		coyote_timer -= delta
-
-	if Input.is_action_just_pressed("ui_accept"):
-		jump_buffer = jump_buffer_time
-	else:
-		jump_buffer -= delta
-
+	
+	jump_buffer -= delta
+	
 	var target_speed = input_dir * move_speed
 	if is_on_floor():
 		velocity.x = target_speed
@@ -45,7 +38,31 @@ func _physics_process(delta: float) -> void:
 		jump_buffer = 0
 		coyote_timer = 0
 
-	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
+	move_and_slide()
+
+
+func _process(delta: float):
+	if !is_local_player: #only local player controls their player
+		return
+	
+	if Input.is_action_just_pressed("jump"):
+		jump()
+	if Input.is_action_just_released("jump"):
+		jump_release()
+		
+	if Input.is_action_just_pressed("move_right") or Input.is_action_just_pressed("move_left") \
+	or Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left"):
+		move(Input.get_axis("move_left", "move_right"))
+
+
+func jump():
+	jump_buffer = jump_buffer_time
+
+
+func jump_release():
+	if velocity.y < 0:
 		velocity.y *= 0.5
 
-	move_and_slide()
+
+func move(input: float):
+	input_dir = input

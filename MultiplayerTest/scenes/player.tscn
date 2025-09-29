@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://btnj1vy1o8wj2" path="res://sprites/player.png" id="2_g2els"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
-radius = 8.0
+radius = 6.0
 
 [node name="player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
