@@ -4,6 +4,16 @@ func _ready() -> void:
 	create_tilemap()
 	Multiplayer.on_received_tile.connect(_update_tile)
 
+##for testing purposes
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var world_pos: Vector2 = get_viewport().get_camera_2d().get_global_mouse_position()
+		var local_pos: Vector2 = to_local(world_pos)
+		var cell: Vector2i = local_to_map(local_pos)
+		
+		update_tile(cell, -1)
+##testing end
+
 func create_tilemap():
 	var width: int = WorldState.map_width 
 	var height: int = WorldState.map_height

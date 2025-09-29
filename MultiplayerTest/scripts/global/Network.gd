@@ -119,6 +119,7 @@ func send_p2p_packet(this_target: int, packet_data: Dictionary, send_type: int =
 			var success = true
 			for member in lobby_members:
 				if member['steam_id'] != Global.steam_id:
+					print("Sending ", packet_data["type"])
 					if !Steam.sendP2PPacket(member['steam_id'], this_data, send_type, channel):
 						success = false
 			return success
@@ -195,11 +196,8 @@ func read_p2p_packet():
 			var cell: Vector2i = readable_data["data"]["cell"]
 			var id: int = readable_data["data"]["id"]
 			emit_signal("on_received_tile", cell, id)
-		"set_map_data":
-			var map_data: Array = readable_data["data"]["map_data"]
-			var map_width: int = readable_data["data"]["map_width"]
-			var map_height: int = readable_data["data"]["map_height"]
-			WorldState.set_map_data(map_data, map_width, map_height)
+		"map_chunk":
+			_handle_map_chunk(packet_sender, readable_data)
 	
 	#player specific functions
 	if data_type.begins_with("update_"):
@@ -214,5 +212,51 @@ func start_game():
 	if is_host:
 		send_p2p_packet(0, {"type": "start_game"})
 		var map_data: Dictionary = WorldState.initialize()
-		send_p2p_packet(0, {"type": "set_map_data", "data":map_data})
+		send_map_data(0, map_data)
 	get_tree().change_scene_to_packed(game_scene)
+
+func send_map_data(this_target: int, data: Dictionary, chunk_size: int = 1000) -> void:
+	var map_data = data["map_data"]
+	var map_width = data["map_width"]
+	var map_height = data["map_height"]
+	
+	var total_chunks: int = int(ceil(float(map_data.size()) / chunk_size))
+	var i := 0
+	while i < map_data.size():
+		var start = i
+		var end = min(i + chunk_size, map_data.size())
+		var chunk: Array = map_data.slice(start, end)  # safe now
+
+		var packet := {
+			"type": "map_chunk",
+			"chunk_index": i,
+			"total_chunks": total_chunks,
+			"map_width": map_width,
+			"map_height": map_height,
+			"chunk_data": chunk
+		}
+		
+		send_p2p_packet(this_target, packet, 3) # reliable with buffering
+		i += chunk_size
+
+func _handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
+	if !WorldState.received_map_chunks.has(sender_id):
+		WorldState.received_map_chunks[sender_id] = {
+			"chunks": {},
+			"expected": packet["total_chunks"],
+			"map_width": packet["map_width"],
+			"map_height": packet["map_height"]
+		}
+
+	var entry = WorldState.received_map_chunks[sender_id]
+	entry["chunks"][packet["chunk_index"]] = packet["chunk_data"]
+
+	# Check if all chunks have arrived
+	if entry["chunks"].size() == entry["expected"]:
+		var map_data: Array = []
+		for i in range(entry["expected"]):
+			map_data += entry["chunks"][i] # concatenate in order
+
+		WorldState.set_map_data(map_data, entry["map_width"], entry["map_height"])
+		print("✅ Full map received from ", sender_id, " with ", map_data.size(), " tiles")
+		WorldState.received_map_chunks.erase(sender_id)

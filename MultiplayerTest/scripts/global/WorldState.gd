@@ -4,8 +4,10 @@ var map_width: int = 0
 var map_height: int = 0
 var map_data: Array = []
 
+var received_map_chunks := {}
+
 func initialize() -> Dictionary:
-	map_width = 140
+	map_width = 80
 	map_height = 80
 	map_data = TerrainGenerator.generate(map_width, map_height, [.2, .4], [0, 0], [-2, 2], [0, 0])
 	
