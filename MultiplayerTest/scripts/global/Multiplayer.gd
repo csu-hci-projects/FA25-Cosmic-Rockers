@@ -1,8 +1,9 @@
 extends Network
 
 signal on_received_ready_status(steam_id: int, data: Dictionary)
-signal on_received_position(steam_id: int, data: Dictionary)
 signal on_received_tile(cell: Vector2i, id: int)
+signal on_received_input(steam_id: int, data: Dictionary)
+signal on_received_position(steam_id: int, data: Dictionary)
 
 # SEND TYPES:
 # 0 -> Packets may be dropped. No guarantee of order or arrival
@@ -13,9 +14,12 @@ func update_ready_status(status: bool) -> bool:
 	var value: Dictionary = {"status": status}
 	return send_player_update("ready_status", value, 2)
 
+func update_tile(cell: Vector2i, id: int) -> bool:
+	return send_world_update(cell, id)
+
+func update_input(value: Dictionary) -> bool:
+	return send_player_update("input", value, 1)
+
 func update_position(position: Vector2) -> bool:
 	var value: Dictionary = {"x": position.x, "y": position.y}
-	return send_player_update("position", value, 1)
-
-func update_tile(cell: Vector2i, id: int):
-	return send_world_update(cell, id)
+	return send_player_update("position", value, 2)
