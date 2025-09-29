@@ -10,11 +10,6 @@ extends CharacterBody2D
 var coyote_timer : float = 0.0
 var jump_buffer : float = 0.0
 
-func _ready():
-	WorldState.on_level_loaded.connect(move_to_empty_tile)
-	if WorldState.level_loaded:
-		move_to_empty_tile()
-
 func move_to_empty_tile():
 	for i in range(WorldState.map_data.size()):
 		if WorldState.map_data[i] == -1:
