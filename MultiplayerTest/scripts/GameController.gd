@@ -15,17 +15,19 @@ func _ready() -> void:
 		spawn_players()
 
 func spawn_players():
-	for key in PlayerState.get_all_players_data().keys():
+	var players = PlayerState.get_all_players_data()
+	for key in players.keys():
 		var remote_player = player_scene.instantiate()
 		remote_players.set(key, remote_player)
-		add_child(remote_player)
 		
+		add_child(remote_player)
+		remote_player.name = players[key]["steam_username"]
 		move_to_empty_tile(remote_player)
 	
 	get_local_player().is_local_player = true
-	camera.target = get_local_player()
+	camera.set_target(get_local_player())
 
-func get_local_player():
+func get_local_player() -> Node2D:
 	if !remote_players.has(Global.steam_id):
 		return null
 	return remote_players[Global.steam_id]
