@@ -19,10 +19,13 @@ func initialize() -> Dictionary:
 	
 	return {"map_data": map_data, "map_width": map_width, "map_height": map_height}
 
-func get_tile_id(cell: Vector2i):
+func get_tile_position(index: int) -> Vector2:
+	return Vector2(int(index % map_width), int(index / map_height)) * 16
+
+func get_tile_id(cell: Vector2i) -> int:
 	return cell.x + cell.y * map_width
 
-func get_tile_data(cell: Vector2i):
+func get_tile_data(cell: Vector2i) -> int:
 	return map_data[cell.x + cell.y * map_width]
 
 func set_map_data(data: Array, width: int, height: int):

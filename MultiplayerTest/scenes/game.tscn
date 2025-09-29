@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxpv8j6aghgg1"]
+[gd_scene load_steps=5 format=3 uid="uid://cxpv8j6aghgg1"]
 
 [ext_resource type="TileSet" uid="uid://c3qfekxo3qskl" path="res://sprites/default_tile_map.tres" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/Tilemap.gd" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scenes/CameraFollow.gd" id="3_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bmihda84q488q" path="res://scenes/player.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node"]
 
@@ -9,6 +11,10 @@
 tile_set = ExtResource("1_yqjtg")
 script = ExtResource("2_lnu2h")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(1152, 642)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(2, 2)
+script = ExtResource("3_lbhrr")
+target = NodePath("../player")
+
+[node name="player" parent="." instance=ExtResource("3_lnu2h")]
