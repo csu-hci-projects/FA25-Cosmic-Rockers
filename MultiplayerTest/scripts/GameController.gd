@@ -23,7 +23,7 @@ func _update_input(steam_id: int, data: Dictionary):
 
 func _update_position(steam_id: int, data: Dictionary):
 	if remote_players.has(steam_id):
-		remote_players[steam_id]._update_input(data)
+		remote_players[steam_id]._update_position(data)
 
 func spawn_players():
 	var players = PlayerState.get_all_players_data()

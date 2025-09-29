@@ -90,5 +90,6 @@ func _update_input(data: Dictionary):
 		move(data["move"])
 
 func _update_position(data: Dictionary):
+	print(data)
 	if data.has("x") and data.has("y"):
 		position = Vector2(data["x"], data["y"])
