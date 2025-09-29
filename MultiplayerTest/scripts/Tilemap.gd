@@ -1,8 +1,10 @@
 extends TileMapLayer
 
 func _ready() -> void:
-	create_tilemap()
 	Multiplayer.on_received_tile.connect(_update_tile)
+	WorldState.on_level_loaded.connect(create_tilemap)
+	if WorldState.level_loaded:
+		create_tilemap()
 
 ##for testing purposes
 func _unhandled_input(event: InputEvent) -> void:
