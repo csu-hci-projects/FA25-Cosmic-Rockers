@@ -34,7 +34,7 @@ func spawn_players():
 		add_child(remote_player)
 		remote_player.name = players[key]["steam_username"]
 		remote_player.entity_id = str(key)
-		move_to_empty_tile(remote_player)
+		move_to_spawn(remote_player)
 	
 	get_local_player().is_local_player = true
 	camera.set_target(get_local_player())
@@ -44,8 +44,8 @@ func get_local_player() -> Node2D:
 		return null
 	return remote_players[Global.steam_id]
 
-func move_to_empty_tile(node: Node2D):
-	for i in range(WorldState.map_data.size()):
-		if WorldState.map_data[i] == -1:
-			node.position = WorldState.get_tile_position(i)
-			return
+func move_to_spawn(node: Node2D):
+	node.position = Vector2i(
+		WorldState.spawn_room_position.x + WorldState.room_size / 2,
+		WorldState.spawn_room_position.y + WorldState.room_size / 2
+		) * 16

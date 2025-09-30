@@ -2,6 +2,11 @@ extends Node
 
 var map_width: int = 0
 var map_height: int = 0
+
+var spawn_room_position: Vector2i
+var end_room_position: Vector2i
+var room_size: int
+
 var map_data: Array = []
 
 var received_map_chunks := {}
@@ -12,6 +17,11 @@ signal on_level_loaded()
 func initialize() -> Dictionary:
 	map_width = 140
 	map_height = 80
+	
+	spawn_room_position = Vector2i(randi_range(5,130),5)
+	end_room_position = Vector2i(randi_range(5,130),70)
+	room_size = 5
+	
 	map_data = TerrainGenerator.generate(map_width, map_height, [.2, .4], [0, 0], [-2, 2], [0, 0])
 	
 	level_loaded = true
