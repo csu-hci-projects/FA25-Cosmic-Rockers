@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Entity
 
 @export var move_speed : float = 200.0
 @export var jump_force : float = 400.0

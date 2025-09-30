@@ -33,6 +33,7 @@ func spawn_players():
 		
 		add_child(remote_player)
 		remote_player.name = players[key]["steam_username"]
+		remote_player.entity_id = str(key)
 		move_to_empty_tile(remote_player)
 	
 	get_local_player().is_local_player = true

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxpv8j6aghgg1"]
 
-[ext_resource type="Script" uid="uid://c1rwrfi4vlhud" path="res://scripts/GameController.gd" id="1_iywne"]
+[ext_resource type="Script" uid="uid://c1rwrfi4vlhud" path="res://scripts/game/GameController.gd" id="1_iywne"]
 [ext_resource type="TileSet" uid="uid://c3qfekxo3qskl" path="res://sprites/default_tile_map.tres" id="1_yqjtg"]
-[ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/Tilemap.gd" id="2_lnu2h"]
-[ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/CameraFollow.gd" id="4_lbhrr"]
+[ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="4_lbhrr"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_iywne")
