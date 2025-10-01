@@ -12,7 +12,7 @@ var jump_buffer : float = 0.0
 var input_dir: float = 0
 var position_sync_timer: int = 0
 
-var is_local_player: bool = false
+@export var is_local_player: bool = false
 var position_sync_frames: int = 20
 
 func _physics_process(delta: float) -> void:
