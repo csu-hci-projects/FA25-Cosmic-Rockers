@@ -24,7 +24,6 @@ texture = ExtResource("1_errlg")
 [node name="enemy" parent="." instance=ExtResource("2_iyx0m")]
 position = Vector2(630, 461)
 collision_layer = 3
-max_health = 20
 
 [node name="player" parent="." instance=ExtResource("3_74lek")]
 position = Vector2(423, 461)

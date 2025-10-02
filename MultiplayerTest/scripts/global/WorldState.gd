@@ -8,6 +8,7 @@ var end_room_position: Vector2i
 var room_size: int
 
 var map_data: Array = []
+var room_data: Array = []
 
 var received_map_chunks := {}
 var level_loaded = false
@@ -22,7 +23,9 @@ func initialize() -> Dictionary:
 	end_room_position = Vector2i(randi_range(5,130),70)
 	room_size = 5
 	
-	map_data = TerrainGenerator.generate(map_width, map_height, [.2, .4], [0, 0], [-2, 2], [0, 0])
+	var data = TerrainGenerator.generate(map_width, map_height, [.2, .4], [0, 0], [-2, 2], [0, 0])
+	map_data = data["map_data"]
+	room_data = data["room_data"]
 	
 	level_loaded = true
 	emit_signal("on_level_loaded")
@@ -56,3 +59,16 @@ func clear():
 	map_width = 0
 	map_height = 0
 	map_data.clear()
+
+func get_enemy_spawn_locations(enemy_count: int) -> Array:
+	var enemy_spawns: Array = []
+	for i in room_data.size():
+		var split = enemy_count / (room_data.size() - i)
+		for j in split:
+			enemy_spawns.append(get_random_room_tile(i))
+		enemy_count -= split
+	return enemy_spawns
+
+func get_random_room_tile(room_id: int) -> Vector2i:
+	var tile_count: int = room_data[room_id].size()
+	return room_data[room_id][randi_range(0, tile_count-1)]

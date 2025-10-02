@@ -65,12 +65,15 @@ func _process_state(delta: float):
 func set_state(new_state: State):
 	if current_state == new_state:
 		return
-	match new_state:
-		State.IDLE: print("IDLE")
-		State.PATROL: print("PATROL")
-		State.CHASE: print("CHASE")
-		State.ATTACK: print("ATTACK")
-		State.FLEE: print("FLEE")
+	
+	if false:
+		match new_state:
+			State.IDLE: print("IDLE")
+			State.PATROL: print("PATROL")
+			State.CHASE: print("CHASE")
+			State.ATTACK: print("ATTACK")
+			State.FLEE: print("FLEE")
+	
 	current_state = new_state
 
 # Behavior stuff

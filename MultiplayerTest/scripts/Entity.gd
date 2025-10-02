@@ -1,8 +1,8 @@
 class_name Entity
 extends CharacterBody2D
 
-var entity_id: String
-@export var max_health: int
+var entity_id: String 
+@export var max_health: int = 100
 var health: int
 
 signal on_health_changed

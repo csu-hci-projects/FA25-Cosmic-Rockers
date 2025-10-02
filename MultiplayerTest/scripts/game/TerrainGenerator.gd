@@ -3,9 +3,13 @@ class_name TerrainGenerator
 const EMPTY_TILE: int = -1
 const CAVE_TILE: int = 0
 
+static var rooms: Array
 static var data: Array
 
-static func generate(width: int, height: int, floor_range: Array = [0, 0], roof_range: Array = [0, 0], x_offset_range: Array = [0, 0], y_offset_range: Array = [0, 0]) -> Array:
+static func generate(width: int, height: int, \
+	floor_range: Array = [0, 0], roof_range: Array = [0, 0], \
+	x_offset_range: Array = [0, 0], y_offset_range: Array = [0, 0]) -> Dictionary:
+	
 	var noise = FastNoiseLite.new()
 	noise.seed = randi()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
@@ -33,6 +37,7 @@ static func generate(width: int, height: int, floor_range: Array = [0, 0], roof_
 	add_border(5)
 	create_flat_rooms(floor_range, roof_range)
 	remove_islands(20)
+	get_rooms()
 	create_room(WorldState.room_size, WorldState.spawn_room_position)
 	create_room(WorldState.room_size, WorldState.end_room_position)
 	
@@ -40,7 +45,7 @@ static func generate(width: int, height: int, floor_range: Array = [0, 0], roof_
 	for row in data:
 		for value in row:
 			flatten.append(value)
-	return flatten
+	return {"map_data": flatten, "room_data": rooms}
 
 static func create_room(size: int, position: Vector2i):
 	for x in range(size):
@@ -62,6 +67,23 @@ static func add_border(width: int):
 		for x in range(width):
 			data[y][x] = CAVE_TILE
 			data[y][cols - 1 - x] = CAVE_TILE
+
+static func get_rooms():
+	rooms.clear()
+	var visited := {}
+	for j in data.size():
+		for i in data[j].size():
+			if data[j][i] != -1:
+				continue
+			var cell = Vector2i(i,j)
+			if cell in visited:
+				continue
+			
+			var group = get_connected_tiles(cell, data[j][i])
+			for c in group:
+				visited[c] = true
+
+			rooms.append(group)
 
 static func remove_islands(min_size: int):
 	var visited := {}

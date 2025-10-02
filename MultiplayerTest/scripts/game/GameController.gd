@@ -1,6 +1,7 @@
 extends Node
 
 var player_scene = preload("res://scenes/player.tscn")
+var enemy_scene = preload("res://scenes/enemy.tscn")
 
 @onready var tilemap = $tilemap
 @onready var camera = $camera
@@ -13,6 +14,7 @@ func _ready() -> void:
 	if WorldState.level_loaded:
 		tilemap.create_tilemap()
 		spawn_players()
+		spawn_enemies()
 	
 	Multiplayer.on_received_input.connect(_update_input)
 	Multiplayer.on_received_position.connect(_update_position)
@@ -45,7 +47,17 @@ func get_local_player() -> Node2D:
 	return remote_players[Global.steam_id]
 
 func move_to_spawn(node: Node2D):
-	node.position = Vector2i(
+	move_to_tile(node, Vector2i(
 		WorldState.spawn_room_position.x + WorldState.room_size / 2,
 		WorldState.spawn_room_position.y + WorldState.room_size / 2
-		) * 16
+		))
+
+func move_to_tile(node: Node2D, tile: Vector2i):
+	node.position = tilemap.map_to_local(tile)
+
+func spawn_enemies():
+	var enemy_spawns = WorldState.get_enemy_spawn_locations(50)
+	for spawn_location in enemy_spawns:
+		var enemy = enemy_scene.instantiate()
+		add_child(enemy)
+		move_to_tile(enemy, spawn_location)
