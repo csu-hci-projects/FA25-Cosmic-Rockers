@@ -1,10 +1,10 @@
 extends Node
 
 var player_scene = preload("res://scenes/player.tscn")
-var enemy_scene = preload("res://scenes/enemy.tscn")
 
 @onready var tilemap = $tilemap
 @onready var camera = $camera
+@onready var enemy_controller = $enemy_controller
 
 var remote_players = {}
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 	if WorldState.level_loaded:
 		tilemap.create_tilemap()
 		spawn_players()
-		spawn_enemies()
+		enemy_controller.spawn_enemies()
 	
 	Multiplayer.on_received_input.connect(_update_input)
 	Multiplayer.on_received_position.connect(_update_position)
@@ -54,10 +54,3 @@ func move_to_spawn(node: Node2D):
 
 func move_to_tile(node: Node2D, tile: Vector2i):
 	node.position = tilemap.map_to_local(tile)
-
-func spawn_enemies():
-	var enemy_spawns = WorldState.get_enemy_spawn_locations(50)
-	for spawn_location in enemy_spawns:
-		var enemy = enemy_scene.instantiate()
-		add_child(enemy)
-		move_to_tile(enemy, spawn_location)

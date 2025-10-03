@@ -89,6 +89,7 @@ func _update_input(data: Dictionary):
 	if data.has("move"):
 		move(data["move"])
 
+
 func _update_position(data: Dictionary):
 	print(data)
 	if data.has("x") and data.has("y"):

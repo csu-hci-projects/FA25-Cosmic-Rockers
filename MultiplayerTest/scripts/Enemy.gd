@@ -24,8 +24,6 @@ var _attack_timer: float = 0.0
 
 
 func _process(delta: float) -> void:
-	_process_state(delta)
-	
 	match current_state:
 		State.IDLE:
 			_idle_behavior(delta)
