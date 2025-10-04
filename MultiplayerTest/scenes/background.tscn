@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://w18230pt20ls"]
+
+[ext_resource type="Texture2D" uid="uid://dgnxojhovbn4f" path="res://sprites/background/cave_0.png" id="1_cbsqf"]
+[ext_resource type="Texture2D" uid="uid://cdb5rxgovnnhy" path="res://sprites/background/cave_1.png" id="1_jougr"]
+[ext_resource type="Script" uid="uid://df7vti8e0g72q" path="res://scenes/parallax.gd" id="1_wisxt"]
+[ext_resource type="Texture2D" uid="uid://cyv1grgw5prpp" path="res://sprites/background/cave_2.png" id="2_cbsqf"]
+[ext_resource type="Texture2D" uid="uid://djk5m6dmhnksf" path="res://sprites/background/cave_3.png" id="3_wisxt"]
+
+[node name="background" type="Node2D"]
+z_index = -5
+script = ExtResource("1_wisxt")
+
+[node name="layer0" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="layer0"]
+texture = ExtResource("1_cbsqf")
+
+[node name="Sprite2D2" type="Sprite2D" parent="layer0"]
+position = Vector2(480, 0)
+texture = ExtResource("1_cbsqf")
+
+[node name="Sprite2D3" type="Sprite2D" parent="layer0"]
+position = Vector2(-480, 0)
+texture = ExtResource("1_cbsqf")
+
+[node name="layer1" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="layer1"]
+texture = ExtResource("1_jougr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="layer1"]
+position = Vector2(480, 0)
+texture = ExtResource("1_jougr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="layer1"]
+position = Vector2(-480, 0)
+texture = ExtResource("1_jougr")
+
+[node name="layer2" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="layer2"]
+texture = ExtResource("2_cbsqf")
+
+[node name="Sprite2D2" type="Sprite2D" parent="layer2"]
+position = Vector2(480, 0)
+texture = ExtResource("2_cbsqf")
+
+[node name="Sprite2D3" type="Sprite2D" parent="layer2"]
+position = Vector2(-480, 0)
+texture = ExtResource("2_cbsqf")
+
+[node name="layer3" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="layer3"]
+texture = ExtResource("3_wisxt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="layer3"]
+position = Vector2(480, 0)
+texture = ExtResource("3_wisxt")
+
+[node name="Sprite2D3" type="Sprite2D" parent="layer3"]
+position = Vector2(-480, 0)
+texture = ExtResource("3_wisxt")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxpv8j6aghgg1"]
+[gd_scene load_steps=7 format=3 uid="uid://cxpv8j6aghgg1"]
 
 [ext_resource type="Script" uid="uid://c1rwrfi4vlhud" path="res://scripts/game/GameController.gd" id="1_iywne"]
 [ext_resource type="TileSet" uid="uid://c3qfekxo3qskl" path="res://sprites/default_tile_map.tres" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://w18230pt20ls" path="res://scenes/background.tscn" id="5_p57ef"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_iywne")
@@ -17,6 +18,8 @@ script = ExtResource("2_lnu2h")
 position = Vector2(1152, 642)
 zoom = Vector2(2, 2)
 script = ExtResource("4_lbhrr")
+
+[node name="background" parent="camera" instance=ExtResource("5_p57ef")]
 
 [node name="enemy_controller" type="Node" parent="."]
 script = ExtResource("5_iywne")

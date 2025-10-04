@@ -13,6 +13,7 @@ script = ExtResource("1_g2els")
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = ExtResource("2_g2els")
+animation = &"walk"
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lbhrr")
