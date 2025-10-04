@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm76kcj8dysoa"
-path="res://.godot/imported/deafulttile.png-2a81dfd166011effe2c704eb30013ff6.ctex"
+uid="uid://jjnmodafmwkt"
+path="res://.godot/imported/deafulttile2.png-64d1471f8bd8fd3a435d19a4296f5f7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/deafulttile.png"
-dest_files=["res://.godot/imported/deafulttile.png-2a81dfd166011effe2c704eb30013ff6.ctex"]
+source_file="res://sprites/testing/deafulttile2.png"
+dest_files=["res://.godot/imported/deafulttile2.png-64d1471f8bd8fd3a435d19a4296f5f7b.ctex"]
 
 [params]
 

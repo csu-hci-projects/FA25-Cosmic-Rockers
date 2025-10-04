@@ -22,8 +22,15 @@ var _current_patrol_index: int = 0
 var _target: Node2D = null
 var _attack_timer: float = 0.0
 
+@onready var sprite: Sprite2D = $sprite
+
 
 func _process(delta: float) -> void:
+	if velocity.x > 0:
+		sprite.flip_h = false
+	elif velocity.x < 0:
+		sprite.flip_h = true
+	
 	match current_state:
 		State.IDLE:
 			_idle_behavior(delta)

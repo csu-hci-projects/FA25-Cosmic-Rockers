@@ -15,24 +15,36 @@ var position_sync_timer: int = 0
 @export var is_local_player: bool = false
 var position_sync_frames: int = 20
 
+@onready var sprite: AnimatedSprite2D = $sprite
+
+func _ready() -> void:
+	sprite.play("default")
+	sprite.animation_finished.connect(_animation_finished)
+
 func _physics_process(delta: float) -> void:
-	if is_on_floor():
-		coyote_timer = coyote_time
-	else:
-		coyote_timer -= delta
-	
 	jump_buffer -= delta
 	
 	var target_speed = input_dir * move_speed
 	if is_on_floor():
+		coyote_timer = coyote_time
 		velocity.x = target_speed
-	else:
-		velocity.x = lerp(velocity.x, target_speed, air_control * delta * 10.0)
-
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	else:
 		velocity.y = 0
+		
+		if abs(velocity.x) > 0.1:
+			sprite.play("walk")
+		else:
+			sprite.play("default")
+	else:
+		coyote_timer -= delta
+		velocity.x = lerp(velocity.x, target_speed, air_control * delta * 10.0)
+		velocity.y += gravity * delta
+		
+		sprite.play("fall")
+	
+	if velocity.x > 0:
+		sprite.flip_h = false
+	elif velocity.x < 0:
+		sprite.flip_h = true
 
 	if jump_buffer > 0 and coyote_timer > 0:
 		velocity.y = -jump_force
@@ -68,6 +80,7 @@ func _process(delta: float):
 
 func jump():
 	jump_buffer = jump_buffer_time
+	sprite.play("jump")
 
 
 func jump_release():
@@ -77,6 +90,13 @@ func jump_release():
 
 func move(input: float):
 	input_dir = input
+
+
+func _animation_finished():
+	if sprite.animation == "jump":
+		sprite.play("fall")
+	if sprite.animation == "land":
+		sprite.play("default")
 
 
 func _update_input(data: Dictionary):
