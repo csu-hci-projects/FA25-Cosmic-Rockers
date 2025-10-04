@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dgnxojhovbn4f" path="res://sprites/background/cave_0.png" id="1_cbsqf"]
 [ext_resource type="Texture2D" uid="uid://cdb5rxgovnnhy" path="res://sprites/background/cave_1.png" id="1_jougr"]
-[ext_resource type="Script" uid="uid://df7vti8e0g72q" path="res://scenes/parallax.gd" id="1_wisxt"]
+[ext_resource type="Script" uid="uid://df7vti8e0g72q" path="res://scripts/game/Parallax.gd" id="1_wisxt"]
 [ext_resource type="Texture2D" uid="uid://cyv1grgw5prpp" path="res://sprites/background/cave_2.png" id="2_cbsqf"]
 [ext_resource type="Texture2D" uid="uid://djk5m6dmhnksf" path="res://sprites/background/cave_3.png" id="3_wisxt"]
 

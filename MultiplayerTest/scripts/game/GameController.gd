@@ -9,15 +9,17 @@ var player_scene = preload("res://scenes/player.tscn")
 var remote_players = {}
 
 func _ready() -> void:
-	WorldState.on_level_loaded.connect(tilemap.create_tilemap)
-	WorldState.on_level_loaded.connect(spawn_players)
+	WorldState.on_level_loaded.connect(initialize_game)
 	if WorldState.level_loaded:
-		tilemap.create_tilemap()
-		spawn_players()
-		enemy_controller.spawn_enemies()
+		initialize_game()
 	
 	Multiplayer.on_received_input.connect(_update_input)
 	Multiplayer.on_received_position.connect(_update_position)
+
+func initialize_game():
+	tilemap.create_tilemap()
+	spawn_players()
+	enemy_controller.spawn_enemies()
 
 func _update_input(steam_id: int, data: Dictionary):
 	if remote_players.has(steam_id):

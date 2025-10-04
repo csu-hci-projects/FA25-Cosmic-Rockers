@@ -239,6 +239,9 @@ func send_map_data(this_target: int, data: Dictionary, chunk_size: int = 1000) -
 	var map_data = data["map_data"]
 	var map_width = data["map_width"]
 	var map_height = data["map_height"]
+	var spawn_room_position = data["spawn_room_position"]
+	var end_room_position = data["end_room_position"]
+	var room_size = data["room_size"]
 	
 	var total_chunks: int = int(ceil(float(map_data.size()) / chunk_size))
 	var chunk_index := 0
@@ -254,6 +257,9 @@ func send_map_data(this_target: int, data: Dictionary, chunk_size: int = 1000) -
 			"total_chunks": total_chunks,
 			"map_width": map_width,
 			"map_height": map_height,
+			"spawn_room_position": spawn_room_position,
+			"end_room_position": end_room_position,
+			"room_size": room_size,
 			"chunk_data": chunk
 		}
 		
@@ -270,7 +276,10 @@ func handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
 			"chunks": {},
 			"expected": packet["total_chunks"],
 			"map_width": packet["map_width"],
-			"map_height": packet["map_height"]
+			"map_height": packet["map_height"],
+			"spawn_room_position": packet["spawn_room_position"],
+			"end_room_position": packet["end_room_position"],
+			"room_size": packet["room_size"]
 		}
 
 	var entry = WorldState.received_map_chunks[sender_id]
@@ -285,5 +294,12 @@ func handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
 				push_error("Missing chunk index %d from sender %d" % [i, sender_id])
 				return
 		
-		WorldState.set_map_data(map_data, entry["map_width"], entry["map_height"])
+		WorldState.set_map_data(
+			map_data, 
+			entry["map_width"], 
+			entry["map_height"], 
+			entry["spawn_room_position"], 
+			entry["end_room_position"], 
+			entry["room_size"]
+			)
 		WorldState.received_map_chunks.erase(sender_id)
