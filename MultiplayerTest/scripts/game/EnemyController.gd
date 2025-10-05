@@ -6,6 +6,9 @@ var enemy_scene = preload("res://scenes/enemy.tscn")
 
 var enemies = {}
 
+func _ready() -> void:
+	Multiplayer.on_received_entity_spawn.connect(_spawn_enemy)
+
 func _process(delta: float):
 	if !Multiplayer.is_host:
 		return
@@ -22,12 +25,12 @@ func spawn_enemies():
 	for spawn_location in enemy_spawns:
 		var enemy_name = "enemy_"+str(entity_id)
 		entity_id += 1
-		spawn_enemy(enemy_name, spawn_location)
+		_spawn_enemy(enemy_name, {"x":spawn_location.x, "y":spawn_location.y})
 		Multiplayer.entity_spawn(enemy_name, spawn_location)
 
-func spawn_enemy(entity_id: String, spawn_location: Vector2):
+func _spawn_enemy(entity_id: String, data: Dictionary):
 	var enemy = enemy_scene.instantiate()
 	add_child(enemy)
 	enemy.name = entity_id
-	game_controller.move_to_tile(enemy, spawn_location)
+	game_controller.move_to_tile(enemy, Vector2(data["x"], data["y"]))
 	enemies.set(entity_id, enemy)

@@ -161,7 +161,7 @@ func send_entity_update(key: String, entity_id: String, value: Dictionary, send_
 	data['type'] = key
 	data['entity_id'] = entity_id
 	data['data'] = value
-	return send_p2p_packet(0, value, send_type)
+	return send_p2p_packet(0, data, send_type)
 
 
 func send_world_update(cell: Vector2i, id: int) -> bool:
@@ -237,6 +237,7 @@ func read_p2p_packet():
 	
 	#entity specific functions
 	if data_type.begins_with("entity_"):
+		print("received",data_type)
 		if has_signal("on_received_" + data_type):
 			emit_signal("on_received_" + data_type, readable_data["entity_id"], readable_data["data"])
 		else:
