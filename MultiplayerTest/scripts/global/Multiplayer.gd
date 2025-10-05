@@ -5,6 +5,10 @@ signal on_received_tile(cell: Vector2i, id: int)
 signal on_received_input(steam_id: int, data: Dictionary)
 signal on_received_position(steam_id: int, data: Dictionary)
 
+signal on_received_entity_spawn(entity_id: int, data: Dictionary)
+signal on_received_entity_status(entity_id: int, data: Dictionary)
+signal on_received_entity_position(entity_id: int, data: Dictionary)
+
 # SEND TYPES:
 # 0 -> Packets may be dropped. No guarantee of order or arrival
 # 1 -> Like unreliable, but packets are dropped if they arrive out of order
@@ -23,3 +27,15 @@ func update_input(value: Dictionary) -> bool:
 func update_position(position: Vector2) -> bool:
 	var value: Dictionary = {"x": position.x, "y": position.y}
 	return send_player_update("position", value, 2)
+
+
+func entity_spawn(entity_id: String, position: Vector2) -> bool:
+	var value: Dictionary = {"x": position.x, "y": position.y}
+	return send_entity_update("entity_spawn", entity_id, value, 2)
+
+func update_entity_status(entity_id: String, status: Dictionary) -> bool:
+	return send_entity_update("entity_status", entity_id, status, 1)
+
+func update_entity_position(entity_id: String, position: Vector2) -> bool:
+	var value: Dictionary = {"x": position.x, "y": position.y}
+	return send_entity_update("entity_position", entity_id, value, 2)

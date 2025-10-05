@@ -20,10 +20,14 @@ func spawn_enemies():
 	var enemy_spawns = WorldState.get_enemy_spawn_locations(50)
 	var entity_id: int = 0
 	for spawn_location in enemy_spawns:
-		var enemy = enemy_scene.instantiate()
 		var enemy_name = "enemy_"+str(entity_id)
-		add_child(enemy)
-		enemy.name = enemy_name
-		game_controller.move_to_tile(enemy, spawn_location)
-		enemies.set(enemy_name, enemy)
 		entity_id += 1
+		spawn_enemy(enemy_name, spawn_location)
+		Multiplayer.entity_spawn(enemy_name, spawn_location)
+
+func spawn_enemy(entity_id: String, spawn_location: Vector2):
+	var enemy = enemy_scene.instantiate()
+	add_child(enemy)
+	enemy.name = entity_id
+	game_controller.move_to_tile(enemy, spawn_location)
+	enemies.set(entity_id, enemy)

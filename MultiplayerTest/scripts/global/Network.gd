@@ -156,6 +156,14 @@ func send_player_update(key: String, value: Dictionary, send_type: int = 0) -> b
 	return send_user_packet("update_" + key, {"data": value}, send_type)
 
 
+func send_entity_update(key: String, entity_id: String, value: Dictionary, send_type: int = 0) -> bool:
+	var data: Dictionary = {}
+	data['type'] = key
+	data['entity_id'] = entity_id
+	data['data'] = value
+	return send_p2p_packet(0, value, send_type)
+
+
 func send_world_update(cell: Vector2i, id: int) -> bool:
 	WorldState.update_tile(cell, id)
 	return send_user_packet("set_tile", {"data": {"cell": cell, "id": id}}, 2)
@@ -224,6 +232,13 @@ func read_p2p_packet():
 		PlayerState.set_player_data(readable_data["steam_id"], { type: readable_data["data"] })
 		if has_signal("on_received_" + type):
 			emit_signal("on_received_" + type, readable_data["steam_id"], readable_data["data"])
+		else:
+			push_warning("No signal called %s exists!" % readable_data["type"])
+	
+	#entity specific functions
+	if data_type.begins_with("entity_"):
+		if has_signal("on_received_" + data_type):
+			emit_signal("on_received_" + data_type, readable_data["entity_id"], readable_data["data"])
 		else:
 			push_warning("No signal called %s exists!" % readable_data["type"])
 
