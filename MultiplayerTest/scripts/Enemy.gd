@@ -1,3 +1,4 @@
+class_name Enemy
 extends Entity
 
 enum State {
@@ -24,6 +25,7 @@ var _attack_timer: float = 0.0
 
 @onready var sprite: Sprite2D = $sprite
 
+signal on_state_change
 
 func _process(delta: float) -> void:
 	if velocity.x > 0:
@@ -67,6 +69,12 @@ func _process_state(delta: float):
 		else:
 			set_state(State.IDLE)
 
+func emit_state():
+	var target_id: String = ""
+	if _target and "entity_id" in _target:
+		target_id = _target.entity_id
+	emit_signal("on_state_change", entity_id, current_state, target_id)
+
 func set_state(new_state: State):
 	if current_state == new_state:
 		return
@@ -80,6 +88,7 @@ func set_state(new_state: State):
 			State.FLEE: print("FLEE")
 	
 	current_state = new_state
+	emit_state()
 
 # Behavior stuff
 
@@ -105,7 +114,11 @@ func _detect_target() -> void:
 		if d < nearest_dist:
 			nearest_dist = d
 			nearest = p
-	_target = nearest
+	
+	if _target != nearest:
+		_target = nearest
+		emit_state()
+
 
 func _chase_behavior(delta: float) -> void:
 	if not _target:

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var parallax_strengths: Array = [0, 0.3, 0.2, 0.1]
+@export var parallax_strengths: Array = [0, -0.1, -0.2, -0.3]
 @export var sprite_width: float = 480
 
 func _process(delta: float) -> void:

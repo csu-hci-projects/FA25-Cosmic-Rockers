@@ -132,7 +132,7 @@ func send_p2p_packet(this_target: int, packet_data: Dictionary, send_type: int =
 			var success = true
 			for member in lobby_members:
 				if member['steam_id'] != Global.steam_id:
-					print("Sending ", packet_data["type"])
+					#print("Sending ", packet_data["type"])
 					if !Steam.sendP2PPacket(member['steam_id'], this_data, send_type, channel):
 						success = false
 			return success
@@ -154,6 +154,14 @@ func send_chat(message: String) -> bool:
 func send_player_update(key: String, value: Dictionary, send_type: int = 0) -> bool:
 	PlayerState.set_player_data(Global.steam_id, {key: value})
 	return send_user_packet("update_" + key, {"data": value}, send_type)
+
+
+func send_entity_update(key: String, entity_id: String, value: Dictionary, send_type: int = 0) -> bool:
+	var data: Dictionary = {}
+	data['type'] = key
+	data['entity_id'] = entity_id
+	data['data'] = value
+	return send_p2p_packet(0, data, send_type)
 
 
 func send_world_update(cell: Vector2i, id: int) -> bool:
@@ -224,6 +232,13 @@ func read_p2p_packet():
 		PlayerState.set_player_data(readable_data["steam_id"], { type: readable_data["data"] })
 		if has_signal("on_received_" + type):
 			emit_signal("on_received_" + type, readable_data["steam_id"], readable_data["data"])
+		else:
+			push_warning("No signal called %s exists!" % readable_data["type"])
+	
+	#entity specific functions
+	if data_type.begins_with("entity_"):
+		if has_signal("on_received_" + data_type):
+			emit_signal("on_received_" + data_type, readable_data["entity_id"], readable_data["data"])
 		else:
 			push_warning("No signal called %s exists!" % readable_data["type"])
 
