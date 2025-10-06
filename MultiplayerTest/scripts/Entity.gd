@@ -10,6 +10,7 @@ signal on_death
 
 func _ready():
 	health = max_health
+	add_to_group("entity")
 
 func take_damage(amt: int):
 	set_health(health - amt)

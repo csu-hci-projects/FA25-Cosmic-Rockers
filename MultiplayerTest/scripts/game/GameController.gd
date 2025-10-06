@@ -16,6 +16,13 @@ func _ready() -> void:
 	Multiplayer.on_received_input.connect(_update_input)
 	Multiplayer.on_received_position.connect(_update_position)
 
+func get_entity(entity_id: String) -> Node2D:
+	var entities = get_tree().get_nodes_in_group("entity")
+	for entity in entities:
+		if entity.entity_id == entity_id:
+			return entity
+	return null
+
 func initialize_game():
 	tilemap.create_tilemap()
 	spawn_players()
