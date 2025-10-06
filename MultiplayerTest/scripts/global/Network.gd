@@ -104,6 +104,11 @@ func join_lobby(this_lobby_id: int):
 func disconnect_lobby():
 	Steam.leaveLobby(lobby_id)
 	lobby_id = 0
+	
+	for member in lobby_members:
+		if member['steam_id'] != Global.steam_id:
+			Steam.closeP2PSessionWithUser(member['steam_id'])
+	
 	is_host = false
 	lobby_members.clear()
 	emit_signal("lobby_left")
