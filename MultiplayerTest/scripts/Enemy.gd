@@ -59,9 +59,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process_state(delta: float):
-	if !ai_enabled:
-		return
-	
 	_attack_timer = max(0.0, _attack_timer - delta)
 	if health <= flee_threshold:
 		set_state(State.FLEE)
