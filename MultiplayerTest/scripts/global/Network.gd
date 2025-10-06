@@ -132,7 +132,7 @@ func send_p2p_packet(this_target: int, packet_data: Dictionary, send_type: int =
 			var success = true
 			for member in lobby_members:
 				if member['steam_id'] != Global.steam_id:
-					print("Sending ", packet_data["type"])
+					#print("Sending ", packet_data["type"])
 					if !Steam.sendP2PPacket(member['steam_id'], this_data, send_type, channel):
 						success = false
 			return success

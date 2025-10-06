@@ -36,12 +36,14 @@ func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
 	var enemy = enemy_scene.instantiate()
 	add_child(enemy)
 	enemy.name = entity_id
+	enemy.entity_id = entity_id
 	game_controller.move_to_tile(enemy, Vector2(data["x"], data["y"]))
 	enemies.set(entity_id, enemy)
 	return enemy
 
 func _set_state(entity_id: String, data: Dictionary):
-	print(data)
+	var state: Enemy.State = data["state"]
 	var target: Node2D = game_controller.get_entity(data["target"])
-	enemies[entity_id].current_state = data["state"]
+	
+	enemies[entity_id].current_state = state
 	enemies[entity_id]._target = target

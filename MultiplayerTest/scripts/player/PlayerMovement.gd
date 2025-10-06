@@ -18,6 +18,7 @@ var position_sync_frames: int = 20
 @onready var sprite: AnimatedSprite2D = $sprite
 
 func _ready() -> void:
+	super()
 	sprite.play("default")
 	sprite.animation_finished.connect(_animation_finished)
 
@@ -111,6 +112,5 @@ func _update_input(data: Dictionary):
 
 
 func _update_position(data: Dictionary):
-	print(data)
 	if data.has("x") and data.has("y"):
 		position = Vector2(data["x"], data["y"])
