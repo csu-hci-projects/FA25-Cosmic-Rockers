@@ -237,7 +237,6 @@ func read_p2p_packet():
 	
 	#entity specific functions
 	if data_type.begins_with("entity_"):
-		print("received",data_type)
 		if has_signal("on_received_" + data_type):
 			emit_signal("on_received_" + data_type, readable_data["entity_id"], readable_data["data"])
 		else:

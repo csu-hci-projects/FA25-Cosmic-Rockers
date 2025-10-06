@@ -12,6 +12,7 @@ var enemies = {}
 func _ready() -> void:
 	Multiplayer.on_received_entity_spawn.connect(_spawn_enemy)
 	Multiplayer.on_received_entity_state.connect(_set_state)
+	Multiplayer.on_received_entity_positions.connect(_set_positions)
 
 func _process(delta: float):
 	if !Multiplayer.is_host:
@@ -27,13 +28,14 @@ func _process(delta: float):
 	if position_sync_timer <= 0:
 		position_sync_timer = position_sync_frames
 		var data = {}
-		for i in range(position_chunk_offset, (position_chunk_offset + position_chunk_size) % keys.size()):
-			data[keys[i]] = enemies[keys[i]].position
+		var size = keys.size()
+		for i in range(position_chunk_offset, position_chunk_offset + position_chunk_size):
+			data[keys[i % size]] = enemies[keys[i % size]].position
 		Multiplayer.update_entity_positions(data)
 		
 		position_chunk_offset += position_chunk_size
-		if position_chunk_offset >= keys.size():
-			position_chunk_offset %= keys.size()
+		if position_chunk_offset >= size:
+			position_chunk_offset %= size
 	position_sync_timer-=1
 
 func send_state(entity_id: String, state: Enemy.State, target: String):
@@ -41,12 +43,14 @@ func send_state(entity_id: String, state: Enemy.State, target: String):
 
 func spawn_enemies():
 	var enemy_spawns = WorldState.get_enemy_spawn_locations(50)
-	var entity_id: int = 0
+	var id: int = 0
 	for spawn_location in enemy_spawns:
-		var enemy_name = "enemy_"+str(entity_id)
-		entity_id += 1
-		_spawn_enemy(enemy_name, {"position":spawn_location}).on_state_change.connect(send_state)
-		Multiplayer.entity_spawn(enemy_name, spawn_location)
+		var entity_id = "enemy_"+str(id)
+		id += 1
+		var enemy = _spawn_enemy(entity_id, {"position":spawn_location})
+		Multiplayer.entity_spawn(entity_id, spawn_location)
+		enemy.on_state_change.connect(send_state)
+		enemy._process_state(0)
 
 func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
 	var enemy = enemy_scene.instantiate()
@@ -63,3 +67,7 @@ func _set_state(entity_id: String, data: Dictionary):
 	
 	enemies[entity_id].current_state = state
 	enemies[entity_id]._target = target
+
+func _set_positions(entity_id: String, data: Dictionary):
+	for key in data.keys():
+		enemies[key].position = data[key]
