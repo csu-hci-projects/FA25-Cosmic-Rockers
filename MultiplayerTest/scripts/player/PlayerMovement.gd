@@ -112,5 +112,5 @@ func _update_input(data: Dictionary):
 
 
 func _update_position(data: Dictionary):
-	if data.has("x") and data.has("y"):
-		position = Vector2(data["x"], data["y"])
+	if data.has("position"):
+		position = data["position"]
