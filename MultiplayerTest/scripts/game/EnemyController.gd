@@ -19,18 +19,20 @@ func _process(delta: float):
 		return
 	if !WorldState.level_loaded:
 		return
+	if enemies.size() == 0:
+		return
 	
-	var keys: Array = enemies.keys()
-	for key in keys:
+	var entity_ids: Array = enemies.keys()
+	for key in entity_ids:
 		var enemy = enemies[key]
 		enemy._process_state(delta)
 	
 	if position_sync_timer <= 0:
 		position_sync_timer = position_sync_frames
 		var data = {}
-		var size = keys.size()
+		var size = enemies.size()
 		for i in range(position_chunk_offset, position_chunk_offset + position_chunk_size):
-			data[keys[i % size]] = enemies[keys[i % size]].position
+			data[entity_ids[i % size]] = enemies[entity_ids[i % size]].position
 		Multiplayer.update_entity_positions(data)
 		
 		position_chunk_offset += position_chunk_size
