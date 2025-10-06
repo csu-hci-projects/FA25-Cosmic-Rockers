@@ -24,10 +24,19 @@ var _target: Node2D = null
 var _attack_timer: float = 0.0
 
 @onready var sprite: Sprite2D = $sprite
+@onready var collision: CollisionShape2D = $collision
+var ai_enabled: bool = false
 
 signal on_state_change
 
+func enable_ai() -> void:
+	collision.disabled = false
+	ai_enabled = true
+
 func _process(delta: float) -> void:
+	if !ai_enabled:
+		return
+	
 	if velocity.x > 0:
 		sprite.flip_h = false
 	elif velocity.x < 0:
@@ -50,6 +59,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process_state(delta: float):
+	if !ai_enabled:
+		return
+	
 	_attack_timer = max(0.0, _attack_timer - delta)
 	if health <= flee_threshold:
 		set_state(State.FLEE)

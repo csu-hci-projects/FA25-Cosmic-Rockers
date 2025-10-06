@@ -8,6 +8,7 @@ var position_chunk_offset: int = 0
 var enemy_scene = preload("res://scenes/enemy.tscn")
 @onready var game_controller = $".." 
 var enemies = {}
+var enabled_enemies: int = 0
 
 func _ready() -> void:
 	Multiplayer.on_received_entity_spawn.connect(_spawn_enemy)
@@ -15,6 +16,17 @@ func _ready() -> void:
 	Multiplayer.on_received_entity_positions.connect(_set_positions)
 
 func _process(delta: float):
+	#CHUNKED ENEMY ENABLING
+	if enabled_enemies < enemies.size():
+		var entity_ids: Array = enemies.keys()
+		var to = enabled_enemies + position_chunk_size
+		if to >= entity_ids.size():
+			to = entity_ids.size()-1
+		for i in range(enabled_enemies, enabled_enemies + position_chunk_size):
+			enemies[entity_ids[i]].enable_ai()
+		enabled_enemies += position_chunk_size
+		return
+	
 	if !Multiplayer.is_host:
 		return
 	if !WorldState.level_loaded:
