@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://w18230pt20ls" path="res://scenes/background.tscn" id="5_p57ef"]
-[ext_resource type="Script" uid="uid://cevyadjutxs8l" path="res://scripts/player/PlayerStatusController.gd" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://cevyadjutxs8l" path="res://scripts/player/Status.gd" id="7_u5sy4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_iywne")

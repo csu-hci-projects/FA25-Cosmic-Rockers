@@ -12,7 +12,7 @@ extends Control
 @onready var start_button: Button = $lobby_menu/start
 @onready var ready_button: Button = $lobby_menu/ready
 
-var lobby_player = preload("res://scenes/lobby_player.tscn")
+var lobby_player = preload("res://scenes/ui/lobby_player.tscn")
 
 func _ready():
 	Multiplayer.chat_received.connect(_add_chat_message)

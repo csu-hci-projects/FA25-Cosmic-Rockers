@@ -5,6 +5,7 @@ var player_scene = preload("res://scenes/player.tscn")
 @onready var tilemap = $tilemap
 @onready var camera = $camera
 @onready var enemy_controller = $enemy_controller
+@onready var player_status = $CanvasLayer/status
 
 var remote_players = {}
 
@@ -46,6 +47,7 @@ func spawn_players():
 		remote_player.name = players[key]["steam_username"]
 		remote_player.entity_id = str(key)
 		move_to_spawn(remote_player)
+		player_status.create_status_bar(remote_player, players[key]["steam_username"])
 	
 	get_local_player().is_local_player = true
 	camera.set_target(get_local_player())
