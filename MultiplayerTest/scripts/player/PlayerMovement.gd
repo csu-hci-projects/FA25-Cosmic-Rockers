@@ -19,8 +19,9 @@ var position_sync_frames: int = 20
 
 func _ready() -> void:
 	super()
-	sprite.play("default")
+	set_animation("default")
 	sprite.animation_finished.connect(_animation_finished)
+	on_die.connect(_on_die)
 
 func _physics_process(delta: float) -> void:
 	jump_buffer -= delta
@@ -32,15 +33,15 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0
 		
 		if abs(velocity.x) > 0.1:
-			sprite.play("walk")
+			set_animation("walk")
 		else:
-			sprite.play("default")
+			set_animation("default")
 	else:
 		coyote_timer -= delta
 		velocity.x = lerp(velocity.x, target_speed, air_control * delta * 10.0)
 		velocity.y += gravity * delta
 		
-		sprite.play("fall")
+		set_animation("fall")
 	
 	if velocity.x > 0:
 		sprite.flip_h = false
@@ -55,8 +56,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func set_animation(animation_name: String):
+	if animation_name != "death" and is_dead:
+		return
+	
+	sprite.play(animation_name)
+
 func _process(delta: float):
 	if !is_local_player: #only local player controls their player
+		return
+	if is_dead:
 		return
 	
 	if position_sync_timer <= 0:
@@ -81,7 +90,7 @@ func _process(delta: float):
 
 func jump():
 	jump_buffer = jump_buffer_time
-	sprite.play("jump")
+	set_animation("jump")
 
 
 func jump_release():
@@ -95,9 +104,9 @@ func move(input: float):
 
 func _animation_finished():
 	if sprite.animation == "jump":
-		sprite.play("fall")
+		set_animation("fall")
 	if sprite.animation == "land":
-		sprite.play("default")
+		set_animation("default")
 
 
 func _update_input(data: Dictionary):
@@ -114,3 +123,12 @@ func _update_input(data: Dictionary):
 func _update_position(data: Dictionary):
 	if data.has("position"):
 		position = data["position"]
+
+func _on_die():
+	input_dir = 0
+	set_animation("death")
+	
+	if !is_local_player:
+		return
+	
+	#NOTIFY NETWORK OF DEATH

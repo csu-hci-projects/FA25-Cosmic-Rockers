@@ -7,11 +7,14 @@ var entity_id: String
 @export var max_health: int = 100
 var health: int
 
+var is_dead: bool = false
+
 signal on_health_changed(percentage: float)
-signal on_death()
+signal on_die()
 
 func _ready():
 	add_to_group("entity")
+	is_dead = false
 	create_health_bar()
 	set_health(max_health)
 
@@ -39,4 +42,5 @@ func set_health(amt: int):
 	emit_signal("on_health_changed", float(health) / float(max_health) * 100)
 
 func die():
-	emit_signal("on_death")
+	is_dead = true
+	emit_signal("on_die")

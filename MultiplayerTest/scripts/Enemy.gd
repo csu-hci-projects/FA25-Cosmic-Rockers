@@ -119,6 +119,8 @@ func _detect_target() -> void:
 	for p in get_tree().get_nodes_in_group("player"):
 		if not p is Node2D:
 			continue
+		if p.is_dead:
+			continue
 		var d = global_position.distance_to(p.global_position)
 		if d < nearest_dist:
 			nearest_dist = d
