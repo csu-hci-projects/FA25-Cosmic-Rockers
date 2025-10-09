@@ -14,6 +14,7 @@ func _ready() -> void:
 	Multiplayer.on_received_entity_spawn.connect(_spawn_enemy)
 	Multiplayer.on_received_entity_state.connect(_set_state)
 	Multiplayer.on_received_entity_positions.connect(_set_positions)
+	Multiplayer.on_received_entity_attack.connect(_attack_player)
 
 func _process(delta: float):
 	#CHUNKED ENEMY ENABLING

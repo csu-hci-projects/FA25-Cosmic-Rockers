@@ -8,6 +8,7 @@ signal on_received_position(steam_id: int, data: Dictionary)
 signal on_received_entity_spawn(entity_id: int, data: Dictionary)
 signal on_received_entity_state(entity_id: int, data: Dictionary)
 signal on_received_entity_positions(entity_id: int, data: Dictionary)
+signal on_received_entity_attack(entity_id: int, data: Dictionary)
 
 # SEND TYPES:
 # 0 -> Packets may be dropped. No guarantee of order or arrival
