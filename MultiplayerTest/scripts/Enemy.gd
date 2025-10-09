@@ -18,6 +18,7 @@ var current_state : State = State.IDLE
 @export var attack_range: float = 20.0
 @export var attack_cooldown: float = 1.0
 @export var flee_threshold: int = 5
+@export var dmg = 5
 
 var _current_patrol_index: int = 0
 var _target: Node2D = null
@@ -27,7 +28,8 @@ var _attack_timer: float = 0.0
 @onready var collision: CollisionShape2D = $collision
 var ai_enabled: bool = false
 
-signal on_state_change
+signal on_state_change(entity_id: String, current_state: State, target_id: String)
+signal on_attack_player(entity_id: String, target_id: String, damage: int)
 
 func enable_ai() -> void:
 	collision.disabled = false
@@ -144,9 +146,8 @@ func _attack_behavior(delta: float) -> void:
 		_attack_timer = attack_cooldown
 
 func _perform_attack() -> void:
-	var dmg = 5
 	if _target and _target.has_method("take_damage"):
-		_target.take_damage(dmg)
+		emit_signal("on_attack_player", entity_id, _target.entity_id, dmg)
 
 func _flee_behavior(delta: float) -> void:
 	var nearest = null

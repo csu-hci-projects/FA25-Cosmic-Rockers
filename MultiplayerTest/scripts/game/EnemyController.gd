@@ -14,6 +14,7 @@ func _ready() -> void:
 	Multiplayer.on_received_entity_spawn.connect(_spawn_enemy)
 	Multiplayer.on_received_entity_state.connect(_set_state)
 	Multiplayer.on_received_entity_positions.connect(_set_positions)
+	Multiplayer.on_received_entity_attack.connect(_attack_player)
 
 func _process(delta: float):
 	#CHUNKED ENEMY ENABLING
@@ -64,6 +65,7 @@ func spawn_enemies():
 		var enemy = _spawn_enemy(entity_id, {"position":spawn_location})
 		Multiplayer.entity_spawn(entity_id, spawn_location)
 		enemy.on_state_change.connect(send_state)
+		enemy.on_attack_player.connect(attack_player)
 		enemy._process_state(0)
 
 func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
@@ -85,3 +87,11 @@ func _set_state(entity_id: String, data: Dictionary):
 func _set_positions(entity_id: String, data: Dictionary):
 	for key in data.keys():
 		enemies[key].position = data[key]
+
+func attack_player(entity_id: String, target_id: String, damage: int):
+	Multiplayer.entity_attack(entity_id, target_id, damage)
+	_attack_player(entity_id, {"target": target_id, "damage": damage})
+
+func _attack_player(entity_id: String, data: Dictionary):
+	var target: Entity = game_controller.get_entity(data["target"])
+	target.take_damage(data["damage"])
