@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cxpv8j6aghgg1"]
 
 [ext_resource type="Script" uid="uid://c1rwrfi4vlhud" path="res://scripts/game/GameController.gd" id="1_iywne"]
-[ext_resource type="TileSet" uid="uid://c3qfekxo3qskl" path="res://sprites/default_tile_map.tres" id="1_yqjtg"]
+[ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/default_tile_map.tres" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="5_iywne"]

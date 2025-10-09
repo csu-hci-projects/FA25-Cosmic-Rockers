@@ -1,5 +1,7 @@
 extends TileMapLayer
 
+const EMPTY_TILE: int = -1
+
 func _ready() -> void:
 	Multiplayer.on_received_tile.connect(_update_tile)
 
@@ -22,10 +24,11 @@ func create_tilemap():
 	for j in range(height):
 		for i in range(width):
 			var cell: Vector2i = Vector2i(i, j)
-			if WorldState.get_tile_data(cell) != -1:
+			var tile_id = WorldState.get_tile_data(cell)
+			if WorldState.get_tile_data(cell) != EMPTY_TILE:
 				cells_to_update.append(cell)
 	
-	set_cells_terrain_connect(cells_to_update, 0, 0, false)
+	set_cells_terrain_connect(cells_to_update, 0, WorldState.tile_set, false)
 
 func update_tile(cell: Vector2i, tile_id: int):
 	Multiplayer.update_tile(cell, tile_id)

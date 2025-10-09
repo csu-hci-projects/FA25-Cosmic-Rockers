@@ -110,7 +110,7 @@ static func create_flat_rooms(floor_height_range: Array, roof_height_range: Arra
 	for j in data.size():
 		for i in data[j].size():
 			var cell = Vector2i(i,j)
-			if cell in visited or data[j][i] == CAVE_TILE:
+			if cell in visited or data[j][i] != EMPTY_TILE:
 				continue
 			
 			var group = get_connected_tiles(cell, data[j][i])

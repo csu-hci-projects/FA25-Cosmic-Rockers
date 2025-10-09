@@ -6,6 +6,7 @@ var map_height: int = 0
 var spawn_room_position: Vector2i
 var end_room_position: Vector2i
 var room_size: int
+var tile_set: int = 0
 
 var map_data: Array = []
 var room_data: Array = []
