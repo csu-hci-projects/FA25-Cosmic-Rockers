@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdb5rxgovnnhy"
-path="res://.godot/imported/cave_1.png-5c3d547cedb1a3c38cf1a63541be682d.ctex"
+uid="uid://bih3jwcbonvka"
+path="res://.godot/imported/lava_1.png-5cd55e381d3e802e44c7e53af322de42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/background/cave_1.png"
-dest_files=["res://.godot/imported/cave_1.png-5c3d547cedb1a3c38cf1a63541be682d.ctex"]
+source_file="res://sprites/background/lava/lava_1.png"
+dest_files=["res://.godot/imported/lava_1.png-5cd55e381d3e802e44c7e53af322de42.ctex"]
 
 [params]
 

@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://ylewfm81p8gu"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://ylewfm81p8gu"]
 
-[ext_resource type="Texture2D" uid="uid://dpdvdym50tm6o" path="res://sprites/tilemap_template.png" id="1_1d8aa"]
-[ext_resource type="Texture2D" uid="uid://boakc3ivgvcmp" path="res://sprites/tilemap_cave.png" id="1_cqpvk"]
-[ext_resource type="Texture2D" uid="uid://ccyl6thqgy15a" path="res://sprites/tilemap_crystal.png" id="2_ief3v"]
+[ext_resource type="Texture2D" uid="uid://dpdvdym50tm6o" path="res://sprites/tilesets/tilemap_template.png" id="1_1d8aa"]
+[ext_resource type="Texture2D" uid="uid://boakc3ivgvcmp" path="res://sprites/tilesets/tilemap_cave.png" id="1_cqpvk"]
+[ext_resource type="Texture2D" uid="uid://ccyl6thqgy15a" path="res://sprites/tilesets/tilemap_crystal.png" id="2_ief3v"]
+[ext_resource type="Texture2D" uid="uid://c1ebof1do8t31" path="res://sprites/tilesets/tilemap_lava.png" id="3_gax23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2qewp"]
 texture = ExtResource("1_cqpvk")
@@ -181,7 +182,7 @@ texture = ExtResource("2_ief3v")
 0:3/0/terrains_peering_bit/top_right_corner = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cqpvk"]
-texture = ExtResource("1_1d8aa")
+texture = ExtResource("3_gax23")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0, 0, 0, 0, 8, -8, 8)
@@ -363,7 +364,7 @@ terrain_set_0/terrain_0/name = "Cave"
 terrain_set_0/terrain_0/color = Color(0.845361, 0.252456, 0.04648, 1)
 terrain_set_0/terrain_1/name = "Crystal"
 terrain_set_0/terrain_1/color = Color(0.653695, 0.910057, 0.153061, 1)
-terrain_set_0/terrain_2/name = "2"
+terrain_set_0/terrain_2/name = "Lava"
 terrain_set_0/terrain_2/color = Color(0, 0.55109, 0.502014, 1)
 terrain_set_0/terrain_3/name = "3"
 terrain_set_0/terrain_3/color = Color(0.178551, 0.371958, 1, 1)

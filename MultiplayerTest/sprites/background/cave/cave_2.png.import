@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpdvdym50tm6o"
-path="res://.godot/imported/tilemap_template.png-895d698216fd35f121c89007da11117f.ctex"
+uid="uid://cyv1grgw5prpp"
+path="res://.godot/imported/cave_2.png-df16ba8fbb37629563090e16400ffc32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tilemap_template.png"
-dest_files=["res://.godot/imported/tilemap_template.png-895d698216fd35f121c89007da11117f.ctex"]
+source_file="res://sprites/background/cave/cave_2.png"
+dest_files=["res://.godot/imported/cave_2.png-df16ba8fbb37629563090e16400ffc32.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
