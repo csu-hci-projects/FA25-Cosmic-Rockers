@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c1ebof1do8t31" path="res://sprites/tilesets/tilemap_lava.png" id="3_gax23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2qewp"]
+resource_name = "Cave"
 texture = ExtResource("1_cqpvk")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -94,6 +95,7 @@ texture = ExtResource("1_cqpvk")
 0:3/0/terrains_peering_bit/top_right_corner = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ief3v"]
+resource_name = "Crystal"
 texture = ExtResource("2_ief3v")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -182,6 +184,7 @@ texture = ExtResource("2_ief3v")
 0:3/0/terrains_peering_bit/top_right_corner = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cqpvk"]
+resource_name = "Lava"
 texture = ExtResource("3_gax23")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -270,6 +273,7 @@ texture = ExtResource("3_gax23")
 0:3/0/terrains_peering_bit/top_right_corner = 2
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gax23"]
+resource_name = "Temp"
 texture = ExtResource("1_1d8aa")
 0:0/0 = 0
 0:0/0/terrain_set = 0

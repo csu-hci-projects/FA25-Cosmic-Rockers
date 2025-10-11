@@ -3,6 +3,7 @@ extends Node
 var player_scene = preload("res://scenes/player.tscn")
 
 @onready var tilemap = $tilemap
+@onready var background = $camera/background
 @onready var camera = $camera
 @onready var enemy_controller = $enemy_controller
 @onready var player_status = $CanvasLayer/status
@@ -26,6 +27,7 @@ func get_entity(entity_id: String) -> Node2D:
 
 func initialize_game():
 	tilemap.create_tilemap()
+	background.create_background()
 	spawn_players()
 	enemy_controller.spawn_enemies()
 

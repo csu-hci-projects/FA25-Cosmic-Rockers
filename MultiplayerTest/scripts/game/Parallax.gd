@@ -1,7 +1,36 @@
 extends Node2D
 
-@export var parallax_strengths: Array = [0, -0.1, -0.2, -0.3]
+var layer_scene = preload("res://scenes/background_layer.tscn")
+@export var parallax_strengths: Array[float] = [0, -0.1, -0.2, -0.3]
 @export var sprite_width: float = 480
+
+func create_background():
+	for sprite in get_background_sprites(WorldState.get_background()):
+		var layer = layer_scene.instantiate()
+		add_child(layer)
+		for child in layer.get_children():
+			if child is Sprite2D:
+				child.texture = sprite
+
+func get_background_sprites(type: String) -> Array[CompressedTexture2D]:
+	var path = "res://sprites/background/" + type
+	var dir := DirAccess.open(path)
+	var textures: Array[CompressedTexture2D] = []
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".png"):
+				var texture = load(path + "/" + file_name)
+				if texture is CompressedTexture2D:
+					textures.append(texture)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	else:
+		push_warning("Directory not found: " + path)
+	
+	return textures
 
 func _process(delta: float) -> void:
 	if get_parent() == null:

@@ -1,5 +1,12 @@
 extends Node
 
+const TILE_SET_BG: Dictionary = {
+	0: "cave",
+	1: "cave",
+	2: "lava",
+	3: "cave",
+}
+
 var map_width: int = 0
 var map_height: int = 0
 
@@ -39,6 +46,9 @@ func initialize() -> Dictionary:
 		"end_room_position" : end_room_position, 
 		"room_size" : room_size
 	}
+
+func get_background() -> String:
+	return TILE_SET_BG[tile_set]
 
 func get_tile_position(index: int) -> Vector2:
 	return Vector2(int(index % map_width), int(index / map_height)) * 16

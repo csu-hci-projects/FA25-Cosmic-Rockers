@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwi3lfxcfvn4x"]
+
+[ext_resource type="Texture2D" uid="uid://dgnxojhovbn4f" path="res://sprites/background/cave/cave_0.png" id="1_757nl"]
+
+[node name="layer0" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_757nl")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(480, 0)
+texture = ExtResource("1_757nl")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-480, 0)
+texture = ExtResource("1_757nl")
