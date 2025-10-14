@@ -6,6 +6,8 @@ extends Entity
 @export var coyote_time : float = 0.1
 @export var jump_buffer_time : float = 0.1
 @export var air_control : float = 0.9
+@onready var weapon: Node = $Weapon
+
 
 var coyote_timer : float = 0.0
 var jump_buffer : float = 0.0
@@ -14,6 +16,15 @@ var position_sync_timer: int = 0
 
 @export var is_local_player: bool = false
 var position_sync_frames: int = 20
+
+func _process(delta):
+	if !is_local_player or is_dead:
+		return
+	
+	# Example: fire in facing direction
+	if Input.is_action_just_pressed("fire"):
+		var dir = Vector2.RIGHT if sprite.flip_h == false else Vector2.LEFT
+		weapon.shoot(dir)
 
 @onready var sprite: AnimatedSprite2D = $sprite
 
