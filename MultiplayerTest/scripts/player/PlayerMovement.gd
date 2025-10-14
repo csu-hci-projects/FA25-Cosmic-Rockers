@@ -7,7 +7,7 @@ extends Entity
 @export var jump_buffer_time : float = 0.1
 @export var air_control : float = 0.9
 @onready var weapon: Node = $Weapon
-
+@onready var sprite: AnimatedSprite2D = $sprite
 
 var coyote_timer : float = 0.0
 var jump_buffer : float = 0.0
@@ -16,17 +16,6 @@ var position_sync_timer: int = 0
 
 @export var is_local_player: bool = false
 var position_sync_frames: int = 20
-
-func _process(delta):
-	if !is_local_player or is_dead:
-		return
-	
-	# Example: fire in facing direction
-	if Input.is_action_just_pressed("fire"):
-		var dir = Vector2.RIGHT if sprite.flip_h == false else Vector2.LEFT
-		weapon.shoot(dir)
-
-@onready var sprite: AnimatedSprite2D = $sprite
 
 func _ready() -> void:
 	super()
@@ -66,52 +55,54 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
-func set_animation(animation_name: String):
-	if animation_name != "death" and is_dead:
-		return
-	
-	sprite.play(animation_name)
-
 func _process(delta: float):
-	if !is_local_player: #only local player controls their player
-		return
-	if is_dead:
+	if !is_local_player or is_dead:
 		return
 	
+	# Process weapon input
+	_process_input(delta)
+	
+	# Multiplayer position sync
 	if position_sync_timer <= 0:
 		position_sync_timer = position_sync_frames
 		Multiplayer.update_position(position)
-	position_sync_timer-=1
+	position_sync_timer -= 1
 	
+	# Jump input
 	if Input.is_action_just_pressed("jump"):
 		jump()
-		Multiplayer.update_input({ "jump":true })
-	
+		Multiplayer.update_input({ "jump": true })
 	if Input.is_action_just_released("jump"):
 		jump_release()
-		Multiplayer.update_input({ "jump":false })
+		Multiplayer.update_input({ "jump": false })
 	
+	# Movement input
 	if Input.is_action_just_pressed("move_right") or Input.is_action_just_pressed("move_left") \
 	or Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left"):
 		var input = Input.get_axis("move_left", "move_right")
 		move(input)
-		Multiplayer.update_input({ "move":input })
+		Multiplayer.update_input({ "move": input })
 
+func _process_input(delta: float):
+	if Input.is_action_just_pressed("fire"):
+		var dir = Vector2.RIGHT if sprite.flip_h == false else Vector2.LEFT
+		weapon.shoot(dir)
+
+func set_animation(animation_name: String):
+	if animation_name != "death" and is_dead:
+		return
+	sprite.play(animation_name)
 
 func jump():
 	jump_buffer = jump_buffer_time
 	set_animation("jump")
 
-
 func jump_release():
 	if velocity.y < 0:
 		velocity.y *= 0.5
 
-
 func move(input: float):
 	input_dir = input
-
 
 func _animation_finished():
 	if sprite.animation == "jump":
@@ -119,17 +110,14 @@ func _animation_finished():
 	if sprite.animation == "land":
 		set_animation("default")
 
-
 func _update_input(data: Dictionary):
 	if data.has("jump"):
 		if data["jump"]:
 			jump()
 		else:
 			jump_release()
-	
 	if data.has("move"):
 		move(data["move"])
-
 
 func _update_position(data: Dictionary):
 	if data.has("position"):
@@ -142,4 +130,4 @@ func _on_die():
 	if !is_local_player:
 		return
 	
-	#NOTIFY NETWORK OF DEATH
+	# NOTIFY NETWORK OF DEATH
