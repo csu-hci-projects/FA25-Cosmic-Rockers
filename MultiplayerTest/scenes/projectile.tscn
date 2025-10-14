@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq3p7e4qf2v9t"]
+
+[ext_resource type="Script" uid="uid://fx23d8rltp0e2" path="res://scripts/Projectile.gd" id="1_r4t5b"]
+[ext_resource type="Texture2D" uid="uid://gk79b2h0n8jz4" path="res://sprites/sprite_sheets/weapons/projectile.png" id="2_r4t5b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4nq2p"]
+radius = 4.0
+
+[node name="projectile" type="Area2D" groups=["projectile"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_r4t5b")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_r4t5b")
+centered = true
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4nq2p")
