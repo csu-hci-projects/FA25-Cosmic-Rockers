@@ -255,37 +255,22 @@ func start_game():
 	get_tree().change_scene_to_packed(game_scene)
 
 
-func send_map_data(this_target: int, data: Dictionary, chunk_size: int = 1000) -> void:
-	var map_data = data["map_data"]
-	var map_width = data["map_width"]
-	var map_height = data["map_height"]
-	var spawn_room_position = data["spawn_room_position"]
-	var end_room_position = data["end_room_position"]
-	var room_size = data["room_size"]
-	
+func send_map_data(this_target: int, level_data: Dictionary, chunk_size: int = 1000) -> void:
+	var map_data: Array = level_data["map_data"]
 	var total_chunks: int = int(ceil(float(map_data.size()) / chunk_size))
-	var chunk_index := 0
-	var i := 0
-	while i < map_data.size():
-		var start = i
-		var end = min(i + chunk_size, map_data.size())
+
+	for chunk_index in range(total_chunks):
+		var start = chunk_index * chunk_size
+		var end = min(start + chunk_size, map_data.size())
 		var chunk: Array = map_data.slice(start, end)
 
-		var packet := {
-			"type": "map_chunk",
-			"chunk_index": chunk_index,
-			"total_chunks": total_chunks,
-			"map_width": map_width,
-			"map_height": map_height,
-			"spawn_room_position": spawn_room_position,
-			"end_room_position": end_room_position,
-			"room_size": room_size,
-			"chunk_data": chunk
-		}
+		var packet := level_data.duplicate()
+		packet["type"] = "map_chunk"
+		packet["chunk_index"] = chunk_index
+		packet["total_chunks"] = total_chunks
+		packet["chunk_data"] = chunk
 		
 		send_p2p_packet(this_target, packet, 2)
-		i += chunk_size
-		chunk_index += 1
 
 
 func handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
@@ -294,14 +279,9 @@ func handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
 	if !WorldState.received_map_chunks.has(sender_id):
 		WorldState.received_map_chunks[sender_id] = {
 			"chunks": {},
-			"expected": packet["total_chunks"],
-			"map_width": packet["map_width"],
-			"map_height": packet["map_height"],
-			"spawn_room_position": packet["spawn_room_position"],
-			"end_room_position": packet["end_room_position"],
-			"room_size": packet["room_size"]
+			"expected": packet["total_chunks"]
 		}
-
+		
 	var entry = WorldState.received_map_chunks[sender_id]
 	entry["chunks"][packet["chunk_index"]] = packet["chunk_data"]
 
@@ -314,12 +294,8 @@ func handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
 				push_error("Missing chunk index %d from sender %d" % [i, sender_id])
 				return
 		
-		WorldState.set_map_data(
-			map_data, 
-			entry["map_width"], 
-			entry["map_height"], 
-			entry["spawn_room_position"], 
-			entry["end_room_position"], 
-			entry["room_size"]
-			)
+		var level_data: Dictionary = packet.duplicate()
+		level_data["map_data"] = map_data
+		
+		WorldState.set_map_data(level_data)
 		WorldState.received_map_chunks.erase(sender_id)

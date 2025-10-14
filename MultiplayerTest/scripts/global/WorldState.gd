@@ -23,7 +23,9 @@ var level_loaded = false
 
 signal on_level_loaded()
 
-func initialize() -> Dictionary:
+func initialize(level: int = 0) -> Dictionary:
+	tile_set = level
+	
 	map_width = 140
 	map_height = 80
 	
@@ -44,7 +46,8 @@ func initialize() -> Dictionary:
 		"map_height": map_height, 
 		"spawn_room_position" : spawn_room_position, 
 		"end_room_position" : end_room_position, 
-		"room_size" : room_size
+		"room_size" : room_size, 
+		"tile_set" : tile_set
 	}
 
 func get_background() -> String:
@@ -59,16 +62,21 @@ func get_tile_id(cell: Vector2i) -> int:
 func get_tile_data(cell: Vector2i) -> int:
 	return map_data[cell.x + cell.y * map_width]
 
-func set_map_data(data: Array, width: int, height: int, _spawn_room_position: Vector2i, _end_room_position: Vector2i, _room_size: int):
-	if data.size() != width * height:
+func set_map_data(data: Dictionary):
+	var map_data: Array = data.get("map_data", [])
+	var map_width: int = data.get("map_width", 0)
+	var map_height: int = data.get("map_height", 0)
+	
+	if map_data.size() != map_width * map_height:
 		push_error("Map data length does not match width * height")
 	
-	map_width = width
-	map_height = height
-	spawn_room_position = _spawn_room_position
-	end_room_position = _end_room_position
-	room_size = _room_size
-	map_data = data
+	map_data = map_data
+	map_width = map_width
+	map_height = map_height
+	spawn_room_position = data.get("spawn_room_position", Vector2i.ZERO)
+	end_room_position = data.get("end_room_position", Vector2i.ZERO)
+	room_size = data.get("room_size", 0)
+	tile_set = data.get("tile_set", 0)
 	
 	level_loaded = true
 	emit_signal("on_level_loaded")
