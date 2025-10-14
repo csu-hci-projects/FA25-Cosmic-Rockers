@@ -63,16 +63,16 @@ func get_tile_data(cell: Vector2i) -> int:
 	return map_data[cell.x + cell.y * map_width]
 
 func set_map_data(data: Dictionary):
-	var map_data: Array = data.get("map_data", [])
-	var map_width: int = data.get("map_width", 0)
-	var map_height: int = data.get("map_height", 0)
+	var _map_data: Array = data.get("map_data", [])
+	var _map_width: int = data.get("map_width", 0)
+	var _map_height: int = data.get("map_height", 0)
 	
-	if map_data.size() != map_width * map_height:
+	if _map_data.size() != _map_width * _map_height:
 		push_error("Map data length does not match width * height")
 	
-	map_data = map_data
-	map_width = map_width
-	map_height = map_height
+	map_data = _map_data
+	map_width = _map_width
+	map_height = _map_height
 	spawn_room_position = data.get("spawn_room_position", Vector2i.ZERO)
 	end_room_position = data.get("end_room_position", Vector2i.ZERO)
 	room_size = data.get("room_size", 0)

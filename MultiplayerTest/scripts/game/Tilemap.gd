@@ -24,7 +24,6 @@ func create_tilemap():
 	for j in range(height):
 		for i in range(width):
 			var cell: Vector2i = Vector2i(i, j)
-			var tile_id = WorldState.get_tile_data(cell)
 			if WorldState.get_tile_data(cell) != EMPTY_TILE:
 				cells_to_update.append(cell)
 	

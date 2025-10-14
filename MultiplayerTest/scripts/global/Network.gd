@@ -265,6 +265,7 @@ func send_map_data(this_target: int, level_data: Dictionary, chunk_size: int = 1
 		var chunk: Array = map_data.slice(start, end)
 
 		var packet := level_data.duplicate()
+		packet.erase("map_data")
 		packet["type"] = "map_chunk"
 		packet["chunk_index"] = chunk_index
 		packet["total_chunks"] = total_chunks
@@ -273,28 +274,27 @@ func send_map_data(this_target: int, level_data: Dictionary, chunk_size: int = 1
 		send_p2p_packet(this_target, packet, 2)
 
 
+
 func handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
 	WorldState.level_loaded = false
 	
 	if !WorldState.received_map_chunks.has(sender_id):
-		WorldState.received_map_chunks[sender_id] = {
-			"chunks": {},
-			"expected": packet["total_chunks"]
-		}
+		WorldState.received_map_chunks[sender_id] = {}
 		
 	var entry = WorldState.received_map_chunks[sender_id]
-	entry["chunks"][packet["chunk_index"]] = packet["chunk_data"]
-
-	if entry["chunks"].size() == entry["expected"]:
+	entry[packet["chunk_index"]] = packet["chunk_data"]
+	
+	if entry.size() == packet["total_chunks"]:
 		var map_data: Array = []
-		for i in range(entry["expected"]):
-			if entry["chunks"].has(i):
-				map_data += entry["chunks"][i]
+		for i in range(packet["total_chunks"]):
+			if entry.has(i):
+				map_data += entry[i]
 			else:
 				push_error("Missing chunk index %d from sender %d" % [i, sender_id])
 				return
 		
 		var level_data: Dictionary = packet.duplicate()
+		level_data.erase("")
 		level_data["map_data"] = map_data
 		
 		WorldState.set_map_data(level_data)
