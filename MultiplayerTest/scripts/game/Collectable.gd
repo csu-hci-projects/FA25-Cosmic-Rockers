@@ -1,7 +1,8 @@
+class_name Collectable
 extends Area2D
 
 var target: Node2D = null
-var lerp_speed: float = 1
+var lerp_speed: float = 10
 
 @onready var sprite = $Sprite2D
 
@@ -10,6 +11,8 @@ var lerp_speed: float = 1
 
 var _base_y: float
 var _time: float = 0.0
+
+signal on_player_grab(player_id: String)
 
 func _ready():
 	await get_tree().process_frame
@@ -24,3 +27,11 @@ func _process(delta: float) -> void:
 
 func set_sprite(texture: Texture2D):
 	sprite.texture = texture
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is PlayerMovement and body.is_local_player:
+		emit_signal("on_player_grab", body.entity_id)
+		_set_target(body)
+
+func _set_target(player: Node2D):
+	target = player

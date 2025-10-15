@@ -23,7 +23,7 @@ func _process(delta: float):
 		var to = enabled_enemies + position_chunk_size
 		if to >= entity_ids.size():
 			to = entity_ids.size()-1
-		for i in range(enabled_enemies, enabled_enemies + position_chunk_size):
+		for i in range(enabled_enemies, to):
 			enemies[entity_ids[i]].enable_ai()
 		enabled_enemies += position_chunk_size
 		return
@@ -57,7 +57,7 @@ func send_state(entity_id: String, state: Enemy.State, target: String):
 	Multiplayer.update_entity_state(entity_id, {"state":state, "target":target})
 
 func spawn_enemies():
-	var enemy_spawns = WorldState.get_enemy_spawn_locations(50)
+	var enemy_spawns = WorldState.get_enemy_spawn_locations(WorldState.enemy_count)
 	var id: int = 0
 	for spawn_location in enemy_spawns:
 		var entity_id = "enemy_"+str(id)

@@ -1,6 +1,7 @@
 extends Node
 
 var LEVELS: Dictionary = {}
+var enemy_count = 50
 
 var map_width: int = 0
 var map_height: int = 0
@@ -44,7 +45,6 @@ func initialize(level: int = 0) -> Dictionary:
 	
 	map_width = 140
 	map_height = 80
-	
 	spawn_room_position = Vector2i(randi_range(5,130),5)
 	end_room_position = Vector2i(randi_range(5,130),70)
 	room_size = 5

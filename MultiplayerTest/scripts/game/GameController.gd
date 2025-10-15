@@ -81,3 +81,7 @@ func spawn_collectable():
 	add_child(collectable)
 	move_to_end(collectable)
 	collectable.set_sprite(WorldState.get_collectible_sprite())
+	collectable.on_player_grab.connect(_player_grab_collectable)
+
+func _player_grab_collectable(player_id: String):
+	print(player_id, " grabbed collectable")

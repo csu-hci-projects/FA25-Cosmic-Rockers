@@ -1,3 +1,4 @@
+class_name PlayerMovement
 extends Entity
 
 @export var move_speed : float = 200.0
