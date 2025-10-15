@@ -13,7 +13,7 @@ signal chat_received(username: String, message: String)
 signal lobby_joined()
 signal lobby_left()
 
-var game_scene = preload("res://scenes/game.tscn")
+var game_scene = preload("res://scenes/game/game.tscn")
 
 
 func _ready():
@@ -248,10 +248,10 @@ func read_p2p_packet():
 			push_warning("No signal called %s exists!" % readable_data["type"])
 
 
-func start_game():
+func start_game(level_id: int = 0):
 	if is_host:
 		send_p2p_packet(0, {"type": "start_game"})
-		send_map_data(0, WorldState.initialize())
+		send_map_data(0, WorldState.initialize(level_id))
 	get_tree().change_scene_to_packed(game_scene)
 
 

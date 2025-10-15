@@ -49,6 +49,10 @@ layout_mode = 2
 toggle_mode = true
 text = "Ready"
 
+[node name="level_select" type="LineEdit" parent="lobby_menu"]
+layout_mode = 2
+placeholder_text = "level id"
+
 [node name="start" type="Button" parent="lobby_menu"]
 layout_mode = 2
 text = "Start Game"

@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmihda84q488q"]
 
-[ext_resource type="Script" uid="uid://cx7p701dtua6w" path="res://scripts/player/PlayerMovement.gd" id="1_g2els"]
-[ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="2_g2els"]
+[ext_resource type="Script" uid="uid://cx7p701dtua6w" path="res://scripts/player/PlayerMovement.gd" id="1_dd427"]
+[ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="2_u3rb4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
 radius = 6.0
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-script = ExtResource("1_g2els")
+script = ExtResource("1_dd427")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
-sprite_frames = ExtResource("2_g2els")
+sprite_frames = ExtResource("2_u3rb4")
 animation = &"walk"
 
 [node name="collision" type="CollisionShape2D" parent="."]

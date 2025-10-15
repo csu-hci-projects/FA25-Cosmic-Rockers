@@ -1,11 +1,6 @@
 extends Node
 
-const TILE_SET_BG: Dictionary = {
-	0: "cave",
-	1: "cave",
-	2: "lava",
-	3: "cave",
-}
+var LEVELS: Dictionary = {}
 
 var map_width: int = 0
 var map_height: int = 0
@@ -13,7 +8,7 @@ var map_height: int = 0
 var spawn_room_position: Vector2i
 var end_room_position: Vector2i
 var room_size: int
-var tile_set: int = 0
+var level_id: int = 0
 
 var map_data: Array = []
 var room_data: Array = []
@@ -23,8 +18,29 @@ var level_loaded = false
 
 signal on_level_loaded()
 
+func _ready():
+	load_all_levels("res://level_data")
+
+func load_all_levels(path: String):
+	var dir = DirAccess.open(path)
+	if not dir:
+		push_error("Could not open directory: " + path)
+		return
+	
+	dir.list_dir_begin()
+	var filename = dir.get_next()
+	while filename != "":
+		if filename.ends_with(".tres"):
+			var resource = load(path + "/" + filename)
+			if resource is LevelData:
+				LEVELS[resource.level_id] = resource
+			else:
+				push_warning("File %s is not a LevelData resource." % filename)
+		filename = dir.get_next()
+	dir.list_dir_end()
+
 func initialize(level: int = 0) -> Dictionary:
-	tile_set = level
+	level_id = level
 	
 	map_width = 140
 	map_height = 80
@@ -47,11 +63,17 @@ func initialize(level: int = 0) -> Dictionary:
 		"spawn_room_position" : spawn_room_position, 
 		"end_room_position" : end_room_position, 
 		"room_size" : room_size, 
-		"tile_set" : tile_set
+		"level_id" : level_id
 	}
 
+func get_collectible_sprite() -> Texture2D:
+	return LEVELS[level_id]["collectable"]
+
+func get_tileset() -> int:
+	return LEVELS[level_id]["tileset"]
+
 func get_background() -> String:
-	return TILE_SET_BG[tile_set]
+	return LEVELS[level_id]["background"]
 
 func get_tile_position(index: int) -> Vector2:
 	return Vector2(int(index % map_width), int(index / map_height)) * 16
@@ -76,7 +98,7 @@ func set_map_data(data: Dictionary):
 	spawn_room_position = data.get("spawn_room_position", Vector2i.ZERO)
 	end_room_position = data.get("end_room_position", Vector2i.ZERO)
 	room_size = data.get("room_size", 0)
-	tile_set = data.get("tile_set", 0)
+	level_id = data.get("level_id", 0)
 	
 	level_loaded = true
 	emit_signal("on_level_loaded")

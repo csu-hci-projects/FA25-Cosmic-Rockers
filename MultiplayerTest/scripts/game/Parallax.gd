@@ -1,6 +1,6 @@
 extends Node2D
 
-var layer_scene = preload("res://scenes/background_layer.tscn")
+var layer_scene = preload("res://scenes/game/background_layer.tscn")
 @export var parallax_strengths: Array[float] = [0, -0.1, -0.2, -0.3]
 @export var sprite_width: float = 480
 

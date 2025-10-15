@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmvclea7501mw"]
+
+[ext_resource type="Texture2D" uid="uid://crmy7dplmnxmt" path="res://sprites/collectables/collectable_drum.png" id="1_c0wb6"]
+[ext_resource type="Script" uid="uid://dus7w7ak7gegi" path="res://scripts/game/Collectable.gd" id="1_lxrtj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lxrtj"]
+
+[node name="collectable" type="Area2D"]
+script = ExtResource("1_lxrtj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lxrtj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c0wb6")

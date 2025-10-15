@@ -1,6 +1,7 @@
 extends Node
 
-var player_scene = preload("res://scenes/player.tscn")
+var player_scene = preload("res://scenes/game/player.tscn")
+var collectable_scene = preload("res://scenes/game/collectable.tscn")
 
 @onready var tilemap = $tilemap
 @onready var background = $camera/background
@@ -28,6 +29,7 @@ func get_entity(entity_id: String) -> Node2D:
 func initialize_game():
 	tilemap.create_tilemap()
 	background.create_background()
+	spawn_collectable()
 	spawn_players()
 	enemy_controller.spawn_enemies()
 
@@ -65,5 +67,17 @@ func move_to_spawn(node: Node2D):
 		WorldState.spawn_room_position.y + WorldState.room_size / 2
 		))
 
+func move_to_end(node: Node2D):
+	move_to_tile(node, Vector2i(
+		WorldState.end_room_position.x + WorldState.room_size / 2,
+		WorldState.end_room_position.y + WorldState.room_size / 2
+		))
+
 func move_to_tile(node: Node2D, tile: Vector2i):
 	node.position = tilemap.map_to_local(tile)
+
+func spawn_collectable():
+	var collectable = collectable_scene.instantiate()
+	add_child(collectable)
+	move_to_end(collectable)
+	collectable.set_sprite(WorldState.get_collectible_sprite())

@@ -5,12 +5,13 @@ extends Control
 
 @onready var chat = $chat
 @onready var chatbox = $chat/chatbox
-@onready var chatinput = $chat/chatinput
+@onready var chatinput: LineEdit = $chat/chatinput
 
 @onready var menu = $menu
 @onready var lobby_menu = $lobby_menu
 @onready var start_button: Button = $lobby_menu/start
 @onready var ready_button: Button = $lobby_menu/ready
+@onready var level_select: LineEdit = $lobby_menu/level_select
 
 var lobby_player = preload("res://scenes/ui/lobby_player.tscn")
 
@@ -73,7 +74,8 @@ func _on_ready_status_changed(steam_id: int, data: Dictionary):
 
 func _on_start_pressed() -> void:
 	if PlayerState.all_ready():
-		Multiplayer.start_game()
+		var level_id = int(level_select.text) if level_select.text.is_valid_int() else 0
+		Multiplayer.start_game(level_id)
 
 func _on_disconnect_pressed() -> void:
 	Multiplayer.disconnect_lobby()

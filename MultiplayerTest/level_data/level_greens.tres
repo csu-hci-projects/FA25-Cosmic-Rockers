@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://c6vrmdnhagih3"]
+
+[ext_resource type="Texture2D" uid="uid://bthtkoko632qq" path="res://sprites/collectables/collectable_piano.png" id="1_klaaa"]
+[ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_rul72"]
+
+[resource]
+script = ExtResource("2_rul72")
+level_id = 2
+tileset = 2
+background = "lava"
+collectable = ExtResource("1_klaaa")
+songs = Array[AudioStream]([])
+metadata/_custom_type_script = "uid://c2bq8r37uevf6"

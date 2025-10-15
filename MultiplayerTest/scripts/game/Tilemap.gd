@@ -27,7 +27,7 @@ func create_tilemap():
 			if WorldState.get_tile_data(cell) != EMPTY_TILE:
 				cells_to_update.append(cell)
 	
-	set_cells_terrain_connect(cells_to_update, 0, WorldState.tile_set, false)
+	set_cells_terrain_connect(cells_to_update, 0, WorldState.get_tileset(), false)
 
 func update_tile(cell: Vector2i, tile_id: int):
 	Multiplayer.update_tile(cell, tile_id)

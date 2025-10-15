@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://dghvt75aocf1w"]
+
+[ext_resource type="Texture2D" uid="uid://ccbome84klrlm" path="res://sprites/collectables/collectable_bass.png" id="1_7c3bj"]
+[ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_22nb1"]
+
+[resource]
+script = ExtResource("2_22nb1")
+level_id = 1
+tileset = 2
+background = "lava"
+collectable = ExtResource("1_7c3bj")
+songs = Array[AudioStream]([])
+metadata/_custom_type_script = "uid://c2bq8r37uevf6"

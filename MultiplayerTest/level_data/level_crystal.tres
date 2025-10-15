@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://bn7cpphesh3yi"]
+
+[ext_resource type="Texture2D" uid="uid://cajjvc56y3dl" path="res://sprites/collectables/collectable_harp.png" id="1_fctfx"]
+[ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_hj2gu"]
+
+[resource]
+script = ExtResource("2_hj2gu")
+level_id = 3
+tileset = 1
+background = "cave"
+collectable = ExtResource("1_fctfx")
+songs = Array[AudioStream]([])
+metadata/_custom_type_script = "uid://c2bq8r37uevf6"
