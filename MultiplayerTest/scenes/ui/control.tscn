@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6het52418hfo"]
+[gd_scene load_steps=3 format=3 uid="uid://c6het52418hfo"]
 
 [ext_resource type="Script" uid="uid://3mwapkenvdo0" path="res://scripts/menu/Lobby.gd" id="1_2k4jl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo0lp"]
+bg_color = Color(0.266575, 0.266575, 0.266575, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
 
 [node name="lobby" type="Control"]
 layout_mode = 3
@@ -88,6 +105,33 @@ text = "Send"
 layout_mode = 1
 anchors_preset = -1
 
+[node name="steam_error" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -29.0
+offset_right = 46.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yo0lp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="steam_error"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="steam_error/VBoxContainer"]
+layout_mode = 2
+text = "Steam Error"
+
+[node name="Button" type="Button" parent="steam_error/VBoxContainer"]
+layout_mode = 2
+text = "Retry"
+
 [connection signal="pressed" from="menu/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="menu/host" to="." method="_on_host_pressed"]
 [connection signal="toggled" from="lobby_menu/ready" to="." method="_on_ready_toggled"]
@@ -96,3 +140,4 @@ anchors_preset = -1
 [connection signal="pressed" from="lobby_menu/disconnect" to="." method="_on_disconnect_pressed"]
 [connection signal="text_submitted" from="chat/chatinput" to="." method="_on_chatinput_text_submitted"]
 [connection signal="pressed" from="chat/send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="steam_error/VBoxContainer/Button" to="." method="_on_retry_pressed"]

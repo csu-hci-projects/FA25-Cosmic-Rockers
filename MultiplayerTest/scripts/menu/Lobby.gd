@@ -1,29 +1,48 @@
 extends Control
 
-@onready var lobby_id = $menu/lobby_id
-@onready var players = $players
 
 @onready var chat = $chat
+@onready var menu = $menu
+@onready var lobby_menu = $lobby_menu
+@onready var players = $players
+@onready var error = $steam_error
+
+@onready var lobby_id = $menu/lobby_id
+
 @onready var chatbox = $chat/chatbox
 @onready var chatinput: LineEdit = $chat/chatinput
 
-@onready var menu = $menu
-@onready var lobby_menu = $lobby_menu
 @onready var start_button: Button = $lobby_menu/start
 @onready var ready_button: Button = $lobby_menu/ready
 @onready var level_select: LineEdit = $lobby_menu/level_select
 
+@onready var error_message = $steam_error/VBoxContainer/Label
+
 var lobby_player = preload("res://scenes/ui/lobby_player.tscn")
 
 func _ready():
+	chat.visible = false
+	lobby_menu.visible = false
+	error.visible = false
+	
 	Multiplayer.chat_received.connect(_add_chat_message)
 	Multiplayer.lobby_members_updated.connect(_update_lobby)
 	Multiplayer.lobby_joined.connect(_on_lobby_joined)
 	Multiplayer.lobby_left.connect(_on_lobby_left)
 	Multiplayer.on_received_ready_status.connect(_on_ready_status_changed)
+	Global.on_steam_error.connect(_display_error)
+	if Global.error_message != "":
+		_display_error(Global.error_message)
+
+func _display_error(message: String):
+	error_message.text = "Steam Error:\n(" + message + ")\nPlease restart steam and try again."
+	error.reset_size()
+	error.position = (get_viewport_rect().size - error.size) / 2
 	
 	chat.visible = false
 	lobby_menu.visible = false
+	menu.visible = false
+	error.visible = true
 
 func _on_host_pressed():
 	Multiplayer.create_lobby()
@@ -94,3 +113,12 @@ func _on_lobby_left():
 
 func _on_invite_pressed() -> void:
 	Multiplayer.open_invite_tab()
+
+func _on_retry_pressed() -> void:
+	error_message.text = ""
+	Global.initialize_steam()
+	
+	chat.visible = false
+	lobby_menu.visible = false
+	menu.visible = true
+	error.visible = false
