@@ -18,6 +18,8 @@ var position_sync_frames: int = 20
 
 @onready var sprite: AnimatedSprite2D = $sprite
 
+var collectable: Collectable = null
+
 func _ready() -> void:
 	super()
 	set_animation("default")
@@ -132,4 +134,9 @@ func _on_die():
 	if !is_local_player:
 		return
 	
-	#NOTIFY NETWORK OF DEATH
+	collectable._set_target(null)
+	Multiplayer.update_collectable(false)
+
+func grab_collectable(_collectable: Collectable):
+	collectable = _collectable
+	Multiplayer.update_collectable(true)

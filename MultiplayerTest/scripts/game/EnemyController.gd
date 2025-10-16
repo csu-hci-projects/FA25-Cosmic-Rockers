@@ -6,7 +6,7 @@ var position_sync_timer: int = 0
 var position_chunk_offset: int = 0
 
 var enemy_scene = preload("res://scenes/game/enemy.tscn")
-@onready var game_controller = $".." 
+@onready var game_controller = $".."
 var enemies = {}
 var enabled_enemies: int = 0
 

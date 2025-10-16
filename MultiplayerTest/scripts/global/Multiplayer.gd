@@ -4,6 +4,7 @@ signal on_received_ready_status(steam_id: int, data: Dictionary)
 signal on_received_tile(cell: Vector2i, id: int)
 signal on_received_input(steam_id: int, data: Dictionary)
 signal on_received_position(steam_id: int, data: Dictionary)
+signal on_received_collectable(steam_id: int, data: Dictionary)
 
 signal on_received_entity_spawn(entity_id: int, data: Dictionary)
 signal on_received_entity_state(entity_id: int, data: Dictionary)
@@ -28,6 +29,10 @@ func update_input(data: Dictionary) -> bool:
 func update_position(position: Vector2) -> bool:
 	var data: Dictionary = {"position": position}
 	return send_player_update("position", data, 2)
+
+func update_collectable(carrying: bool) -> bool:
+	var data: Dictionary = {"carrying": carrying}
+	return send_player_update("collectable", data, 2)
 
 
 func entity_spawn(entity_id: String, position: Vector2) -> bool:
