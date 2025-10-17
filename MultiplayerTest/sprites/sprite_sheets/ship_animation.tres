@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://ivjkxtd4behj"]
+
+[ext_resource type="Texture2D" uid="uid://c2j1khvj3vly6" path="res://sprites/sprite_sheets/ship-sheet.png" id="1_ok43p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb3yr"]
+atlas = ExtResource("1_ok43p")
+region = Rect2(0, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r4kl"]
+atlas = ExtResource("1_ok43p")
+region = Rect2(48, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wrhc"]
+atlas = ExtResource("1_ok43p")
+region = Rect2(96, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xoial"]
+atlas = ExtResource("1_ok43p")
+region = Rect2(144, 0, 48, 96)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lb3yr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r4kl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wrhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xoial")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
