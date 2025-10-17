@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://dw1w2r5x23bny"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://dw1w2r5x23bny"]
 
 [ext_resource type="Texture2D" uid="uid://crmy7dplmnxmt" path="res://sprites/collectables/collectable_drum.png" id="1_b8go7"]
 [ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_n05vu"]
+[ext_resource type="AudioStream" uid="uid://bgjmybd6l03yo" path="res://audio/track_1_drums.wav" id="3_n05vu"]
 
 [resource]
 script = ExtResource("2_n05vu")
@@ -9,5 +10,5 @@ level_id = 0
 tileset = 0
 background = "cave"
 collectable = ExtResource("1_b8go7")
-songs = Array[AudioStream]([])
+songs = Array[AudioStream]([ExtResource("3_n05vu")])
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

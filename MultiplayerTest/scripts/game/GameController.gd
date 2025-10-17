@@ -9,6 +9,7 @@ var ship_scene = preload("res://scenes/game/ship.tscn")
 @onready var camera = $camera
 @onready var enemy_controller = $enemy_controller
 @onready var player_status = $CanvasLayer/status
+@onready var music_controller = $music_controller
 
 var remote_players = {}
 
@@ -32,6 +33,7 @@ func initialize_game():
 	background.create_background()
 	spawn_collectable()
 	enemy_controller.spawn_enemies()
+	music_controller.play_music()
 	start_drop_sequence()
 
 func _update_input(steam_id: int, data: Dictionary):
@@ -52,6 +54,8 @@ func spawn_players():
 		remote_player.name = players[key]["steam_username"]
 		remote_player.entity_id = str(key)
 		move_to_spawn(remote_player)
+		remote_player.on_die.connect(music_controller.enable_effects)
+		
 		player_status.create_status_bar(remote_player, players[key]["steam_username"])
 	
 	get_local_player().is_local_player = true
@@ -85,6 +89,7 @@ func spawn_collectable():
 	collectable.set_sprite(WorldState.get_collectible_sprite())
 	
 func start_drop_sequence():
+	music_controller.enable_effects()
 	var ship = ship_scene.instantiate()
 	add_child(ship)
 	move_to_spawn(ship)
@@ -93,4 +98,5 @@ func start_drop_sequence():
 	camera.set_target(ship, false) 
 
 func _on_ship_dropped():
+	music_controller.disable_effects()
 	spawn_players()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxpv8j6aghgg1"]
+[gd_scene load_steps=9 format=3 uid="uid://cxpv8j6aghgg1"]
 
 [ext_resource type="Script" uid="uid://c1rwrfi4vlhud" path="res://scripts/game/GameController.gd" id="1_iywne"]
 [ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/tilesets/default_tile_map.tres" id="1_yqjtg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://w18230pt20ls" path="res://scenes/game/background.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://cevyadjutxs8l" path="res://scripts/player/PlayerStatusController.gd" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://bfxhtocx83gf4" path="res://scenes/game/MusicPlayer.gd" id="8_87uf6"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_iywne")
@@ -29,3 +30,6 @@ script = ExtResource("5_iywne")
 
 [node name="status" type="VBoxContainer" parent="CanvasLayer"]
 script = ExtResource("7_u5sy4")
+
+[node name="music_controller" type="Node2D" parent="."]
+script = ExtResource("8_87uf6")

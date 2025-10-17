@@ -1,6 +1,7 @@
 extends Node
 
 var LEVELS: Dictionary = {}
+
 var enemy_count = 50
 
 var map_width: int = 0
@@ -74,6 +75,9 @@ func get_tileset() -> int:
 
 func get_background() -> String:
 	return LEVELS[level_id]["background"]
+
+func get_music() -> Array[AudioStream]:
+	return LEVELS[level_id]["songs"]
 
 func get_tile_position(index: int) -> Vector2:
 	return Vector2(int(index % map_width), int(index / map_height)) * 16
