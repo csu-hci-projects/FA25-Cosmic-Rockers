@@ -1,7 +1,7 @@
 extends Node2D
 
 var music_bus = AudioServer.get_bus_index("Music")
-var effects_bus = AudioServer.get_bus_index("Effects")
+var effects_bus = AudioServer.get_bus_index("Music Effects")
 var master_bus = AudioServer.get_bus_index("Master")
 
 func play_music():
@@ -15,7 +15,7 @@ func play_music():
 		player.play()
 
 func enable_effects():
-	AudioServer.set_bus_send(music_bus, "Effects")
+	AudioServer.set_bus_send(music_bus, "Music Effects")
 
 func disable_effects():
 	AudioServer.set_bus_send(music_bus, "Master")

@@ -5,7 +5,8 @@ resource_name = "LowPassFilter"
 cutoff_hz = 1000.0
 
 [resource]
-bus/1/name = &"Effects"
+bus/0/volume_db = -9.2092
+bus/1/name = &"Music Effects"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
@@ -17,5 +18,11 @@ bus/2/name = &"Music"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -1.51703
-bus/2/send = &"Effects"
+bus/2/volume_db = 0.0
+bus/2/send = &"Music Effects"
+bus/3/name = &"Effects"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"

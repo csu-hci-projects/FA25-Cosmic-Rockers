@@ -108,7 +108,9 @@ func set_map_data(data: Dictionary):
 	emit_signal("on_level_loaded")
 
 func update_tile(cell: Vector2i, value: int):
-	map_data[get_tile_id(cell)] = value
+	var tile_id = get_tile_id(cell)
+	if map_data.has(tile_id):
+		map_data[tile_id] = value
 
 func clear():
 	map_width = 0

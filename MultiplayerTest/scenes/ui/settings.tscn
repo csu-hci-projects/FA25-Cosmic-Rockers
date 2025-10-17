@@ -1,0 +1,174 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw41hdyory4oq"]
+
+[ext_resource type="Script" uid="uid://c1jcef5aoks8q" path="res://scripts/menu/Settings.gd" id="1_8wfqe"]
+[ext_resource type="Script" uid="uid://dcvuca6up5rwr" path="res://scripts/menu/SettingsInput.gd" id="2_7pacj"]
+[ext_resource type="Script" uid="uid://bq8ikf5ki55kv" path="res://scripts/menu/SettingsAudio.gd" id="2_h175o"]
+
+[sub_resource type="Theme" id="Theme_8wfqe"]
+
+[node name="settings" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.5
+offset_top = -88.0
+offset_right = 202.5
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8wfqe")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+current_tab = 0
+use_hidden_tabs_for_min_size = true
+
+[node name="Audio" type="BoxContainer" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("2_h175o")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Audio/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_8wfqe")
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="master_label" type="Label" parent="TabContainer/Audio/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Master"
+
+[node name="master_slider" type="HSlider" parent="TabContainer/Audio/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.1
+
+[node name="music_label" type="Label" parent="TabContainer/Audio/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Music"
+
+[node name="music_slider" type="HSlider" parent="TabContainer/Audio/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="effects_label" type="Label" parent="TabContainer/Audio/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Effects"
+
+[node name="effects_slider" type="HSlider" parent="TabContainer/Audio/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Graphics" type="BoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Graphics/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_8wfqe")
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="brightness_label" type="Label" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Brightness"
+
+[node name="brightness_slider" type="HSlider" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="zoom_label" type="Label" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Zoom"
+
+[node name="zoom_slider" type="HSlider" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="highcontrast_label" type="Label" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "High Contrast Mode"
+
+[node name="effects_slider" type="CheckBox" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Input" type="BoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_7pacj")
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Input"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Input/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Input/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_8wfqe")
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="action" type="Label" parent="TabContainer/Input/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Action"
+
+[node name="primary" type="Label" parent="TabContainer/Input/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Primary"
+
+[node name="alt" type="Label" parent="TabContainer/Input/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Alternate"
+
+[node name="reset" type="Button" parent="TabContainer/Input/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Reset"
+
+[node name="back" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="value_changed" from="TabContainer/Audio/MarginContainer/GridContainer/master_slider" to="TabContainer/Audio" method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/MarginContainer/GridContainer/music_slider" to="TabContainer/Audio" method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/MarginContainer/GridContainer/effects_slider" to="TabContainer/Audio" method="_on_effects_slider_value_changed"]
+[connection signal="pressed" from="TabContainer/Input/MarginContainer/VBoxContainer/reset" to="TabContainer/Input" method="_on_reset_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
