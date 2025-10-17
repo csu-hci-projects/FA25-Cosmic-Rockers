@@ -90,7 +90,7 @@ func start_drop_sequence():
 	move_to_spawn(ship)
 	ship.set_drop(ship.position)
 	ship.on_dropped.connect(_on_ship_dropped)
-	camera.set_target(ship, false)
+	camera.set_target(ship, false) 
 
 func _on_ship_dropped():
 	spawn_players()

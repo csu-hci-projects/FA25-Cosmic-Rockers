@@ -75,8 +75,10 @@ func _on_lobby_joined():
 	
 	if !Multiplayer.is_host:
 		start_button.visible = false
+		level_select.visible = false
 	else:
 		start_button.visible = true
+		level_select.visible = true
 
 func _add_chat_message(username: String, message: String):
 	var new_chat: String = "[" + username + "]: " + message

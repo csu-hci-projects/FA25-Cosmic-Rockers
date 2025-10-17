@@ -134,8 +134,9 @@ func _on_die():
 	if !is_local_player:
 		return
 	
-	collectable._set_target(null)
-	Multiplayer.update_collectable(false)
+	if collectable:
+		collectable._set_target(null)
+		Multiplayer.update_collectable(false)
 
 func grab_collectable(_collectable: Collectable):
 	collectable = _collectable
