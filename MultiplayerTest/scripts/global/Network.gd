@@ -30,6 +30,7 @@ func _process(delta):
 
 
 func _on_join_requested(this_lobby_id: int, steam_id: int):
+	is_host = false
 	join_lobby(this_lobby_id)
 
 

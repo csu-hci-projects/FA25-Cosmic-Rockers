@@ -2,6 +2,7 @@ extends Node
 
 var player_scene = preload("res://scenes/game/player.tscn")
 var collectable_scene = preload("res://scenes/game/collectable.tscn")
+var ship_scene = preload("res://scenes/game/ship.tscn")
 
 @onready var tilemap = $tilemap
 @onready var background = $camera/background
@@ -30,8 +31,8 @@ func initialize_game():
 	tilemap.create_tilemap()
 	background.create_background()
 	spawn_collectable()
-	spawn_players()
 	enemy_controller.spawn_enemies()
+	start_drop_sequence()
 
 func _update_input(steam_id: int, data: Dictionary):
 	if remote_players.has(steam_id):
@@ -80,8 +81,16 @@ func spawn_collectable():
 	var collectable = collectable_scene.instantiate()
 	add_child(collectable)
 	move_to_end(collectable)
+	collectable.game_controller = self
 	collectable.set_sprite(WorldState.get_collectible_sprite())
-	collectable.on_player_grab.connect(_player_grab_collectable)
+	
+func start_drop_sequence():
+	var ship = ship_scene.instantiate()
+	add_child(ship)
+	move_to_spawn(ship)
+	ship.set_drop(ship.position)
+	ship.on_dropped.connect(_on_ship_dropped)
+	camera.set_target(ship, false) 
 
-func _player_grab_collectable(player_id: String):
-	print(player_id, " grabbed collectable")
+func _on_ship_dropped():
+	spawn_players()

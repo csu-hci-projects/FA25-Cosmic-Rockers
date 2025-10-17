@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://brnb3gmeptra1"]
+
+[ext_resource type="Script" uid="uid://crvqa07eyew1a" path="res://scenes/game/Ship.gd" id="1_lyiba"]
+[ext_resource type="SpriteFrames" uid="uid://ivjkxtd4behj" path="res://sprites/sprite_sheets/ship_animation.tres" id="2_lyiba"]
+
+[node name="ship" type="Node2D"]
+script = ExtResource("1_lyiba")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 10)
+sprite_frames = ExtResource("2_lyiba")
+frame = 3
+frame_progress = 0.0302766
