@@ -21,6 +21,7 @@ Global="*res://scripts/global/Global.gd"
 PlayerState="*res://scripts/global/PlayerState.gd"
 Multiplayer="*res://scripts/global/Multiplayer.gd"
 WorldState="*res://scripts/global/WorldState.gd"
+Settings="*res://scripts/global/Settings.gd"
 
 [dotnet]
 
