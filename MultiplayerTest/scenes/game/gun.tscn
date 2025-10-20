@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdctsdjup4rsn"]
+
+[ext_resource type="Script" uid="uid://dq8r8rtuvm4w0" path="res://scripts/player/Gun.gd" id="1_ncnns"]
+[ext_resource type="Texture2D" uid="uid://dsbkdbh7lek7n" path="res://sprites/sprite_sheets/player/gun.png" id="1_r2sfl"]
+
+[node name="gun" type="Node2D"]
+script = ExtResource("1_ncnns")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_r2sfl")
+offset = Vector2(3, 3)
+
+[node name="ray_start" type="Node2D" parent="."]
+position = Vector2(10, 2)

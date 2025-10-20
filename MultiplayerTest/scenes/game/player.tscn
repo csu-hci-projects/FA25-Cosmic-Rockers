@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmihda84q488q"]
+[gd_scene load_steps=5 format=3 uid="uid://bmihda84q488q"]
 
 [ext_resource type="Script" uid="uid://cx7p701dtua6w" path="res://scripts/player/PlayerMovement.gd" id="1_dd427"]
 [ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="2_u3rb4"]
+[ext_resource type="PackedScene" uid="uid://bdctsdjup4rsn" path="res://scenes/game/gun.tscn" id="3_68xwl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
 radius = 6.0
@@ -17,3 +18,5 @@ animation = &"walk"
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lbhrr")
+
+[node name="gun" parent="." instance=ExtResource("3_68xwl")]
