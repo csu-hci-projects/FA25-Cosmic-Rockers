@@ -61,14 +61,18 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="level_select" type="SpinBox" parent="lobby_menu"]
+layout_mode = 2
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+rounded = true
+prefix = "Level"
+
 [node name="ready" type="Button" parent="lobby_menu"]
 layout_mode = 2
 toggle_mode = true
 text = "Ready"
-
-[node name="level_select" type="LineEdit" parent="lobby_menu"]
-layout_mode = 2
-placeholder_text = "level id"
 
 [node name="start" type="Button" parent="lobby_menu"]
 layout_mode = 2
@@ -134,6 +138,7 @@ text = "Retry"
 
 [connection signal="pressed" from="menu/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="menu/host" to="." method="_on_host_pressed"]
+[connection signal="value_changed" from="lobby_menu/level_select" to="." method="_on_level_select_value_changed"]
 [connection signal="toggled" from="lobby_menu/ready" to="." method="_on_ready_toggled"]
 [connection signal="pressed" from="lobby_menu/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="lobby_menu/invite" to="." method="_on_invite_pressed"]

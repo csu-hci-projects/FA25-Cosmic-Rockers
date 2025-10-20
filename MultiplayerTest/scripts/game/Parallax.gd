@@ -4,6 +4,10 @@ var layer_scene = preload("res://scenes/game/background_layer.tscn")
 @export var parallax_strengths: Array[float] = [0, -0.1, -0.2, -0.3]
 @export var sprite_width: float = 480
 
+func _ready():
+	Settings.on_zoom_changed.connect(_set_zoom)
+	_set_zoom(Settings.get_zoom())
+
 func create_background():
 	for sprite in get_background_sprites(WorldState.get_background()):
 		var layer = layer_scene.instantiate()
@@ -36,15 +40,13 @@ func _process(delta: float) -> void:
 	if get_parent() == null:
 		return
 	
-	var parent_global_x = get_parent().global_position.x
+	var camera_position_x = get_viewport().get_camera_2d().global_position.x
 	var children = get_children()
 	
 	for i in children.size():
 		var layer = children[i]
-		layer.position.x = parent_global_x * parallax_strengths[i]
-		
-		for sprite in layer.get_children():
-			if sprite.position.x + layer.position.x < -sprite_width:
-				sprite.position.x += sprite_width * layer.get_child_count()
-			elif sprite.position.x + layer.position.x > sprite_width * (layer.get_child_count() - 1):
-				sprite.position.x -= sprite_width * layer.get_child_count()
+		layer.position.x = camera_position_x * parallax_strengths[i]
+
+func _set_zoom(value: float):
+	var scale_value = 2 / value
+	scale = Vector2(scale_value, scale_value)

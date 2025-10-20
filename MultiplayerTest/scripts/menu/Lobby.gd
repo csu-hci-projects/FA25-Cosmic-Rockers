@@ -14,7 +14,7 @@ extends Control
 
 @onready var start_button: Button = $lobby_menu/start
 @onready var ready_button: Button = $lobby_menu/ready
-@onready var level_select: LineEdit = $lobby_menu/level_select
+@onready var level_select: SpinBox = $lobby_menu/level_select
 
 @onready var error_message = $steam_error/VBoxContainer/Label
 
@@ -95,7 +95,7 @@ func _on_ready_status_changed(steam_id: int, data: Dictionary):
 
 func _on_start_pressed() -> void:
 	if PlayerState.all_ready():
-		var level_id = int(level_select.text) if level_select.text.is_valid_int() else 0
+		var level_id = int(level_select.value) - 1
 		Multiplayer.start_game(level_id)
 
 func _on_disconnect_pressed() -> void:
@@ -124,3 +124,4 @@ func _on_retry_pressed() -> void:
 	lobby_menu.visible = false
 	menu.visible = true
 	error.visible = false
+	

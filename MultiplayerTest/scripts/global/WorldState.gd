@@ -44,10 +44,10 @@ func load_all_levels(path: String):
 func initialize(level: int = 0) -> Dictionary:
 	level_id = level
 	
-	map_width = 140
-	map_height = 80
-	spawn_room_position = Vector2i(randi_range(5,130),5)
-	end_room_position = Vector2i(randi_range(5,130),70)
+	map_width = 200
+	map_height = 100
+	spawn_room_position = Vector2i(randi_range(5, map_width - 10),5)
+	end_room_position = Vector2i(randi_range(5, map_width - 10), map_height - 10)
 	room_size = 5
 	
 	var data = TerrainGenerator.generate(map_width, map_height, [.2, .4], [0, 0], [-2, 2], [0, 0])

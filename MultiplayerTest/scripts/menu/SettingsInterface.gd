@@ -4,6 +4,7 @@ extends Control
 
 func _ready():
 	set_min_width()
+	tab_container.current_tab = 0
 
 func set_min_width():
 	tab_container.use_hidden_tabs_for_min_size = false

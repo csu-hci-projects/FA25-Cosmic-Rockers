@@ -11,7 +11,7 @@
 script = ExtResource("2_hj2gu")
 level_id = 3
 tileset = 1
-background = "cave"
+background = "crystal"
 collectable = ExtResource("1_fctfx")
 songs = Array[AudioStream]([ExtResource("3_w1pyr"), ExtResource("4_4icpg"), ExtResource("5_56ux8"), ExtResource("6_k35so")])
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

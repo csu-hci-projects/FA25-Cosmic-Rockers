@@ -9,8 +9,8 @@
 [resource]
 script = ExtResource("2_rul72")
 level_id = 2
-tileset = 2
-background = "lava"
+tileset = 3
+background = "grass"
 collectable = ExtResource("1_klaaa")
 songs = Array[AudioStream]([ExtResource("3_iy86f"), ExtResource("4_v1g0p"), ExtResource("5_385q0")])
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

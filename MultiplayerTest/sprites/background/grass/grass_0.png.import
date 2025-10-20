@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2j1khvj3vly6"
-path="res://.godot/imported/ship-sheet.png-83662f2a610b13e94fbe186313fba6de.ctex"
+uid="uid://tffkqw8686f4"
+path="res://.godot/imported/grass_0.png-1dd9c6bdb0c0f359a11c340e2fa67188.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/sprite_sheets/ship-sheet.png"
-dest_files=["res://.godot/imported/ship-sheet.png-83662f2a610b13e94fbe186313fba6de.ctex"]
+source_file="res://sprites/background/grass/grass_0.png"
+dest_files=["res://.godot/imported/grass_0.png-1dd9c6bdb0c0f359a11c340e2fa67188.ctex"]
 
 [params]
 
