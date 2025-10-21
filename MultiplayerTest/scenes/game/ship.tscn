@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://brnb3gmeptra1"]
 
 [ext_resource type="Script" uid="uid://crvqa07eyew1a" path="res://scripts/game/Ship.gd" id="1_lyiba"]
-[ext_resource type="SpriteFrames" uid="uid://ivjkxtd4behj" path="res://sprites/sprite_sheets/ship_animation.tres" id="2_lyiba"]
+[ext_resource type="SpriteFrames" uid="uid://ivjkxtd4behj" path="res://sprites/sprite_sheets/ship/ship_animation.tres" id="2_lyiba"]
 
 [node name="ship" type="Node2D"]
 script = ExtResource("1_lyiba")

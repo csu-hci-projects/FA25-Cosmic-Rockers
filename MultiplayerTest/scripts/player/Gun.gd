@@ -8,25 +8,32 @@ extends Node2D
 var sprite_offset = 0
 var ray_offset = 0
 var max_distance := 500.0
+var ray_extend := 10
+
+var direction: Vector2
+
+var player_owner: PlayerMovement = null
 
 func _ready() -> void:
 	sprite_offset = sprite.offset.x
 	ray_offset = ray_start.position.x
+	player_owner = find_parent("player")
 
 func _process(delta: float) -> void:
-	var mouse_pos = get_global_mouse_position()
-	var dir = (mouse_pos - global_position).normalized()
+	if player_owner and player_owner.is_local_player:
+		var mouse_pos = get_global_mouse_position()
+		_set_direction((mouse_pos - global_position).normalized())
 	
-	if dir.x > 0:
+	if direction.x > 0:
 		sprite.flip_h = false
 		sprite.offset.x = sprite_offset
 		ray_start.position.x = ray_offset
-		rotation = atan2(dir.y, dir.x)
-	elif dir.x < 0:
+		rotation = atan2(direction.y, direction.x)
+	elif direction.x < 0:
 		sprite.flip_h = true
 		sprite.offset.x = -sprite_offset
 		ray_start.position.x = -ray_offset
-		rotation = atan2(-dir.y, -dir.x)
+		rotation = atan2(-direction.y, -direction.x)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -35,9 +42,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _shoot():
 	var space_state = get_world_2d().direct_space_state
 	var mouse_pos = get_global_mouse_position()
-	var dir = (mouse_pos - global_position).normalized()
+	var shoot_direction = (mouse_pos - global_position).normalized()
 
-	var to_position = global_position + dir * max_distance
+	var to_position = global_position + shoot_direction * max_distance
 	var query = PhysicsRayQueryParameters2D.create(global_position, to_position)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
@@ -54,7 +61,7 @@ func _shoot():
 	line.width = 1
 	line.default_color = Color("#FF0147")
 	line.add_point(ray_start.global_position)
-	line.add_point(hit_position)
+	line.add_point(hit_position + (ray_extend * shoot_direction))
 
 	get_tree().root.add_child(line)
 
@@ -67,3 +74,6 @@ func _handle_hit(object: Node2D, hit_position: Vector2):
 	
 	if object is Tilemap:
 		object.take_hit(hit_position)
+
+func _set_direction(_direction: Vector2):
+	direction = _direction
