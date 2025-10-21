@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var damage = 10
+@export var ray_color: Color
 
 @onready var ray_start = $ray_start
 @onready var sprite = $sprite
@@ -59,7 +60,7 @@ func _shoot():
 	var hit_position: Vector2 = result.get("position", to_position)
 	var line = Line2D.new()
 	line.width = 1
-	line.default_color = Color("#FF0147")
+	line.default_color = ray_color
 	line.add_point(ray_start.global_position)
 	line.add_point(hit_position + (ray_extend * shoot_direction))
 

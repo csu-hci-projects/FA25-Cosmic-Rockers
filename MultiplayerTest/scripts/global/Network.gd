@@ -59,7 +59,7 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		send_user_packet("handshake", {}, 2)
 
 
-func _on_lobby_chat_update(lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
+func _on_lobby_chat_update(this_lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
 		return
 	
@@ -225,6 +225,9 @@ func read_p2p_packet():
 			emit_signal("chat_received", readable_data["steam_username"], readable_data["chat"])
 		"start_game":
 			start_game()
+		"level_complete":
+			if is_host:
+				next_level()
 		"set_tile":
 			var cell: Vector2i = readable_data["data"]["cell"]
 			var id: int = readable_data["data"]["id"]
@@ -248,13 +251,15 @@ func read_p2p_packet():
 		else:
 			push_warning("No signal called %s exists!" % readable_data["type"])
 
-
 func start_game(level_id: int = 0):
 	if is_host:
 		send_p2p_packet(0, {"type": "start_game"})
 		send_map_data(0, WorldState.initialize(level_id))
+	get_tree().unload_current_scene()
 	get_tree().change_scene_to_packed(game_scene)
 
+func next_level():
+	start_game(WorldState.get_next_level())
 
 func send_map_data(this_target: int, level_data: Dictionary, chunk_size: int = 1000) -> void:
 	var map_data: Array = level_data["map_data"]

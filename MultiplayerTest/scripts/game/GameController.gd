@@ -28,8 +28,10 @@ func get_entity(entity_id: String) -> Node2D:
 			return entity
 	return null
 
-func initialize_game():
+func initialize_game() -> void:
 	tilemap.create_tilemap()
+	await get_tree().process_frame # let visuals update
+	await get_tree().physics_frame # let physics finish
 	background.create_background()
 	spawn_collectable()
 	enemy_controller.spawn_enemies()

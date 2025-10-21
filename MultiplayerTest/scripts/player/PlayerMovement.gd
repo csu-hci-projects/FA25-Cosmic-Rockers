@@ -135,9 +135,18 @@ func _on_die():
 		return
 	
 	if collectable:
-		collectable._set_target(null)
-		Multiplayer.update_collectable(false)
+		drop_collectable()
 
 func grab_collectable(_collectable: Collectable):
 	collectable = _collectable
 	Multiplayer.update_collectable(true)
+
+func drop_collectable():
+	collectable._set_target(null)
+	collectable = null
+	Multiplayer.update_collectable(false)
+
+func submit_collectable(target: Node2D):
+	collectable._set_target(target)
+	collectable = null
+	Multiplayer.level_complete()

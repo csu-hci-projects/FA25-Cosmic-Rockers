@@ -2,7 +2,7 @@ extends Node
 
 var LEVELS: Dictionary = {}
 
-var enemy_count = 50
+var enemy_count = 10
 
 var map_width: int = 0
 var map_height: int = 0
@@ -41,11 +41,18 @@ func load_all_levels(path: String):
 		filename = dir.get_next()
 	dir.list_dir_end()
 
+func get_next_level() -> int:
+	level_loaded = false
+	if LEVELS.has(level_id + 1):
+		return level_id + 1
+	else:
+		return level_id
+
 func initialize(level: int = 0) -> Dictionary:
 	level_id = level
 	
-	map_width = 200
-	map_height = 100
+	map_width = 50
+	map_height = 50
 	spawn_room_position = Vector2i(randi_range(5, map_width - 10),5)
 	end_room_position = Vector2i(randi_range(5, map_width - 10), map_height - 10)
 	room_size = 5
@@ -117,7 +124,7 @@ func clear():
 	map_height = 0
 	map_data.clear()
 
-func get_enemy_spawn_locations(enemy_count: int) -> Array:
+func get_enemy_spawn_locations() -> Array:
 	var enemy_spawns: Array = []
 	for i in room_data.size():
 		var split = enemy_count / (room_data.size() - i)

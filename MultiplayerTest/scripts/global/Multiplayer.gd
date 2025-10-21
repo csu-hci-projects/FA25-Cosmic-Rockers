@@ -5,6 +5,7 @@ signal on_received_tile(cell: Vector2i, id: int)
 signal on_received_input(steam_id: int, data: Dictionary)
 signal on_received_position(steam_id: int, data: Dictionary)
 signal on_received_collectable(steam_id: int, data: Dictionary)
+signal on_received_collectable_submit(steam_id: int, data: Dictionary)
 
 signal on_received_entity_spawn(entity_id: int, data: Dictionary)
 signal on_received_entity_state(entity_id: int, data: Dictionary)
@@ -48,3 +49,11 @@ func update_entity_positions(data: Dictionary) -> bool:
 func entity_attack(entity_id: String, target_id: String, damage: int) -> bool:
 	var data: Dictionary = {"target": target_id, "damage": damage}
 	return send_entity_update("entity_attack", entity_id, data, 2)
+
+
+func level_complete() -> bool:
+	if is_host:
+		next_level()
+		return true
+	else:
+		return send_player_update("level_complete", {}, 2)

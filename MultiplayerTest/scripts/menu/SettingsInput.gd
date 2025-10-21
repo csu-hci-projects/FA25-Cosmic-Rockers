@@ -75,14 +75,14 @@ func rebind_action(action_name: String, keycode: int, alternate: bool = false):
 			InputMap.action_erase_event(action_name, events[1])
 		if keycode >= 0:
 			var new_event := InputEventKey.new()
-			new_event.physical_keycode = keycode
+			new_event.physical_keycode = keycode as Key
 			InputMap.action_add_event(action_name, new_event)
 	else:
 		if events.size() >= 1:
 			InputMap.action_erase_event(action_name, events[0])
 		if keycode >= 0:
 			var new_event := InputEventKey.new()
-			new_event.physical_keycode = keycode
+			new_event.physical_keycode = keycode as Key
 			InputMap.action_add_event(action_name, new_event)
 	
 	_update_button_text(action_name)

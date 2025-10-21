@@ -96,7 +96,7 @@ func _on_ready_status_changed(steam_id: int, data: Dictionary):
 func _on_start_pressed() -> void:
 	if PlayerState.all_ready():
 		var level_id = int(level_select.value) - 1
-		Multiplayer.start_game(level_id)
+		Multiplayer.call_deferred("start_game", level_id)
 
 func _on_disconnect_pressed() -> void:
 	Multiplayer.disconnect_lobby()

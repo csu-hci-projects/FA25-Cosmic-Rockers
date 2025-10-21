@@ -38,3 +38,9 @@ func rumble(delta: float):
 	var offset_x = randf_range(-rumble_strength, rumble_strength)
 	var offset_y = randf_range(-rumble_strength, rumble_strength)
 	sprite.position = _original_sprite_pos + Vector2(offset_x, offset_y)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is PlayerMovement and body.is_local_player:
+		if body.collectable != null:
+			body.call_deferred("submit_collectable", self)
