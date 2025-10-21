@@ -11,4 +11,6 @@ tileset = 0
 background = "cave"
 collectable = ExtResource("1_b8go7")
 songs = Array[AudioStream]([ExtResource("3_n05vu")])
+level_name = "Drobbo"
+level_name_alien = "⎅⍀⎍⋔"
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

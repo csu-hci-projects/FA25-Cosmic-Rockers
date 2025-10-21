@@ -12,4 +12,6 @@ tileset = 2
 background = "lava"
 collectable = ExtResource("1_7c3bj")
 songs = Array[AudioStream]([ExtResource("3_67qsx"), ExtResource("4_m4kff")])
+level_name = "Balorb"
+level_name_alien = "⏚⏃⌇⌇"
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

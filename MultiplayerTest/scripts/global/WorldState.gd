@@ -86,6 +86,12 @@ func get_background() -> String:
 func get_music() -> Array[AudioStream]:
 	return LEVELS[level_id]["songs"]
 
+func get_level_name() -> String:
+	return LEVELS[level_id]["level_name"]
+
+func get_level_name_alien() -> String:
+	return LEVELS[level_id]["level_name_alien"]
+
 func get_tile_position(index: int) -> Vector2:
 	return Vector2(int(index % map_width), int(index / map_height)) * 16
 

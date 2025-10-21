@@ -14,4 +14,6 @@ tileset = 1
 background = "crystal"
 collectable = ExtResource("1_fctfx")
 songs = Array[AudioStream]([ExtResource("3_w1pyr"), ExtResource("4_4icpg"), ExtResource("5_56ux8"), ExtResource("6_k35so")])
+level_name = "Axtov"
+level_name_alien = "⌇⏃⌖⍜⌿⊑⍜⋏⟒"
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"
