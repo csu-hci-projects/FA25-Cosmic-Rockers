@@ -51,13 +51,21 @@ func get_next_level() -> int:
 func initialize(level: int = 0) -> Dictionary:
 	level_id = level
 	
-	map_width = 50
-	map_height = 50
+	map_width = 200
+	map_height = 100
 	spawn_room_position = Vector2i(randi_range(5, map_width - 10),5)
 	end_room_position = Vector2i(randi_range(5, map_width - 10), map_height - 10)
 	room_size = 5
 	
-	var data = TerrainGenerator.generate(map_width, map_height, [.2, .4], [0, 0], [-2, 2], [0, 0])
+	var level_data = LEVELS[level_id]
+	var data = TerrainGenerator.generate(
+		map_width, 
+		map_height, 
+		level_data["floor_range"], 
+		level_data["roof_range"], 
+		level_data["x_offset_range"], 
+		level_data["y_offset_range"])
+	enemy_count = level_data["enemy_count"]
 	map_data = data["map_data"]
 	room_data = data["room_data"]
 	

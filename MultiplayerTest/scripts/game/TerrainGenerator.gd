@@ -7,8 +7,8 @@ static var rooms: Array
 static var data: Array
 
 static func generate(width: int, height: int, \
-	floor_range: Array = [0, 0], roof_range: Array = [0, 0], \
-	x_offset_range: Array = [0, 0], y_offset_range: Array = [0, 0]) -> Dictionary:
+	floor_range: Vector2 = Vector2.ZERO, roof_range: Vector2 = Vector2.ZERO, \
+	x_offset_range: Vector2 = Vector2.ZERO, y_offset_range: Vector2 = Vector2.ZERO) -> Dictionary:
 	
 	var noise = FastNoiseLite.new()
 	noise.seed = randi()
@@ -17,11 +17,11 @@ static func generate(width: int, height: int, \
 	
 	var y_offsets = []
 	for x in range(width):
-		y_offsets.append(randf_range(y_offset_range[0], y_offset_range[1]))
+		y_offsets.append(randf_range(y_offset_range.x, y_offset_range.y))
 	
 	var x_offsets = []
 	for y in range(height):
-		x_offsets.append(randf_range(x_offset_range[0], x_offset_range[1]))
+		x_offsets.append(randf_range(x_offset_range.x, x_offset_range.y))
 
 	data = []
 	for y in range(height):
@@ -105,7 +105,7 @@ static func remove_islands(min_size: int):
 				for c in group:
 					data[c.y][c.x] = set_value
 
-static func create_flat_rooms(floor_height_range: Array, roof_height_range: Array):
+static func create_flat_rooms(floor_height_range: Vector2, roof_height_range: Vector2):
 	var visited := {}
 	for j in data.size():
 		for i in data[j].size():
@@ -123,8 +123,8 @@ static func create_flat_rooms(floor_height_range: Array, roof_height_range: Arra
 				if c.y < min_height:
 					min_height = c.y
 			
-			var floor_height = randf_range(floor_height_range[0], floor_height_range[1])
-			var roof_height = randf_range(roof_height_range[0], roof_height_range[1])
+			var floor_height = randf_range(floor_height_range.x, floor_height_range.y)
+			var roof_height = randf_range(roof_height_range.x, roof_height_range.y)
 			var floor_level = max_height - ((max_height - min_height) * floor_height)
 			var roof_level = min_height + ((max_height - min_height) * roof_height)
 			
