@@ -107,13 +107,18 @@ func join_lobby(this_lobby_id: int):
 
 
 func disconnect_lobby():
-	if lobby_members.size() > 1:
-		for member in lobby_members:
-			if member["steam_id"] != Global.steam_id:
-				set_lobby_host(member["steam_id"])
-				break
-	else:
-		Steam.setLobbyType(lobby_id, Steam.LOBBY_TYPE_PRIVATE)
+	if is_host:
+		if lobby_members.size() > 1:
+			for member in lobby_members:
+				if member["steam_id"] != Global.steam_id:
+					set_lobby_host(member["steam_id"])
+					break
+		else:
+			Steam.setLobbyType(lobby_id, Steam.LOBBY_TYPE_PRIVATE)
+		
+		await get_tree().process_frame
+		await get_tree().process_frame
+		await get_tree().process_frame
 	
 	Steam.leaveLobby(lobby_id)
 	lobby_id = 0
@@ -126,10 +131,10 @@ func disconnect_lobby():
 	emit_signal("lobby_left")
 
 
-func set_lobby_host(steam_id: int):
+func set_lobby_host(steam_id: int) -> bool:
 	is_host = false
 	emit_signal("on_host_changed")
-	send_p2p_packet(steam_id, {"type": "set_host"}, 2)
+	return send_p2p_packet(0, {"type": "set_host"}, Steam.P2P_SEND_RELIABLE)
 
 
 func get_lobby_members():
