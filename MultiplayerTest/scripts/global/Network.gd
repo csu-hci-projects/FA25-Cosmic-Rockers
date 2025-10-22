@@ -3,7 +3,6 @@ extends Node
 
 const PACKET_READ_LIMIT: int = 32
 
-var is_host: bool = false
 var lobby_id: int = 0
 var lobby_members: Array = []
 var lobby_members_max: int = 8
@@ -32,14 +31,12 @@ func _process(delta):
 
 
 func _on_join_requested(this_lobby_id: int, steam_id: int):
-	is_host = false
 	join_lobby(this_lobby_id)
 
 
 func _on_lobby_created(connect: int, this_lobby_id: int):
 	if connect == 1:
 		lobby_id = this_lobby_id
-		is_host = true
 		Steam.setLobbyJoinable(lobby_id, true)
 		Steam.setLobbyData(lobby_id, "name", "My Lobby")
 		Steam.setLobbyData(lobby_id, "connect", str(lobby_id))
@@ -62,6 +59,8 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 
 
 func _on_lobby_chat_update(this_lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
+	emit_signal("on_host_changed")
+	
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
 		return
 	if PlayerState.get_player_data(changed_id).size() == 0:
@@ -107,19 +106,6 @@ func join_lobby(this_lobby_id: int):
 
 
 func disconnect_lobby():
-	if is_host:
-		if lobby_members.size() > 1:
-			for member in lobby_members:
-				if member["steam_id"] != Global.steam_id:
-					set_lobby_host(member["steam_id"])
-					break
-		else:
-			Steam.setLobbyType(lobby_id, Steam.LOBBY_TYPE_PRIVATE)
-		
-		await get_tree().process_frame
-		await get_tree().process_frame
-		await get_tree().process_frame
-	
 	Steam.leaveLobby(lobby_id)
 	lobby_id = 0
 	
@@ -131,10 +117,8 @@ func disconnect_lobby():
 	emit_signal("lobby_left")
 
 
-func set_lobby_host(steam_id: int) -> bool:
-	is_host = false
-	emit_signal("on_host_changed")
-	return send_p2p_packet(0, {"type": "set_host"}, Steam.P2P_SEND_RELIABLE)
+func is_host() -> bool:
+	return Steam.getLobbyOwner(lobby_id) == Global.steam_id
 
 
 func get_lobby_members():
@@ -234,7 +218,7 @@ func read_p2p_packet():
 			emit_signal("chat_received", "SYSTEM", readable_data["steam_username"] + " joined")
 			PlayerState.set_player_data(readable_data["steam_id"], {"steam_username": readable_data["steam_username"]})
 			get_lobby_members()
-			if is_host:
+			if is_host():
 				var data = {}
 				data['type'] = "initialize_state"
 				data['players'] = PlayerState.get_all_players_data()
@@ -248,11 +232,8 @@ func read_p2p_packet():
 		"start_game":
 			start_game()
 		"level_complete":
-			if is_host:
+			if is_host():
 				next_level()
-		"set_host":
-			is_host = true
-			emit_signal("on_host_changed")
 		"set_tile":
 			var cell: Vector2i = readable_data["data"]["cell"]
 			var id: int = readable_data["data"]["id"]
@@ -279,7 +260,7 @@ func read_p2p_packet():
 func start_game(level_id: int = 0):
 	WorldState.level_loaded = false
 	
-	if is_host:
+	if is_host():
 		send_p2p_packet(0, {"type": "start_game"})
 		send_map_data(0, WorldState.initialize(level_id))
 	

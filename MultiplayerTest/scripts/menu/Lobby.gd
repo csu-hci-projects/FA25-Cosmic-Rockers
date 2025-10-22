@@ -78,7 +78,7 @@ func _on_lobby_joined():
 	update_host()
 
 func update_host():
-	if !Multiplayer.is_host:
+	if !Multiplayer.is_host():
 		start_button.visible = false
 		level_select.visible = false
 	else:
