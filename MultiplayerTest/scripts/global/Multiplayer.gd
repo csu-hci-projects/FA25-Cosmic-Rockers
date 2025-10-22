@@ -56,4 +56,4 @@ func level_complete() -> bool:
 		next_level()
 		return true
 	else:
-		return send_player_update("level_complete", {}, 2)
+		return send_user_packet("level_complete", {}, 2)

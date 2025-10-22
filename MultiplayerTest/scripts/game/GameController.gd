@@ -56,12 +56,13 @@ func spawn_players():
 		remote_player.name = players[key]["steam_username"]
 		remote_player.entity_id = str(key)
 		move_to_spawn(remote_player)
-		remote_player.on_die.connect(music_controller.enable_effects)
 		
 		player_status.create_status_bar(remote_player, players[key]["steam_username"])
 	
-	get_local_player().is_local_player = true
-	camera.set_target(get_local_player())
+	var local_player = get_local_player()
+	local_player.is_local_player = true
+	camera.set_target(local_player)
+	local_player.on_die.connect(music_controller.enable_effects)
 
 func get_local_player() -> Node2D:
 	if !remote_players.has(Global.steam_id):

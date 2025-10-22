@@ -362,7 +362,7 @@ texture = ExtResource("4_kit0x")
 0:3/0/terrains_peering_bit/top_right_corner = 3
 
 [resource]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 9
 terrain_set_0/mode = 1
 terrain_set_0/terrain_0/name = "Cave"
 terrain_set_0/terrain_0/color = Color(0.845361, 0.252456, 0.04648, 1)

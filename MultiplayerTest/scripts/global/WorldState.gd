@@ -42,7 +42,6 @@ func load_all_levels(path: String):
 	dir.list_dir_end()
 
 func get_next_level() -> int:
-	level_loaded = false
 	if LEVELS.has(level_id + 1):
 		return level_id + 1
 	else:
@@ -51,8 +50,8 @@ func get_next_level() -> int:
 func initialize(level: int = 0) -> Dictionary:
 	level_id = level
 	
-	map_width = 200
-	map_height = 100
+	map_width = 30
+	map_height = 30
 	spawn_room_position = Vector2i(randi_range(5, map_width - 10),5)
 	end_room_position = Vector2i(randi_range(5, map_width - 10), map_height - 10)
 	room_size = 5

@@ -18,5 +18,5 @@ floor_range = Vector2(0, 0)
 roof_range = Vector2(0, 0)
 x_offset_range = Vector2(-2, 2)
 y_offset_range = Vector2(-2, 2)
-enemy_count = 30
+enemy_count = 0
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

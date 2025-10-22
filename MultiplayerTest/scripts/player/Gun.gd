@@ -38,7 +38,8 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_shoot()
+		if player_owner and player_owner.is_local_player:
+			_shoot()
 
 func _shoot():
 	var space_state = get_world_2d().direct_space_state
@@ -49,7 +50,7 @@ func _shoot():
 	var query = PhysicsRayQueryParameters2D.create(global_position, to_position)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
-	query.collision_mask = (1 << 0) | (1 << 2) #set bits 0 and 2 (layers 1 and 3) to 1
+	query.collision_mask = (1 << 3) #set bit 3 (layer 4) to 1
 
 	var result = space_state.intersect_ray(query)
 	
