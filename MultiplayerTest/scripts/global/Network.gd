@@ -12,6 +12,7 @@ signal lobby_members_updated(lobby_members: Array)
 signal chat_received(username: String, message: String)
 signal lobby_joined()
 signal lobby_left()
+signal on_host_changed()
 
 var game_scene = preload("res://scenes/game/game.tscn")
 var current_scene: Node = null
@@ -63,6 +64,8 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 func _on_lobby_chat_update(this_lobby_id: int, changed_id: int, making_changed_id: int, chat_state: int):
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
 		return
+	if PlayerState.get_player_data(changed_id).size() == 0:
+		return
 	
 	var steam_username = PlayerState.get_player_data(changed_id)["steam_username"]
 	
@@ -104,6 +107,14 @@ func join_lobby(this_lobby_id: int):
 
 
 func disconnect_lobby():
+	if lobby_members.size() > 1:
+		for member in lobby_members:
+			if member["steam_id"] != Global.steam_id:
+				set_lobby_host(member["steam_id"])
+				break
+	else:
+		Steam.setLobbyType(lobby_id, Steam.LOBBY_TYPE_PRIVATE)
+	
 	Steam.leaveLobby(lobby_id)
 	lobby_id = 0
 	
@@ -111,9 +122,14 @@ func disconnect_lobby():
 		if member['steam_id'] != Global.steam_id:
 			Steam.closeP2PSessionWithUser(member['steam_id'])
 	
-	is_host = false
 	lobby_members.clear()
 	emit_signal("lobby_left")
+
+
+func set_lobby_host(steam_id: int):
+	is_host = false
+	emit_signal("on_host_changed")
+	send_p2p_packet(steam_id, {"type": "set_host"}, 2)
 
 
 func get_lobby_members():
@@ -229,6 +245,9 @@ func read_p2p_packet():
 		"level_complete":
 			if is_host:
 				next_level()
+		"set_host":
+			is_host = true
+			emit_signal("on_host_changed")
 		"set_tile":
 			var cell: Vector2i = readable_data["data"]["cell"]
 			var id: int = readable_data["data"]["id"]
