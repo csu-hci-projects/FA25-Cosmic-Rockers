@@ -43,7 +43,5 @@ func set_health(amt: int):
 
 func die():
 	is_dead = true
-	set_collision_layer_value(2, false)
-	set_collision_layer_value(3, false)
-	set_collision_layer_value(4, true)
+	set_collision_layer_value(4, false)
 	emit_signal("on_die")

@@ -103,3 +103,8 @@ func start_drop_sequence():
 func _on_ship_dropped():
 	music_controller.disable_effects()
 	spawn_players()
+	var spawn_room_position = tilemap.map_to_local(Vector2i(
+		WorldState.spawn_room_position.x + WorldState.room_size / 2,
+		WorldState.spawn_room_position.y + WorldState.room_size / 2
+		))
+	enemy_controller.kill_in_radius(spawn_room_position, 250)

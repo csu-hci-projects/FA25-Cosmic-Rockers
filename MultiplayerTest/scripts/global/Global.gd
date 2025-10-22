@@ -60,4 +60,3 @@ func open_settings():
 			canvas_layer.add_child(settings)
 		else:
 			get_tree().current_scene.add_child(settings)
-	

@@ -17,7 +17,8 @@ var current_state : State = State.IDLE
 @export var detection_radius: float = 200.0
 @export var attack_range: float = 20.0
 @export var attack_cooldown: float = 1.0
-@export var flee_threshold: int = 5
+@export var flee_threshold: int = 15
+@export var flee_radius: float = 250
 @export var dmg = 5
 
 var _current_patrol_index: int = 0
@@ -37,6 +38,11 @@ func enable_ai() -> void:
 
 func _process(delta: float) -> void:
 	if !ai_enabled:
+		return
+	
+	if is_dead:
+		if !is_on_floor():
+			velocity.y += get_gravity().y * delta
 		return
 	
 	if velocity.x > 0:
@@ -151,23 +157,23 @@ func _perform_attack() -> void:
 
 func _flee_behavior(delta: float) -> void:
 	var nearest = null
-	var nearest_dist = 999999
-	for p in get_tree().get_nodes_in_group("players"):
+	var nearest_dist = flee_radius
+	for p in get_tree().get_nodes_in_group("player"):
 		if not p is Node2D:
 			continue
 		var d = global_position.distance_to(p.global_position)
 		if d < nearest_dist:
 			nearest_dist = d
 			nearest = p
+	
 	if nearest:
 		var dir = (global_position - nearest.global_position).normalized()
 		velocity = dir * chase_speed
 	else:
 		velocity = Vector2.ZERO
 
-# Damage tingz
-
-func _on_took_damage() -> void:
+func take_damage(amt: int) -> void:
+	super(amt)
 	if has_meta("last_attacker"):
 		var attacker = get_meta("last_attacker")
 		if attacker and attacker is Node2D:

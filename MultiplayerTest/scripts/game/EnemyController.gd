@@ -95,3 +95,8 @@ func attack_player(entity_id: String, target_id: String, damage: int):
 func _attack_player(entity_id: String, data: Dictionary):
 	var target: Entity = game_controller.get_entity(data["target"])
 	target.take_damage(data["damage"])
+
+func kill_in_radius(position: Vector2, radius: float):
+	for entity_id in enemies:
+		if position.distance_to(enemies[entity_id].position) <= radius:
+			enemies[entity_id].set_health(0)

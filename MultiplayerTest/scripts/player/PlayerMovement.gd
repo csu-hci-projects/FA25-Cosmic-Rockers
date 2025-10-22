@@ -3,7 +3,6 @@ extends Entity
 
 @export var move_speed : float = 200.0
 @export var jump_force : float = 400.0
-@export var gravity : float = 1200.0
 @export var coyote_time : float = 0.1
 @export var jump_buffer_time : float = 0.1
 @export var air_control : float = 0.9
@@ -24,7 +23,6 @@ func _ready() -> void:
 	super()
 	set_animation("default")
 	sprite.animation_finished.connect(_animation_finished)
-	on_die.connect(_on_die)
 
 func _physics_process(delta: float) -> void:
 	jump_buffer -= delta
@@ -42,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		coyote_timer -= delta
 		velocity.x = lerp(velocity.x, target_speed, air_control * delta * 10.0)
-		velocity.y += gravity * delta
+		velocity.y += get_gravity().y * delta
 		
 		set_animation("fall")
 	
@@ -127,7 +125,8 @@ func _update_position(data: Dictionary):
 	if data.has("position"):
 		position = data["position"]
 
-func _on_die():
+func die():
+	super()
 	input_dir = 0
 	set_animation("death")
 	
