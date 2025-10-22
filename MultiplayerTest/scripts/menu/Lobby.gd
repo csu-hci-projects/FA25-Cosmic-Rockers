@@ -74,7 +74,6 @@ func _on_lobby_joined():
 	menu.visible = false
 	lobby_menu.visible = true
 	chat.visible = true
-	chatbox.text = ""
 	update_host()
 
 func update_host():

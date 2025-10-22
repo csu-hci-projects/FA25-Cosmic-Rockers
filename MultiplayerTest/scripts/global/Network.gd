@@ -48,6 +48,9 @@ func _on_lobby_created(connect: int, this_lobby_id: int):
 
 
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int):
+	if lobby_id != this_lobby_id:
+		disconnect_lobby()
+	
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		lobby_id = this_lobby_id
 		
