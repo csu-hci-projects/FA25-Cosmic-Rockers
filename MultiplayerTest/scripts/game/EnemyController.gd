@@ -28,7 +28,7 @@ func _process(delta: float):
 		enabled_enemies += position_chunk_size
 		return
 	
-	if !Multiplayer.is_host:
+	if !Multiplayer.is_host():
 		return
 	if !WorldState.level_loaded:
 		return

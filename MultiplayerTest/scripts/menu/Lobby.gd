@@ -30,6 +30,8 @@ func _ready():
 	Multiplayer.lobby_joined.connect(_on_lobby_joined)
 	Multiplayer.lobby_left.connect(_on_lobby_left)
 	Multiplayer.on_received_ready_status.connect(_on_ready_status_changed)
+	Multiplayer.on_host_changed.connect(update_host)
+	
 	Global.on_steam_error.connect(_display_error)
 	if Global.error_message != "":
 		_display_error(Global.error_message)
@@ -72,8 +74,10 @@ func _on_lobby_joined():
 	menu.visible = false
 	lobby_menu.visible = true
 	chat.visible = true
-	
-	if !Multiplayer.is_host:
+	update_host()
+
+func update_host():
+	if !Multiplayer.is_host():
 		start_button.visible = false
 		level_select.visible = false
 	else:
