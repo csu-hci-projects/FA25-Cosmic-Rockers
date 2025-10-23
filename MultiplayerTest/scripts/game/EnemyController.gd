@@ -22,7 +22,7 @@ func _process(delta: float):
 		var entity_ids: Array = enemies.keys()
 		var to = enabled_enemies + position_chunk_size
 		if to >= entity_ids.size():
-			to = entity_ids.size()-1
+			to = entity_ids.size()
 		for i in range(enabled_enemies, to):
 			enemies[entity_ids[i]].enable_ai()
 		enabled_enemies += position_chunk_size

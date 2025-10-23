@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://crmy7dplmnxmt" path="res://sprites/collectables/collectable_drum.png" id="1_b8go7"]
 [ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_n05vu"]
-[ext_resource type="AudioStream" uid="uid://bgjmybd6l03yo" path="res://audio/track_1_drums.wav" id="3_n05vu"]
+[ext_resource type="AudioStream" uid="uid://dtm8lkcg5qiul" path="res://audio/Moon Lander.wav" id="3_n05vu"]
 
 [resource]
 script = ExtResource("2_n05vu")

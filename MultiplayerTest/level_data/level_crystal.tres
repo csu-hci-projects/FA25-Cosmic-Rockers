@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://cajjvc56y3dl" path="res://sprites/collectables/collectable_harp.png" id="1_fctfx"]
 [ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_hj2gu"]
-[ext_resource type="AudioStream" uid="uid://dgir4mcousg35" path="res://audio/track_1_bass.wav" id="3_w1pyr"]
-[ext_resource type="AudioStream" uid="uid://bgjmybd6l03yo" path="res://audio/track_1_drums.wav" id="4_4icpg"]
-[ext_resource type="AudioStream" uid="uid://8w4km8fbmkq5" path="res://audio/track_1_keys.wav" id="5_56ux8"]
-[ext_resource type="AudioStream" uid="uid://busqfi2wqi2jw" path="res://audio/track_1_lead.wav" id="6_k35so"]
+[ext_resource type="AudioStream" uid="uid://dgir4mcousg35" path="res://audio/track_1_stems/track_1_bass.wav" id="3_w1pyr"]
+[ext_resource type="AudioStream" uid="uid://bgjmybd6l03yo" path="res://audio/track_1_stems/track_1_drums.wav" id="4_4icpg"]
+[ext_resource type="AudioStream" uid="uid://8w4km8fbmkq5" path="res://audio/track_1_stems/track_1_keys.wav" id="5_56ux8"]
+[ext_resource type="AudioStream" uid="uid://busqfi2wqi2jw" path="res://audio/track_1_stems/track_1_lead.wav" id="6_k35so"]
 
 [resource]
 script = ExtResource("2_hj2gu")
