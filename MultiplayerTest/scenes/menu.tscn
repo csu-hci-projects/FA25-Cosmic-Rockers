@@ -2,6 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://c6het52418hfo" path="res://scenes/ui/control.tscn" id="1_s6dok"]
 
-[node name="Node" type="Node"]
+[node name="Node" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.172416, 0.0183948, 0.0735537, 1)
 
 [node name="Control" parent="." instance=ExtResource("1_s6dok")]

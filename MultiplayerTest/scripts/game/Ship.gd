@@ -1,7 +1,7 @@
 extends Node2D
 
 var target_position: Vector2
-var drop_height = 2000
+var drop_height = 2500
 var drop_speed = 500
 var can_drop = false
 

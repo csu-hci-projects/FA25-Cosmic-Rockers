@@ -14,9 +14,10 @@ var ship_scene = preload("res://scenes/game/ship.tscn")
 var remote_players = {}
 
 func _ready() -> void:
-	WorldState.on_level_loaded.connect(initialize_game)
 	if WorldState.level_loaded:
 		initialize_game()
+	else:
+		WorldState.on_level_loaded.connect(initialize_game)
 	
 	Multiplayer.on_received_input.connect(_update_input)
 	Multiplayer.on_received_position.connect(_update_position)
@@ -35,6 +36,10 @@ func initialize_game() -> void:
 	background.create_background()
 	spawn_collectable()
 	enemy_controller.spawn_enemies()
+	
+	await get_tree().create_timer(3).timeout
+	
+	WorldState.emit_signal("on_game_loaded")
 	music_controller.play_music()
 	start_drop_sequence()
 

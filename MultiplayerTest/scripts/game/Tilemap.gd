@@ -20,6 +20,7 @@ func create_tilemap():
 	
 	set_cells_terrain_connect(cells_to_update, 0, WorldState.get_tileset(), false)
 
+
 func update_tile(cell: Vector2i, tile_id: int):
 	Multiplayer.update_tile(cell, tile_id)
 	_update_tile(cell, tile_id)

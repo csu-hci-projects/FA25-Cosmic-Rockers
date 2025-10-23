@@ -1,0 +1,155 @@
+[gd_scene load_steps=13 format=3 uid="uid://b6bjunyhlkom7"]
+
+[ext_resource type="Script" uid="uid://47l03se5eybw" path="res://scripts/menu/Transition.gd" id="1_54u3s"]
+[ext_resource type="Texture2D" uid="uid://2vuh5c4wrcsc" path="res://sprites/planets/sun.png" id="1_mqh5w"]
+[ext_resource type="Texture2D" uid="uid://duuaeweocig88" path="res://sprites/planets/axtov.png" id="2_b3nhs"]
+[ext_resource type="Texture2D" uid="uid://c06ejgkay8dkg" path="res://sprites/planets/target.png" id="3_v68kg"]
+[ext_resource type="Texture2D" uid="uid://b8nkcgdibgfw2" path="res://sprites/planets/symyt.png" id="3_vrufj"]
+[ext_resource type="Script" uid="uid://bqseh8yv6bbkc" path="res://scripts/menu/TargetSpin.gd" id="4_54u3s"]
+[ext_resource type="Texture2D" uid="uid://uvaghd5h74f4" path="res://sprites/planets/balorb.png" id="4_v68kg"]
+[ext_resource type="Texture2D" uid="uid://dokyq2pbnmqoj" path="res://sprites/planets/drobbo.png" id="5_54u3s"]
+[ext_resource type="PackedScene" uid="uid://blkvjt4xwkqep" path="res://scenes/transitions/orbit.tscn" id="6_senw2"]
+[ext_resource type="Script" uid="uid://cyb410hegaatn" path="res://scripts/menu/Orbit.gd" id="7_b3nhs"]
+[ext_resource type="LabelSettings" uid="uid://mncnrl8aguup" path="res://on_screen_label.tres" id="7_kou68"]
+[ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/menu/WorldName.gd" id="8_mvuiw"]
+
+[node name="transition" type="CanvasLayer" node_paths=PackedStringArray("planets")]
+script = ExtResource("1_54u3s")
+zoom_scale = 8.0
+planets = [NodePath("system/planets/drobbo"), NodePath("system/planets/balorb"), NodePath("system/planets/symyt"), NodePath("system/planets/axtov")]
+
+[node name="fade_rect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0823529, 0, 0.133333, 1)
+
+[node name="system" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="orbits" type="Control" parent="system"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="orbit" parent="system/orbits" instance=ExtResource("6_senw2")]
+position = Vector2(-266, 151)
+script = ExtResource("7_b3nhs")
+radius = 130.66
+eccentricity = 0.49
+orbit_rotation_deg = 141.0
+dot_count = 36
+dot_color = Color(0.408924, 0.457737, 0.93135, 1)
+orbit_speed = 0.045
+animate_in_editor = true
+
+[node name="orbit2" parent="system/orbits" instance=ExtResource("6_senw2")]
+position = Vector2(-266, 151)
+script = ExtResource("7_b3nhs")
+radius = 250.0
+eccentricity = 0.58
+orbit_rotation_deg = 151.0
+dot_count = 50
+dot_color = Color(0.886275, 0.396078, 0.0431373, 1)
+orbit_speed = 0.025
+animate_in_editor = true
+
+[node name="orbit3" parent="system/orbits" instance=ExtResource("6_senw2")]
+position = Vector2(-266, 151)
+script = ExtResource("7_b3nhs")
+radius = 435.29
+eccentricity = 0.14
+orbit_rotation_deg = 137.0
+dot_count = 90
+dot_color = Color(0.27451, 0.509804, 0.196078, 1)
+orbit_speed = 0.015
+animate_in_editor = true
+
+[node name="orbit4" parent="system/orbits" instance=ExtResource("6_senw2")]
+position = Vector2(-266, 151)
+script = ExtResource("7_b3nhs")
+radius = 711.21
+eccentricity = 0.07
+orbit_rotation_deg = 242.0
+dot_count = 140
+dot_color = Color(0.858824, 0.32549, 0.709804, 1)
+orbit_speed = 0.005
+animate_in_editor = true
+
+[node name="planets" type="Control" parent="system"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="target" type="Sprite2D" parent="system/planets"]
+position = Vector2(-255, 5)
+texture = ExtResource("3_v68kg")
+script = ExtResource("4_54u3s")
+rotation_speed_deg = 70.0
+scale_speed = 1.0
+
+[node name="sun" type="Sprite2D" parent="system/planets"]
+position = Vector2(-268, 152)
+texture = ExtResource("1_mqh5w")
+
+[node name="drobbo" type="Sprite2D" parent="system/planets"]
+position = Vector2(-255, 5)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_54u3s")
+
+[node name="balorb" type="Sprite2D" parent="system/planets"]
+position = Vector2(-151, -131)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_v68kg")
+
+[node name="symyt" type="Sprite2D" parent="system/planets"]
+position = Vector2(212, 131)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_vrufj")
+
+[node name="axtov" type="Sprite2D" parent="system/planets"]
+position = Vector2(377, -152)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_b3nhs")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 191.0
+offset_bottom = 92.0
+text = "Traveling"
+label_settings = ExtResource("7_kou68")
+script = ExtResource("8_mvuiw")
+pretext = "Traveling to: "
+keep_text = true

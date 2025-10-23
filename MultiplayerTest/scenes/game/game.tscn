@@ -4,17 +4,13 @@
 [ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/tilesets/default_tile_map.tres" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/menu/WorldName.gd" id="3_4j704"]
+[ext_resource type="LabelSettings" uid="uid://mncnrl8aguup" path="res://on_screen_label.tres" id="3_kp23o"]
 [ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://w18230pt20ls" path="res://scenes/game/background.tscn" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://cevyadjutxs8l" path="res://scripts/player/PlayerStatusController.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://bfxhtocx83gf4" path="res://scripts/game/MusicPlayer.gd" id="8_87uf6"]
 [ext_resource type="Script" uid="uid://t8cfn5odscf5" path="res://scripts/game/Environment.gd" id="9_2a8rs"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_2a8rs"]
-font_size = 30
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Environment" id="Environment_87uf6"]
 background_mode = 3
@@ -42,9 +38,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 text = "World Name"
-label_settings = SubResource("LabelSettings_2a8rs")
+label_settings = ExtResource("3_kp23o")
 horizontal_alignment = 1
 script = ExtResource("3_4j704")
+pretext = "Arriving at: "
+execute_point = 1
 
 [node name="tilemap" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_yqjtg")

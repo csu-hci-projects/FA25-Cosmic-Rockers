@@ -19,6 +19,7 @@ var received_map_chunks := {}
 var level_loaded = false
 
 signal on_level_loaded()
+signal on_game_loaded()
 
 func _ready():
 	load_all_levels("res://level_data")

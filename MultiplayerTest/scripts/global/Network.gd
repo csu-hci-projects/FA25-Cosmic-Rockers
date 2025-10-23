@@ -13,7 +13,7 @@ signal lobby_joined()
 signal lobby_left()
 signal on_host_changed()
 
-var game_scene = preload("res://scenes/game/game.tscn")
+var transition_scene = preload("res://scenes/transitions/transition.tscn")
 var current_scene: Node = null
 
 func _ready():
@@ -267,8 +267,12 @@ func start_game(level_id: int = 0):
 		send_p2p_packet(0, {"type": "start_game"})
 		send_map_data(0, WorldState.initialize(level_id))
 	
-	get_tree().unload_current_scene()
-	get_tree().change_scene_to_packed(game_scene)
+	var current_scene = get_tree().current_scene
+	var transition_instance = transition_scene.instantiate()
+
+	transition_instance.previous_scene = current_scene
+
+	get_tree().root.add_child(transition_instance)
 
 func next_level():
 	start_game(WorldState.get_next_level())
