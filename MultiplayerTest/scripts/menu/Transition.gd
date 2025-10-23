@@ -75,6 +75,7 @@ func fade_out_transition():
 	tween.tween_callback(Callable(self, "_on_fade_out_complete"))
 
 func _on_fade_out_complete():
+	await _thread.wait_to_finish()
 	queue_free()
 
 func _load_scene_thread() -> void:
@@ -86,7 +87,7 @@ func _on_scene_loaded():
 		return
 
 	get_tree().change_scene_to_packed(_loaded_scene)
-	WorldState.connect("on_game_loaded", _on_game_loaded)
+	WorldState.on_game_loaded.connect(_on_game_loaded)
 
 func _on_game_loaded():
 	fade_out_transition()

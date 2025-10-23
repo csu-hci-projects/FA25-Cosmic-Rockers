@@ -35,6 +35,7 @@ signal on_attack_player(entity_id: String, target_id: String, damage: int)
 func _ready() -> void:
 	super()
 	set_animation("default")
+	sprite.animation_finished.connect(_animation_finished)
 
 func enable_ai() -> void:
 	collision.disabled = false
@@ -156,6 +157,8 @@ func _attack_behavior(delta: float) -> void:
 		_attack_timer = attack_cooldown
 
 func _perform_attack() -> void:
+	set_animation("attack")
+	
 	if _target and _target.has_method("take_damage"):
 		emit_signal("on_attack_player", entity_id, _target.entity_id, dmg)
 
@@ -188,6 +191,10 @@ func set_animation(animation_name: String):
 		return
 	
 	sprite.play(animation_name)
+
+func _animation_finished():
+	if sprite.animation == "attack":
+		set_animation("default")
 
 func die():
 	super()
