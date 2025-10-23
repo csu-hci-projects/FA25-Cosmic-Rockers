@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://quxy8m2odmil"]
+
+[ext_resource type="Texture2D" uid="uid://dx3v5x448b5us" path="res://sprites/sprite_sheets/enemies/enemy_1.png" id="1_no232"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rmb6"]
+atlas = ExtResource("1_no232")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vew0e"]
+atlas = ExtResource("1_no232")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lboby"]
+atlas = ExtResource("1_no232")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyroq"]
+atlas = ExtResource("1_no232")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nfaq"]
+atlas = ExtResource("1_no232")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rmb6")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vew0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lboby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyroq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nfaq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]

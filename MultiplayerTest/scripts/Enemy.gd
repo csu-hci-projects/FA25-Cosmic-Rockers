@@ -25,12 +25,16 @@ var _current_patrol_index: int = 0
 var _target: Node2D = null
 var _attack_timer: float = 0.0
 
-@onready var sprite: Sprite2D = $sprite
+@onready var sprite: AnimatedSprite2D = $sprite
 @onready var collision: CollisionShape2D = $collision
 var ai_enabled: bool = false
 
 signal on_state_change(entity_id: String, current_state: State, target_id: String)
 signal on_attack_player(entity_id: String, target_id: String, damage: int)
+
+func _ready() -> void:
+	super()
+	set_animation("default")
 
 func enable_ai() -> void:
 	collision.disabled = false
@@ -178,3 +182,14 @@ func take_damage(amt: int) -> void:
 		var attacker = get_meta("last_attacker")
 		if attacker and attacker is Node2D:
 			_target = attacker
+
+func set_animation(animation_name: String):
+	if animation_name != "death" and is_dead:
+		return
+	
+	sprite.play(animation_name)
+
+func die():
+	super()
+	velocity = Vector2.ZERO
+	set_animation("death")

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=37 format=3 uid="uid://duypje6j552l1"]
 
-[ext_resource type="Texture2D" uid="uid://cxwfp0e0in4jl" path="res://sprites/sprite_sheets/player/Astronaut-Sheet.png" id="1_d5txy"]
+[ext_resource type="Texture2D" uid="uid://cxwfp0e0in4jl" path="res://sprites/sprite_sheets/player/player.png" id="1_d5txy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5txy"]
 atlas = ExtResource("1_d5txy")

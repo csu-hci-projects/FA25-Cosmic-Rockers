@@ -20,10 +20,14 @@ func _ready() -> void:
 	ray_offset = ray_start.position.x
 	player_owner = find_parent("player")
 
-func _process(delta: float) -> void:
-	if player_owner and player_owner.is_local_player:
-		var mouse_pos = get_global_mouse_position()
-		_set_direction((mouse_pos - global_position).normalized())
+func _process(delta: float) -> void:		
+	if player_owner:
+		if player_owner.is_dead:
+			return
+		
+		if player_owner.is_local_player:
+			var mouse_pos = get_global_mouse_position()
+			_set_direction((mouse_pos - global_position).normalized())
 	
 	if direction.x > 0:
 		sprite.flip_h = false
@@ -37,6 +41,9 @@ func _process(delta: float) -> void:
 		rotation = atan2(-direction.y, -direction.x)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if player_owner and player_owner.is_dead:
+			return
+	
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if player_owner and player_owner.is_local_player:
 			_shoot()

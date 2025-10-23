@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxwfp0e0in4jl"
-path="res://.godot/imported/Astronaut-Sheet.png-00d12e47a205879683cca8c979ed0436.ctex"
+path="res://.godot/imported/player.png-e1a13f4f2c6ea5d23c0d638e851e8c24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/sprite_sheets/player/Astronaut-Sheet.png"
-dest_files=["res://.godot/imported/Astronaut-Sheet.png-00d12e47a205879683cca8c979ed0436.ctex"]
+source_file="res://sprites/sprite_sheets/player/player.png"
+dest_files=["res://.godot/imported/player.png-e1a13f4f2c6ea5d23c0d638e851e8c24.ctex"]
 
 [params]
 
