@@ -1,6 +1,10 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://mncnrl8aguup"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://mncnrl8aguup"]
+
+[sub_resource type="SystemFont" id="SystemFont_iwmk2"]
+font_names = PackedStringArray("Monospace")
 
 [resource]
-font_size = 30
+font = SubResource("SystemFont_iwmk2")
+font_size = 40
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
