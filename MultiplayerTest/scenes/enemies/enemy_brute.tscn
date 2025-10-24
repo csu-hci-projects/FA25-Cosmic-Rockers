@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhqetr04io6eo"]
+
+[ext_resource type="Script" uid="uid://c0o3tgwslroaf" path="res://scripts/enemy/EnemyBrute.gd" id="1_p86ed"]
+[ext_resource type="SpriteFrames" uid="uid://quxy8m2odmil" path="res://sprites/sprite_sheets/enemies/enemy_1.tres" id="2_i7j1g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
+radius = 6.0
+
+[node name="brute" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 10
+script = ExtResource("1_p86ed")
+jump_force = 300.0
+is_flying = false
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_i7j1g")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lbhrr")
+disabled = true

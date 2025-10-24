@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0oeugig4u6ih"]
 
 [ext_resource type="Texture2D" uid="uid://bm76kcj8dysoa" path="res://sprites/testing/deafulttile.png" id="1_errlg"]
-[ext_resource type="PackedScene" uid="uid://ceuddiwc25qpf" path="res://scenes/game/enemy.tscn" id="2_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://ceuddiwc25qpf" path="res://scenes/enemies/enemy.tscn" id="2_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://bmihda84q488q" path="res://scenes/game/player.tscn" id="3_74lek"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bl13t"]

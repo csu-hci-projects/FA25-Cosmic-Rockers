@@ -11,6 +11,7 @@ enum State {
 
 var current_state : State = State.IDLE
 
+@export var is_flying: bool = true
 @export var patrol_points: Array = []        
 @export var patrol_speed: float = 60.0
 @export var chase_speed: float = 120.0
@@ -45,9 +46,11 @@ func _process(delta: float) -> void:
 	if !ai_enabled:
 		return
 	
-	if is_dead:
+	if is_dead or !is_flying:
 		if !is_on_floor():
 			velocity.y += get_gravity().y * delta
+	
+	if is_dead:
 		return
 	
 	if velocity.x > 0:

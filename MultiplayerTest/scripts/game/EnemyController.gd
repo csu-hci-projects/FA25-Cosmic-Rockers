@@ -5,7 +5,7 @@ const position_sync_frames: int = 20
 var position_sync_timer: int = 0
 var position_chunk_offset: int = 0
 
-var enemy_scene = preload("res://scenes/game/enemy.tscn")
+var enemy_scene = preload("res://scenes/enemies/enemy_brute.tscn")
 @onready var game_controller = $".."
 var enemies = {}
 var enabled_enemies: int = 0
