@@ -3,18 +3,16 @@ extends Entity
 
 enum State {
 	IDLE,
-	PATROL,
 	CHASE,
 	ATTACK,
-	FLEE
+	FLEE,
+	DEAD
 }
 
 var current_state : State = State.IDLE
 
 @export var is_flying: bool = true
-@export var patrol_points: Array = []        
-@export var patrol_speed: float = 60.0
-@export var chase_speed: float = 120.0
+@export var move_speed: float = 120.0
 @export var detection_radius: float = 200.0
 @export var attack_range: float = 20.0
 @export var attack_cooldown: float = 1.0
@@ -22,13 +20,13 @@ var current_state : State = State.IDLE
 @export var flee_radius: float = 250
 @export var dmg = 5
 
-var _current_patrol_index: int = 0
 var _target: Node2D = null
 var _attack_timer: float = 0.0
 
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var collision: CollisionShape2D = $collision
 var ai_enabled: bool = false
+var move_dir: Vector2 = Vector2.ZERO
 
 signal on_state_change(entity_id: String, current_state: State, target_id: String)
 signal on_attack_player(entity_id: String, target_id: String, damage: int)
@@ -49,10 +47,12 @@ func _process(delta: float) -> void:
 	if is_dead or !is_flying:
 		if !is_on_floor():
 			velocity.y += get_gravity().y * delta
-	
+		else:
+			velocity = Vector2.ZERO
+
 	if is_dead:
 		return
-	
+
 	if velocity.x > 0:
 		sprite.flip_h = false
 	elif velocity.x < 0:
@@ -61,20 +61,27 @@ func _process(delta: float) -> void:
 	match current_state:
 		State.IDLE:
 			_idle_behavior(delta)
-		State.PATROL:
-			_patrol_behavior(delta)
 		State.CHASE:
 			_chase_behavior(delta)
 		State.ATTACK:
 			_attack_behavior(delta)
 		State.FLEE:
 			_flee_behavior(delta)
+		State.DEAD:
+			pass
+	
+	move()
 
+func move():
+	velocity = move_dir * move_speed
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process_state(delta: float):
+	if is_dead:
+		return
+	
 	_attack_timer = max(0.0, _attack_timer - delta)
 	if health <= flee_threshold:
 		set_state(State.FLEE)
@@ -89,10 +96,7 @@ func _process_state(delta: float):
 		else:
 			set_state(State.CHASE)
 	else:
-		if patrol_points.size() > 0:
-			set_state(State.PATROL)
-		else:
-			set_state(State.IDLE)
+		set_state(State.IDLE)
 
 func emit_state():
 	var target_id: String = ""
@@ -107,10 +111,10 @@ func set_state(new_state: State):
 	if false:
 		match new_state:
 			State.IDLE: print("IDLE")
-			State.PATROL: print("PATROL")
 			State.CHASE: print("CHASE")
 			State.ATTACK: print("ATTACK")
 			State.FLEE: print("FLEE")
+			State.DEAD: print("DEAD")
 	
 	current_state = new_state
 	emit_state()
@@ -118,16 +122,8 @@ func set_state(new_state: State):
 # Behavior stuff
 
 func _idle_behavior(delta: float) -> void:
-	velocity = Vector2.ZERO
+	move_dir = Vector2.ZERO
 
-func _patrol_behavior(delta: float) -> void:
-	var target_pos = to_global(patrol_points[_current_patrol_index]) if patrol_points.size() > 0 else global_position
-	var dir = (target_pos - global_position)
-	if dir.length() < 4.0:
-		_current_patrol_index = (_current_patrol_index + 1) % patrol_points.size()
-		return
-	dir = dir.normalized()
-	velocity = dir * patrol_speed
 
 func _detect_target() -> void:
 	var nearest = null
@@ -150,11 +146,10 @@ func _detect_target() -> void:
 func _chase_behavior(delta: float) -> void:
 	if not _target:
 		return
-	var dir = (_target.global_position - global_position).normalized()
-	velocity = dir * chase_speed
+	move_dir = (_target.global_position - global_position).normalized()
 
 func _attack_behavior(delta: float) -> void:
-	velocity = Vector2.ZERO
+	move_dir = Vector2.ZERO
 	if _attack_timer <= 0.0 and _target:
 		_perform_attack()
 		_attack_timer = attack_cooldown
@@ -177,10 +172,9 @@ func _flee_behavior(delta: float) -> void:
 			nearest = p
 	
 	if nearest:
-		var dir = (global_position - nearest.global_position).normalized()
-		velocity = dir * chase_speed
+		move_dir = (global_position - nearest.global_position).normalized()
 	else:
-		velocity = Vector2.ZERO
+		move_dir = Vector2.ZERO
 
 func take_damage(amt: int) -> void:
 	super(amt)
@@ -201,5 +195,6 @@ func _animation_finished():
 
 func die():
 	super()
-	velocity = Vector2.ZERO
+	move_dir = Vector2.ZERO
+	set_state(State.DEAD)
 	set_animation("death")

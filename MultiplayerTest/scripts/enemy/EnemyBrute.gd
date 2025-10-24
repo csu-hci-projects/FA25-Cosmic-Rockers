@@ -2,15 +2,9 @@ extends Enemy
 
 @export var jump_force : float = 400.0
 
-func _idle_behavior(delta: float) -> void:
-	velocity.x = 0
-
-func _chase_behavior(delta: float) -> void:
-	if not _target:
-		return
-	var dir = (_target.global_position - global_position).normalized()
-	var horizontal_dir = sign(dir.x)
-	velocity.x = horizontal_dir * chase_speed
+func move():
+	var horizontal_dir = sign(move_dir.x)
+	velocity.x = horizontal_dir * move_speed
 	
 	var space_state := get_world_2d().direct_space_state
 	var start := global_position

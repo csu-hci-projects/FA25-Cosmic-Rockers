@@ -5,7 +5,8 @@ const position_sync_frames: int = 20
 var position_sync_timer: int = 0
 var position_chunk_offset: int = 0
 
-var enemy_scene = preload("res://scenes/enemies/enemy_brute.tscn")
+var enemy_scene_1 = preload("res://scenes/enemies/enemy.tscn")
+var enemy_scene_2 = preload("res://scenes/enemies/enemy_brute.tscn")
 @onready var game_controller = $".."
 var enemies = {}
 var enabled_enemies: int = 0
@@ -69,6 +70,12 @@ func spawn_enemies():
 		enemy._process_state(0)
 
 func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
+	var enemy_scene = null
+	if randf() > 0.5:
+		enemy_scene = enemy_scene_1
+	else:
+		enemy_scene = enemy_scene_2
+	
 	var enemy = enemy_scene.instantiate()
 	add_child(enemy)
 	enemy.name = entity_id
