@@ -36,8 +36,8 @@ func update_collectable(carrying: bool) -> bool:
 	return send_player_update("collectable", data, 2)
 
 
-func entity_spawn(entity_id: String, position: Vector2) -> bool:
-	var data: Dictionary = {"position": position}
+func entity_spawn(entity_id: String, position: Vector2, enemy_type: int) -> bool:
+	var data: Dictionary = {"position": position, "type":enemy_type}
 	return send_entity_update("entity_spawn", entity_id, data, 2)
 
 func update_entity_state(entity_id: String, state: Dictionary) -> bool:

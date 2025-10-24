@@ -63,15 +63,16 @@ func spawn_enemies():
 	for spawn_location in enemy_spawns:
 		var entity_id = "enemy_"+str(id)
 		id += 1
-		var enemy = _spawn_enemy(entity_id, {"position":spawn_location})
-		Multiplayer.entity_spawn(entity_id, spawn_location)
+		var enemy_type = randi_range(0,1)
+		var enemy = _spawn_enemy(entity_id, {"position":spawn_location, "type":enemy_type})
+		Multiplayer.entity_spawn(entity_id, spawn_location, enemy_type)
 		enemy.on_state_change.connect(send_state)
 		enemy.on_attack_player.connect(attack_player)
 		enemy._process_state(0)
 
 func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
 	var enemy_scene = null
-	if randf() > 0.5:
+	if data["type"] == 0:
 		enemy_scene = enemy_scene_1
 	else:
 		enemy_scene = enemy_scene_2
