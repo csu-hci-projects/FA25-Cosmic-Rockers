@@ -107,7 +107,7 @@ func take_hit(entity_id: String, amt: int):
 	Multiplayer.entity_hit(entity_id, amt)
 
 func _take_hit(entity_id: String, data: Dictionary):
-	enemies[entity_id].take_damage(data["amt"])
+	enemies[entity_id]._take_damage(data["amt"])
 
 
 func attack_player(entity_id: String, target_id: String, damage: int):
