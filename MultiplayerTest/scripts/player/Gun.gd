@@ -22,7 +22,7 @@ func _ready() -> void:
 	player_owner = find_parent("player")
 	player_owner.on_sync.connect(sync_direction)
 	
-	Multiplayer.on_received_gun_direciton.connect(on_set_direction)
+	Multiplayer.on_received_gun_direction.connect(on_set_direction)
 	Multiplayer.on_received_gun_shoot.connect(on_shoot)
 
 func _update_direction(data: Dictionary):

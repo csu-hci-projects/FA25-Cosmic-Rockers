@@ -6,13 +6,14 @@ signal on_received_input(steam_id: int, data: Dictionary)
 signal on_received_position(steam_id: int, data: Dictionary)
 signal on_received_collectable(steam_id: int, data: Dictionary)
 signal on_received_collectable_submit(steam_id: int, data: Dictionary)
-signal on_received_gun_direciton(steam_id: int, data: Dictionary)
+signal on_received_gun_direction(steam_id: int, data: Dictionary)
 signal on_received_gun_shoot(steam_id: int, data: Dictionary)
 
 signal on_received_entity_spawn(entity_id: int, data: Dictionary)
 signal on_received_entity_state(entity_id: int, data: Dictionary)
 signal on_received_entity_positions(entity_id: int, data: Dictionary)
 signal on_received_entity_attack(entity_id: int, data: Dictionary)
+signal on_received_entity_hit(entity_id: int, data: Dictionary)
 
 # SEND TYPES:
 # 0 -> Packets may be dropped. No guarantee of order or arrival
@@ -58,6 +59,10 @@ func update_entity_positions(data: Dictionary) -> bool:
 func entity_attack(entity_id: String, target_id: String, damage: int) -> bool:
 	var data: Dictionary = {"target": target_id, "damage": damage}
 	return send_entity_update("entity_attack", entity_id, data, 2)
+
+func entity_hit(entity_id: String, amt: int) -> bool:
+	var data: Dictionary = {"amt": amt}
+	return send_entity_update("entity_hit", entity_id, data, 2)
 
 
 func level_complete() -> bool:
