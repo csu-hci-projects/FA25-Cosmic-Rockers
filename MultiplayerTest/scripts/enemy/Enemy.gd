@@ -178,6 +178,8 @@ func _flee_behavior(delta: float) -> void:
 
 func take_damage(amt: int) -> void:
 	super(amt)
+	emit_signal("on_hit_taken", entity_id, amt)
+	
 	if has_meta("last_attacker"):
 		var attacker = get_meta("last_attacker")
 		if attacker and attacker is Node2D:

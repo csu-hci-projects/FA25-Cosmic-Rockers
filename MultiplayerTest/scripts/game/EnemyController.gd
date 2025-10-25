@@ -72,7 +72,6 @@ func spawn_enemies():
 		Multiplayer.entity_spawn(entity_id, spawn_location, enemy_type)
 		enemy.on_state_change.connect(send_state)
 		enemy.on_attack_player.connect(attack_player)
-		enemy.on_hit_taken.connect(take_hit)
 		enemy._process_state(0)
 
 func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
@@ -86,6 +85,7 @@ func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
 	add_child(enemy)
 	enemy.name = entity_id
 	enemy.entity_id = entity_id
+	enemy.on_hit_taken.connect(take_hit)
 	game_controller.move_to_tile(enemy, data["position"])
 	enemies.set(entity_id, enemy)
 	return enemy
@@ -107,11 +107,7 @@ func take_hit(entity_id: String, amt: int):
 	Multiplayer.entity_hit(entity_id, amt)
 
 func _take_hit(entity_id: String, data: Dictionary):
-	var amt: int = data["amt"]
-	if amt < 0:
-		enemies[entity_id].take_damage(abs(amt))
-	else:
-		enemies[entity_id].take_healing(abs(amt))
+	enemies[entity_id].take_damage(data["amt"])
 
 
 func attack_player(entity_id: String, target_id: String, damage: int):

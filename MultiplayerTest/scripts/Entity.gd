@@ -25,11 +25,9 @@ func create_health_bar():
 	on_health_changed.connect(health_bar._set_fill)
 
 func take_damage(amt: int):
-	emit_signal("on_hit_taken", entity_id, -amt)
 	set_health(health - amt)
 
 func take_healing(amt: int):
-	emit_signal("on_hit_taken", entity_id, amt)
 	set_health(health + amt)
 
 func set_health(amt: int):
