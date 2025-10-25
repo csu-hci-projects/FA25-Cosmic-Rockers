@@ -81,13 +81,13 @@ func _shoot():
 	var from = ray_start.global_position
 	var to = hit_position + (ray_extend * shoot_direction)
 	
-	on_shoot({"from": from, "to": to})
+	on_shoot(0, {"from": from, "to": to})
 	Multiplayer.update_gun_shoot(from, to)
 
-func on_set_direction(data: Dictionary):
+func on_set_direction(_steam_id: int, data: Dictionary):
 	target_direction = data["direction"]
 
-func on_shoot(data: Dictionary):
+func on_shoot(_steam_id: int, data: Dictionary):
 	var from = data["from"]
 	var to = data["to"]
 	var line = Line2D.new()
