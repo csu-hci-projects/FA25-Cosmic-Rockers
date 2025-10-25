@@ -6,6 +6,8 @@ signal on_received_input(steam_id: int, data: Dictionary)
 signal on_received_position(steam_id: int, data: Dictionary)
 signal on_received_collectable(steam_id: int, data: Dictionary)
 signal on_received_collectable_submit(steam_id: int, data: Dictionary)
+signal on_received_gun_direciton(steam_id: int, data: Dictionary)
+signal on_received_gun_shoot(steam_id: int, data: Dictionary)
 
 signal on_received_entity_spawn(entity_id: int, data: Dictionary)
 signal on_received_entity_state(entity_id: int, data: Dictionary)
@@ -35,6 +37,13 @@ func update_collectable(carrying: bool) -> bool:
 	var data: Dictionary = {"carrying": carrying}
 	return send_player_update("collectable", data, 2)
 
+func update_gun_direction(direction) -> bool:
+	var data: Dictionary = {"direction": direction}
+	return send_player_update("gun_direction", data, 2)
+
+func update_gun_shoot(from, to) -> bool:
+	var data: Dictionary = {"from": from, "to": to}
+	return send_player_update("gun_shoot", data, 2)
 
 func entity_spawn(entity_id: String, position: Vector2, enemy_type: int) -> bool:
 	var data: Dictionary = {"position": position, "type":enemy_type}

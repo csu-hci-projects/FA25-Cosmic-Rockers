@@ -10,14 +10,16 @@ extends Entity
 var coyote_timer : float = 0.0
 var jump_buffer : float = 0.0
 var input_dir: float = 0
-var position_sync_timer: int = 0
+var sync_timer: int = 0
 
 @export var is_local_player: bool = false
-var position_sync_frames: int = 20
+var sync_frames: int = 20
 
 @onready var sprite: AnimatedSprite2D = $sprite
 
 var collectable: Collectable = null
+
+signal on_sync
 
 func _ready() -> void:
 	super()
@@ -69,10 +71,11 @@ func _process(delta: float):
 	if is_dead:
 		return
 	
-	if position_sync_timer <= 0:
-		position_sync_timer = position_sync_frames
+	if sync_timer <= 0:
+		sync_timer = sync_frames
+		emit_signal("on_sync")
 		Multiplayer.update_position(position)
-	position_sync_timer-=1
+	sync_timer-=1
 	
 	if Input.is_action_just_pressed("jump"):
 		jump()
