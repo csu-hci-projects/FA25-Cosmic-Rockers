@@ -16,6 +16,7 @@ func _ready() -> void:
 	Multiplayer.on_received_entity_state.connect(_set_state)
 	Multiplayer.on_received_entity_positions.connect(_set_positions)
 	Multiplayer.on_received_entity_attack.connect(_attack_player)
+	Multiplayer.on_received_entity_hit.connect(_take_hit)
 
 func _process(delta: float):
 	#CHUNKED ENEMY ENABLING
@@ -46,7 +47,10 @@ func _process(delta: float):
 		var data = {}
 		var size = enemies.size()
 		for i in range(position_chunk_offset, position_chunk_offset + position_chunk_size):
-			data[entity_ids[i % size]] = enemies[entity_ids[i % size]].position
+			data[entity_ids[i % size]] = {
+				"position": enemies[entity_ids[i % size]].position, 
+				"health": enemies[entity_ids[i % size]].health
+				}
 		Multiplayer.update_entity_positions(data)
 		
 		position_chunk_offset += position_chunk_size
@@ -81,6 +85,7 @@ func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
 	add_child(enemy)
 	enemy.name = entity_id
 	enemy.entity_id = entity_id
+	enemy.on_hit_taken.connect(take_hit)
 	game_controller.move_to_tile(enemy, data["position"])
 	enemies.set(entity_id, enemy)
 	return enemy
@@ -94,7 +99,16 @@ func _set_state(entity_id: String, data: Dictionary):
 
 func _set_positions(entity_id: String, data: Dictionary):
 	for key in data.keys():
-		enemies[key].position = data[key]
+		enemies[key].position = data[key]["position"]
+		enemies[key].set_health(data[key]["health"])
+
+
+func take_hit(entity_id: String, amt: int):
+	Multiplayer.entity_hit(entity_id, amt)
+
+func _take_hit(entity_id: String, data: Dictionary):
+	enemies[entity_id]._take_damage(data["amt"])
+
 
 func attack_player(entity_id: String, target_id: String, damage: int):
 	Multiplayer.entity_attack(entity_id, target_id, damage)
