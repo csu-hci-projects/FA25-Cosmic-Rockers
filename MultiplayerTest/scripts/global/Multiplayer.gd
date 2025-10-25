@@ -46,6 +46,7 @@ func update_gun_shoot(from, to) -> bool:
 	var data: Dictionary = {"from": from, "to": to}
 	return send_player_update("gun_shoot", data, 2)
 
+
 func entity_spawn(entity_id: String, position: Vector2, enemy_type: int) -> bool:
 	var data: Dictionary = {"position": position, "type":enemy_type}
 	return send_entity_update("entity_spawn", entity_id, data, 2)

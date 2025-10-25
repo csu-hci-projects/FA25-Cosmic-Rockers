@@ -47,7 +47,10 @@ func _process(delta: float):
 		var data = {}
 		var size = enemies.size()
 		for i in range(position_chunk_offset, position_chunk_offset + position_chunk_size):
-			data[entity_ids[i % size]] = enemies[entity_ids[i % size]].position
+			data[entity_ids[i % size]] = {
+				"position": enemies[entity_ids[i % size]].position, 
+				"health": enemies[entity_ids[i % size]].health
+				}
 		Multiplayer.update_entity_positions(data)
 		
 		position_chunk_offset += position_chunk_size
@@ -96,7 +99,8 @@ func _set_state(entity_id: String, data: Dictionary):
 
 func _set_positions(entity_id: String, data: Dictionary):
 	for key in data.keys():
-		enemies[key].position = data[key]
+		enemies[key].position = data[key]["position"]
+		enemies[key].set_health(data[key]["health"])
 
 
 func take_hit(entity_id: String, amt: int):
