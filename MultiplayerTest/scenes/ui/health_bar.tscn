@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://da7i83jrfu284" path="res://sprites/ui/health_small_bg.png" id="1_4rf34"]
 [ext_resource type="Texture2D" uid="uid://chrphea7670ud" path="res://sprites/ui/health_small_fill.png" id="2_8ymem"]
-[ext_resource type="Script" uid="uid://bs4voolf65epm" path="res://scripts/HealthBar.gd" id="3_x4hh8"]
+[ext_resource type="Script" uid="uid://bs4voolf65epm" path="res://scripts/ui/HealthBar.gd" id="3_x4hh8"]
 
 [node name="health_bar" type="TextureProgressBar"]
 offset_left = -8.0

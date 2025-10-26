@@ -1,6 +1,8 @@
 extends Network
 
 signal on_received_ready_status(steam_id: int, data: Dictionary)
+signal on_received_player_customization(steam_id: int, data: Dictionary)
+
 signal on_received_tile(cell: Vector2i, id: int)
 signal on_received_input(steam_id: int, data: Dictionary)
 signal on_received_position(steam_id: int, data: Dictionary)
@@ -23,6 +25,9 @@ signal on_received_entity_hit(entity_id: int, data: Dictionary)
 func update_ready_status(status: bool) -> bool:
 	var data: Dictionary = {"status": status}
 	return send_player_update("ready_status", data, 2)
+	
+func update_player_customization(data: Dictionary) -> bool:
+	return send_player_update("player_customization", data, 2)
 
 func update_tile(cell: Vector2i, id: int) -> bool:
 	return send_world_update(cell, id)

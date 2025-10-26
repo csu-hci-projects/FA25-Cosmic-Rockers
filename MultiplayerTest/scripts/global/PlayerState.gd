@@ -1,7 +1,23 @@
 extends Node
 
+@onready var COLORS = [
+	Color.from_string("#AA78A6", Color.BLACK), 
+	Color.from_string("#E03616", Color.BLACK), 
+	Color.from_string("#FFF689", Color.BLACK), 
+	Color.from_string("#CFFFB0", Color.BLACK), 
+	Color.from_string("#5998C5", Color.BLACK), 
+	Color.from_string("#C5CBD3", Color.BLACK), 
+	Color.from_string("#17C3B2", Color.BLACK)
+	]
+
 # Stores the latest data for each player
 var players: Dictionary = {}  # Dictionary keyed by Steam ID
+
+signal on_customization_changed(steam_id: int, data: Dictionary)
+
+func set_customization(data: Dictionary):
+	emit_signal("on_customization_changed", Global.steam_id, data)
+	set_player_data(Global.steam_id, data)
 
 # Update or add a player's data
 func set_player_data(steam_id: int, data: Dictionary):

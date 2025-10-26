@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6het52418hfo"]
+[gd_scene load_steps=4 format=3 uid="uid://c6het52418hfo"]
 
 [ext_resource type="Script" uid="uid://3mwapkenvdo0" path="res://scripts/menu/Lobby.gd" id="1_2k4jl"]
+[ext_resource type="PackedScene" uid="uid://c2a6riwcgaqaa" path="res://scenes/ui/character_edit.tscn" id="2_bchhi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo0lp"]
 bg_color = Color(0.266575, 0.266575, 0.266575, 1)
@@ -108,6 +109,7 @@ text = "Send"
 [node name="players" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
+anchor_right = 0.085
 
 [node name="steam_error" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -135,6 +137,9 @@ text = "Steam Error"
 [node name="Button" type="Button" parent="steam_error/VBoxContainer"]
 layout_mode = 2
 text = "Retry"
+
+[node name="character_edit" parent="." instance=ExtResource("2_bchhi")]
+layout_mode = 1
 
 [connection signal="pressed" from="menu/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="menu/host" to="." method="_on_host_pressed"]

@@ -15,6 +15,7 @@ extends Control
 @onready var start_button: Button = $lobby_menu/start
 @onready var ready_button: Button = $lobby_menu/ready
 @onready var level_select: SpinBox = $lobby_menu/level_select
+@onready var character_edit: PanelContainer = $character_edit
 
 @onready var error_message = $steam_error/VBoxContainer/Label
 
@@ -24,6 +25,7 @@ func _ready():
 	chat.visible = false
 	lobby_menu.visible = false
 	error.visible = false
+	character_edit.visible = false
 	
 	Multiplayer.chat_received.connect(_add_chat_message)
 	Multiplayer.lobby_members_updated.connect(_update_lobby)
@@ -44,6 +46,7 @@ func _display_error(message: String):
 	chat.visible = false
 	lobby_menu.visible = false
 	menu.visible = false
+	character_edit.visible = false
 	error.visible = true
 
 func _on_host_pressed():
@@ -74,6 +77,7 @@ func _on_lobby_joined():
 	menu.visible = false
 	lobby_menu.visible = true
 	chat.visible = true
+	character_edit.visible = true
 	update_host()
 
 func update_host():
@@ -112,6 +116,7 @@ func _on_lobby_left():
 	menu.visible = true
 	lobby_menu.visible = false
 	chat.visible = false
+	character_edit.visible = false
 	chatbox.text = ""
 	ready_button.set_pressed_no_signal(false)
 	
@@ -128,4 +133,5 @@ func _on_retry_pressed() -> void:
 	lobby_menu.visible = false
 	menu.visible = true
 	error.visible = false
+	character_edit.visible = false
 	

@@ -1,29 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0ie515s35k8c"]
+[gd_scene load_steps=12 format=3 uid="uid://b0ie515s35k8c"]
 
+[ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://WhiteReplace.gdshader" id="1_5suwc"]
 [ext_resource type="Script" uid="uid://bojqf4p2v5cq6" path="res://scripts/menu/LobbyPlayer.gd" id="1_6upnp"]
+[ext_resource type="Texture2D" uid="uid://0vtngp4fjn5b" path="res://sprites/ui/lobby_player.png" id="1_smq7i"]
 [ext_resource type="Texture2D" uid="uid://bcob6wc2jimxn" path="res://icon.svg" id="2_v5tub"]
 [ext_resource type="Texture2D" uid="uid://db7gxwl00qset" path="res://sprites/ui/red_cross.png" id="3_6cgia"]
+[ext_resource type="Script" uid="uid://h08l2ja5wkko" path="res://scripts/menu/LobbyPlayerAnimation.gd" id="4_6qj6r"]
+[ext_resource type="Texture2D" uid="uid://cxwfp0e0in4jl" path="res://sprites/sprite_sheets/player/player.png" id="4_k46x5"]
+[ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="5_anhif"]
 
-[node name="lobby_player" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 3
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmtyh"]
+shader = ExtResource("1_5suwc")
+shader_parameter/target_color = Color(1, 1, 1, 1)
+shader_parameter/threshold = 0.5
+
+[sub_resource type="LabelSettings" id="LabelSettings_smq7i"]
+font_size = 28
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnu5a"]
+atlas = ExtResource("4_k46x5")
+region = Rect2(16, 16, 16, 16)
+
+[node name="lobby_player" type="TextureRect"]
+material = SubResource("ShaderMaterial_qmtyh")
+custom_minimum_size = Vector2(360, 90)
+offset_right = 360.0
+offset_bottom = 90.0
+texture = ExtResource("1_smq7i")
 script = ExtResource("1_6upnp")
 
-[node name="picture" type="TextureRect" parent="."]
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="hbox" type="HBoxContainer" parent="margin"]
 layout_mode = 2
+size_flags_vertical = 4
+
+[node name="picture" type="TextureRect" parent="margin/hbox"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("2_v5tub")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="username" type="Label" parent="."]
+[node name="username" type="Label" parent="margin/hbox"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "username"
+label_settings = SubResource("LabelSettings_smq7i")
 
-[node name="ready_check" type="TextureRect" parent="."]
+[node name="ready_check" type="TextureRect" parent="margin/hbox"]
+custom_minimum_size = Vector2(35, 35)
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 texture = ExtResource("3_6cgia")
 expand_mode = 2
 stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="margin/hbox"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_cnu5a")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("4_6qj6r")
+spriteframes = ExtResource("5_anhif")
+do_animation = true
