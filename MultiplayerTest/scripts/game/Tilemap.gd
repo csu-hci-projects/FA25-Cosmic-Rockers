@@ -25,7 +25,14 @@ func update_tile(cell: Vector2i, tile_id: int):
 	Multiplayer.update_tile(cell, tile_id)
 	_update_tile(cell, tile_id)
 
+	if not _in_bounds(cell):
+		return
+	if tile_id == -1 and _is_boundary_at_cell(cell):
+		return
+
 func _update_tile(cell: Vector2i, tile_id: int):
+	if not _in_bounds(cell):
+		return
 	set_3x3(cell, tile_id)
 
 func take_hit(hit_position: Vector2):
@@ -34,7 +41,7 @@ func take_hit(hit_position: Vector2):
 	update_tile(cell, -1)
 
 func set_3x3(cell: Vector2i, tile_id: int):
-	var cells_to_erase := []
+	var cells_to_erase: Array[Vector2i] = []
 	
 	for y_offset in range(-1,2):
 		for x_offset in range(-1,2):
