@@ -1,13 +1,13 @@
 extends Node
 
 @onready var COLORS = [
-	Color.from_string("#AA78A6", Color.BLACK), 
-	Color.from_string("#E03616", Color.BLACK), 
-	Color.from_string("#FFF689", Color.BLACK), 
-	Color.from_string("#CFFFB0", Color.BLACK), 
-	Color.from_string("#5998C5", Color.BLACK), 
-	Color.from_string("#C5CBD3", Color.BLACK), 
-	Color.from_string("#17C3B2", Color.BLACK)
+	Color.from_string("#AA78A6", Color.WHITE), 
+	Color.from_string("#E03616", Color.WHITE), 
+	Color.from_string("#FFF689", Color.WHITE), 
+	Color.from_string("#CFFFB0", Color.WHITE), 
+	Color.from_string("#5998C5", Color.WHITE), 
+	Color.from_string("#C5CBD3", Color.WHITE), 
+	Color.from_string("#17C3B2", Color.WHITE)
 	]
 
 # Stores the latest data for each player

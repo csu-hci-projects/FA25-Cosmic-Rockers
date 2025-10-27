@@ -58,8 +58,10 @@ func spawn_players():
 		remote_players.set(key, remote_player)
 		
 		add_child(remote_player)
+		var player_data = PlayerState.get_player_data(key)
 		remote_player.name = players[key]["steam_username"]
 		remote_player.entity_id = str(key)
+		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", Color.WHITE)])
 		move_to_spawn(remote_player)
 		
 		player_status.create_status_bar(remote_player, players[key]["steam_username"])

@@ -16,6 +16,7 @@ var sync_timer: int = 0
 var sync_frames: int = 20
 
 @onready var sprite: AnimatedSprite2D = $sprite
+@onready var pointer: Sprite2D = $pointer
 
 var collectable: Collectable = null
 
