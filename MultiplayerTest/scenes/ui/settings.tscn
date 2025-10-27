@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cw41hdyory4oq"]
 
-[ext_resource type="Script" uid="uid://c1jcef5aoks8q" path="res://scripts/ui/SettingsInterface.gd" id="1_8wfqe"]
-[ext_resource type="Script" uid="uid://dcvuca6up5rwr" path="res://scripts/ui/SettingsInput.gd" id="2_7pacj"]
-[ext_resource type="Script" uid="uid://bq8ikf5ki55kv" path="res://scripts/ui/SettingsAudio.gd" id="2_h175o"]
-[ext_resource type="Script" uid="uid://urq3g3lktux8" path="res://scripts/ui/SettingsGraphics.gd" id="3_ptynm"]
+[ext_resource type="Script" uid="uid://c1jcef5aoks8q" path="res://scripts/menu/SettingsInterface.gd" id="1_8wfqe"]
+[ext_resource type="Script" uid="uid://dcvuca6up5rwr" path="res://scripts/menu/SettingsInput.gd" id="2_7pacj"]
+[ext_resource type="Script" uid="uid://bq8ikf5ki55kv" path="res://scripts/menu/SettingsAudio.gd" id="2_h175o"]
+[ext_resource type="Script" uid="uid://urq3g3lktux8" path="res://scripts/menu/SettingsGraphics.gd" id="3_ptynm"]
 [ext_resource type="Texture2D" uid="uid://fo0heeidxqne" path="res://sprites/ui/reset.png" id="4_ncfhn"]
 
 [sub_resource type="Theme" id="Theme_8wfqe"]
