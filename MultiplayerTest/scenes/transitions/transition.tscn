@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6bjunyhlkom7"]
+[gd_scene load_steps=11 format=3 uid="uid://b6bjunyhlkom7"]
 
 [ext_resource type="Script" uid="uid://47l03se5eybw" path="res://scripts/menu/Transition.gd" id="1_54u3s"]
 [ext_resource type="Texture2D" uid="uid://2vuh5c4wrcsc" path="res://sprites/planets/sun.png" id="1_mqh5w"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dokyq2pbnmqoj" path="res://sprites/planets/drobbo.png" id="5_54u3s"]
 [ext_resource type="PackedScene" uid="uid://blkvjt4xwkqep" path="res://scenes/transitions/orbit.tscn" id="6_senw2"]
 [ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/menu/WorldName.gd" id="8_mvuiw"]
-[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://default_theme.tres" id="10_v68kg"]
 
 [node name="transition" type="CanvasLayer" node_paths=PackedStringArray("planets")]
 script = ExtResource("1_54u3s")
@@ -125,7 +124,6 @@ offset_left = 15.0
 offset_top = 15.0
 offset_right = 104.0
 offset_bottom = 43.0
-theme = ExtResource("10_v68kg")
 text = "Traveling"
 script = ExtResource("8_mvuiw")
 pretext = "Traveling to: "

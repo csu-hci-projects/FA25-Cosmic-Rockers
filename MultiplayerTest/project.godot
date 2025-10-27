@@ -49,6 +49,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="MultiplayerTest"
 
+[gui]
+
+theme/custom="uid://t3yhq5i1rmho"
+
 [input]
 
 ui_accept={

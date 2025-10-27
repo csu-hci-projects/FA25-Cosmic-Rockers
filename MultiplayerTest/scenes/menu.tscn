@@ -11,5 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.172416, 0.0183948, 0.0735537, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Control" parent="." instance=ExtResource("1_s6dok")]
+metadata/_edit_use_anchors_ = true

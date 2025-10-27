@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0ie515s35k8c"]
+[gd_scene load_steps=11 format=3 uid="uid://b0ie515s35k8c"]
 
 [ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://WhiteReplace.gdshader" id="1_5suwc"]
 [ext_resource type="Script" uid="uid://bojqf4p2v5cq6" path="res://scripts/menu/LobbyPlayer.gd" id="1_6upnp"]
 [ext_resource type="Texture2D" uid="uid://0vtngp4fjn5b" path="res://sprites/ui/lobby_player.png" id="1_smq7i"]
-[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://default_theme.tres" id="2_qmtyh"]
 [ext_resource type="Texture2D" uid="uid://bcob6wc2jimxn" path="res://icon.svg" id="2_v5tub"]
 [ext_resource type="Texture2D" uid="uid://db7gxwl00qset" path="res://sprites/ui/red_cross.png" id="3_6cgia"]
 [ext_resource type="Script" uid="uid://h08l2ja5wkko" path="res://scripts/menu/LobbyPlayerAnimation.gd" id="4_6qj6r"]
@@ -25,7 +24,6 @@ material = SubResource("ShaderMaterial_qmtyh")
 custom_minimum_size = Vector2(200, 50)
 offset_right = 160.0
 offset_bottom = 40.0
-theme = ExtResource("2_qmtyh")
 texture = ExtResource("1_smq7i")
 script = ExtResource("1_6upnp")
 
@@ -36,20 +34,17 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_right = 1.0
 offset_bottom = 10.0
-theme = ExtResource("2_qmtyh")
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
 [node name="hbox" type="HBoxContainer" parent="margin"]
 layout_mode = 2
 size_flags_vertical = 0
-theme = ExtResource("2_qmtyh")
 
 [node name="picture" type="TextureRect" parent="margin/hbox"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 4
-theme = ExtResource("2_qmtyh")
 texture = ExtResource("2_v5tub")
 expand_mode = 2
 stretch_mode = 4
@@ -57,7 +52,6 @@ stretch_mode = 4
 [node name="username" type="Label" parent="margin/hbox"]
 layout_mode = 2
 size_flags_vertical = 0
-theme = ExtResource("2_qmtyh")
 text = "username"
 
 [node name="ready_check" type="TextureRect" parent="margin/hbox"]
@@ -66,7 +60,6 @@ layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
-theme = ExtResource("2_qmtyh")
 texture = ExtResource("3_6cgia")
 expand_mode = 2
 stretch_mode = 4
@@ -76,7 +69,6 @@ custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme = ExtResource("2_qmtyh")
 texture = SubResource("AtlasTexture_wwgsw")
 expand_mode = 2
 stretch_mode = 5

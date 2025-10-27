@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2a6riwcgaqaa"]
+[gd_scene load_steps=11 format=3 uid="uid://c2a6riwcgaqaa"]
 
 [ext_resource type="Script" uid="uid://h08l2ja5wkko" path="res://scripts/menu/LobbyPlayerAnimation.gd" id="1_4j2yn"]
 [ext_resource type="Texture2D" uid="uid://cxwfp0e0in4jl" path="res://sprites/sprite_sheets/player/player.png" id="1_7r5up"]
-[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://default_theme.tres" id="1_y50pb"]
 [ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="2_ufpfr"]
 [ext_resource type="Texture2D" uid="uid://bwil3q5a1t4xr" path="res://sprites/ui/arrow.png" id="4_6f2av"]
 [ext_resource type="Texture2D" uid="uid://dsbkdbh7lek7n" path="res://sprites/sprite_sheets/player/gun.png" id="5_d8icd"]
@@ -10,9 +9,9 @@
 [ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://WhiteReplace.gdshader" id="7_66o6p"]
 [ext_resource type="Texture2D" uid="uid://cc0oy7wbm8xpj" path="res://sprites/ui/crest.png" id="7_y50pb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wwgsw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnu5a"]
 atlas = ExtResource("1_7r5up")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qmtyh"]
 shader = ExtResource("7_66o6p")
@@ -51,7 +50,6 @@ size_flags_vertical = 4
 [node name="player_label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("1_y50pb")
 text = "Player"
 
 [node name="player" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -71,7 +69,7 @@ flip_h = true
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = SubResource("AtlasTexture_wwgsw")
+texture = SubResource("AtlasTexture_cnu5a")
 stretch_mode = 5
 script = ExtResource("1_4j2yn")
 spriteframes = ExtResource("2_ufpfr")
@@ -91,7 +89,6 @@ layout_mode = 2
 [node name="weapon_label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("1_y50pb")
 text = "Weapon"
 
 [node name="weapon" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -127,7 +124,6 @@ layout_mode = 2
 [node name="color_label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("1_y50pb")
 text = "Color"
 
 [node name="color" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
