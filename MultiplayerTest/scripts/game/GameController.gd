@@ -37,6 +37,7 @@ func initialize_game() -> void:
 	background.create_background()
 	spawn_collectable()
 	enemy_controller.spawn_enemies()
+	_create_out_of_bounds(tilemap)
 	
 	await get_tree().create_timer(3).timeout
 	
