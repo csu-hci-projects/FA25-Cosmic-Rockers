@@ -20,7 +20,7 @@ func _set_color(this_steam_id: int, data: Dictionary):
 
 func set_color(color: int):
 	material.set_shader_parameter("target_color", PlayerState.COLORS[color])
-	username.label_settings.font_color = PlayerState.COLORS[color]
+	username.add_theme_color_override("font_color", PlayerState.COLORS[color])
 
 func load_player(this_steam_id: int, this_steam_name: String):
 	var player_data = PlayerState.get_player_data(this_steam_id)

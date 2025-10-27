@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dgnxojhovbn4f" path="res://sprites/background/cave/cave_0.png" id="1_757nl"]
 
 [node name="layer0" type="Node2D"]
-scale = Vector2(1.7, 1.7)
+scale = Vector2(1.2, 1.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_757nl")

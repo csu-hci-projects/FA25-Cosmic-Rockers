@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw41hdyory4oq"]
+[gd_scene load_steps=8 format=3 uid="uid://cw41hdyory4oq"]
 
 [ext_resource type="Script" uid="uid://c1jcef5aoks8q" path="res://scripts/menu/SettingsInterface.gd" id="1_8wfqe"]
+[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://default_theme.tres" id="1_ob3hf"]
 [ext_resource type="Script" uid="uid://dcvuca6up5rwr" path="res://scripts/menu/SettingsInput.gd" id="2_7pacj"]
 [ext_resource type="Script" uid="uid://bq8ikf5ki55kv" path="res://scripts/menu/SettingsAudio.gd" id="2_h175o"]
 [ext_resource type="Script" uid="uid://urq3g3lktux8" path="res://scripts/menu/SettingsGraphics.gd" id="3_ptynm"]
@@ -20,15 +21,18 @@ offset_right = 202.5
 offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ob3hf")
 script = ExtResource("1_8wfqe")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 current_tab = 0
 use_hidden_tabs_for_min_size = true
 
 [node name="Audio" type="BoxContainer" parent="TabContainer"]
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 script = ExtResource("2_h175o")
 metadata/_tab_index = 0
 
@@ -81,12 +85,14 @@ step = 0.05
 [node name="Graphics" type="BoxContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 script = ExtResource("3_ptynm")
 metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme = ExtResource("1_ob3hf")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -94,17 +100,19 @@ theme_override_constants/margin_bottom = 10
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/Graphics/MarginContainer"]
 layout_mode = 2
-theme = SubResource("Theme_8wfqe")
+theme = ExtResource("1_ob3hf")
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="brightness_label" type="Label" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 text = "Brightness"
 
 [node name="brightness_box" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 
 [node name="brightness_reset" type="TextureButton" parent="TabContainer/Graphics/MarginContainer/GridContainer/brightness_box"]
 custom_minimum_size = Vector2(23, 23)
@@ -119,10 +127,12 @@ layout_mode = 2
 
 [node name="zoom_label" type="Label" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 text = "Zoom"
 
 [node name="zoom_box" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 
 [node name="zoom_reset" type="TextureButton" parent="TabContainer/Graphics/MarginContainer/GridContainer/zoom_box"]
 custom_minimum_size = Vector2(23, 23)
@@ -137,15 +147,18 @@ layout_mode = 2
 
 [node name="highcontrast_label" type="Label" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 text = "High Contrast Mode"
 
 [node name="highcontrast_toggle" type="CheckBox" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("1_ob3hf")
 
 [node name="Input" type="BoxContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_ob3hf")
 script = ExtResource("2_7pacj")
 metadata/_tab_index = 2
 
@@ -188,6 +201,7 @@ text = "Reset"
 [node name="back" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("1_ob3hf")
 text = "Back"
 
 [connection signal="value_changed" from="TabContainer/Audio/MarginContainer/GridContainer/master_slider" to="TabContainer/Audio" method="_on_master_slider_value_changed"]
