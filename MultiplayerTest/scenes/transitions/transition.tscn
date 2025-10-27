@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://uvaghd5h74f4" path="res://sprites/planets/balorb.png" id="4_v68kg"]
 [ext_resource type="Texture2D" uid="uid://dokyq2pbnmqoj" path="res://sprites/planets/drobbo.png" id="5_54u3s"]
 [ext_resource type="PackedScene" uid="uid://blkvjt4xwkqep" path="res://scenes/transitions/orbit.tscn" id="6_senw2"]
-[ext_resource type="Script" uid="uid://cyb410hegaatn" path="res://scripts/ui/Orbit.gd" id="7_b3nhs"]
+[ext_resource type="Script" path="res://scripts/menu/Orbit.gd" id="7_b3nhs"]
 [ext_resource type="LabelSettings" uid="uid://mncnrl8aguup" path="res://on_screen_label.tres" id="7_kou68"]
-[ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/ui/WorldName.gd" id="8_mvuiw"]
+[ext_resource type="Script" path="res://scripts/menu/WorldName.gd" id="8_mvuiw"]
 
 [node name="transition" type="CanvasLayer" node_paths=PackedStringArray("planets")]
 script = ExtResource("1_54u3s")
