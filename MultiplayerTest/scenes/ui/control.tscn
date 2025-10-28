@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://3mwapkenvdo0" path="res://scripts/menu/Lobby.gd" id="1_2k4jl"]
 [ext_resource type="PackedScene" uid="uid://c2a6riwcgaqaa" path="res://scenes/ui/character_edit.tscn" id="2_bchhi"]
 [ext_resource type="PackedScene" uid="uid://b0ie515s35k8c" path="res://scenes/ui/lobby_player.tscn" id="2_ettb2"]
-[ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://WhiteReplace.gdshader" id="3_m5bgy"]
+[ext_resource type="Shader" path="res://WhiteReplace.gdshader" id="3_m5bgy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bwyrb"]
 resource_local_to_scene = true
@@ -61,12 +61,15 @@ layout_mode = 2
 text = "Host"
 
 [node name="lobby_menu" type="VBoxContainer" parent="."]
+layout_direction = 2
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -176.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -122,7 +125,6 @@ anchor_right = 0.085
 [node name="lobby_player" parent="players" instance=ExtResource("2_ettb2")]
 material = SubResource("ShaderMaterial_bwyrb")
 layout_mode = 2
-theme = null
 
 [node name="steam_error" type="PanelContainer" parent="."]
 layout_mode = 1

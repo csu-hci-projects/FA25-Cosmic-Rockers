@@ -43,7 +43,7 @@ gdscript/warnings/narrowing_conversion=0
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -52,6 +52,7 @@ project/assembly_name="MultiplayerTest"
 [gui]
 
 theme/custom="uid://t3yhq5i1rmho"
+theme/custom_font="uid://7d8gi0t6nqcl"
 
 [input]
 
