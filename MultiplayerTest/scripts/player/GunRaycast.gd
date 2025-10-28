@@ -5,6 +5,12 @@ extends Gun
 var max_distance := 500.0
 var ray_extend := 10
 
+func _ready() -> void:
+	super()
+	var player_data = PlayerState.get_player_data(int(player_owner.entity_id))
+	print(player_data)
+	ray_color = PlayerState.COLORS[player_data.get("color", 0)]
+
 func _shoot():
 	var space_state = get_world_2d().direct_space_state
 	var mouse_pos = get_global_mouse_position()

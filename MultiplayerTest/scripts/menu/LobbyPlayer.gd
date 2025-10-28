@@ -5,22 +5,29 @@ var steam_id: int = 0
 @onready var picture = $margin/hbox/picture
 @onready var username = $margin/hbox/username
 @onready var ready_check = $margin/hbox/ready_check
+@onready var character = $character
 
 var ready_sprite = preload("res://sprites/ui/green_check.png")
 var unready_sprite = preload("res://sprites/ui/red_cross.png")
 
 func _ready():
-	Multiplayer.on_received_player_customization.connect(_set_color)
-	PlayerState.on_customization_changed.connect(_set_color)
+	Multiplayer.on_received_player_customization.connect(_set_customization)
+	PlayerState.on_customization_changed.connect(_set_customization)
 	set_color(0)
 
-func _set_color(this_steam_id: int, data: Dictionary):
-	if this_steam_id == steam_id and data.has("color"):
-		set_color(data.get("color"))
+func _set_customization(target_steam_id: int, data: Dictionary):
+	if target_steam_id == steam_id:
+		if data.has("color"):
+			set_color(data.get("color"))
+		if data.has("character"):
+			set_character(data.get("character"))
 
-func set_color(color: int):
-	material.set_shader_parameter("target_color", PlayerState.COLORS[color])
-	username.add_theme_color_override("font_color", PlayerState.COLORS[color])
+func set_color(color_id: int):
+	material.set_shader_parameter("target_color", PlayerState.COLORS[color_id])
+	username.add_theme_color_override("font_color", PlayerState.COLORS[color_id])
+
+func set_character(character_id: int):
+	character.set_frames(PlayerState.CHARACTERS[character_id])
 
 func load_player(this_steam_id: int, this_steam_name: String):
 	var player_data = PlayerState.get_player_data(this_steam_id)

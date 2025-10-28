@@ -57,13 +57,15 @@ func spawn_players():
 		var remote_player = player_scene.instantiate()
 		remote_players.set(key, remote_player)
 		
-		add_child(remote_player)
-		var player_data = PlayerState.get_player_data(key)
-		remote_player.name = players[key]["steam_username"]
 		remote_player.entity_id = str(key)
-		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", Color.WHITE)])
-		move_to_spawn(remote_player)
 		
+		add_child(remote_player)
+		
+		var player_data = PlayerState.get_player_data(key)
+		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", 0)])
+		remote_player.sprite.sprite_frames = PlayerState.CHARACTERS[player_data.get("character", 0)]
+		
+		move_to_spawn(remote_player)
 		player_status.create_status_bar(remote_player, players[key]["steam_username"])
 	
 	var local_player = get_local_player()

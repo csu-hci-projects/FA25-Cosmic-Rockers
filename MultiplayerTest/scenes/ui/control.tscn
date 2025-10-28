@@ -1,15 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6het52418hfo"]
+[gd_scene load_steps=5 format=3 uid="uid://c6het52418hfo"]
 
 [ext_resource type="Script" uid="uid://3mwapkenvdo0" path="res://scripts/menu/Lobby.gd" id="1_2k4jl"]
 [ext_resource type="PackedScene" uid="uid://c2a6riwcgaqaa" path="res://scenes/ui/character_edit.tscn" id="2_bchhi"]
-[ext_resource type="PackedScene" uid="uid://b0ie515s35k8c" path="res://scenes/ui/lobby_player.tscn" id="2_ettb2"]
-[ext_resource type="Shader" path="res://WhiteReplace.gdshader" id="3_m5bgy"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwyrb"]
-resource_local_to_scene = true
-shader = ExtResource("3_m5bgy")
-shader_parameter/target_color = Color(1, 1, 1, 1)
-shader_parameter/threshold = 0.5
+[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://default_theme.tres" id="2_m5bgy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo0lp"]
 bg_color = Color(0.266575, 0.266575, 0.266575, 1)
@@ -75,6 +68,7 @@ grow_vertical = 0
 
 [node name="level_select" type="SpinBox" parent="lobby_menu"]
 layout_mode = 2
+theme = ExtResource("2_m5bgy")
 min_value = 1.0
 max_value = 4.0
 value = 1.0
@@ -121,10 +115,6 @@ text = "Send"
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.085
-
-[node name="lobby_player" parent="players" instance=ExtResource("2_ettb2")]
-material = SubResource("ShaderMaterial_bwyrb")
-layout_mode = 2
 
 [node name="steam_error" type="PanelContainer" parent="."]
 layout_mode = 1

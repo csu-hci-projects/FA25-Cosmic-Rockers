@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cx7p701dtua6w" path="res://scripts/player/PlayerMovement.gd" id="1_dd427"]
 [ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="2_u3rb4"]
 [ext_resource type="PackedScene" uid="uid://bdctsdjup4rsn" path="res://scenes/game/gun.tscn" id="3_68xwl"]
-[ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://WhiteReplace.gdshader" id="4_68xwl"]
+[ext_resource type="Shader" path="res://WhiteReplace.gdshader" id="4_68xwl"]
 [ext_resource type="Texture2D" uid="uid://do7bxssgc1kyv" path="res://sprites/ui/pointer.png" id="5_wwvfn"]
 [ext_resource type="Script" uid="uid://cu5oe4ocbd8lq" path="res://scripts/player/Pointer.gd" id="6_wwvfn"]
 
@@ -24,8 +24,6 @@ script = ExtResource("1_dd427")
 position = Vector2(0, -2)
 sprite_frames = ExtResource("2_u3rb4")
 animation = &"walk"
-frame = 2
-frame_progress = 0.894753
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lbhrr")

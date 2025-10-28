@@ -17,11 +17,18 @@ func _ready():
 		else:
 			texture = spriteframes.get_frame_texture(animation_name, 0)
 
+func set_frames(_spriteframes: SpriteFrames):
+	spriteframes = _spriteframes
+	var current_frame = texture.current_frame
+	texture = _spriteframes_to_animated_texture()
+	if current_frame < _spriteframes.get_frame_count(animation_name):
+		texture.current_frame = current_frame
+
 func _spriteframes_to_animated_texture() -> AnimatedTexture:
 	var anim = AnimatedTexture.new()
 	anim.speed_scale = spriteframes.get_animation_speed(animation_name)
 	anim.frames = spriteframes.get_frame_count(animation_name)
-
+	
 	for i in range(anim.frames):
 		var tex = spriteframes.get_frame_texture(animation_name, i)
 		var new_texture: ImageTexture = ImageTexture.create_from_image(tex.get_image())

@@ -1,14 +1,21 @@
 extends Node
 
-@onready var COLORS = [
-	Color.from_string("#AA78A6", Color.WHITE), 
-	Color.from_string("#E03616", Color.WHITE), 
-	Color.from_string("#FFF689", Color.WHITE), 
-	Color.from_string("#CFFFB0", Color.WHITE), 
-	Color.from_string("#5998C5", Color.WHITE), 
-	Color.from_string("#C5CBD3", Color.WHITE), 
-	Color.from_string("#17C3B2", Color.WHITE)
-	]
+const CHARACTERS = [
+	preload("res://sprites/sprite_sheets/player/player_animation.tres"),
+	preload("res://sprites/sprite_sheets/player/player_black_animation.tres"),
+	preload("res://sprites/sprite_sheets/player/player_green_animation.tres")
+]
+
+const COLORS = [
+	Color("#FF5733"), # red-orange
+	Color("#33FF57"), # green
+	Color("#3357FF"), # blue
+	Color("#FF33A8"), # pink
+	Color("#FFD633"), # yellow
+	Color("#33FFF3"), # cyan
+	Color("#A833FF"), # purple
+	Color("#FF8C33")  # orange
+]
 
 # Stores the latest data for each player
 var players: Dictionary = {}  # Dictionary keyed by Steam ID

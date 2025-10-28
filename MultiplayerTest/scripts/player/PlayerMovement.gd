@@ -27,6 +27,7 @@ func _ready() -> void:
 	set_animation("default")
 	sprite.animation_finished.connect(_animation_finished)
 
+
 func _physics_process(delta: float) -> void:
 	jump_buffer -= delta
 	
