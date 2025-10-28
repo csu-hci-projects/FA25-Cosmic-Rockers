@@ -1,25 +1,22 @@
 extends Area2D
 class_name Projectile
 
-@export var speed := 800.0
-@export var damage := 10
-@export var lifetime := 2.0
-@export var projectile_texture: Texture2D = preload("res://sprites/sprite_sheets/player/note.png")
+@export var shoot_velocity := 400.0
+@export var lifetime := 5.0
 
 var direction := Vector2.ZERO
-var owner_id: int = 0
+var velocity := Vector2.ZERO
+var gun_owner: Gun = null
 
 func _ready() -> void:
-	if has_node("Sprite2D"):
-		$Sprite2D.texture = projectile_texture
-	connect("body_entered", Callable(self, "_on_body_entered"))
+	velocity = direction * shoot_velocity
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 
 func _process(delta: float) -> void:
-	position += direction * speed * delta
+	velocity.y += gravity * delta
+	position += velocity * delta
 
 func _on_body_entered(body: Node) -> void:
-	if body is Entity and body.get_instance_id() != owner_id:
-		body.take_damage(damage)
+	gun_owner._handle_hit(body, position)
 	queue_free()

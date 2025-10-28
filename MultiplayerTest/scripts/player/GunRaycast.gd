@@ -8,7 +8,6 @@ var ray_extend := 10
 func _ready() -> void:
 	super()
 	var player_data = PlayerState.get_player_data(int(player_owner.entity_id))
-	print(player_data)
 	ray_color = PlayerState.COLORS[player_data.get("color", 0)]
 
 func _shoot():
