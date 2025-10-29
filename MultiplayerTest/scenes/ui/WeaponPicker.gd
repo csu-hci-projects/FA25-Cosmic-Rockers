@@ -15,7 +15,6 @@ func set_weapon():
 	texture.texture = PlayerState.WEAPON_SPRITES[current_weapon]
 	
 	Multiplayer.update_player_customization({"weapon": current_weapon})
-	PlayerState.set_customization({"weapon": current_weapon})
 
 
 func _on_button_left_pressed() -> void:

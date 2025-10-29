@@ -12,7 +12,6 @@ var unready_sprite = preload("res://sprites/ui/red_cross.png")
 
 func _ready():
 	Multiplayer.on_received_player_customization.connect(_set_customization)
-	PlayerState.on_customization_changed.connect(_set_customization)
 	set_color(0)
 
 func _set_customization(target_steam_id: int, data: Dictionary):

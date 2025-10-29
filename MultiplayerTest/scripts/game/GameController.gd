@@ -77,7 +77,7 @@ func spawn_players():
 		
 		add_child(remote_player)
 		
-		var player_data = PlayerState.get_player_data(key)
+		var player_data = PlayerState.get_player_data(key)["player_customization"]
 		print(player_data)
 		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", 0)])
 		remote_player.sprite.sprite_frames = PlayerState.CHARACTERS[player_data.get("character", 0)]

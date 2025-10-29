@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c21c2ehwnktdj" path="res://sprites/ui/arrows/arrow_left_disabled.png" id="2_v05da"]
 [ext_resource type="Texture2D" uid="uid://dsbkdbh7lek7n" path="res://sprites/sprite_sheets/player/weapons/gun.png" id="5_d8icd"]
 [ext_resource type="Texture2D" uid="uid://l4oggb0rnncm" path="res://sprites/ui/arrows/arrow_right.png" id="6_3dtro"]
-[ext_resource type="Script" path="res://scripts/menu/ColorPicker.gd" id="6_y50pb"]
+[ext_resource type="Script" uid="uid://c2ppq8i64ivwe" path="res://scripts/menu/ColorPicker.gd" id="6_y50pb"]
 [ext_resource type="Texture2D" uid="uid://cxmjdxefbo6ui" path="res://sprites/ui/arrows/arrow_right_disabled.png" id="7_1cu1c"]
 [ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://resources/WhiteReplace.gdshader" id="7_66o6p"]
 [ext_resource type="Texture2D" uid="uid://cc0oy7wbm8xpj" path="res://sprites/ui/crest.png" id="7_y50pb"]
