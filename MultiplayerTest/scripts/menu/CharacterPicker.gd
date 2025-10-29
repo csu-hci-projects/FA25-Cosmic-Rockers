@@ -14,7 +14,6 @@ func set_character():
 	texture.set_frames(PlayerState.CHARACTERS[current_character])
 	
 	Multiplayer.update_player_customization({"character": current_character})
-	PlayerState.set_customization({"character": current_character})
 
 
 func _on_button_left_pressed() -> void:

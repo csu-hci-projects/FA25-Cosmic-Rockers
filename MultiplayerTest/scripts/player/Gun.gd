@@ -17,11 +17,7 @@ var player_owner: PlayerMovement = null
 func _ready() -> void:
 	sprite_offset = sprite.offset.x
 	ray_offset = ray_start.position.x
-	player_owner = find_parent("player")
 	player_owner.on_sync.connect(sync_direction)
-	
-	Multiplayer.on_received_gun_direction.connect(on_set_direction)
-	Multiplayer.on_received_gun_shoot.connect(on_shoot)
 
 func _update_direction(data: Dictionary):
 	if data.has("direction"):
@@ -63,10 +59,10 @@ func _shoot():
 	#Extend this
 	pass
 
-func on_set_direction(_steam_id: int, data: Dictionary):
+func on_set_direction(data: Dictionary):
 	target_direction = data["direction"]
 
-func on_shoot(_steam_id: int, data: Dictionary):
+func on_shoot(data: Dictionary):
 	#Extend this
 	pass
 

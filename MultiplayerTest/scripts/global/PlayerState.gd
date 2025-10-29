@@ -30,18 +30,19 @@ const COLORS = [
 # Stores the latest data for each player
 var players: Dictionary = {}  # Dictionary keyed by Steam ID
 
-signal on_customization_changed(steam_id: int, data: Dictionary)
-
-func set_customization(data: Dictionary):
-	emit_signal("on_customization_changed", Global.steam_id, data)
-	set_player_data(Global.steam_id, data)
-
 # Update or add a player's data
 func set_player_data(steam_id: int, data: Dictionary):
 	if not players.has(steam_id):
 		players[steam_id] = {}
 	for key in data.keys():
-		players[steam_id][key] = data[key]
+		if data[key] is Dictionary:
+			if !players[steam_id].has(key):
+				players[steam_id][key] = {}
+			
+			for data_key in data[key]:
+				players[steam_id][key][data_key] = data[key][data_key]
+		else:
+			players[steam_id][key] = data[key]
 
 # Get a player's data
 func get_player_data(steam_id: int) -> Dictionary:

@@ -27,7 +27,9 @@ func update_ready_status(status: bool) -> bool:
 	return send_player_update("ready_status", data, 2)
 	
 func update_player_customization(data: Dictionary) -> bool:
-	return send_player_update("player_customization", data, 2)
+	var sent = send_player_update("player_customization", data, 2)
+	emit_signal("on_received_player_customization", Global.steam_id, data)
+	return sent
 
 func update_tile(cell: Vector2i, id: int) -> bool:
 	return send_world_update(cell, id)

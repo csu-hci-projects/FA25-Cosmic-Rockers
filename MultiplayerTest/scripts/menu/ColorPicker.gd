@@ -14,7 +14,6 @@ func set_color():
 	texture.material.set_shader_parameter("target_color", PlayerState.COLORS[current_color])
 	
 	Multiplayer.update_player_customization({"color": current_color})
-	PlayerState.set_customization({"color": current_color})
 
 
 func _on_button_left_pressed() -> void:
