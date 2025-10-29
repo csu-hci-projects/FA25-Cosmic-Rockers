@@ -28,17 +28,6 @@ func _is_boundary_at_cell(cell: Vector2i) -> bool:
 	var world_pos: Vector2 = to_global(local_pos)
 	return _is_boundary_at_point(world_pos)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var world_pos: Vector2 = get_viewport().get_camera_2d().get_global_mouse_position()
-
-		if _is_boundary_at_point(world_pos):
-			return
-
-		var local_pos: Vector2 = to_local(world_pos)
-		var cell: Vector2i = local_to_map(local_pos)
-		update_tile(cell, -1)
-
 func create_tilemap():
 	var width: int = WorldState.map_width 
 	var height: int = WorldState.map_height

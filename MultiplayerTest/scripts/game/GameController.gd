@@ -189,8 +189,9 @@ func _make_boundary_zone(rect: Rect2) -> void:
 	sprite.position = -rect.size * 0.5
 	wall.position = rect.position + rect.size * 0.5
 
-	wall.collision_layer = 1
-	wall.collision_mask = 2
+	wall.set_collision_layer_value(1, true)
+	wall.set_collision_layer_value(4, true)
+	wall.set_collision_mask_value(1, true)
 
 	add_child(wall)
 	wall.add_child(col)
