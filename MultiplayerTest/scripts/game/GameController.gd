@@ -3,6 +3,7 @@ extends Node
 var player_scene = preload("res://scenes/game/player.tscn")
 var collectable_scene = preload("res://scenes/game/collectable.tscn")
 var ship_scene = preload("res://scenes/game/ship.tscn")
+var cobblestone_texture = preload("res://sprites/tilesets/Cobblestone.png")
 
 @onready var tilemap = $tilemap
 @onready var background = $camera/background
@@ -38,6 +39,7 @@ func initialize_game() -> void:
 	background.create_background()
 	spawn_collectable()
 	enemy_controller.spawn_enemies()
+	_create_out_of_bounds(tilemap)
 	
 	await get_tree().create_timer(3).timeout
 	
@@ -138,3 +140,58 @@ func _on_ship_dropped():
 		WorldState.spawn_room_position.y + WorldState.room_size / 2
 		))
 	enemy_controller.kill_in_radius(spawn_room_position, 250)
+
+func _create_out_of_bounds(tilemap: TileMapLayer) -> void:
+	var margin_px: int = -30
+	var thickness_px: int = 200
+
+	var used: Rect2i = tilemap.get_used_rect()
+	if used.size == Vector2i.ZERO:
+		return
+
+	var cell_min: Vector2 = tilemap.map_to_local(used.position)
+	var cell_max: Vector2 = tilemap.map_to_local(used.position + used.size)
+
+	var left: float   = min(cell_min.x, cell_max.x)
+	var right: float  = max(cell_min.x, cell_max.x)
+	var top: float    = min(cell_min.y, cell_max.y)
+	var bottom: float = max(cell_min.y, cell_max.y)
+
+	left   -= float(margin_px)
+	right  += float(margin_px)
+	top    -= float(margin_px)
+	bottom += float(margin_px)
+
+	var w: float = right - left
+	var h: float = bottom - top
+	var t: float = float(thickness_px)
+
+	_make_boundary_zone(Rect2(Vector2(left - t, top - t),   Vector2(w + 2.0 * t, t))) # top
+	_make_boundary_zone(Rect2(Vector2(left - t, bottom),    Vector2(w + 2.0 * t, t))) # bottom
+	_make_boundary_zone(Rect2(Vector2(left - t, top),       Vector2(t, h)))           # left
+	_make_boundary_zone(Rect2(Vector2(right,  top),         Vector2(t, h)))           # right
+
+
+func _make_boundary_zone(rect: Rect2) -> void:
+	var wall: StaticBody2D = StaticBody2D.new()
+	var col: CollisionShape2D = CollisionShape2D.new()
+	var shape: RectangleShape2D = RectangleShape2D.new()
+	var sprite: Sprite2D = Sprite2D.new()
+	
+	shape.size= rect.size
+	col.shape = shape
+	sprite.texture = cobblestone_texture
+	
+	sprite.region_enabled = true
+	sprite.region_rect = Rect2(Vector2.ZERO, rect.size)
+	sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	sprite.centered = false
+	sprite.position = -rect.size * 0.5
+	wall.position = rect.position + rect.size * 0.5
+
+	wall.collision_layer = 1
+	wall.collision_mask = 2
+
+	add_child(wall)
+	wall.add_child(col)
+	wall.add_child(sprite)
