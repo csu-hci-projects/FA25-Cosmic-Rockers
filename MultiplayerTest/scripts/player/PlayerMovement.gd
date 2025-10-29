@@ -11,10 +11,12 @@ var coyote_timer : float = 0.0
 var jump_buffer : float = 0.0
 var input_dir: float = 0
 var sync_timer: int = 0
+var last_vertical_velocity: float = 0
 
 @export var is_local_player: bool = false
 var sync_frames: int = 20
 
+@onready var dust_particle_scene = preload("res://scenes/particles/dust.tscn")
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var pointer: Sprite2D = $pointer
 
@@ -33,6 +35,19 @@ func _physics_process(delta: float) -> void:
 	
 	var target_speed = input_dir * move_speed
 	if is_on_floor():
+		if last_vertical_velocity > 10:
+			var dust_particle: CPUParticles2D = dust_particle_scene.instantiate()
+			var ratio = (last_vertical_velocity - 200) / 500
+			var amount = clampi(dust_particle.amount * ratio, 0, dust_particle.amount)
+			if amount > 0:
+				dust_particle.amount = amount
+				dust_particle.position = get_last_slide_collision().get_position()
+				get_tree().root.add_child(dust_particle)
+				dust_particle.emitting = true
+			else:
+				dust_particle.queue_free()
+			set_animation("land")
+		
 		coyote_timer = coyote_time
 		velocity.x = target_speed
 		velocity.y = 0
@@ -58,11 +73,14 @@ func _physics_process(delta: float) -> void:
 		jump_buffer = 0
 		coyote_timer = 0
 
+	last_vertical_velocity = velocity.y
 	move_and_slide()
 
 
 func set_animation(animation_name: String):
 	if animation_name != "death" and is_dead:
+		return
+	if animation_name != "land":
 		return
 	
 	sprite.play(animation_name)

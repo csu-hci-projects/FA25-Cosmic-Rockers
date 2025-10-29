@@ -9,14 +9,81 @@ size = Vector2(425, 20)
 
 [node name="test" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="terrain" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="terrain"]
 position = Vector2(376, 489)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="terrain/StaticBody2D"]
 position = Vector2(202.5, 0)
 shape = SubResource("RectangleShape2D_bl13t")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="terrain/StaticBody2D"]
+position = Vector2(202.5, -4.76837e-07)
+scale = Vector2(26.5625, 1.25)
+texture = ExtResource("1_errlg")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="terrain"]
+position = Vector2(615, 433)
+scale = Vector2(0.119998, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="terrain/StaticBody2D2"]
+position = Vector2(202.5, 0)
+shape = SubResource("RectangleShape2D_bl13t")
+
+[node name="Sprite2D" type="Sprite2D" parent="terrain/StaticBody2D2"]
+position = Vector2(202.5, -4.76837e-07)
+scale = Vector2(26.5625, 1.25)
+texture = ExtResource("1_errlg")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="terrain"]
+position = Vector2(660, 391)
+scale = Vector2(0.119998, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="terrain/StaticBody2D3"]
+position = Vector2(202.5, 0)
+shape = SubResource("RectangleShape2D_bl13t")
+
+[node name="Sprite2D" type="Sprite2D" parent="terrain/StaticBody2D3"]
+position = Vector2(202.5, -4.76837e-07)
+scale = Vector2(26.5625, 1.25)
+texture = ExtResource("1_errlg")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="terrain"]
+position = Vector2(565, 358)
+scale = Vector2(0.119998, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="terrain/StaticBody2D4"]
+position = Vector2(202.5, 0)
+shape = SubResource("RectangleShape2D_bl13t")
+
+[node name="Sprite2D" type="Sprite2D" parent="terrain/StaticBody2D4"]
+position = Vector2(202.5, -4.76837e-07)
+scale = Vector2(26.5625, 1.25)
+texture = ExtResource("1_errlg")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="terrain"]
+position = Vector2(490, 325)
+scale = Vector2(0.119998, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="terrain/StaticBody2D5"]
+position = Vector2(202.5, 0)
+shape = SubResource("RectangleShape2D_bl13t")
+
+[node name="Sprite2D" type="Sprite2D" parent="terrain/StaticBody2D5"]
+position = Vector2(202.5, -4.76837e-07)
+scale = Vector2(26.5625, 1.25)
+texture = ExtResource("1_errlg")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="terrain"]
+position = Vector2(389, 299)
+scale = Vector2(0.119998, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="terrain/StaticBody2D6"]
+position = Vector2(202.5, 0)
+shape = SubResource("RectangleShape2D_bl13t")
+
+[node name="Sprite2D" type="Sprite2D" parent="terrain/StaticBody2D6"]
 position = Vector2(202.5, -4.76837e-07)
 scale = Vector2(26.5625, 1.25)
 texture = ExtResource("1_errlg")
@@ -28,3 +95,7 @@ collision_layer = 3
 [node name="player" parent="." instance=ExtResource("3_74lek")]
 position = Vector2(423, 461)
 is_local_player = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(581, 424)
+zoom = Vector2(2, 2)
