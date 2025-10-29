@@ -34,15 +34,16 @@ func _shoot():
 	Multiplayer.update_gun_shoot(from, to)
 
 func on_shoot(_steam_id: int, data: Dictionary):
-	var from = data["from"]
-	var to = data["to"]
-	var line = Line2D.new()
-	line.width = 1
-	line.default_color = ray_color
-	line.add_point(from)
-	line.add_point(to)
+	if _steam_id == 0 or _steam_id == int(player_owner.entity_id):
+		var from = data["from"]
+		var to = data["to"]
+		var line = Line2D.new()
+		line.width = 1
+		line.default_color = ray_color
+		line.add_point(from)
+		line.add_point(to)
 
-	get_tree().root.add_child(line)
+		get_tree().root.add_child(line)
 
-	await get_tree().create_timer(0.1).timeout
-	line.queue_free()
+		await get_tree().create_timer(0.1).timeout
+		line.queue_free()
