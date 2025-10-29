@@ -40,6 +40,13 @@ func load_player(this_steam_id: int, this_steam_name: String):
 		ready_status = player_data["ready_status"]["status"]
 	
 	set_ready_status(ready_status)
+	
+	if player_data.has("player_customization"):
+		var customization = player_data["player_customization"]
+		if customization.has("color"):
+			set_color(customization.get("color"))
+		if customization.has("character"):
+			set_character(customization.get("character"))
 
 func load_avatar(this_steam_id: int):
 	var avatar_id = Steam.getMediumFriendAvatar(this_steam_id)
