@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cml5ci187gp65"
-path="res://.godot/imported/otamatone.png-e2173231f1177c4fc7a1dec84e2dbfdc.ctex"
+uid="uid://bcob6wc2jimxn"
+path="res://.godot/imported/icon.svg-60a93a01b332c0a9192782f1380f6837.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/sprite_sheets/player/otamatone.png"
-dest_files=["res://.godot/imported/otamatone.png-e2173231f1177c4fc7a1dec84e2dbfdc.ctex"]
+source_file="res://resources/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-60a93a01b332c0a9192782f1380f6837.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsbkdbh7lek7n"
-path="res://.godot/imported/gun.png-f109dc1d27c1f5c883d5ee9e110866a9.ctex"
+uid="uid://cml5ci187gp65"
+path="res://.godot/imported/otamatone.png-e1013219344b40d3f6f6a4a4fe62e9c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/sprite_sheets/player/gun.png"
-dest_files=["res://.godot/imported/gun.png-f109dc1d27c1f5c883d5ee9e110866a9.ctex"]
+source_file="res://sprites/sprite_sheets/player/weapons/otamatone.png"
+dest_files=["res://.godot/imported/otamatone.png-e1013219344b40d3f6f6a4a4fe62e9c5.ctex"]
 
 [params]
 

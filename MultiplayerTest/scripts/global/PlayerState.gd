@@ -1,5 +1,15 @@
 extends Node
 
+const WEAPONS = [
+	preload("res://scenes/weapons/gun_raycast.tscn"),
+	preload("res://scenes/weapons/gun_projectile.tscn")
+]
+
+const WEAPON_SPRITES = [
+	preload("res://sprites/sprite_sheets/player/weapons/gun.png"),
+	preload("res://sprites/sprite_sheets/player/weapons/gun_2.png")
+]
+
 const CHARACTERS = [
 	preload("res://sprites/sprite_sheets/player/player_animation.tres"),
 	preload("res://sprites/sprite_sheets/player/player_black_animation.tres"),

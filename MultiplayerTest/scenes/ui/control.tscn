@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3mwapkenvdo0" path="res://scripts/menu/Lobby.gd" id="1_2k4jl"]
 [ext_resource type="PackedScene" uid="uid://c2a6riwcgaqaa" path="res://scenes/ui/character_edit.tscn" id="2_bchhi"]
-[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://default_theme.tres" id="2_m5bgy"]
+[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://resources/default_theme.tres" id="2_m5bgy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo0lp"]
 bg_color = Color(0.266575, 0.266575, 0.266575, 1)

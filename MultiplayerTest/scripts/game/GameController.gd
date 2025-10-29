@@ -65,6 +65,12 @@ func spawn_players():
 		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", 0)])
 		remote_player.sprite.sprite_frames = PlayerState.CHARACTERS[player_data.get("character", 0)]
 		
+		var gun = PlayerState.WEAPONS[player_data.get("weapon", 0)].instantiate()
+		for child in remote_player.get_children():
+			if child is Gun:
+				child.queue_free()
+		remote_player.add_child(gun)
+		
 		move_to_spawn(remote_player)
 		player_status.create_status_bar(remote_player, players[key]["steam_username"])
 	

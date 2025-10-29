@@ -4,7 +4,7 @@ extends Node2D
 @export var damage = 10
 
 @onready var ray_start = $ray_start
-@onready var sprite = $sprite
+@onready var sprite: Sprite2D = $sprite
 
 var sprite_offset = 0
 var ray_offset = 0
