@@ -30,20 +30,19 @@ func _shoot():
 	var from = ray_start.global_position
 	var to = hit_position + (ray_extend * shoot_direction)
 	
-	on_shoot(0, {"from": from, "to": to})
+	on_shoot({"from": from, "to": to})
 	Multiplayer.update_gun_shoot(from, to)
 
-func on_shoot(_steam_id: int, data: Dictionary):
-	if _steam_id == 0 or _steam_id == int(player_owner.entity_id):
-		var from = data["from"]
-		var to = data["to"]
-		var line = Line2D.new()
-		line.width = 1
-		line.default_color = ray_color
-		line.add_point(from)
-		line.add_point(to)
+func on_shoot(data: Dictionary):
+	var from = data["from"]
+	var to = data["to"]
+	var line = Line2D.new()
+	line.width = 1
+	line.default_color = ray_color
+	line.add_point(from)
+	line.add_point(to)
 
-		get_tree().root.add_child(line)
+	get_tree().root.add_child(line)
 
-		await get_tree().create_timer(0.1).timeout
-		line.queue_free()
+	await get_tree().create_timer(0.1).timeout
+	line.queue_free()

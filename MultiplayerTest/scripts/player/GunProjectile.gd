@@ -10,10 +10,10 @@ func _shoot():
 	var from = global_position
 	var to = get_global_mouse_position()
 	
-	on_shoot(0, {"from": from, "to": to})
+	on_shoot({"from": from, "to": to})
 	Multiplayer.update_gun_shoot(from, to)
 
-func on_shoot(_steam_id: int, data: Dictionary):
+func on_shoot(data: Dictionary):
 	var from = data["from"]
 	var to = data["to"]
 	var shoot_direction = (to - from).normalized()

@@ -21,6 +21,8 @@ func _ready() -> void:
 	
 	Multiplayer.on_received_input.connect(_update_input)
 	Multiplayer.on_received_position.connect(_update_position)
+	Multiplayer.on_received_gun_direction.connect(_update_direction)
+	Multiplayer.on_received_gun_shoot.connect(_update_shoot)
 
 func get_entity(entity_id: String) -> Node2D:
 	var entities = get_tree().get_nodes_in_group("entity")
@@ -51,6 +53,20 @@ func _update_position(steam_id: int, data: Dictionary):
 	if remote_players.has(steam_id):
 		remote_players[steam_id]._update_position(data)
 
+func _update_direction(steam_id: int, data: Dictionary):
+	if remote_players.has(steam_id):
+		var player = remote_players[steam_id]
+		for child in player.get_children():
+			if child is Gun:
+				child.on_set_direction(data)
+
+func _update_shoot(steam_id: int, data: Dictionary):
+	if remote_players.has(steam_id):
+		var player = remote_players[steam_id]
+		for child in player.get_children():
+			if child is Gun:
+				child.on_shoot(data)
+
 func spawn_players():
 	var players = PlayerState.get_all_players_data()
 	for key in players.keys():
@@ -62,6 +78,7 @@ func spawn_players():
 		add_child(remote_player)
 		
 		var player_data = PlayerState.get_player_data(key)
+		print(player_data)
 		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", 0)])
 		remote_player.sprite.sprite_frames = PlayerState.CHARACTERS[player_data.get("character", 0)]
 		
