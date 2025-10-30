@@ -4,17 +4,23 @@ var layer_scene = preload("res://scenes/game/background_layer.tscn")
 @export var parallax_strengths: Array[float] = [0, -0.1, -0.2, -0.3]
 @export var sprite_width: float = 480
 
+@export var load_on_ready: bool = false
+
 func _ready():
 	Settings.on_zoom_changed.connect(_set_zoom)
 	_set_zoom(Settings.get_zoom())
+	if load_on_ready:
+		create_background()
 
 func create_background():
+	var background_id = 0
 	for sprite in get_background_sprites(WorldState.get_background()):
 		var layer = layer_scene.instantiate()
 		add_child(layer)
 		for child in layer.get_children():
 			if child is Sprite2D:
 				child.texture = sprite
+		background_id += 1
 
 func get_background_sprites(type: String) -> Array[CompressedTexture2D]:
 	var path = "res://sprites/background/" + type

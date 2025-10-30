@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cxmjdxefbo6ui" path="res://sprites/ui/arrows/arrow_right_disabled.png" id="7_1cu1c"]
 [ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://resources/WhiteReplace.gdshader" id="7_66o6p"]
 [ext_resource type="Texture2D" uid="uid://cc0oy7wbm8xpj" path="res://sprites/ui/crest.png" id="7_y50pb"]
-[ext_resource type="Script" uid="uid://bc72blopeydp6" path="res://scenes/ui/WeaponPicker.gd" id="9_3dtro"]
+[ext_resource type="Script" uid="uid://bc72blopeydp6" path="res://scripts/menu/WeaponPicker.gd" id="9_3dtro"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cnu5a"]
 atlas = ExtResource("1_7r5up")

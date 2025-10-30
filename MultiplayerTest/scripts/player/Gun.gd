@@ -12,7 +12,7 @@ var ray_offset = 0
 var direction: Vector2
 var target_direction: Vector2
 
-var player_owner: PlayerMovement = null
+@export var player_owner: PlayerMovement = null
 
 func _ready() -> void:
 	sprite_offset = sprite.offset.x
