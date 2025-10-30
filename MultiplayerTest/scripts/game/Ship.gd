@@ -6,6 +6,9 @@ var drop_speed = 500
 var can_drop = false
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
+@onready var drill_particles: CPUParticles2D = $drill_particles
+@onready var land_particles: CPUParticles2D = $land_particles
+
 var rumble_strength = 2.0
 var rumble_speed = 30.0
 var _rumble_timer = 0.0
@@ -27,9 +30,14 @@ func _process(delta: float) -> void:
 		if position.y < target_position.y:
 			position.y += delta * drop_speed
 			rumble(delta)
+			
+			if position.y > -200:
+				drill_particles.emitting = true
 		else:
 			position = target_position
 			sprite.position = _original_sprite_pos
+			land_particles.emitting = true
+			drill_particles.emitting = false
 			can_drop = false
 			emit_signal("on_dropped")
 

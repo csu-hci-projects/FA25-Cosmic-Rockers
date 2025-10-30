@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://brnb3gmeptra1"]
+[gd_scene load_steps=5 format=3 uid="uid://brnb3gmeptra1"]
 
 [ext_resource type="Script" uid="uid://crvqa07eyew1a" path="res://scripts/game/Ship.gd" id="1_lyiba"]
 [ext_resource type="SpriteFrames" uid="uid://ivjkxtd4behj" path="res://sprites/sprite_sheets/ship/ship_animation.tres" id="2_lyiba"]
+[ext_resource type="Texture2D" uid="uid://bcurxww8ub62d" path="res://sprites/particles/dust_2.png" id="3_0oc8y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lyiba"]
 size = Vector2(46, 40)
@@ -20,5 +21,40 @@ frame_progress = 0.0302766
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_lyiba")
+
+[node name="drill_particles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 58)
+emitting = false
+amount = 32
+texture = ExtResource("3_0oc8y")
+emission_shape = 5
+emission_points = PackedVector2Array(10, -15, -10, -15, -2, -3, 2, -3)
+emission_normals = PackedVector2Array(1, -1, -1, -1, 1, -1, -1, -1)
+emission_colors = PackedColorArray()
+spread = 20.0
+initial_velocity_min = 184.94
+initial_velocity_max = 184.94
+angular_velocity_min = -345.21
+angular_velocity_max = 364.93
+scale_amount_min = 0.8
+scale_amount_max = 1.2
+
+[node name="land_particles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 29)
+emitting = false
+amount = 32
+texture = ExtResource("3_0oc8y")
+one_shot = true
+explosiveness = 0.9
+emission_shape = 3
+emission_rect_extents = Vector2(32, 1)
+direction = Vector2(0, -1)
+spread = 38.49
+initial_velocity_min = 267.12
+initial_velocity_max = 342.46
+angular_velocity_min = -345.21
+angular_velocity_max = 364.93
+scale_amount_min = 0.8
+scale_amount_max = 1.2
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
