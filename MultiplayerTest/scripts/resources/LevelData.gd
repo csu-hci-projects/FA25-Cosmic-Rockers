@@ -15,3 +15,9 @@ class_name LevelData
 @export var x_offset_range: Vector2
 @export var y_offset_range: Vector2
 @export var enemy_count: int = 0
+
+enum LEVEL_EFFECT {
+	HEAT_DISTORT
+}
+
+@export var effects: Array[LEVEL_EFFECT]

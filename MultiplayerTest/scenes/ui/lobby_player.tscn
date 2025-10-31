@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://b0ie515s35k8c"]
 
-[ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://resources/WhiteReplace.gdshader" id="1_5suwc"]
+[ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://shaders/WhiteReplace.gdshader" id="1_5suwc"]
 [ext_resource type="Script" uid="uid://bojqf4p2v5cq6" path="res://scripts/menu/LobbyPlayer.gd" id="1_6upnp"]
 [ext_resource type="Texture2D" uid="uid://0vtngp4fjn5b" path="res://sprites/ui/lobby_player.png" id="1_smq7i"]
 [ext_resource type="Texture2D" uid="uid://bcob6wc2jimxn" path="res://resources/icon.svg" id="2_v5tub"]
 [ext_resource type="Texture2D" uid="uid://db7gxwl00qset" path="res://sprites/ui/red_cross.png" id="3_6cgia"]
-[ext_resource type="Script" uid="uid://h08l2ja5wkko" path="res://scripts/menu/LobbyPlayerAnimation.gd" id="4_6qj6r"]
+[ext_resource type="Script" path="res://scripts/menu/LobbyPlayerAnimation.gd" id="4_6qj6r"]
 [ext_resource type="Texture2D" uid="uid://cxwfp0e0in4jl" path="res://sprites/sprite_sheets/player/player.png" id="4_k46x5"]
 [ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="5_anhif"]
 

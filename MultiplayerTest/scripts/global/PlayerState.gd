@@ -30,6 +30,24 @@ const COLORS = [
 # Stores the latest data for each player
 var players: Dictionary = {}  # Dictionary keyed by Steam ID
 
+func set_this_stat(key: String, value):
+	set_stat(Global.steam_id, key, value)
+
+func set_stat(steam_id: int, key: String, value):
+	if not players.has(steam_id):
+		players[steam_id] = {}
+	if not players[steam_id].has("stats"):
+		players[steam_id]["stats"] = {}
+	
+	players[steam_id]["stats"][key] = value
+
+func get_stats(steam_id: int):
+	if not players.has(steam_id):
+		return {}
+	if not players[steam_id].has("stats"):
+		return {}
+	return players[steam_id]["stats"]
+
 # Update or add a player's data
 func set_player_data(steam_id: int, data: Dictionary):
 	if not players.has(steam_id):

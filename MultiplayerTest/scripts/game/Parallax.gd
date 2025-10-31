@@ -6,6 +6,8 @@ var layer_scene = preload("res://scenes/game/background_layer.tscn")
 
 @export var load_on_ready: bool = false
 
+var heat_effect = preload("res://resources/heat_distortion.tres")
+
 func _ready():
 	Settings.on_zoom_changed.connect(_set_zoom)
 	_set_zoom(Settings.get_zoom())
@@ -20,6 +22,10 @@ func create_background():
 		for child in layer.get_children():
 			if child is Sprite2D:
 				child.texture = sprite
+				if WorldState.get_level_effects().has(LevelData.LEVEL_EFFECT.HEAT_DISTORT):
+					child.material = heat_effect
+				else:
+					child.material = null
 		background_id += 1
 
 func get_background_sprites(type: String) -> Array[CompressedTexture2D]:

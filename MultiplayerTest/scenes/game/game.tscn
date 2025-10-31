@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c1rwrfi4vlhud" path="res://scripts/game/GameController.gd" id="1_iywne"]
 [ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/tilesets/default_tile_map.tres" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="2_lnu2h"]
-[ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/menu/WorldName.gd" id="3_4j704"]
+[ext_resource type="Script" path="res://scripts/menu/WorldName.gd" id="3_4j704"]
 [ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://w18230pt20ls" path="res://scenes/game/background.tscn" id="5_p57ef"]
@@ -13,6 +13,8 @@
 
 [sub_resource type="Environment" id="Environment_87uf6"]
 background_mode = 3
+glow_enabled = true
+glow_bloom = 0.2
 adjustment_enabled = true
 
 [node name="Game" type="Node"]

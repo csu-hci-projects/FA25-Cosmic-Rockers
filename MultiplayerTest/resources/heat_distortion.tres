@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dfoasnhoulffr"]
+
+[ext_resource type="Shader" uid="uid://c83tdm3ovum3v" path="res://shaders/HeatDistortion.gdshader" id="1_efnui"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3ebjn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kn17e"]
+seamless = true
+noise = SubResource("FastNoiseLite_3ebjn")
+
+[resource]
+shader = ExtResource("1_efnui")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_kn17e")
+shader_parameter/speed = 0.05
+shader_parameter/strength = 0.01
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/noise_scroll_dir = Vector2(0, 1)

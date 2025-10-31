@@ -80,9 +80,13 @@ func _physics_process(delta: float) -> void:
 func set_animation(animation_name: String):
 	if animation_name != "death" and is_dead:
 		return
-	if animation_name != "land":
-		return
 	
+	if animation_name != "landed":
+		if sprite.animation == "land":
+			return
+	else:
+		animation_name = "default"
+		
 	sprite.play(animation_name)
 
 func _process(delta: float):
@@ -130,7 +134,7 @@ func _animation_finished():
 	if sprite.animation == "jump":
 		set_animation("fall")
 	if sprite.animation == "land":
-		set_animation("default")
+		set_animation("landed")
 
 
 func _update_input(data: Dictionary):

@@ -82,24 +82,6 @@ func initialize(level: int = 0) -> Dictionary:
 		"level_id" : level_id
 	}
 
-func get_collectible_sprite() -> Texture2D:
-	return LEVELS[level_id]["collectable"]
-
-func get_tileset() -> int:
-	return LEVELS[level_id]["tileset"]
-
-func get_background() -> String:
-	return LEVELS[level_id]["background"]
-
-func get_music() -> Array[AudioStream]:
-	return LEVELS[level_id]["songs"]
-
-func get_level_name() -> String:
-	return LEVELS[level_id]["level_name"]
-
-func get_level_name_alien() -> String:
-	return LEVELS[level_id]["level_name_alien"]
-
 func get_tile_position(index: int) -> Vector2:
 	return Vector2(int(index % map_width), int(index / map_height)) * 16
 
@@ -150,3 +132,24 @@ func get_enemy_spawn_locations() -> Array:
 func get_random_room_tile(room_id: int) -> Vector2i:
 	var tile_count: int = room_data[room_id].size()
 	return room_data[room_id][randi_range(0, tile_count-1)]
+
+func get_collectible_sprite() -> Texture2D:
+	return LEVELS[level_id]["collectable"]
+
+func get_tileset() -> int:
+	return LEVELS[level_id]["tileset"]
+
+func get_background() -> String:
+	return LEVELS[level_id]["background"]
+
+func get_music() -> Array[AudioStream]:
+	return LEVELS[level_id]["songs"]
+
+func get_level_name() -> String:
+	return LEVELS[level_id]["level_name"]
+
+func get_level_name_alien() -> String:
+	return LEVELS[level_id]["level_name_alien"]
+
+func get_level_effects() -> Array[LevelData.LEVEL_EFFECT]:
+	return LEVELS[level_id]["effects"]
