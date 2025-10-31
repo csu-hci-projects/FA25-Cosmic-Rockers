@@ -20,6 +20,7 @@ func _shoot():
 	var query = PhysicsRayQueryParameters2D.create(global_position, to_position)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
+	query.hit_from_inside = true
 	query.collision_mask = (1 << 3) #set bit 3 (layer 4) to 1
 
 	var result = space_state.intersect_ray(query)

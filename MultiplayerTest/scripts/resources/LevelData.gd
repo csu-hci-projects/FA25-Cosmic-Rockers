@@ -17,7 +17,11 @@ class_name LevelData
 @export var enemy_count: int = 0
 
 enum LEVEL_EFFECT {
-	HEAT_DISTORT
+	DUST_PARTICLE,
+	ASH_PARTICLE,
+	HEAT_DISTORT,
+	LEAF_PARTICLE,
+	GLOW_PARTICLE,
 }
 
 @export var effects: Array[LEVEL_EFFECT]

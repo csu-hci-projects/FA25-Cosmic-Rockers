@@ -21,4 +21,5 @@ roof_range = Vector2(0, 0)
 x_offset_range = Vector2(0, 0)
 y_offset_range = Vector2(-3, 3)
 enemy_count = 50
+effects = Array[int]([4])
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

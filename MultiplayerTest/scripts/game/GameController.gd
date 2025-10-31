@@ -7,6 +7,7 @@ var cobblestone_texture = preload("res://sprites/tilesets/Cobblestone.png")
 
 @onready var tilemap = $tilemap
 @onready var background = $camera/background
+@onready var foreground_particles = $camera/foreground_particles
 @onready var camera = $camera
 @onready var enemy_controller = $enemy_controller
 @onready var player_status = $CanvasLayer/status
@@ -37,6 +38,7 @@ func initialize_game() -> void:
 	await get_tree().process_frame # let visuals update
 	await get_tree().physics_frame # let physics finish
 	background.create_background()
+	foreground_particles.create_level_effects()
 	spawn_collectable()
 	enemy_controller.spawn_enemies()
 	_create_out_of_bounds(tilemap)
