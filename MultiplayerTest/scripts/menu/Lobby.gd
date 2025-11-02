@@ -37,6 +37,8 @@ func _ready():
 	Global.on_steam_error.connect(_display_error)
 	if Global.error_message != "":
 		_display_error(Global.error_message)
+	
+	level_select.max_value = WorldState.LEVELS.size()
 
 func _display_error(message: String):
 	error_message.text = "Steam Error:\n(" + message + ")\nPlease restart steam and try again."

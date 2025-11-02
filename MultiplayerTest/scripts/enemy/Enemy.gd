@@ -28,6 +28,8 @@ var _attack_timer: float = 0.0
 var ai_enabled: bool = false
 var move_dir: Vector2 = Vector2.ZERO
 
+var attack_effect_scene = preload("res://scenes/enemies/melee_effect.tscn")
+
 signal on_state_change(entity_id: String, current_state: State, target_id: String)
 signal on_attack_player(entity_id: String, target_id: String, damage: int)
 
@@ -155,7 +157,25 @@ func _attack_behavior(delta: float) -> void:
 		_attack_timer = attack_cooldown
 
 func _perform_attack() -> void:
+	if _target.position.x > position.x:
+		sprite.flip_h = false
+	elif _target.position.x < position.x:
+		sprite.flip_h = true
+	
 	set_animation("attack")
+	
+	var attack_effect: AnimatedSprite2D = attack_effect_scene.instantiate()
+	var attack_direction = (_target.global_position - global_position).normalized()
+	attack_effect.position = position + attack_direction * 16
+	
+	if attack_direction.x > 0:
+		attack_effect.flip_h = false
+		attack_effect.rotation = atan2(attack_direction.y, attack_direction.x)
+	elif attack_direction.x < 0:
+		attack_effect.flip_h = true
+		attack_effect.rotation = atan2(-attack_direction.y, -attack_direction.x)
+	
+	get_tree().root.add_child(attack_effect)
 	
 	if _target and _target.has_method("take_damage"):
 		emit_signal("on_attack_player", entity_id, _target.entity_id, dmg)

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://dl2kra6wyx52f"]
+
+[ext_resource type="Texture2D" uid="uid://ccbome84klrlm" path="res://sprites/collectables/collectable_bass.png" id="1_2thol"]
+[ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_2dx5g"]
+
+[resource]
+script = ExtResource("2_2dx5g")
+level_id = 4
+tileset = 0
+background = "cave"
+collectable = ExtResource("1_2thol")
+songs = Array[AudioStream]([])
+level_name = "Encroacher"
+level_name_alien = "⏚⏃⌇⌇"
+floor_range = Vector2(0, 0)
+roof_range = Vector2(0, 0)
+x_offset_range = Vector2(-2, 2)
+y_offset_range = Vector2(-2, 2)
+enemy_count = 30
+effects = Array[int]([1, 2])
+metadata/_custom_type_script = "uid://c2bq8r37uevf6"

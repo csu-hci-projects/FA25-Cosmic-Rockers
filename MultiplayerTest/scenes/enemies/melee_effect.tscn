@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://0i8qp6niahp7"]
+
+[ext_resource type="SpriteFrames" uid="uid://d01ignc3xitca" path="res://sprites/particles/melee_attack.tres" id="1_hvj48"]
+[ext_resource type="Script" uid="uid://cuo4jvlag55ym" path="res://scripts/effects/AnimationOneShot.gd" id="2_lyffy"]
+
+[node name="MeleeEffect" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_hvj48")
+frame_progress = 0.479001
+script = ExtResource("2_lyffy")

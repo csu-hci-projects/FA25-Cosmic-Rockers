@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6bjunyhlkom7"]
+[gd_scene load_steps=12 format=3 uid="uid://b6bjunyhlkom7"]
 
 [ext_resource type="Script" uid="uid://47l03se5eybw" path="res://scripts/menu/Transition.gd" id="1_54u3s"]
 [ext_resource type="Texture2D" uid="uid://2vuh5c4wrcsc" path="res://sprites/planets/sun.png" id="1_mqh5w"]
@@ -9,12 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://uvaghd5h74f4" path="res://sprites/planets/balorb.png" id="4_v68kg"]
 [ext_resource type="Texture2D" uid="uid://dokyq2pbnmqoj" path="res://sprites/planets/drobbo.png" id="5_54u3s"]
 [ext_resource type="PackedScene" uid="uid://blkvjt4xwkqep" path="res://scenes/transitions/orbit.tscn" id="6_senw2"]
-[ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/menu/WorldName.gd" id="8_mvuiw"]
+[ext_resource type="Script" path="res://scripts/menu/WorldName.gd" id="8_mvuiw"]
+[ext_resource type="Texture2D" uid="uid://bmw5bmcvxua0c" path="res://sprites/planets/encroacher.png" id="10_v68kg"]
 
 [node name="transition" type="CanvasLayer" node_paths=PackedStringArray("planets")]
 script = ExtResource("1_54u3s")
 zoom_scale = 8.0
-planets = [NodePath("system/planets/drobbo"), NodePath("system/planets/balorb"), NodePath("system/planets/symyt"), NodePath("system/planets/axtov")]
+planets = [NodePath("system/planets/drobbo"), NodePath("system/planets/balorb"), NodePath("system/planets/symyt"), NodePath("system/planets/axtov"), NodePath("system/planets/encroacher")]
 
 [node name="fade_rect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -62,9 +63,9 @@ animate_in_editor = true
 
 [node name="orbit3" parent="system/orbits" instance=ExtResource("6_senw2")]
 position = Vector2(292, 454)
-radius = 435.29
-eccentricity = 0.14
-orbit_rotation_deg = 137.0
+radius = 402.58
+eccentricity = 0.4
+orbit_rotation_deg = 144.0
 dot_count = 90
 dot_color = Color(0.27451, 0.509804, 0.196078, 1)
 orbit_speed = 0.015
@@ -72,12 +73,22 @@ animate_in_editor = true
 
 [node name="orbit4" parent="system/orbits" instance=ExtResource("6_senw2")]
 position = Vector2(292, 454)
-radius = 711.21
-eccentricity = 0.07
-orbit_rotation_deg = 242.0
+radius = 602.61
+eccentricity = 0.21
+orbit_rotation_deg = 135.0
 dot_count = 140
 dot_color = Color(0.858824, 0.32549, 0.709804, 1)
 orbit_speed = 0.005
+animate_in_editor = true
+
+[node name="orbit5" parent="system/orbits" instance=ExtResource("6_senw2")]
+position = Vector2(292, 454)
+radius = 619.15
+eccentricity = 0.87
+orbit_rotation_deg = 251.0
+dot_count = 140
+dot_color = Color(1, 1, 0, 1)
+orbit_speed = -0.025
 animate_in_editor = true
 
 [node name="planets" type="Control" parent="system"]
@@ -118,6 +129,13 @@ texture = ExtResource("3_vrufj")
 position = Vector2(959, 204)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_b3nhs")
+
+[node name="encroacher" type="Sprite2D" parent="system/planets"]
+position = Vector2(130, 574)
+rotation = 1.74597
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("10_v68kg")
+flip_v = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 15.0

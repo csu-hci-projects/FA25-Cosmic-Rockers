@@ -131,6 +131,8 @@ func move(input: float):
 
 
 func _animation_finished():
+	if is_dead:
+		return
 	if sprite.animation == "jump":
 		set_animation("fall")
 	if sprite.animation == "land":

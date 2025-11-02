@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf55kppai1oak"]
+[gd_scene load_steps=4 format=3 uid="uid://boxrp36onph30"]
 
 [ext_resource type="Texture2D" uid="uid://ggfv7kj84ha" path="res://sprites/particles/glow.png" id="1_eotlu"]
-[ext_resource type="Script" uid="uid://cq65f5jxbvexn" path="res://scripts/game/ForegroundParticles.gd" id="2_ey8da"]
-[ext_resource type="Material" uid="uid://bhxqn4m3w51hy" path="res://resources/dust_particles.tres" id="2_quwl1"]
+[ext_resource type="Script" path="res://scripts/game/ForegroundParticles.gd" id="2_ey8da"]
+[ext_resource type="Material" uid="uid://c8y5el3hjdlkk" path="res://resources/dust_particles.tres" id="2_quwl1"]
 
 [node name="foreground_particles" type="GPUParticles2D"]
 amount = 32
