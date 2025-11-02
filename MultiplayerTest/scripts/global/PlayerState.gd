@@ -1,5 +1,15 @@
 extends Node
 
+enum STAT {
+	BLOCKS_BROKEN,
+	ENEMIES_KILLED,
+	DAMAGE_DEALT,
+	DEATHS,
+	DISTANCE_TRAVELLED,
+	CHORDES_COLLECTED,
+	DAMAGE_TAKEN
+}
+
 const WEAPONS = [
 	preload("res://scenes/weapons/gun_raycast.tscn"),
 	preload("res://scenes/weapons/gun_projectile.tscn")
@@ -30,12 +40,21 @@ const COLORS = [
 # Stores the latest data for each player
 var players: Dictionary = {}  # Dictionary keyed by Steam ID
 
-func set_this_stat(key: String, value):
-	set_stat(Global.steam_id, key, value)
 
-func set_stat(steam_id: int, key: String, value):
+
+func add_stat(key: STAT, value):
+	if not players[Global.steam_id].has("stats"):
+		players[Global.steam_id]["stats"] = {}
+	
+	if players[Global.steam_id]["stats"].has(key):
+		players[Global.steam_id]["stats"][key] += value
+	else:
+		players[Global.steam_id]["stats"][key] = value
+	
+
+func set_stat(steam_id: int, key: STAT, value):
 	if not players.has(steam_id):
-		players[steam_id] = {}
+		return
 	if not players[steam_id].has("stats"):
 		players[steam_id]["stats"] = {}
 	
@@ -87,3 +106,14 @@ func all_ready() -> bool:
 
 func clear():
 	players.clear()
+
+func get_stat_name(key: STAT) -> String:
+	match(key):
+		STAT.BLOCKS_BROKEN: return "Blocks Broken"
+		STAT.ENEMIES_KILLED: return "Enemies Killed"
+		STAT.DAMAGE_DEALT: return "Damage Dealt"
+		STAT.DEATHS: return "Deaths"
+		STAT.DISTANCE_TRAVELLED: return "Distance Travelled"
+		STAT.CHORDES_COLLECTED: return "Chordes Collected"
+		STAT.DAMAGE_TAKEN: return "Damage Taken"
+	return ""

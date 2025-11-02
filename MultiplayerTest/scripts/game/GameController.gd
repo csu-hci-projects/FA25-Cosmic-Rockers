@@ -3,6 +3,7 @@ extends Node
 var player_scene = preload("res://scenes/game/player.tscn")
 var collectable_scene = preload("res://scenes/game/collectable.tscn")
 var ship_scene = preload("res://scenes/game/ship.tscn")
+var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
 var cobblestone_texture = preload("res://sprites/tilesets/Cobblestone.png")
 
 @onready var tilemap = $tilemap
@@ -74,7 +75,7 @@ func _update_shoot(steam_id: int, data: Dictionary):
 func spawn_players():
 	var players = PlayerState.get_all_players_data()
 	for key in players.keys():
-		var remote_player = player_scene.instantiate()
+		var remote_player: PlayerMovement = player_scene.instantiate()
 		remote_players.set(key, remote_player)
 		
 		remote_player.entity_id = str(key)
@@ -84,6 +85,7 @@ func spawn_players():
 		var player_data = PlayerState.get_player_data(key)["player_customization"]
 		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", 0)])
 		remote_player.sprite.sprite_frames = PlayerState.CHARACTERS[player_data.get("character", 0)]
+		remote_player.on_die.connect(_on_player_die)
 		
 		var gun: Gun = PlayerState.WEAPONS[player_data.get("weapon", 0)].instantiate()
 		gun.player_owner = remote_player
@@ -197,3 +199,19 @@ func _make_boundary_zone(rect: Rect2) -> void:
 	add_child(wall)
 	wall.add_child(col)
 	wall.add_child(sprite)
+
+func _on_player_die():
+	var all_dead = true
+	for key in remote_players:
+		if !remote_players[key].is_dead:
+			all_dead = false
+	if all_dead:
+		show_end_screen()
+
+func show_end_screen():
+	var end_screen = end_screen_scene.instantiate()
+	var canvas_layer := get_tree().current_scene.get_node_or_null("CanvasLayer")
+	if canvas_layer:
+		canvas_layer.add_child(end_screen)
+	else:
+		get_tree().current_scene.add_child(end_screen)

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpkjx88d4iuo3"]
+
+[ext_resource type="Script" uid="uid://tqlh5ya7s7bq" path="res://scripts/stats/StatsScreenStat.gd" id="1_lh5i2"]
+
+[node name="stat" type="HBoxContainer"]
+size_flags_vertical = 6
+script = ExtResource("1_lh5i2")
+
+[node name="type" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "type"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="score" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "score"
