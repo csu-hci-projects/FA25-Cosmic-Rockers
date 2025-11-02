@@ -23,7 +23,6 @@ var current_state : State = State.IDLE
 var _target: Node2D = null
 var _attack_timer: float = 0.0
 
-@onready var sprite: AnimatedSprite2D = $sprite
 @onready var collision: CollisionShape2D = $collision
 var ai_enabled: bool = false
 var move_dir: Vector2 = Vector2.ZERO
