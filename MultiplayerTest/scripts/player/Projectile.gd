@@ -1,7 +1,7 @@
 extends Area2D
 class_name Projectile
 
-@export var shoot_velocity := 400.0
+@export var shoot_velocity := 600.0
 @export var lifetime := 5.0
 
 var direction := Vector2.ZERO

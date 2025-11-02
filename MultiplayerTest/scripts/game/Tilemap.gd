@@ -43,30 +43,30 @@ func create_tilemap():
 	set_cells_terrain_connect(cells_to_update, 0, WorldState.get_tileset(), false)
 
 
-func update_tile(cell: Vector2i, tile_id: int):
-	Multiplayer.update_tile(cell, tile_id)
-	_update_tile(cell, tile_id)
+func update_tile(cell: Vector2i, tile_id: int, range: int):
+	Multiplayer.update_tile(cell, tile_id, range)
+	_update_tile(cell, tile_id, range)
 
 	if not _in_bounds(cell):
 		return
 	if tile_id == -1 and _is_boundary_at_cell(cell):
 		return
 
-func _update_tile(cell: Vector2i, tile_id: int):
+func _update_tile(cell: Vector2i, tile_id: int, range: int):
 	if not _in_bounds(cell):
 		return
-	set_3x3(cell, tile_id)
+	set_cells(cell, tile_id, range)
 
-func take_hit(hit_position: Vector2):
+func take_hit(hit_position: Vector2, range: int):
 	var local_pos: Vector2 = to_local(hit_position)
 	var cell: Vector2i = local_to_map(local_pos)
-	update_tile(cell, -1)
+	update_tile(cell, -1, range)
 
-func set_3x3(cell: Vector2i, tile_id: int):
+func set_cells(cell: Vector2i, tile_id: int, range: int):
 	var cells_to_erase: Array[Vector2i] = []
 	
-	for y_offset in range(-1,2):
-		for x_offset in range(-1,2):
+	for y_offset in range(-range, range + 1):
+		for x_offset in range(-range, range + 1):
 			var c := cell + Vector2i(x_offset, y_offset)
 			cells_to_erase.append(c)
 	

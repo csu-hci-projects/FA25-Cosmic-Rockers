@@ -179,9 +179,9 @@ func send_entity_update(key: String, entity_id: String, value: Dictionary, send_
 	return send_p2p_packet(0, data, send_type)
 
 
-func send_world_update(cell: Vector2i, id: int) -> bool:
-	WorldState.update_tile(cell, id)
-	return send_user_packet("set_tile", {"data": {"cell": cell, "id": id}}, 2)
+func send_world_update(cell: Vector2i, id: int, range: int) -> bool:
+	WorldState.update_tile(cell, id, range)
+	return send_user_packet("set_tile", {"data": {"cell": cell, "id": id, "range": range}}, 2)
 
 
 func send_user_packet(type: String, data: Dictionary = {}, send_type: int = 0) -> bool:
@@ -240,7 +240,8 @@ func read_p2p_packet():
 		"set_tile":
 			var cell: Vector2i = readable_data["data"]["cell"]
 			var id: int = readable_data["data"]["id"]
-			emit_signal("on_received_tile", cell, id)
+			var range: int = readable_data["data"]["range"]
+			emit_signal("on_received_tile", cell, id, range)
 		"map_chunk":
 			handle_map_chunk(packet_sender, readable_data)
 	

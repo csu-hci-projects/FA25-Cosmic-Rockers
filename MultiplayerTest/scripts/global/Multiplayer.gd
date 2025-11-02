@@ -3,7 +3,7 @@ extends Network
 signal on_received_ready_status(steam_id: int, data: Dictionary)
 signal on_received_player_customization(steam_id: int, data: Dictionary)
 
-signal on_received_tile(cell: Vector2i, id: int)
+signal on_received_tile(cell: Vector2i, id: int, range: int)
 signal on_received_input(steam_id: int, data: Dictionary)
 signal on_received_position(steam_id: int, data: Dictionary)
 signal on_received_collectable(steam_id: int, data: Dictionary)
@@ -31,8 +31,8 @@ func update_player_customization(data: Dictionary) -> bool:
 	emit_signal("on_received_player_customization", Global.steam_id, data)
 	return sent
 
-func update_tile(cell: Vector2i, id: int) -> bool:
-	return send_world_update(cell, id)
+func update_tile(cell: Vector2i, id: int, range: int) -> bool:
+	return send_world_update(cell, id, range)
 
 func update_input(data: Dictionary) -> bool:
 	return send_player_update("input", data, 1)
