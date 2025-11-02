@@ -6,7 +6,8 @@ var leaf_particles = preload("res://resources/leaf_particles.tres")
 var glow_particles = preload("res://resources/glow_particles.tres")
 
 var dust_texture = preload("res://sprites/particles/dust_2.png")
-var glow_texture = preload("res://sprites/particles/glow.png")
+var glow_texture = preload("res://sprites/particles/sparkle.png")
+var sparkle_texture = preload("res://sprites/particles/sparkle.png")
 var leaf_texture = preload("res://sprites/particles/leaf.png")
 
 var particle_settings = {
@@ -31,7 +32,7 @@ var particle_settings = {
 	LevelData.LEVEL_EFFECT.GLOW_PARTICLE: {
 		"particle": glow_particles,
 		"amount": 32,
-		"texture": glow_texture,
+		"texture": sparkle_texture,
 		"lifetime": 2.5
 	}
 }

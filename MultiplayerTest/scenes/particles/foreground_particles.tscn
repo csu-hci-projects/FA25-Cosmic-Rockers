@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://boxrp36onph30"]
 
-[ext_resource type="Texture2D" uid="uid://ggfv7kj84ha" path="res://sprites/particles/glow.png" id="1_eotlu"]
-[ext_resource type="Script" path="res://scripts/game/ForegroundParticles.gd" id="2_ey8da"]
-[ext_resource type="Material" uid="uid://c8y5el3hjdlkk" path="res://resources/dust_particles.tres" id="2_quwl1"]
+[ext_resource type="Texture2D" uid="uid://cp5e1ddx83ci" path="res://sprites/particles/sparkle.png" id="1_dbv1b"]
+[ext_resource type="Material" uid="uid://btm0arkn40sx6" path="res://resources/glow_particles.tres" id="2_2rba3"]
+[ext_resource type="Script" uid="uid://cq65f5jxbvexn" path="res://scripts/game/ForegroundParticles.gd" id="2_ey8da"]
 
 [node name="foreground_particles" type="GPUParticles2D"]
 amount = 32
-texture = ExtResource("1_eotlu")
+texture = ExtResource("1_dbv1b")
 lifetime = 2.5
 visibility_rect = Rect2(-500, -300, 1000, 600)
-process_material = ExtResource("2_quwl1")
+process_material = ExtResource("2_2rba3")
 script = ExtResource("2_ey8da")
