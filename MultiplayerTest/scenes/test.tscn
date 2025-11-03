@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://scripts/menu/WorldName.gd" id="3_abytp"]
 [ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/tilesets/default_tile_map.tres" id="4_7bh6m"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="5_fqoh6"]
+[ext_resource type="PackedScene" uid="uid://7c00aky8y8vg" path="res://scenes/weapons/gun_projectile.tscn" id="6_ghpyy"]
 [ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="6_vw7v2"]
 [ext_resource type="PackedScene" uid="uid://w18230pt20ls" path="res://scenes/game/background.tscn" id="7_2ovx8"]
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="8_1shok"]
 [ext_resource type="Script" uid="uid://bfxhtocx83gf4" path="res://scripts/game/MusicPlayer.gd" id="9_fsiky"]
 [ext_resource type="Script" uid="uid://t8cfn5odscf5" path="res://scripts/game/Environment.gd" id="10_570kq"]
 [ext_resource type="PackedScene" uid="uid://bmihda84q488q" path="res://scenes/game/player.tscn" id="10_yk7ts"]
-[ext_resource type="PackedScene" uid="uid://bdctsdjup4rsn" path="res://scenes/weapons/gun_raycast.tscn" id="11_ajshl"]
 [ext_resource type="PackedScene" uid="uid://boxrp36onph30" path="res://scenes/particles/foreground_particles.tscn" id="11_ghpyy"]
 
 [sub_resource type="Environment" id="Environment_87uf6"]
@@ -59,7 +59,8 @@ script = ExtResource("5_fqoh6")
 position = Vector2(329, 218)
 is_local_player = true
 
-[node name="gun_raycast" parent="player" node_paths=PackedStringArray("player_owner") instance=ExtResource("11_ajshl")]
+[node name="gun_projectile" parent="player" node_paths=PackedStringArray("player_owner") instance=ExtResource("6_ghpyy")]
+recoil_distance = 80.0
 player_owner = NodePath("..")
 
 [node name="enemy_controller" type="Node2D" parent="."]

@@ -18,7 +18,6 @@ shader_parameter/threshold = 0.5
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_dd427")
-max_health = 30
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)

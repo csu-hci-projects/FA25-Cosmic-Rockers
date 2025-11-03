@@ -57,10 +57,12 @@ func _update_tile(cell: Vector2i, tile_id: int, range: int):
 		return
 	set_cells(cell, tile_id, range)
 
-func take_hit(hit_position: Vector2, range: int):
+func take_hit(hit_position: Vector2, range: int) -> int:
 	var local_pos: Vector2 = to_local(hit_position)
 	var cell: Vector2i = local_to_map(local_pos)
+	var cell_count = cells_in_range(cell, -1, range)
 	update_tile(cell, -1, range)
+	return cell_count
 
 func set_cells(cell: Vector2i, tile_id: int, range: int):
 	var cells_to_erase: Array[Vector2i] = []
@@ -71,3 +73,14 @@ func set_cells(cell: Vector2i, tile_id: int, range: int):
 			cells_to_erase.append(c)
 	
 	set_cells_terrain_connect(cells_to_erase, 0, -1, false)
+
+func cells_in_range(cell: Vector2i, tile_id: int, range: int) -> int:
+	var cells: int = 0
+	
+	for y_offset in range(-range, range + 1):
+		for x_offset in range(-range, range + 1):
+			var c := cell + Vector2i(x_offset, y_offset)
+			if get_cell_source_id(c) != tile_id:
+				cells += 1
+	return cells
+			

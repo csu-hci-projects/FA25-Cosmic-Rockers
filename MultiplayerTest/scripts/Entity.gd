@@ -30,7 +30,7 @@ func create_health_bar():
 
 func take_damage(amt: int):
 	emit_signal("on_hit_taken", entity_id, amt)
-	_take_damage(amt)
+	return _take_damage(amt)
 
 func _take_damage(amt: int):
 	hit_effect()

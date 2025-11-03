@@ -81,10 +81,13 @@ func _handle_hit(object: Node2D, hit_position: Vector2):
 	if object is Entity:
 		PlayerState.add_stat(PlayerState.STAT.DAMAGE_DEALT, damage)
 		object.take_damage(damage)
+		if object.is_dead:
+			PlayerState.add_stat(PlayerState.STAT.ENEMIES_KILLED, 1)
 	
 	if object is Tilemap:
-		PlayerState.add_stat(PlayerState.STAT.BLOCKS_BROKEN, 1)
-		object.take_hit(hit_position, tile_damage)
+		var cell_count = object.take_hit(hit_position, tile_damage)
+		PlayerState.add_stat(PlayerState.STAT.BLOCKS_BROKEN, cell_count)
+		
 
 func _set_direction(_direction: Vector2):
 	direction = _direction

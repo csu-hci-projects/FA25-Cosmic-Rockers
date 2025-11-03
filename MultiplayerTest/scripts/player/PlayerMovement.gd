@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	jump_buffer -= delta
 	
 	var target_speed = input_dir * move_speed
-	if is_on_floor():
+	if velocity.y <= 0 and is_on_floor():
 		if last_vertical_velocity > 10:
 			var dust_particle: CPUParticles2D = dust_particle_scene.instantiate()
 			var ratio = (last_vertical_velocity - 200) / 500
@@ -153,6 +153,11 @@ func _update_position(data: Dictionary):
 	if data.has("position"):
 		position = data["position"]
 
+func take_damage(amt: int):
+	if is_local_player:
+		PlayerState.add_stat(PlayerState.STAT.DAMAGE_TAKEN, amt)
+	super(amt)
+
 func die():
 	super()
 	input_dir = 0
@@ -160,6 +165,8 @@ func die():
 	
 	if !is_local_player:
 		return
+	
+	PlayerState.add_stat(PlayerState.STAT.DEATHS, 1)
 	
 	if collectable:
 		drop_collectable()
@@ -176,4 +183,5 @@ func drop_collectable():
 func submit_collectable(target: Node2D):
 	collectable._set_target(target)
 	collectable = null
+	PlayerState.add_stat(PlayerState.STAT.CHORDES_COLLECTED, 1)
 	Multiplayer.level_complete()

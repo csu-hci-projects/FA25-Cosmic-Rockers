@@ -96,7 +96,7 @@ func spawn_players():
 	
 	var local_player = get_local_player()
 	local_player.is_local_player = true
-	camera.set_target(local_player)
+	camera.set_target(local_player, true, 5)
 	local_player.on_die.connect(music_controller.enable_effects)
 
 func get_local_player() -> Node2D:
@@ -133,7 +133,7 @@ func start_drop_sequence():
 	move_to_spawn(ship)
 	ship.set_drop(ship.position)
 	ship.on_dropped.connect(_on_ship_dropped)
-	camera.set_target(ship, false) 
+	camera.set_target(ship, false, 10) 
 
 func _on_ship_dropped():
 	music_controller.disable_effects()

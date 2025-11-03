@@ -5,7 +5,6 @@ enum STAT {
 	ENEMIES_KILLED,
 	DAMAGE_DEALT,
 	DEATHS,
-	DISTANCE_TRAVELLED,
 	CHORDES_COLLECTED,
 	DAMAGE_TAKEN
 }
@@ -113,7 +112,6 @@ func get_stat_name(key: STAT) -> String:
 		STAT.ENEMIES_KILLED: return "Enemies Killed"
 		STAT.DAMAGE_DEALT: return "Damage Dealt"
 		STAT.DEATHS: return "Deaths"
-		STAT.DISTANCE_TRAVELLED: return "Distance Travelled"
 		STAT.CHORDES_COLLECTED: return "Chordes Collected"
 		STAT.DAMAGE_TAKEN: return "Damage Taken"
 	return ""
