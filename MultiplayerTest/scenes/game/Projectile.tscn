@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb8ke1el6up7m"]
+[gd_scene load_steps=4 format=3 uid="uid://bgdpxofu2cslw"]
 
 [ext_resource type="Script" uid="uid://bcthp4kh0bk3i" path="res://scripts/player/Projectile.gd" id="1_gs15w"]
 [ext_resource type="Texture2D" uid="uid://btg8mkdbrbok6" path="res://sprites/sprite_sheets/player/weapons/note.png" id="2_u1cto"]

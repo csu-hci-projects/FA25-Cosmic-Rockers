@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="MultiplayerTest"
+config/name="CosmicRockers"
 run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://resources/icon.svg"
+boot_splash/image="uid://cllw1ph0rhckn"
+config/icon="res://resources/icon.ico"
+boot_splash/minimum_display_time=2500
 
 [audio]
 

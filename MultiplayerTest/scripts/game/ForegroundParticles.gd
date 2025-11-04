@@ -7,7 +7,7 @@ var glow_particles = preload("res://resources/glow_particles.tres")
 var rain_particles = preload("res://resources/rain_particles.tres")
 
 var dust_texture = preload("res://sprites/particles/dust_2.png")
-var glow_texture = preload("res://sprites/particles/sparkle.png")
+var glow_texture = preload("res://sprites/particles/glow.png")
 var sparkle_texture = preload("res://sprites/particles/sparkle.png")
 var leaf_texture = preload("res://sprites/particles/leaf.png")
 var rain_texture = preload("res://sprites/particles/rain.png")

@@ -33,8 +33,10 @@ func load_all_levels(path: String):
 	dir.list_dir_begin()
 	var filename = dir.get_next()
 	while filename != "":
+		if filename.ends_with(".remap"):
+			filename = filename.trim_suffix(".remap")
 		if filename.ends_with(".tres"):
-			var resource = load(path + "/" + filename)
+			var resource = load(path.path_join(filename))
 			if resource is LevelData:
 				LEVELS[resource.level_id] = resource
 			else:
@@ -142,8 +144,8 @@ func get_collectible_sprite() -> Texture2D:
 func get_tileset() -> int:
 	return LEVELS[level_id]["tileset"]
 
-func get_background() -> String:
-	return LEVELS[level_id]["background"]
+func get_backgrounds() -> Array[Texture2D]:
+	return LEVELS[level_id]["backgrounds"]
 
 func get_music() -> Array[AudioStream]:
 	return LEVELS[level_id]["songs"]

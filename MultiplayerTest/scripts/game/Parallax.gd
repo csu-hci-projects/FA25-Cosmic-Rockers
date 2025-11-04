@@ -16,7 +16,7 @@ func _ready():
 
 func create_background():
 	var background_id = 0
-	for sprite in get_background_sprites(WorldState.get_background()):
+	for sprite in WorldState.get_backgrounds():
 		var layer = layer_scene.instantiate()
 		add_child(layer)
 		for child in layer.get_children():
@@ -27,26 +27,6 @@ func create_background():
 				else:
 					child.material = null
 		background_id += 1
-
-func get_background_sprites(type: String) -> Array[CompressedTexture2D]:
-	var path = "res://sprites/background/" + type
-	var dir := DirAccess.open(path)
-	var textures: Array[CompressedTexture2D] = []
-	
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".png"):
-				var texture = load(path + "/" + file_name)
-				if texture is CompressedTexture2D:
-					textures.append(texture)
-			file_name = dir.get_next()
-		dir.list_dir_end()
-	else:
-		push_warning("Directory not found: " + path)
-	
-	return textures
 
 func _process(delta: float) -> void:
 	if get_parent() == null:
