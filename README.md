@@ -2,7 +2,7 @@
 
 ## Premise
 
-Cosmic Rockers is the name of a band who have learned of the planet system of . Hidden within the planets are Chordes, instruments of unimaginable beauty.
+Cosmic Rockers is the name of a band who have learned of the planet system of Rhythmia. Hidden within the planets are Chordes, instruments that procude otherworldy sounds.
 
 Your mission: Collect the Chordes at all costs. There are no ethical concerns regarding the local wildlife.
 
