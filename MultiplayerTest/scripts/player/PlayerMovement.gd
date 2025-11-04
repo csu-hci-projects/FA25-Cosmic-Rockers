@@ -16,7 +16,7 @@ var last_vertical_velocity: float = 0
 @export var is_local_player: bool = false
 var sync_frames: int = 20
 
-@onready var dust_particle_scene = preload("res://scenes/particles/dust.tscn")
+@onready var dust_particle_scene = preload("res://scenes/particles/particle_effect.tscn")
 @onready var pointer: Sprite2D = $pointer
 
 var collectable: Collectable = null

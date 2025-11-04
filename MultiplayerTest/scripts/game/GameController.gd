@@ -1,3 +1,4 @@
+class_name GameController
 extends Node
 
 var player_scene = preload("res://scenes/game/player.tscn")

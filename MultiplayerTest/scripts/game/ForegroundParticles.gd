@@ -4,11 +4,13 @@ var dust_particles = preload("res://resources/dust_particles.tres")
 var ash_particles = preload("res://resources/ash_particles.tres")
 var leaf_particles = preload("res://resources/leaf_particles.tres")
 var glow_particles = preload("res://resources/glow_particles.tres")
+var rain_particles = preload("res://resources/rain_particles.tres")
 
 var dust_texture = preload("res://sprites/particles/dust_2.png")
 var glow_texture = preload("res://sprites/particles/sparkle.png")
 var sparkle_texture = preload("res://sprites/particles/sparkle.png")
 var leaf_texture = preload("res://sprites/particles/leaf.png")
+var rain_texture = preload("res://sprites/particles/rain.png")
 
 var particle_settings = {
 	LevelData.LEVEL_EFFECT.DUST_PARTICLE: {
@@ -33,6 +35,12 @@ var particle_settings = {
 		"particle": glow_particles,
 		"amount": 32,
 		"texture": sparkle_texture,
+		"lifetime": 2.5
+	},
+	LevelData.LEVEL_EFFECT.RAIN_PARTICLE: {
+		"particle": rain_particles,
+		"amount": 64,
+		"texture": rain_texture,
 		"lifetime": 2.5
 	}
 }

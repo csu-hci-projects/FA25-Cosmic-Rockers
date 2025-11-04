@@ -22,6 +22,7 @@ enum LEVEL_EFFECT {
 	HEAT_DISTORT,
 	LEAF_PARTICLE,
 	GLOW_PARTICLE,
+	RAIN_PARTICLE,
 }
 
 @export var effects: Array[LEVEL_EFFECT]

@@ -60,7 +60,6 @@ position = Vector2(329, 218)
 is_local_player = true
 
 [node name="gun_projectile" parent="player" node_paths=PackedStringArray("player_owner") instance=ExtResource("6_ghpyy")]
-recoil_distance = 80.0
 player_owner = NodePath("..")
 
 [node name="enemy_controller" type="Node2D" parent="."]

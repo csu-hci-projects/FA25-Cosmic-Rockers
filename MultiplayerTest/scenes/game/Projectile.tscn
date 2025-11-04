@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://btg8mkdbrbok6" path="res://sprites/sprite_sheets/player/weapons/note.png" id="2_u1cto"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mdtbv"]
-radius = 8.0
+radius = 4.0
 
 [node name="projectile" type="Area2D"]
 collision_layer = 8

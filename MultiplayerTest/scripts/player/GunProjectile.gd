@@ -28,7 +28,21 @@ func on_shoot(data: Dictionary):
 	get_tree().root.add_child(projectile)
 
 func _handle_hit(object: Node2D, hit_position: Vector2):
-	super(object, hit_position)
+	if not player_owner.is_local_player:
+		return
+	
+	var game_controller: GameController = get_tree().get_first_node_in_group("GameController")
+	var enemy_controller: EnemyController = game_controller.enemy_controller
+	
+	for enemy in enemy_controller.get_enemies_in_radius(hit_position, recoil_distance):
+		PlayerState.add_stat(PlayerState.STAT.DAMAGE_DEALT, damage)
+		enemy.take_damage(damage)
+		if enemy.is_dead:
+			PlayerState.add_stat(PlayerState.STAT.ENEMIES_KILLED, 1)
+	
+	var cell_count = game_controller.tilemap.take_hit(hit_position, tile_damage)
+	PlayerState.add_stat(PlayerState.STAT.BLOCKS_BROKEN, cell_count)
+	
 	recoil(hit_position)
 
 func recoil(hit_position: Vector2):

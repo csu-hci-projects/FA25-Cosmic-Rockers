@@ -18,7 +18,7 @@ glow_enabled = true
 glow_bloom = 0.2
 adjustment_enabled = true
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" groups=["GameController"]]
 script = ExtResource("1_iywne")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -1,3 +1,4 @@
+class_name EnemyController
 extends Node
 
 const position_chunk_size: int = 10
@@ -119,6 +120,12 @@ func _attack_player(entity_id: String, data: Dictionary):
 	target.take_damage(data["damage"])
 
 func kill_in_radius(position: Vector2, radius: float):
+	for enemy in get_enemies_in_radius(position, radius):
+		enemy.set_health(0)
+
+func get_enemies_in_radius(position: Vector2, radius: float) -> Array:
+	var enemies_in_radius = []
 	for entity_id in enemies:
-		if position.distance_to(enemies[entity_id].position) <= radius:
-			enemies[entity_id].set_health(0)
+		if position.distance_to(enemies[entity_id].position) <= radius and !enemies[entity_id].is_dead:
+			enemies_in_radius.append(enemies[entity_id])
+	return enemies_in_radius
