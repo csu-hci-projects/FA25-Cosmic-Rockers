@@ -80,7 +80,8 @@ func cells_in_range(cell: Vector2i, tile_id: int, range: int) -> int:
 	for y_offset in range(-range, range + 1):
 		for x_offset in range(-range, range + 1):
 			var c := cell + Vector2i(x_offset, y_offset)
-			if get_cell_source_id(c) != tile_id:
+			var data := get_cell_tile_data(c)
+			
+			if data != null and data.terrain != -1:
 				cells += 1
 	return cells
-			

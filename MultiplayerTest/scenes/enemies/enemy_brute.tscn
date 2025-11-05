@@ -11,6 +11,7 @@ collision_layer = 10
 script = ExtResource("1_p86ed")
 jump_force = 300.0
 is_flying = false
+dmg = 10
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)

@@ -160,14 +160,13 @@ func take_damage(amt: int):
 	super(amt)
 
 func die():
+	PlayerState.add_stat(PlayerState.STAT.DEATHS, 1)
 	super()
 	input_dir = 0
 	set_animation("death")
 	
 	if !is_local_player:
 		return
-	
-	PlayerState.add_stat(PlayerState.STAT.DEATHS, 1)
 	
 	if collectable:
 		drop_collectable()
