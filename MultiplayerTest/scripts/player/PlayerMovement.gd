@@ -17,6 +17,7 @@ var last_vertical_velocity: float = 0
 var sync_frames: int = 20
 
 @onready var dust_particle_scene = preload("res://scenes/particles/particle_effect.tscn")
+@onready var teleport_particle_scene = preload("res://scenes/particles/teleport.tscn")
 @onready var pointer: Sprite2D = $pointer
 
 var collectable: Collectable = null
@@ -185,3 +186,10 @@ func submit_collectable(target: Node2D):
 	collectable = null
 	PlayerState.add_stat(PlayerState.STAT.CHORDES_COLLECTED, 1)
 	Multiplayer.level_complete()
+
+func despawn():
+	var teleport_particle: CPUParticles2D = teleport_particle_scene.instantiate()
+	teleport_particle.position = position
+	get_tree().root.add_child(teleport_particle)
+	teleport_particle.emitting = true
+	queue_free()

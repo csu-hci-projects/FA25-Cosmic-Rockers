@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpj5i1cubibui"]
+
+[ext_resource type="PackedScene" uid="uid://dp0b7x1o1ay41" path="res://scenes/particles/particle_effect.tscn" id="1_hawrm"]
+[ext_resource type="Texture2D" uid="uid://ggfv7kj84ha" path="res://sprites/particles/glow.png" id="2_hawrm"]
+
+[sub_resource type="Curve" id="Curve_hawrm"]
+_data = [Vector2(0, 0.504967), 0.0, 0.0946278, 0, 0, Vector2(0.682353, 0.397351), -0.535455, -0.535455, 0, 0, Vector2(1, 0), -1.70015, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_3ajkw"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.270492, 0.550218, 0.694323, 1)
+colors = PackedColorArray(0, 0.203028, 0.421792, 1, 4.62055e-06, 0.614472, 0.739489, 1, 0, 0.633891, 0.472711, 1, 0.779558, 0.807837, 0.831864, 1, 1, 1, 1, 0)
+
+[node name="effect" instance=ExtResource("1_hawrm")]
+amount = 60
+texture = ExtResource("2_hawrm")
+lifetime = 0.5
+explosiveness = 0.2
+emission_shape = 5
+emission_points = PackedVector2Array(-8, 4, 0, 4, 8, 4, -4, 4, 4, 4)
+emission_normals = PackedVector2Array(0.1, -1, 0, -1, -0.1, -1, 0.05, -1, -0.05, -1)
+emission_colors = PackedColorArray()
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angular_velocity_min = 0.0
+angular_velocity_max = 0.0
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = SubResource("Curve_hawrm")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_3ajkw")

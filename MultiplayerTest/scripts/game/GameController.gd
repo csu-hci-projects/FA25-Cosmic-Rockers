@@ -23,6 +23,8 @@ func _ready() -> void:
 	else:
 		WorldState.on_level_loaded.connect(initialize_game)
 	
+	Multiplayer.transition_started.connect(despawn_players)
+	
 	Multiplayer.on_received_input.connect(_update_input)
 	Multiplayer.on_received_position.connect(_update_position)
 	Multiplayer.on_received_gun_direction.connect(_update_direction)
@@ -99,6 +101,11 @@ func spawn_players():
 	local_player.is_local_player = true
 	camera.set_target(local_player, true, 5)
 	local_player.on_die.connect(music_controller.enable_effects)
+
+func despawn_players():
+	camera.set_target(null, true, 0)
+	for key in remote_players.keys():
+		remote_players[key].despawn()
 
 func get_local_player() -> Node2D:
 	if !remote_players.has(Global.steam_id):

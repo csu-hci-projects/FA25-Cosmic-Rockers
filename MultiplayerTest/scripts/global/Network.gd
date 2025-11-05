@@ -12,6 +12,7 @@ signal chat_received(username: String, message: String)
 signal lobby_joined()
 signal lobby_left()
 signal on_host_changed()
+signal transition_started()
 
 var transition_scene = preload("res://scenes/transitions/transition.tscn")
 var current_scene: Node = null
@@ -262,6 +263,7 @@ func read_p2p_packet():
 			push_warning("No signal called %s exists!" % readable_data["type"])
 
 func start_game(level_id: int = 0):
+	emit_signal("transition_started")
 	WorldState.level_loaded = false
 	
 	if is_host():
