@@ -6,6 +6,7 @@
 [node name="gun_raycast" type="Node2D"]
 script = ExtResource("1_fj2i5")
 ray_color = Color(0.962113, 0.0520781, 0.466182, 1)
+fire_rate = 0.15
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ti028")
