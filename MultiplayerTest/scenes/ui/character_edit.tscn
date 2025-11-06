@@ -96,7 +96,7 @@ layout_mode = 2
 [node name="weapon_label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Weapon"
+text = "Instrument"
 
 [node name="weapon" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
