@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/menu/WorldName.gd" id="3_abytp"]
 [ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/tilesets/default_tile_map.tres" id="4_7bh6m"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="5_fqoh6"]
-[ext_resource type="PackedScene" uid="uid://7c00aky8y8vg" path="res://scenes/weapons/gun_projectile.tscn" id="6_ghpyy"]
+[ext_resource type="PackedScene" uid="uid://bdctsdjup4rsn" path="res://scenes/weapons/gun_raycast.tscn" id="6_ghpyy"]
 [ext_resource type="Script" uid="uid://tiysbnpn85n5" path="res://scripts/player/CameraFollow.gd" id="6_vw7v2"]
 [ext_resource type="PackedScene" uid="uid://w18230pt20ls" path="res://scenes/game/background.tscn" id="7_2ovx8"]
 [ext_resource type="Script" uid="uid://ctvysur1ai7kq" path="res://scripts/game/EnemyController.gd" id="8_1shok"]
@@ -59,7 +59,7 @@ script = ExtResource("5_fqoh6")
 position = Vector2(329, 218)
 is_local_player = true
 
-[node name="gun_projectile" parent="player" node_paths=PackedStringArray("player_owner") instance=ExtResource("6_ghpyy")]
+[node name="gun_raycast" parent="player" node_paths=PackedStringArray("player_owner") instance=ExtResource("6_ghpyy")]
 player_owner = NodePath("..")
 
 [node name="enemy_controller" type="Node2D" parent="."]

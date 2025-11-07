@@ -1,6 +1,9 @@
 class_name Gun
 extends Node2D
 
+@export var audio_effect = preload("res://audio/effects/death.wav")
+var loop_timer = 0
+
 @export var damage = 10
 @export var tile_damage: int = 1
 
@@ -10,6 +13,7 @@ var is_firing := false
 
 @onready var ray_start = $ray_start
 @onready var sprite: Sprite2D = $sprite
+@onready var audio_player: AudioStreamPlayer2D = $audio_player
 
 var sprite_offset = 0
 var ray_offset = 0
@@ -20,6 +24,7 @@ var target_direction: Vector2
 @export var player_owner: PlayerMovement = null
 
 func _ready() -> void:
+	audio_player.stream = audio_effect
 	sprite_offset = sprite.offset.x
 	ray_offset = ray_start.position.x
 	player_owner.on_sync.connect(sync_direction)
@@ -64,15 +69,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_firing = event.pressed
 
 func _shoot():
-	#Extend this
+	#local shoot logic
 	pass
 
 func on_set_direction(data: Dictionary):
 	target_direction = data["direction"]
 
 func on_shoot(data: Dictionary):
-	#Extend this
-	pass
+	#networked shoot logic
+	audio_player.play(loop_timer)
+	if audio_effect.loop_mode != AudioStreamWAV.LOOP_DISABLED:
+		await get_tree().create_timer(fire_rate).timeout
+		audio_player.stop()
+		loop_timer += fire_rate
+		if loop_timer >= audio_effect.get_length() - fire_rate / 2:
+			loop_timer = 0
 
 func _handle_hit(object: Node2D, hit_position: Vector2):
 	if not player_owner.is_local_player:
