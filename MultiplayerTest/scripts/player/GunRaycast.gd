@@ -36,6 +36,7 @@ func _shoot():
 	Multiplayer.update_gun_shoot(from, to)
 
 func on_shoot(data: Dictionary):
+	super(data)
 	var from = data["from"]
 	var to = data["to"]
 	var line = Line2D.new()

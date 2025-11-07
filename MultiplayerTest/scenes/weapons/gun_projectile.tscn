@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://7c00aky8y8vg"]
+[gd_scene load_steps=4 format=3 uid="uid://7c00aky8y8vg"]
 
 [ext_resource type="Script" uid="uid://bqhcd8reen7v4" path="res://scripts/player/GunProjectile.gd" id="1_arav0"]
+[ext_resource type="AudioStream" uid="uid://belkv3rssbs5k" path="res://audio/effects/saxophone.wav" id="2_4adse"]
 [ext_resource type="Texture2D" uid="uid://ynx6yseu008y" path="res://sprites/sprite_sheets/player/weapons/gun_2.png" id="2_uumn0"]
 
 [node name="gun_projectile" type="Node2D"]
 script = ExtResource("1_arav0")
 recoil_velocity = 500.0
 recoil_distance = 80.0
+audio_effect = ExtResource("2_4adse")
 damage = 15
 tile_damage = 2
 fire_rate = 0.5
@@ -17,3 +19,5 @@ offset = Vector2(3, 6)
 
 [node name="ray_start" type="Node2D" parent="."]
 position = Vector2(10, 2)
+
+[node name="audio_player" type="AudioStreamPlayer2D" parent="."]

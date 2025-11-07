@@ -16,6 +16,7 @@ func _shoot():
 	Multiplayer.update_gun_shoot(from, to)
 
 func on_shoot(data: Dictionary):
+	super(data)
 	var from = data["from"]
 	var to = data["to"]
 	var shoot_direction = (to - from).normalized()
@@ -30,7 +31,9 @@ func on_shoot(data: Dictionary):
 func _handle_hit(object: Node2D, hit_position: Vector2):
 	if not player_owner.is_local_player:
 		return
-	
+	if get_tree().get_first_node_in_group("GameController") == null:
+		return
+		
 	var game_controller: GameController = get_tree().get_first_node_in_group("GameController")
 	var enemy_controller: EnemyController = game_controller.enemy_controller
 	
