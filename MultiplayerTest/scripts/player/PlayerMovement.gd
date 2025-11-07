@@ -18,7 +18,15 @@ var sync_frames: int = 20
 
 @onready var dust_particle_scene = preload("res://scenes/particles/particle_effect.tscn")
 @onready var teleport_particle_scene = preload("res://scenes/particles/teleport.tscn")
+
 @onready var pointer: Sprite2D = $pointer
+@onready var audio_player: AudioStreamPlayer2D = $audio_player
+
+var sfx_jump: AudioStream = preload("res://audio/effects/cartoon_jump.mp3")
+var sfx_land: AudioStream = preload("res://audio/effects/cartoon_jump.mp3")
+var sfx_walk: AudioStream = preload("res://audio/effects/cartoon_jump.mp3")
+var sfx_damage: AudioStream = preload("res://audio/effects/cartoon_jump.mp3")
+var sfx_death: AudioStream = preload("res://audio/effects/cartoon_jump.mp3")
 
 var collectable: Collectable = null
 
@@ -28,6 +36,7 @@ func _ready() -> void:
 	super()
 	set_animation("default")
 	sprite.animation_finished.connect(_animation_finished)
+	audio_player.finished.connect(_audio_finished)
 
 
 func _physics_process(delta: float) -> void:
@@ -47,6 +56,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				dust_particle.queue_free()
 			set_animation("land")
+			set_sfx(sfx_land)
 		
 		coyote_timer = coyote_time
 		velocity.x = target_speed
@@ -54,6 +64,7 @@ func _physics_process(delta: float) -> void:
 		
 		if abs(velocity.x) > 0.1:
 			set_animation("walk")
+			set_sfx(sfx_walk)
 		else:
 			set_animation("default")
 	else:
@@ -89,6 +100,12 @@ func set_animation(animation_name: String):
 		
 	sprite.play(animation_name)
 
+func set_sfx(clip: AudioStream):
+	if audio_player.stream == clip:
+		return
+	audio_player.stream = clip
+	audio_player.play()
+
 func _process(delta: float):
 	if !is_local_player: #only local player controls their player
 		return
@@ -119,6 +136,7 @@ func _process(delta: float):
 func jump():
 	jump_buffer = jump_buffer_time
 	set_animation("jump")
+	set_sfx(sfx_jump)
 
 
 func jump_release():
@@ -139,6 +157,9 @@ func _animation_finished():
 		set_animation("landed")
 
 
+func _audio_finished():
+	audio_player.stream = null
+
 func _update_input(data: Dictionary):
 	if data.has("jump"):
 		if data["jump"]:
@@ -158,12 +179,14 @@ func take_damage(amt: int):
 	if is_local_player:
 		PlayerState.add_stat(PlayerState.STAT.DAMAGE_TAKEN, amt)
 	super(amt)
+	set_sfx(sfx_damage)
 
 func die():
 	PlayerState.add_stat(PlayerState.STAT.DEATHS, 1)
 	super()
 	input_dir = 0
 	set_animation("death")
+	set_sfx(sfx_death)
 	
 	if !is_local_player:
 		return

@@ -32,3 +32,5 @@ material = SubResource("ShaderMaterial_t8yk2")
 position = Vector2(0, -13)
 texture = ExtResource("5_wwvfn")
 script = ExtResource("6_wwvfn")
+
+[node name="audio_player" type="AudioStreamPlayer2D" parent="."]
