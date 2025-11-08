@@ -141,13 +141,14 @@ texture = ExtResource("10_v68kg")
 flip_v = true
 
 [node name="ship" type="Node2D" parent="system"]
-position = Vector2(1008.99, 449.25)
-rotation = -0.0320085
+position = Vector2(1008.99, 457.547)
+rotation = 0.0222949
 scale = Vector2(2, 2)
 script = ExtResource("12_kou68")
 amplitude = 8.0
 rotation_amplitude = 3.0
 travel_time = null
+curve_height = null
 
 [node name="ship" type="AnimatedSprite2D" parent="system/ship"]
 rotation = 0.349066

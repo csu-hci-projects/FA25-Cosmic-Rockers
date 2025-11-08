@@ -6,6 +6,7 @@ var next_scene_path: String = "res://scenes/game/game.tscn"
 @onready var system: Control = $system
 @onready var fade_rect: ColorRect = $fade_rect
 @onready var target: Node2D = $system/planets/target
+@onready var ship = $system/ship
 
 @export var transition_time: float = 2.0
 @export var zoom_scale: float = 10
@@ -17,7 +18,11 @@ var next_scene_path: String = "res://scenes/game/game.tscn"
 var _thread: Thread
 var _loaded_scene: PackedScene = null
 
+var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
+
 func _ready():
+	if WorldState.win_state:
+		target.visible = false
 	if WorldState.level_loaded:
 		set_target()
 	else:
@@ -44,9 +49,12 @@ func fade_in_transition():
 func _on_fade_in_complete():
 	if previous_scene:
 		previous_scene.free()
-	_thread = Thread.new()
-	_thread.start(Callable(self, "_load_scene_thread"))
-
+	if !WorldState.win_state:
+		_thread = Thread.new()
+		_thread.start(Callable(self, "_load_scene_thread"))
+	else:
+		var end_screen = end_screen_scene.instantiate()
+		add_child(end_screen)
 
 func fade_out_transition():
 	var tween = create_tween()
@@ -87,7 +95,11 @@ func _on_scene_loaded():
 		return
 
 	get_tree().change_scene_to_packed(_loaded_scene)
+	WorldState.on_game_ready.connect(_on_game_ready)
 	WorldState.on_game_loaded.connect(_on_game_loaded)
 
 func _on_game_loaded():
+	ship.move_to_target(target)
+
+func _on_game_ready():
 	fade_out_transition()

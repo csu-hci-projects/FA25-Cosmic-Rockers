@@ -17,9 +17,11 @@ var room_data: Array = []
 
 var received_map_chunks := {}
 var level_loaded = false
+var win_state = false
 
 signal on_level_loaded()
 signal on_game_loaded()
+signal on_game_ready()
 
 func _ready():
 	load_all_levels("res://level_data")
@@ -48,13 +50,13 @@ func get_next_level() -> int:
 	if LEVELS.has(level_id + 1):
 		return level_id + 1
 	else:
-		return level_id
+		return -1
 
 func initialize(level: int = 0) -> Dictionary:
 	level_id = level
 	
-	map_width = 200
-	map_height = 100
+	map_width = 30
+	map_height = 30
 	spawn_room_position = Vector2i(randi_range(5, map_width - 10),5)
 	end_room_position = Vector2i(randi_range(5, map_width - 10), map_height - 10)
 	room_size = 5

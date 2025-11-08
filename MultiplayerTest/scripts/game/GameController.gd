@@ -47,9 +47,11 @@ func initialize_game() -> void:
 	enemy_controller.spawn_enemies()
 	_create_out_of_bounds(tilemap)
 	
-	await get_tree().create_timer(3).timeout
-	
 	WorldState.emit_signal("on_game_loaded")
+	
+	await get_tree().create_timer(4).timeout
+	
+	WorldState.emit_signal("on_game_ready")
 	music_controller.play_music()
 	start_drop_sequence()
 

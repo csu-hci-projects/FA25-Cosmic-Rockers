@@ -19,7 +19,7 @@ func _ready() -> void:
 			else:
 				WorldState.on_level_loaded.connect(start_text_sequence)
 		ExecutePoint.GAME_LOAD:
-			WorldState.on_game_loaded.connect(start_text_sequence)
+			WorldState.on_game_ready.connect(start_text_sequence)
 	
 func start_text_sequence():
 	var level_name_alien = WorldState.get_level_name_alien()

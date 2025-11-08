@@ -115,3 +115,13 @@ func get_stat_name(key: STAT) -> String:
 		STAT.CHORDES_COLLECTED: return "Chordes Collected"
 		STAT.DAMAGE_TAKEN: return "Damage Taken"
 	return ""
+
+func get_stat_multiplier(key: STAT) -> float:
+	match(key):
+		STAT.BLOCKS_BROKEN: return 1
+		STAT.ENEMIES_KILLED: return 10
+		STAT.DAMAGE_DEALT: return 1
+		STAT.DEATHS: return 0
+		STAT.CHORDES_COLLECTED: return 100
+		STAT.DAMAGE_TAKEN: return 0
+	return 0

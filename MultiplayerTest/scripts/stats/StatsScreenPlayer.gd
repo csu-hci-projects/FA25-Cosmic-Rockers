@@ -6,8 +6,14 @@ extends HBoxContainer
 
 func load_player(steam_id: int, player_data: Dictionary):
 	username.text = player_data["steam_username"]
-	score.text = str(randi_range(0, 1000))
+	score.text = str(calculate_score(player_data["stats"]))
 	load_avatar(steam_id)
+
+func calculate_score(stats: Dictionary) -> int:
+	var total_score = 0
+	for key in stats.keys():
+		total_score += stats[key] * PlayerState.get_stat_multiplier(key)
+	return total_score
 
 func load_avatar(steam_id: int):
 	var avatar_id = Steam.getMediumFriendAvatar(steam_id)

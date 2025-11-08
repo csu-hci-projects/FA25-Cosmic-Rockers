@@ -277,8 +277,27 @@ func start_game(level_id: int = 0):
 
 	get_tree().root.add_child(transition_instance)
 
+func win_game():
+	emit_signal("transition_started")
+	WorldState.level_loaded = false
+	WorldState.win_state = true
+	
+	if is_host():
+		send_p2p_packet(0, {"type": "win_game"})
+	
+	var current_scene = get_tree().current_scene
+	var transition_instance = transition_scene.instantiate()
+
+	transition_instance.previous_scene = current_scene
+
+	get_tree().root.add_child(transition_instance)
+
 func next_level():
-	start_game(WorldState.get_next_level())
+	var next_level = WorldState.get_next_level()
+	if next_level != -1:
+		start_game(next_level)
+	else:
+		win_game()
 
 func send_map_data(this_target: int, level_data: Dictionary, chunk_size: int = 1000) -> void:
 	var map_data: Array = level_data["map_data"]
@@ -297,7 +316,6 @@ func send_map_data(this_target: int, level_data: Dictionary, chunk_size: int = 1
 		packet["chunk_data"] = chunk
 		
 		send_p2p_packet(this_target, packet, 2)
-
 
 
 func handle_map_chunk(sender_id: int, packet: Dictionary) -> void:
