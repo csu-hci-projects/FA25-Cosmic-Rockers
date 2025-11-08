@@ -45,11 +45,11 @@ custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 placeholder_text = "lobby id"
 
-[node name="join" type="Button" parent="menu"]
+[node name="join" type="Button" parent="menu" groups=["Button"]]
 layout_mode = 2
 text = "Join"
 
-[node name="host" type="Button" parent="menu"]
+[node name="host" type="Button" parent="menu" groups=["Button"]]
 layout_mode = 2
 text = "Host"
 
@@ -75,40 +75,53 @@ value = 1.0
 rounded = true
 prefix = "Level"
 
-[node name="ready" type="Button" parent="lobby_menu"]
+[node name="ready" type="Button" parent="lobby_menu" groups=["Button"]]
 layout_mode = 2
 toggle_mode = true
 text = "Ready"
 
-[node name="start" type="Button" parent="lobby_menu"]
+[node name="start" type="Button" parent="lobby_menu" groups=["Button"]]
 layout_mode = 2
 text = "Start Game"
 
-[node name="invite" type="Button" parent="lobby_menu"]
+[node name="invite" type="Button" parent="lobby_menu" groups=["Button"]]
 layout_mode = 2
 text = "Invite"
 
-[node name="disconnect" type="Button" parent="lobby_menu"]
+[node name="disconnect" type="Button" parent="lobby_menu" groups=["Button"]]
 layout_mode = 2
 text = "Disconnect"
 
 [node name="chat" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_top = -500.0
+offset_right = 500.0
 grow_vertical = 0
 
-[node name="chatbox" type="Label" parent="chat"]
+[node name="chat_scroll" type="ScrollContainer" parent="chat"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="chatbox" type="Label" parent="chat/chat_scroll"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 1
+autowrap_mode = 3
 
 [node name="chatinput" type="LineEdit" parent="chat"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
+size_flags_vertical = 8
 placeholder_text = "chat"
+keep_editing_on_text_submit = true
+clear_button_enabled = true
 
 [node name="send" type="Button" parent="chat"]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Send"
 
 [node name="players" type="VBoxContainer" parent="."]
@@ -139,7 +152,7 @@ theme_override_constants/separation = 20
 layout_mode = 2
 text = "Steam Error"
 
-[node name="Button" type="Button" parent="steam_error/VBoxContainer"]
+[node name="Button" type="Button" parent="steam_error/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 text = "Retry"
 

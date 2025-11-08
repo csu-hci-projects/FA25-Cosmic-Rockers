@@ -147,7 +147,6 @@ scale = Vector2(2, 2)
 script = ExtResource("12_kou68")
 amplitude = 8.0
 rotation_amplitude = 3.0
-travel_time = null
 
 [node name="ship" type="AnimatedSprite2D" parent="system/ship"]
 rotation = 0.349066

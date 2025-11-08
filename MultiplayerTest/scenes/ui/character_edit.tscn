@@ -63,7 +63,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_v05da")
 
-[node name="button_left" type="TextureButton" parent="MarginContainer/VBoxContainer/player"]
+[node name="button_left" type="TextureButton" parent="MarginContainer/VBoxContainer/player" groups=["Button"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -82,7 +82,7 @@ spriteframes = ExtResource("2_ufpfr")
 animation_name = "walk"
 do_animation = true
 
-[node name="button_right" type="TextureButton" parent="MarginContainer/VBoxContainer/player"]
+[node name="button_right" type="TextureButton" parent="MarginContainer/VBoxContainer/player" groups=["Button"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -104,7 +104,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("9_3dtro")
 
-[node name="button_left" type="TextureButton" parent="MarginContainer/VBoxContainer/weapon"]
+[node name="button_left" type="TextureButton" parent="MarginContainer/VBoxContainer/weapon" groups=["Button"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -119,7 +119,7 @@ size_flags_horizontal = 4
 texture = ExtResource("5_d8icd")
 stretch_mode = 5
 
-[node name="button_right" type="TextureButton" parent="MarginContainer/VBoxContainer/weapon"]
+[node name="button_right" type="TextureButton" parent="MarginContainer/VBoxContainer/weapon" groups=["Button"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -141,7 +141,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("6_y50pb")
 
-[node name="button_left" type="TextureButton" parent="MarginContainer/VBoxContainer/color"]
+[node name="button_left" type="TextureButton" parent="MarginContainer/VBoxContainer/color" groups=["Button"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -157,7 +157,7 @@ size_flags_horizontal = 4
 texture = ExtResource("7_y50pb")
 stretch_mode = 5
 
-[node name="button_right" type="TextureButton" parent="MarginContainer/VBoxContainer/color"]
+[node name="button_right" type="TextureButton" parent="MarginContainer/VBoxContainer/color" groups=["Button"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 8

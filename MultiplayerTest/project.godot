@@ -51,6 +51,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="MultiplayerTest"
 
+[global_group]
+
+Button=""
+
 [gui]
 
 theme/custom="uid://t3yhq5i1rmho"

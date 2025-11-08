@@ -9,7 +9,8 @@ extends Control
 
 @onready var lobby_id = $menu/lobby_id
 
-@onready var chatbox = $chat/chatbox
+@onready var chat_scroll = $chat/chat_scroll
+@onready var chatbox = $chat/chat_scroll/chatbox
 @onready var chatinput: LineEdit = $chat/chatinput
 
 @onready var start_button: Button = $lobby_menu/start
@@ -63,8 +64,9 @@ func _on_chatinput_text_submitted(new_text: String):
 
 func _on_send_pressed():
 	var message: String = chatinput.text
-	Multiplayer.send_chat(message)
-	chatinput.clear()
+	if message.strip_edges() != "":
+		Multiplayer.send_chat(message)
+		chatinput.clear()
 
 func _update_lobby(lobby_members: Array):
 	for child in players.get_children():
@@ -91,8 +93,16 @@ func update_host():
 		level_select.visible = true
 
 func _add_chat_message(username: String, message: String):
+	var vbar: VScrollBar = chat_scroll.get_v_scroll_bar()
+	var do_scroll = false
+	if vbar.value >= vbar.max_value - vbar.size.y - 20:
+		do_scroll = true
 	var new_chat: String = "[" + username + "]: " + message
 	chatbox.text = chatbox.text + '\n' + new_chat
+	
+	if do_scroll:
+		await get_tree().process_frame
+		vbar.value = vbar.max_value
 
 func _on_ready_toggled(toggled_on: bool) -> void:
 	_on_ready_status_changed(Global.steam_id, {"status": toggled_on})

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxr47xovyvcna"]
+[gd_scene load_steps=4 format=3 uid="uid://dxr47xovyvcna"]
 
 [ext_resource type="PackedScene" uid="uid://c6het52418hfo" path="res://scenes/ui/control.tscn" id="1_s6dok"]
+[ext_resource type="PackedScene" uid="uid://c2qalw7axdloc" path="res://scenes/ui_audio.tscn" id="2_con2f"]
+[ext_resource type="Script" uid="uid://dxoa8x65d768g" path="res://scenes/UIAudio.gd" id="3_mhnvy"]
 
 [node name="Node" type="CanvasLayer"]
 
@@ -15,3 +17,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Control" parent="." instance=ExtResource("1_s6dok")]
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("2_con2f")]
+script = ExtResource("3_mhnvy")

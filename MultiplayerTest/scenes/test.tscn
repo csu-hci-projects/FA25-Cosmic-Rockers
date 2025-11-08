@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://6vskyqwmvnma"]
 
 [ext_resource type="Script" uid="uid://cevyadjutxs8l" path="res://scripts/player/PlayerStatusController.gd" id="2_4ijme"]
-[ext_resource type="Script" path="res://scripts/menu/WorldName.gd" id="3_abytp"]
+[ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/menu/WorldName.gd" id="3_abytp"]
 [ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/tilesets/default_tile_map.tres" id="4_7bh6m"]
 [ext_resource type="Script" uid="uid://duh06kuuspt28" path="res://scripts/game/Tilemap.gd" id="5_fqoh6"]
 [ext_resource type="PackedScene" uid="uid://bdctsdjup4rsn" path="res://scenes/weapons/gun_raycast.tscn" id="6_ghpyy"]
