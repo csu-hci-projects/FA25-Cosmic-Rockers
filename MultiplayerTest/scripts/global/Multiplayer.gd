@@ -72,9 +72,8 @@ func entity_hit(entity_id: String, amt: int) -> bool:
 	var data: Dictionary = {"amt": amt}
 	return send_entity_update("entity_hit", entity_id, data, 2)
 
-
 func level_complete() -> bool:
-	if is_host:
+	if is_host():
 		next_level()
 		return true
 	else:

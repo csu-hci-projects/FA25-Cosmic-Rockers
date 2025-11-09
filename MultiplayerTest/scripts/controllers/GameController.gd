@@ -87,7 +87,7 @@ func spawn_players():
 		
 		add_child(remote_player)
 		
-		var player_data = PlayerState.get_player_data(key)["player_customization"]
+		var player_data = PlayerState.get_player_data(key).get("player_customization", {})
 		var player_username = players[key]["steam_username"]
 		var player_color = PlayerState.COLORS[player_data.get("color", 0)]
 		
@@ -111,6 +111,7 @@ func despawn_players():
 	camera.set_target(null, true, 0)
 	for key in remote_players.keys():
 		remote_players[key].despawn()
+	remote_players.clear()
 
 func get_local_player() -> Node2D:
 	if !remote_players.has(Global.steam_id):
