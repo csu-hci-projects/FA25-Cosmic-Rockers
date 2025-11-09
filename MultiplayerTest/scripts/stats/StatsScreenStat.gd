@@ -1,3 +1,4 @@
+class_name StatsScreenStat
 extends HBoxContainer
 
 @onready var type = $type

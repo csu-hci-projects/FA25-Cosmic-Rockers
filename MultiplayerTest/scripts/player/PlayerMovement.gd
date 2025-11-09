@@ -19,7 +19,7 @@ var sync_frames: int = 20
 @onready var dust_particle_scene = preload("res://scenes/particles/particle_effect.tscn")
 @onready var teleport_particle_scene = preload("res://scenes/particles/teleport.tscn")
 
-@onready var pointer: Sprite2D = $pointer
+@onready var pointer: Label = $pointer
 @onready var audio_player: AudioStreamPlayer2D = $audio_player
 
 var sfx_jump: AudioStream = preload("res://audio/effects/jump.wav")
@@ -193,6 +193,9 @@ func _update_position(data: Dictionary):
 		position = data["position"]
 
 func take_damage(amt: int):
+	if is_dead:
+		return
+	
 	if is_local_player:
 		PlayerState.add_stat(PlayerState.STAT.DAMAGE_TAKEN, amt)
 	super(amt)
@@ -201,6 +204,9 @@ func take_damage(amt: int):
 		set_sfx(sfx_damage)
 
 func die():
+	if is_dead:
+		return
+		
 	PlayerState.add_stat(PlayerState.STAT.DEATHS, 1)
 	super()
 	input_dir = 0

@@ -106,6 +106,12 @@ func all_ready() -> bool:
 func clear():
 	players.clear()
 
+func reset():
+	for steam_id in players.keys():
+		for key in players[steam_id].keys():
+			if key != "steam_username":
+				players[steam_id].erase(key)
+
 func get_stat_name(key: STAT) -> String:
 	match(key):
 		STAT.BLOCKS_BROKEN: return "Blocks Broken"

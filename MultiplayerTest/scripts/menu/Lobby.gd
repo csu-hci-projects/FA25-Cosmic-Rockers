@@ -40,6 +40,11 @@ func _ready():
 		_display_error(Global.error_message)
 	
 	level_select.max_value = WorldState.LEVELS.size()
+	
+	#rejoin lobby after game
+	if Multiplayer.lobby_id != 0:
+		_on_lobby_joined()
+		Multiplayer.get_lobby_members()
 
 func _display_error(message: String):
 	error_message.text = "Steam Error:\n(" + message + ")\nPlease restart steam and try again."

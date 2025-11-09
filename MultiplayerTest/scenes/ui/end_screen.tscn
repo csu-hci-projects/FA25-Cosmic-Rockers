@@ -6,52 +6,75 @@
 [ext_resource type="Texture2D" uid="uid://l4oggb0rnncm" path="res://sprites/ui/arrows/arrow_right.png" id="4_h1n6l"]
 [ext_resource type="Texture2D" uid="uid://cxmjdxefbo6ui" path="res://sprites/ui/arrows/arrow_right_disabled.png" id="5_w8f1j"]
 
-[node name="end_screen" type="HBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
+[node name="end_screen" type="VBoxContainer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -12.0
+offset_right = 300.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
 script = ExtResource("1_eok5x")
 
-[node name="player_list" type="VBoxContainer" parent="."]
+[node name="stats" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="player_list" type="VBoxContainer" parent="stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VSeparator" type="VSeparator" parent="."]
+[node name="VSeparator" type="VSeparator" parent="stats"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="stat_list" type="VBoxContainer" parent="."]
+[node name="stat_list" type="VBoxContainer" parent="stats"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="player" type="HBoxContainer" parent="stat_list"]
+[node name="player" type="HBoxContainer" parent="stats/stat_list"]
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="left" type="TextureButton" parent="stat_list/player"]
+[node name="left" type="TextureButton" parent="stats/stat_list/player"]
 layout_mode = 2
 size_flags_horizontal = 2
 texture_normal = ExtResource("2_dlhjq")
 texture_pressed = ExtResource("3_eok5x")
 stretch_mode = 5
 
-[node name="username" type="Label" parent="stat_list/player"]
+[node name="username" type="Label" parent="stats/stat_list/player"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "username"
 
-[node name="right" type="TextureButton" parent="stat_list/player"]
+[node name="right" type="TextureButton" parent="stats/stat_list/player"]
 layout_mode = 2
 size_flags_horizontal = 10
 texture_normal = ExtResource("4_h1n6l")
 texture_pressed = ExtResource("5_w8f1j")
 stretch_mode = 5
 
-[connection signal="pressed" from="stat_list/player/left" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="stat_list/player/right" to="." method="_on_right_pressed"]
+[node name="buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="menu" type="Button" parent="buttons"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="lobby" type="Button" parent="buttons"]
+layout_mode = 2
+text = "Return to Lobby"
+
+[connection signal="pressed" from="stats/stat_list/player/left" to="stats" method="_on_left_pressed"]
+[connection signal="pressed" from="stats/stat_list/player/right" to="stats" method="_on_right_pressed"]
+[connection signal="pressed" from="buttons/menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="buttons/lobby" to="." method="_on_lobby_pressed"]

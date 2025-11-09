@@ -1,19 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmihda84q488q"]
+[gd_scene load_steps=6 format=3 uid="uid://bmihda84q488q"]
 
 [ext_resource type="Script" uid="uid://cx7p701dtua6w" path="res://scripts/player/PlayerMovement.gd" id="1_dd427"]
 [ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="2_u3rb4"]
-[ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://shaders/WhiteReplace.gdshader" id="4_68xwl"]
-[ext_resource type="Texture2D" uid="uid://do7bxssgc1kyv" path="res://sprites/ui/pointer.png" id="5_wwvfn"]
-[ext_resource type="Script" path="res://scripts/player/Pointer.gd" id="6_wwvfn"]
+[ext_resource type="Script" uid="uid://cu5oe4ocbd8lq" path="res://scripts/player/Pointer.gd" id="6_wwvfn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
 radius = 6.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8yk2"]
-resource_local_to_scene = true
-shader = ExtResource("4_68xwl")
-shader_parameter/target_color = Color(1, 1, 1, 1)
-shader_parameter/threshold = 0.5
+[sub_resource type="LabelSettings" id="LabelSettings_68xwl"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0.12549, 0.12549, 0.156863, 1)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -27,11 +24,27 @@ animation = &"walk"
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lbhrr")
 
-[node name="pointer" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_t8yk2")
-position = Vector2(0, -13)
-texture = ExtResource("5_wwvfn")
-script = ExtResource("6_wwvfn")
-
 [node name="audio_player" type="AudioStreamPlayer2D" parent="."]
 bus = &"Effects"
+
+[node name="pointer" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -14.0
+offset_right = 175.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+size_flags_horizontal = 4
+text = "username"
+label_settings = SubResource("LabelSettings_68xwl")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("6_wwvfn")

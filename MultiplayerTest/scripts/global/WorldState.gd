@@ -160,3 +160,10 @@ func get_level_name_alien() -> String:
 
 func get_level_effects() -> Array[LevelData.LEVEL_EFFECT]:
 	return LEVELS[level_id]["effects"]
+
+func reset():
+	map_data = []
+	room_data = []
+	received_map_chunks = {}
+	level_loaded = false
+	win_state = false

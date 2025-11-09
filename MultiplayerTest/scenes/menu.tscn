@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6het52418hfo" path="res://scenes/ui/control.tscn" id="1_s6dok"]
 [ext_resource type="PackedScene" uid="uid://c2qalw7axdloc" path="res://scenes/ui_audio.tscn" id="2_con2f"]
-[ext_resource type="Script" uid="uid://dxoa8x65d768g" path="res://scenes/UIAudio.gd" id="3_mhnvy"]
+[ext_resource type="Script" uid="uid://dxoa8x65d768g" path="res://scripts/effects/UIAudio.gd" id="3_mhnvy"]
 
 [node name="Node" type="CanvasLayer"]
 

@@ -5,14 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://duuaeweocig88" path="res://sprites/planets/axtov.png" id="2_b3nhs"]
 [ext_resource type="Texture2D" uid="uid://c06ejgkay8dkg" path="res://sprites/planets/target.png" id="3_v68kg"]
 [ext_resource type="Texture2D" uid="uid://b8nkcgdibgfw2" path="res://sprites/planets/symyt.png" id="3_vrufj"]
-[ext_resource type="Script" uid="uid://bqseh8yv6bbkc" path="res://scripts/menu/TargetSpin.gd" id="4_54u3s"]
+[ext_resource type="Script" uid="uid://bqseh8yv6bbkc" path="res://scripts/effects/TargetSpin.gd" id="4_54u3s"]
 [ext_resource type="Texture2D" uid="uid://uvaghd5h74f4" path="res://sprites/planets/balorb.png" id="4_v68kg"]
 [ext_resource type="Texture2D" uid="uid://dokyq2pbnmqoj" path="res://sprites/planets/drobbo.png" id="5_54u3s"]
 [ext_resource type="PackedScene" uid="uid://blkvjt4xwkqep" path="res://scenes/transitions/orbit.tscn" id="6_senw2"]
 [ext_resource type="Script" uid="uid://bv0s1oa21wg05" path="res://scripts/menu/WorldName.gd" id="8_mvuiw"]
 [ext_resource type="Texture2D" uid="uid://bmw5bmcvxua0c" path="res://sprites/planets/encroacher.png" id="10_v68kg"]
 [ext_resource type="SpriteFrames" uid="uid://ivjkxtd4behj" path="res://sprites/sprite_sheets/ship/ship_animation.tres" id="11_54u3s"]
-[ext_resource type="Script" uid="uid://jj0rnxktsk5d" path="res://scripts/menu/Floating.gd" id="12_kou68"]
+[ext_resource type="Script" uid="uid://jj0rnxktsk5d" path="res://scripts/effects/Floating.gd" id="12_kou68"]
 [ext_resource type="Texture2D" uid="uid://b65lt3s1woa1o" path="res://sprites/sprite_sheets/ship/space-ship.png" id="13_mvuiw"]
 
 [node name="transition" type="CanvasLayer" node_paths=PackedStringArray("planets")]
@@ -141,8 +141,8 @@ texture = ExtResource("10_v68kg")
 flip_v = true
 
 [node name="ship" type="Node2D" parent="system"]
-position = Vector2(1008.99, 449.25)
-rotation = -0.0320085
+position = Vector2(1008.99, 464.06)
+rotation = 0.0649245
 scale = Vector2(2, 2)
 script = ExtResource("12_kou68")
 amplitude = 8.0
@@ -151,7 +151,7 @@ rotation_amplitude = 3.0
 [node name="ship" type="AnimatedSprite2D" parent="system/ship"]
 rotation = 0.349066
 sprite_frames = ExtResource("11_54u3s")
-frame_progress = 0.455548
+frame_progress = 0.731817
 
 [node name="space_ship" type="Sprite2D" parent="system/ship"]
 rotation = 0.349066

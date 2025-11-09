@@ -88,7 +88,10 @@ func spawn_players():
 		add_child(remote_player)
 		
 		var player_data = PlayerState.get_player_data(key)["player_customization"]
-		remote_player.pointer.material.set_shader_parameter("target_color", PlayerState.COLORS[player_data.get("color", 0)])
+		var player_username = players[key]["steam_username"]
+		var player_color = PlayerState.COLORS[player_data.get("color", 0)]
+		
+		remote_player.pointer.set_pointer(player_color, player_username	)
 		remote_player.sprite.sprite_frames = PlayerState.CHARACTERS[player_data.get("character", 0)]
 		remote_player.on_die.connect(_on_player_die)
 		
@@ -97,7 +100,7 @@ func spawn_players():
 		remote_player.add_child(gun)
 		
 		move_to_spawn(remote_player)
-		player_status.create_status_bar(remote_player, players[key]["steam_username"])
+		player_status.create_status_bar(remote_player, player_username, player_color)
 	
 	var local_player = get_local_player()
 	local_player.is_local_player = true
