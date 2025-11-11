@@ -32,6 +32,10 @@ class_name Arm extends Node2D
 @export_range(0.0, 5, 0.1) var wave_frequency: float = 2.0
 @export_range(0.0, 10.0, 0.1) var wave_speed: float = 3.0
 
+@export_group("Force")
+@export var idle_force: Vector2 = Vector2.ZERO
+@export var idle_force_strength: float = 0.0
+
 @export_group("Visual Properties")
 @export_range(1.0, 100.0, 0.5) var line_width: float = 24.0:
 	set(value):
@@ -68,6 +72,8 @@ func _physics_process(delta: float) -> void:
 	if !is_dead:
 		apply_wave_motion(delta)
 		apply_constraints()
+		apply_idle_force(delta)
+		apply_constraints()
 
 	update_line2d()
 
@@ -86,6 +92,15 @@ func solve_ik(target_position: Vector2) -> void:
 			var vec: Vector2 = _segments[i + 1] - _segments[i]
 			var direction: Vector2 = vec.normalized()
 			_segments[i + 1] = _segments[i] + direction * _segment_lengths[i]
+
+
+func apply_idle_force(delta: float) -> void:
+	if idle_force == Vector2.ZERO or idle_force_strength <= 0.0:
+		return
+
+	# Apply the idle force evenly across all segments except the base
+	for i in range(1, _segments.size()):
+		_segments[i] += idle_force.normalized() * idle_force_strength * delta
 
 
 func apply_constraints() -> void:

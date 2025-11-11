@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://j3gcywxflkf1"]
 
 [ext_resource type="Script" uid="uid://d4ae5iqydorjl" path="res://scripts/enemy/boss/Arm.gd" id="1_k0nq1"]
-[ext_resource type="Shader" uid="uid://b7wgfbm5n32tc" path="res://shaders/TwoToneShade.gdshader" id="3_dxwbl"]
+[ext_resource type="Shader" uid="uid://b7wgfbm5n32tc" path="res://shaders/Shade.gdshader" id="3_dxwbl"]
 [ext_resource type="Shader" uid="uid://m0itjqx6e3t0" path="res://shaders/Outline.gdshader" id="3_o1qxq"]
 
 [sub_resource type="Curve" id="Curve_pqnx6"]
@@ -19,7 +19,6 @@ shader_parameter/shade_color = Color(1, 1, 1, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pqnx6"]
 resource_local_to_scene = true
 shader = ExtResource("3_dxwbl")
-shader_parameter/light_color = Color(0.0736265, 0.617919, 0, 1)
 shader_parameter/dark_color = Color(0, 0.314903, 0.486831, 1)
 shader_parameter/shade_ratio = 0.18
 
@@ -31,6 +30,8 @@ max_length = 100.0
 wave_amplitude = 1.0
 wave_frequency = 1.0
 wave_speed = 1.0
+idle_force = null
+idle_force_strength = null
 line_width = 12.0
 width_curve = SubResource("Curve_pqnx6")
 
@@ -58,9 +59,10 @@ material = SubResource("ShaderMaterial_pqnx6")
 
 [node name="BaseLine" type="Line2D" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup"]
 position = Vector2(256, 256)
-points = PackedVector2Array(0, 0, 8.05548, -2.4859, 13.6936, -8.72087, 17.0362, -16.4381, 19.259, -24.5491, 21.7935, -32.564, 25.405, -40.1497, 30.0941, -47.1206, 35.2544, -53.7554, 39.6991, -60.8922, 41.8508, -69.0131, 40.4179, -77.2721, 35.1346, -83.7441)
+points = PackedVector2Array(0, 0, -5.62823, -6.17844, -11.7959, -11.8116, -17.9151, -17.4961, -23.8984, -23.3184, -29.6956, -29.3195, -35.302, -35.4957, -40.7634, -41.801, -46.173, -48.1543, -51.6408, -54.4603, -57.2534, -60.6371, -63.052, -66.6351, -69.03, -72.4466)
 width = 12.0
 width_curve = SubResource("Curve_pqnx6")
+default_color = Color(0.0745098, 0.619608, 0, 1)
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2

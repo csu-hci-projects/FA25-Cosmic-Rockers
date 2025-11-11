@@ -39,6 +39,8 @@ arm_2_target = NodePath("visuals/arm2/path/target")
 position = Vector2(-12, -3)
 target = NodePath("path/target")
 num__segments = 20
+idle_force = Vector2(1, 0)
+idle_force_strength = 30.0
 
 [node name="path" type="Path2D" parent="visuals/arm"]
 curve = SubResource("Curve2D_ub7yk")
@@ -56,6 +58,8 @@ intensity_cooldown_rate = 1.0
 position = Vector2(12, -3)
 target = NodePath("path/target")
 num__segments = 20
+idle_force = Vector2(1, 0)
+idle_force_strength = 30.0
 
 [node name="path" type="Path2D" parent="visuals/arm2"]
 position = Vector2(-25, 7)
@@ -66,10 +70,13 @@ position = Vector2(-5, -57)
 rotation = 2.14011
 
 [node name="head" parent="visuals" node_paths=PackedStringArray("target") instance=ExtResource("4_eig4w")]
+position = Vector2(0, -3)
 target = NodePath("target")
+max_length = 130.0
+idle_force_strength = 70.0
 
 [node name="target" type="Node2D" parent="visuals/head"]
-position = Vector2(28, -76)
+position = Vector2(-34, -77)
 
 [node name="body" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
