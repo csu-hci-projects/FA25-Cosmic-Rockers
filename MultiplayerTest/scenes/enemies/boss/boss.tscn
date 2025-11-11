@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy836erei1ko5"]
+[gd_scene load_steps=8 format=3 uid="uid://cy836erei1ko5"]
 
 [ext_resource type="PackedScene" uid="uid://j3gcywxflkf1" path="res://scenes/enemies/boss/arm.tscn" id="1_1ex25"]
-[ext_resource type="Script" uid="uid://cw1iek3lmjg3q" path="res://scripts/enemy/EnemyBoss.gd" id="1_ub7yk"]
+[ext_resource type="Script" uid="uid://cw1iek3lmjg3q" path="res://scripts/enemy/boss/EnemyBoss.gd" id="1_ub7yk"]
 [ext_resource type="PackedScene" uid="uid://cl2sc160goxhv" path="res://scenes/enemies/boss/harp.tscn" id="2_ub7yk"]
+[ext_resource type="PackedScene" uid="uid://t2qcj1j7bad1" path="res://scenes/enemies/boss/head.tscn" id="4_eig4w"]
 
 [sub_resource type="Curve2D" id="Curve2D_ub7yk"]
 resource_local_to_scene = true
@@ -64,15 +65,17 @@ curve = SubResource("Curve2D_ian0n")
 position = Vector2(-5, -57)
 rotation = 2.14011
 
-[node name="head" parent="visuals" node_paths=PackedStringArray("target") instance=ExtResource("1_1ex25")]
-position = Vector2(0, -3)
-target = NodePath("target3")
-num__segments = 20
+[node name="head" parent="visuals" node_paths=PackedStringArray("target") instance=ExtResource("4_eig4w")]
+target = NodePath("target")
 
-[node name="target3" type="Node2D" parent="visuals/head"]
-position = Vector2(32, -76)
+[node name="target" type="Node2D" parent="visuals/head"]
+position = Vector2(28, -76)
 
 [node name="body" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ian0n")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -45)
+zoom = Vector2(5, 5)

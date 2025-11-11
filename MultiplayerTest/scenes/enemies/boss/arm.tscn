@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://j3gcywxflkf1"]
 
-[ext_resource type="Script" uid="uid://d4ae5iqydorjl" path="res://scripts/enemy/Arm.gd" id="1_k0nq1"]
+[ext_resource type="Script" uid="uid://d4ae5iqydorjl" path="res://scripts/enemy/boss/Arm.gd" id="1_k0nq1"]
 [ext_resource type="Shader" uid="uid://b7wgfbm5n32tc" path="res://shaders/TwoToneShade.gdshader" id="3_dxwbl"]
 [ext_resource type="Shader" uid="uid://m0itjqx6e3t0" path="res://shaders/Outline.gdshader" id="3_o1qxq"]
 
-[sub_resource type="Curve" id="Curve_pi6jo"]
-_data = [Vector2(0, 0.987436), 0.0, 0.0, 0, 0, Vector2(1, 0.145985), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_pqnx6"]
+_data = [Vector2(0, 0.987436), 0.0, 0.0, 0, 0, Vector2(1, 0.235927), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pi6jo"]
@@ -16,9 +16,10 @@ shader_parameter/alpha_threshold = 0.9
 shader_parameter/outline_samples = 4
 shader_parameter/shade_color = Color(1, 1, 1, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_arm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pqnx6"]
+resource_local_to_scene = true
 shader = ExtResource("3_dxwbl")
-shader_parameter/light_color = Color(0.211717, 0.545112, 1.92523e-07, 1)
+shader_parameter/light_color = Color(0.0736265, 0.617919, 0, 1)
 shader_parameter/dark_color = Color(0, 0.314903, 0.486831, 1)
 shader_parameter/shade_ratio = 0.18
 
@@ -31,7 +32,7 @@ wave_amplitude = 1.0
 wave_frequency = 1.0
 wave_speed = 1.0
 line_width = 12.0
-width_curve = SubResource("Curve_pi6jo")
+width_curve = SubResource("Curve_pqnx6")
 
 [node name="OutlinedSubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_pi6jo")
@@ -53,13 +54,13 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="TwoToneCanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport"]
-material = SubResource("ShaderMaterial_arm")
+material = SubResource("ShaderMaterial_pqnx6")
 
 [node name="BaseLine" type="Line2D" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup"]
 position = Vector2(256, 256)
-points = PackedVector2Array(0, 0, -7.86011, -3.31314, -13.7204, -9.43269, -16.6999, -17.363, -16.572, -25.838, -14.2305, -33.9922, -11.4939, -42.0258, -10.4246, -50.4401, -12.4306, -58.6713, -17.6988, -65.2883, -25.2225, -69.1084, -33.5418, -70.322, -41.8551, -71.2496)
+points = PackedVector2Array(0, 0, 8.05548, -2.4859, 13.6936, -8.72087, 17.0362, -16.4381, 19.259, -24.5491, 21.7935, -32.564, 25.405, -40.1497, 30.0941, -47.1206, 35.2544, -53.7554, 39.6991, -60.8922, 41.8508, -69.0131, 40.4179, -77.2721, 35.1346, -83.7441)
 width = 12.0
-width_curve = SubResource("Curve_pi6jo")
+width_curve = SubResource("Curve_pqnx6")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2

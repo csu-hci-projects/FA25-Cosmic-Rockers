@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://t2qcj1j7bad1"]
+
+[ext_resource type="PackedScene" uid="uid://j3gcywxflkf1" path="res://scenes/enemies/boss/arm.tscn" id="1_0mr36"]
+[ext_resource type="Shader" uid="uid://b7wgfbm5n32tc" path="res://shaders/TwoToneShade.gdshader" id="2_yr4rn"]
+[ext_resource type="Script" uid="uid://fjwwoamqcir7" path="res://scripts/enemy/boss/Eye.gd" id="3_no6qd"]
+
+[sub_resource type="Curve" id="Curve_yr4rn"]
+_data = [Vector2(0, 0.987436), 0.0, 0.0, 0, 0, Vector2(1, 0.483444), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_no6qd"]
+resource_local_to_scene = true
+shader = ExtResource("2_yr4rn")
+shader_parameter/light_color = Color(0.0736265, 0.617919, 0, 1)
+shader_parameter/dark_color = Color(0, 0.314903, 0.486831, 1)
+shader_parameter/shade_ratio = 0.18
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_arm"]
+resource_local_to_scene = true
+shader = ExtResource("2_yr4rn")
+shader_parameter/light_color = Color(0.713726, 0.635294, 0.337255, 1)
+shader_parameter/dark_color = Color(0, 0.314903, 0.486831, 1)
+shader_parameter/shade_ratio = 0.18
+
+[node name="Arm" instance=ExtResource("1_0mr36")]
+width_curve = SubResource("Curve_yr4rn")
+
+[node name="TwoToneCanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="0"]
+material = SubResource("ShaderMaterial_no6qd")
+
+[node name="BaseLine" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup" index="0"]
+points = PackedVector2Array(0, 0, 8.37985, 0.676361, 16.2233, 3.69077, 23.8461, 7.26563, 31.7398, 10.2329, 40.071, 11.5861, 48.4696, 10.7365, 56.33, 7.66364, 63.3035, 2.91452, 69.6948, -2.58345, 76.3108, -7.78476, 83.7307, -11.7017, 91.8745, -13.5792)
+width_curve = SubResource("Curve_yr4rn")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="1"]
+material = SubResource("ShaderMaterial_arm")
+
+[node name="eye" type="Node2D" parent="OutlinedSubViewportContainer/SubViewport/CanvasGroup" index="0" node_paths=PackedStringArray("arm")]
+position = Vector2(256, 256)
+script = ExtResource("3_no6qd")
+arm = NodePath("../../../..")

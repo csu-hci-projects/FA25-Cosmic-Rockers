@@ -176,3 +176,7 @@ func get_segments() -> Array[Vector2]:
 
 func get_segment_lengths() -> Array:
 	return _segment_lengths
+
+
+func get_last_segment() -> Vector2:
+	return base_node.to_local(_segments[-1])
