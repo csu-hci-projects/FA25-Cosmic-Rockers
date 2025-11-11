@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfqdi08v1dmx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uqxm8"]
+radius = 2.0
+
+[node name="death_target" type="RigidBody2D"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uqxm8")

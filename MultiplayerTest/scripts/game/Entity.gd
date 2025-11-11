@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var health_bar_scene = preload("res://scenes/ui/health_bar.tscn")
 
-@onready var sprite: AnimatedSprite2D = $sprite
+var sprite: AnimatedSprite2D
 
 var entity_id: String
 @export var max_health: int = 100
@@ -16,8 +16,8 @@ signal on_hit_taken(amt: int)
 signal on_die()
 
 func _ready():
-	if sprite == null:
-		push_error("Entity class must have a child of type AnimatedSprite2D named \"sprite\"")
+	if find_child("sprite"):
+		sprite = $sprite
 	add_to_group("entity")
 	is_dead = false
 	create_health_bar()
@@ -41,7 +41,6 @@ func take_healing(amt: int):
 
 func set_health(amt: int):
 	health = amt
-	
 	if health <= 0:
 		health = 0
 		die()
@@ -57,6 +56,9 @@ func die():
 	emit_signal("on_die")
 
 func hit_effect():
+	if !sprite:
+		return
+	
 	for i in 1:
 		sprite.self_modulate = Color.INDIAN_RED
 		await get_tree().create_timer(0.1).timeout

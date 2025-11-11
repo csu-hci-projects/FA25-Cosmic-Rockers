@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://t8cfn5odscf5" path="res://scripts/game/Environment.gd" id="10_570kq"]
 [ext_resource type="PackedScene" uid="uid://bmihda84q488q" path="res://scenes/game/player.tscn" id="10_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://boxrp36onph30" path="res://scenes/particles/foreground_particles.tscn" id="11_ghpyy"]
-[ext_resource type="PackedScene" uid="uid://cy836erei1ko5" path="res://scenes/enemies/boss/boss.tscn" id="13_44saj"]
+[ext_resource type="PackedScene" uid="uid://cy836erei1ko5" path="res://scenes/enemies/boss.tscn" id="13_44saj"]
 
 [sub_resource type="Environment" id="Environment_87uf6"]
 background_mode = 3
