@@ -29,7 +29,7 @@ width_curve = SubResource("Curve_yr4rn")
 material = SubResource("ShaderMaterial_no6qd")
 
 [node name="BaseLine" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup" index="0"]
-points = PackedVector2Array(0, 0, -4.8318, -6.58434, -9.21942, -13.5591, -13.5399, -20.6135, -17.8868, -27.6837, -22.3668, -34.6932, -27.0477, -41.584, -31.9473, -48.3288, -37.0314, -54.9388, -42.2185, -61.469, -47.3973, -68.0048, -52.4619, -74.6273, -57.3383, -81.3869)
+points = PackedVector2Array(0, 0, -5.31662, -6.16165, -10.5768, -12.4809, -15.9299, -18.7692, -21.4521, -24.9514, -27.1789, -30.9756, -33.1002, -36.8294, -39.1616, -42.5502, -45.2737, -48.2231, -51.3357, -53.9516, -57.2632, -59.8183, -63.0071, -65.8624, -68.561, -72.0778)
 width_curve = SubResource("Curve_yr4rn")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="1"]
@@ -43,3 +43,4 @@ eye_color = Color(1, 0.386676, 0.707693, 1)
 lid_color = Color(0, 0.466667, 0, 1)
 pupil_color = Color(0.626912, 8.90419e-07, 0.315301, 1)
 pupil_offset = Vector2(-6, 0)
+lid_angle = 0.0

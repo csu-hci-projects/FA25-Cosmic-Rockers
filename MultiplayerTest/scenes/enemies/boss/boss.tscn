@@ -31,11 +31,12 @@ point_count = 3
 radius = 8.0
 height = 34.0
 
-[node name="boss" type="CharacterBody2D" node_paths=PackedStringArray("harp", "arm_1", "arm_1_target", "arm_2", "arm_2_target")]
+[node name="boss" type="CharacterBody2D" node_paths=PackedStringArray("harp", "head", "head_target", "arm_1", "arm_1_target", "arm_2", "arm_2_target")]
 collision_layer = 10
 script = ExtResource("1_ub7yk")
 harp = NodePath("visuals/harp")
-move_speed = 0.5
+head = NodePath("visuals/head")
+head_target = NodePath("visuals/head/target")
 arm_1 = NodePath("visuals/arm")
 arm_1_target = NodePath("visuals/arm/path/target")
 arm_2 = NodePath("visuals/arm2")

@@ -81,4 +81,4 @@ target = NodePath("../player")
 load_on_ready = true
 
 [node name="boss" parent="." instance=ExtResource("13_44saj")]
-position = Vector2(285, 72)
+position = Vector2(621, 72)

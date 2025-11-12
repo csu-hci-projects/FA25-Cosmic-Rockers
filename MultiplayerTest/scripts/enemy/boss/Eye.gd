@@ -18,10 +18,15 @@ var _blink_timer := 0.0
 var _next_blink_time := 0.0
 var _is_blinking := false
 
+var parent_entity: Entity = null
+
 func _process(delta):
-	_blink_timer += delta
-	if !_is_blinking and _blink_timer >= _next_blink_time:
-		blink()
+	if parent_entity and !parent_entity.is_dead:
+		_blink_timer += delta
+		if !_is_blinking and _blink_timer >= _next_blink_time:
+			blink()
+	else:
+		lid_angle = 0
 	
 	queue_redraw()
 
