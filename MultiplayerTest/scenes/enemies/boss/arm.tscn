@@ -30,8 +30,6 @@ max_length = 100.0
 wave_amplitude = 1.0
 wave_frequency = 1.0
 wave_speed = 1.0
-idle_force = null
-idle_force_strength = null
 line_width = 12.0
 width_curve = SubResource("Curve_pqnx6")
 
@@ -59,7 +57,7 @@ material = SubResource("ShaderMaterial_pqnx6")
 
 [node name="BaseLine" type="Line2D" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup"]
 position = Vector2(256, 256)
-points = PackedVector2Array(0, 0, -5.62823, -6.17844, -11.7959, -11.8116, -17.9151, -17.4961, -23.8984, -23.3184, -29.6956, -29.3195, -35.302, -35.4957, -40.7634, -41.801, -46.173, -48.1543, -51.6408, -54.4603, -57.2534, -60.6371, -63.052, -66.6351, -69.03, -72.4466)
+points = PackedVector2Array(0, 0, 8.33334, 0, 16.6667, 0, 25, 0, 33.3333, 0, 41.6667, 0, 50, 0, 58.3333, 0, 66.6667, 0, 75, 0, 83.3333, 0, 91.6667, 0, 100, 0)
 width = 12.0
 width_curve = SubResource("Curve_pqnx6")
 default_color = Color(0.0745098, 0.619608, 0, 1)

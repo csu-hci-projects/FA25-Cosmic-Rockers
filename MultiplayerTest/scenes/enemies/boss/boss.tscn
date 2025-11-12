@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cy836erei1ko5"]
+[gd_scene load_steps=10 format=3 uid="uid://cy836erei1ko5"]
 
 [ext_resource type="PackedScene" uid="uid://j3gcywxflkf1" path="res://scenes/enemies/boss/arm.tscn" id="1_1ex25"]
 [ext_resource type="Script" uid="uid://cw1iek3lmjg3q" path="res://scripts/enemy/boss/EnemyBoss.gd" id="1_ub7yk"]
 [ext_resource type="PackedScene" uid="uid://cl2sc160goxhv" path="res://scenes/enemies/boss/harp.tscn" id="2_ub7yk"]
 [ext_resource type="PackedScene" uid="uid://t2qcj1j7bad1" path="res://scenes/enemies/boss/head.tscn" id="4_eig4w"]
+
+[sub_resource type="Curve" id="Curve_b7gi3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ub7yk"]
 resource_local_to_scene = true
@@ -18,6 +22,10 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -5, -57, -3.75554, -3.27994, 3.75554, 3.27994, -21, -32, -6.97392, 3.43249, 6.97392, -3.43249, -2, -35, -4.89982, 7.32265, 4.89982, -7.32265, 11, -46, 0, 0, 0, 0, 10, -57, 0, 0, 0, 0, -5, -57)
 }
 point_count = 6
+
+[sub_resource type="Curve" id="Curve_eig4w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.740741, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ian0n"]
 radius = 8.0
@@ -41,6 +49,7 @@ target = NodePath("path/target")
 num__segments = 20
 idle_force = Vector2(1, 0)
 idle_force_strength = 30.0
+force_curve = SubResource("Curve_b7gi3")
 
 [node name="path" type="Path2D" parent="visuals/arm"]
 curve = SubResource("Curve2D_ub7yk")
@@ -52,6 +61,7 @@ rotates = false
 
 [node name="harp" parent="visuals" instance=ExtResource("2_ub7yk")]
 position = Vector2(-13, -32)
+play_intensity = 0.7
 intensity_cooldown_rate = 1.0
 
 [node name="arm2" parent="visuals" node_paths=PackedStringArray("target") instance=ExtResource("1_1ex25")]
@@ -60,6 +70,7 @@ target = NodePath("path/target")
 num__segments = 20
 idle_force = Vector2(1, 0)
 idle_force_strength = 30.0
+force_curve = SubResource("Curve_b7gi3")
 
 [node name="path" type="Path2D" parent="visuals/arm2"]
 position = Vector2(-25, 7)
@@ -74,6 +85,7 @@ position = Vector2(0, -3)
 target = NodePath("target")
 max_length = 130.0
 idle_force_strength = 70.0
+force_curve = SubResource("Curve_eig4w")
 
 [node name="target" type="Node2D" parent="visuals/head"]
 position = Vector2(-34, -77)

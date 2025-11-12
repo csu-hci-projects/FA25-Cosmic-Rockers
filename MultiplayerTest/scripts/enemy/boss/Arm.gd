@@ -35,6 +35,7 @@ class_name Arm extends Node2D
 @export_group("Force")
 @export var idle_force: Vector2 = Vector2.ZERO
 @export var idle_force_strength: float = 0.0
+@export var force_curve: Curve
 
 @export_group("Visual Properties")
 @export_range(1.0, 100.0, 0.5) var line_width: float = 24.0:
@@ -100,7 +101,10 @@ func apply_idle_force(delta: float) -> void:
 
 	# Apply the idle force evenly across all segments except the base
 	for i in range(1, _segments.size()):
-		_segments[i] += idle_force.normalized() * idle_force_strength * delta
+		var influence = 1
+		if force_curve:
+			influence = force_curve.sample(float(i) / _segments.size())
+		_segments[i] += idle_force.normalized() * idle_force_strength * delta * influence
 
 
 func apply_constraints() -> void:

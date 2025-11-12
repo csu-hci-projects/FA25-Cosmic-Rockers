@@ -29,9 +29,8 @@ width_curve = SubResource("Curve_yr4rn")
 material = SubResource("ShaderMaterial_no6qd")
 
 [node name="BaseLine" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup" index="0"]
-points = PackedVector2Array(0, 0, -6.22218, -5.2155, -12.099, -10.951, -17.8624, -16.8571, -23.5481, -22.8855, -29.2464, -28.9353, -35.0498, -34.9047, -41.0205, -40.7174, -47.1774, -46.337, -53.4963, -51.7746, -59.9132, -57.0953, -66.3388, -62.4042, -72.6831, -67.8084)
+points = PackedVector2Array(0, 0, -4.8318, -6.58434, -9.21942, -13.5591, -13.5399, -20.6135, -17.8868, -27.6837, -22.3668, -34.6932, -27.0477, -41.584, -31.9473, -48.3288, -37.0314, -54.9388, -42.2185, -61.469, -47.3973, -68.0048, -52.4619, -74.6273, -57.3383, -81.3869)
 width_curve = SubResource("Curve_yr4rn")
-default_color = Color(0.0745098, 0.619608, 0, 1)
 
 [node name="CanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="1"]
 material = SubResource("ShaderMaterial_arm")
