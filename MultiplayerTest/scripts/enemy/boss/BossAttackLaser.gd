@@ -1,6 +1,7 @@
 class_name BossAttackLaser extends BossAttack
 
 @export var line: Line2D
+@export var audio_player: AudioStreamPlayer2D
 @export var timer: float = 5
 
 @export var charge_timer: float = 2
@@ -15,6 +16,7 @@ var damage_timer: float = .2
 func _ready() -> void:
 	_charge_timer = charge_timer
 	_width = float(line.width)
+	audio_player.play()
 
 func _process(delta: float) -> void:
 	timer -= delta
