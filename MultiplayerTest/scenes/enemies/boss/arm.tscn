@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://j3gcywxflkf1"]
+
+[ext_resource type="Script" uid="uid://d4ae5iqydorjl" path="res://scripts/enemy/boss/Arm.gd" id="1_k0nq1"]
+[ext_resource type="Shader" uid="uid://b7wgfbm5n32tc" path="res://shaders/Shade.gdshader" id="3_dxwbl"]
+[ext_resource type="Shader" uid="uid://m0itjqx6e3t0" path="res://shaders/Outline.gdshader" id="3_o1qxq"]
+
+[sub_resource type="Curve" id="Curve_pqnx6"]
+_data = [Vector2(0, 0.987436), 0.0, 0.0, 0, 0, Vector2(1, 0.235927), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pi6jo"]
+shader = ExtResource("3_o1qxq")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_size = 1.0
+shader_parameter/alpha_threshold = 0.9
+shader_parameter/outline_samples = 4
+shader_parameter/shade_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pqnx6"]
+resource_local_to_scene = true
+shader = ExtResource("3_dxwbl")
+shader_parameter/dark_color = Color(0, 0.314903, 0.486831, 1)
+shader_parameter/shade_ratio = 0.18
+
+[node name="Arm" type="Node2D" node_paths=PackedStringArray("base_node")]
+script = ExtResource("1_k0nq1")
+base_node = NodePath("OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup/BaseLine")
+num__segments = 12
+max_length = 100.0
+wave_amplitude = 1.0
+wave_frequency = 1.0
+wave_speed = 1.0
+line_width = 12.0
+width_curve = SubResource("Curve_pqnx6")
+
+[node name="OutlinedSubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_pi6jo")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="OutlinedSubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(300, 300)
+render_target_update_mode = 4
+
+[node name="TwoToneCanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport"]
+material = SubResource("ShaderMaterial_pqnx6")
+
+[node name="BaseLine" type="Line2D" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup"]
+position = Vector2(150, 150)
+points = PackedVector2Array(0, 0, -6.1339, -5.69043, -12.7735, -10.7645, -19.5765, -15.613, -26.5043, -20.2766, -33.4932, -24.8431, -40.4634, -29.4331, -47.3409, -34.1558, -54.0747, -39.0768, -60.6461, -44.2089, -67.0769, -49.5132, -73.433, -54.9048, -79.807, -60.2738)
+width = 12.0
+width_curve = SubResource("Curve_pqnx6")
+default_color = Color(0.0745098, 0.619608, 0, 1)
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

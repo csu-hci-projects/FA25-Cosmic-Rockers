@@ -122,6 +122,9 @@ func disconnect_lobby():
 
 
 func is_host() -> bool:
+	var scene := get_tree().current_scene
+	if scene and scene.scene_file_path.ends_with("test.tscn"):
+		return true
 	return Steam.getLobbyOwner(lobby_id) == Global.steam_id
 
 

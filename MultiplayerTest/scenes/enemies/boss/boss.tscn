@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy836erei1ko5"]
+
+[ext_resource type="PackedScene" uid="uid://j3gcywxflkf1" path="res://scenes/enemies/boss/arm.tscn" id="1_1ex25"]
+[ext_resource type="Script" uid="uid://cw1iek3lmjg3q" path="res://scripts/enemy/boss/EnemyBoss.gd" id="1_ub7yk"]
+[ext_resource type="PackedScene" uid="uid://cl2sc160goxhv" path="res://scenes/enemies/boss/harp.tscn" id="2_ub7yk"]
+[ext_resource type="PackedScene" uid="uid://t2qcj1j7bad1" path="res://scenes/enemies/boss/head.tscn" id="4_eig4w"]
+
+[sub_resource type="Curve" id="Curve_b7gi3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ub7yk"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -56, -3.75554, -3.27994, 3.75554, 3.27994, -21, -32, -5.90603, 1.29672, 5.90603, -1.29672, 1, -32, -2.07754, 7.8566, 2.07754, -7.8566, 13, -42, 0, 0, 0, 0, 9, -54, 0, 0, 0, 0, 0, -56)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_ian0n"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -5, -57, -3.75554, -3.27994, 3.75554, 3.27994, -21, -32, -6.97392, 3.43249, 6.97392, -3.43249, -2, -35, -4.89982, 7.32265, 4.89982, -7.32265, 11, -46, 0, 0, 0, 0, 10, -57, 0, 0, 0, 0, -5, -57)
+}
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_eig4w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.740741, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ian0n"]
+radius = 8.0
+height = 34.0
+
+[node name="boss" type="CharacterBody2D" node_paths=PackedStringArray("harp", "head", "head_target", "arm_1", "arm_1_target", "arm_2", "arm_2_target")]
+collision_layer = 10
+script = ExtResource("1_ub7yk")
+harp = NodePath("visuals/harp")
+head = NodePath("visuals/head")
+head_target = NodePath("visuals/head/target")
+arm_1 = NodePath("visuals/arm")
+arm_1_target = NodePath("visuals/arm/path/target")
+arm_2 = NodePath("visuals/arm2")
+arm_2_target = NodePath("visuals/arm2/path/target")
+
+[node name="visuals" type="Node2D" parent="."]
+
+[node name="arm" parent="visuals" node_paths=PackedStringArray("target") instance=ExtResource("1_1ex25")]
+position = Vector2(-12, -3)
+target = NodePath("path/target")
+num__segments = 20
+idle_force = Vector2(1, 0)
+idle_force_strength = 30.0
+force_curve = SubResource("Curve_b7gi3")
+
+[node name="path" type="Path2D" parent="visuals/arm"]
+curve = SubResource("Curve2D_ub7yk")
+
+[node name="target" type="PathFollow2D" parent="visuals/arm/path"]
+position = Vector2(0, -56)
+rotation = 2.28963
+rotates = false
+
+[node name="harp" parent="visuals" instance=ExtResource("2_ub7yk")]
+position = Vector2(-13, -32)
+play_intensity = 0.7
+intensity_cooldown_rate = 1.0
+
+[node name="arm2" parent="visuals" node_paths=PackedStringArray("target") instance=ExtResource("1_1ex25")]
+position = Vector2(12, -3)
+target = NodePath("path/target")
+num__segments = 20
+idle_force = Vector2(1, 0)
+idle_force_strength = 30.0
+force_curve = SubResource("Curve_b7gi3")
+
+[node name="path" type="Path2D" parent="visuals/arm2"]
+position = Vector2(-25, 7)
+curve = SubResource("Curve2D_ian0n")
+
+[node name="target" type="PathFollow2D" parent="visuals/arm2/path"]
+position = Vector2(-5, -57)
+rotation = 2.14011
+
+[node name="head" parent="visuals" node_paths=PackedStringArray("target") instance=ExtResource("4_eig4w")]
+position = Vector2(0, -3)
+target = NodePath("target")
+max_length = 130.0
+idle_force_strength = 70.0
+force_curve = SubResource("Curve_eig4w")
+
+[node name="target" type="Node2D" parent="visuals/head"]
+position = Vector2(-34, -77)
+
+[node name="body" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ian0n")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -45)
+zoom = Vector2(5, 5)

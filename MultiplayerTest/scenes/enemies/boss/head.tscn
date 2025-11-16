@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://t2qcj1j7bad1"]
+
+[ext_resource type="PackedScene" uid="uid://j3gcywxflkf1" path="res://scenes/enemies/boss/arm.tscn" id="1_0mr36"]
+[ext_resource type="Shader" uid="uid://b7wgfbm5n32tc" path="res://shaders/Shade.gdshader" id="2_yr4rn"]
+[ext_resource type="Script" uid="uid://fjwwoamqcir7" path="res://scripts/enemy/boss/Eye.gd" id="3_no6qd"]
+
+[sub_resource type="Curve" id="Curve_yr4rn"]
+_data = [Vector2(0, 0.987436), 0.0, 0.0, 0, 0, Vector2(1, 0.483444), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_no6qd"]
+resource_local_to_scene = true
+shader = ExtResource("2_yr4rn")
+shader_parameter/dark_color = Color(0, 0.314903, 0.486831, 1)
+shader_parameter/shade_ratio = 0.18
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_arm"]
+resource_local_to_scene = true
+shader = ExtResource("2_yr4rn")
+shader_parameter/dark_color = Color(0, 0.314903, 0.486831, 1)
+shader_parameter/shade_ratio = 0.088
+
+[node name="Arm" instance=ExtResource("1_0mr36")]
+idle_force = Vector2(1, 0)
+idle_force_strength = 50.0
+width_curve = SubResource("Curve_yr4rn")
+
+[node name="TwoToneCanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="0"]
+material = SubResource("ShaderMaterial_no6qd")
+
+[node name="BaseLine" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup" index="0"]
+points = PackedVector2Array(0, 0, -5.99522, -5.4875, -11.5406, -11.5513, -17.0083, -17.7378, -22.4584, -23.9843, -27.9951, -30.1858, -33.699, -36.2533, -39.6072, -42.1326, -45.7095, -47.8146, -51.9513, -53.344, -58.2431, -58.8152, -64.4852, -64.3409, -70.5946, -70.0102)
+width_curve = SubResource("Curve_yr4rn")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="1"]
+material = SubResource("ShaderMaterial_arm")
+
+[node name="eye" type="Node2D" parent="OutlinedSubViewportContainer/SubViewport/CanvasGroup" index="0" node_paths=PackedStringArray("arm")]
+position = Vector2(150, 150)
+script = ExtResource("3_no6qd")
+arm = NodePath("../../../..")
+eye_color = Color(1, 0.386676, 0.707693, 1)
+lid_color = Color(0, 0.466667, 0, 1)
+pupil_color = Color(0.626912, 8.90419e-07, 0.315301, 1)
+pupil_offset = 5.0

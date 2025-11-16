@@ -1,4 +1,4 @@
-extends CPUParticles2D
+extends Node
 
 @export var delay: float = 1.0
 

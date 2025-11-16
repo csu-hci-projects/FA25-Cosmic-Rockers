@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqfqdi08v1dmx"]
+
+[ext_resource type="Script" uid="uid://d268nd2myew0g" path="res://scripts/enemy/boss/DeathTarget.gd" id="1_gde3g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uqxm8"]
+radius = 2.0
+
+[node name="death_target" type="RigidBody2D"]
+collision_layer = 0
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_gde3g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uqxm8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
