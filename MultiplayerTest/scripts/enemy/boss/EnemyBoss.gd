@@ -9,6 +9,7 @@ enum State {
 }
 
 var current_state : State = State.IDLE
+var player_target: Entity
 
 @export_group("Attack")
 @export var melee_range: float = 100
@@ -29,6 +30,7 @@ var current_state : State = State.IDLE
 @export var arm_2_target: PathFollow2D
 
 var arms: Array = []
+var eye: Eye
 
 @export_group("Death")
 var death_target_scene = preload("res://scenes/enemies/boss/death_target.tscn")
@@ -53,9 +55,12 @@ func _ready():
 	arms.append(ArmState.new(arm_2, arm_2_target))
 	arm_2_target.progress_ratio = 0.5
 	
-	var child_eye = find_child("eye")
-	if "parent_entity" in child_eye:
-		child_eye.parent_entity = self
+	eye = find_child("eye") as Eye
+	if eye:
+		eye.parent_entity = self
+	
+	for p in get_tree().get_nodes_in_group("player"):
+		set_target(p)
 
 func _process(delta: float):
 	if is_dead:
@@ -81,7 +86,7 @@ func _process_state(delta: float):
 	for p in get_tree().get_nodes_in_group("player"):
 		players.append(p as PlayerMovement)
 	current_state = get_attack_type(players)
-	
+
 
 func get_attack_type(players: Array[PlayerMovement]) -> State:
 	var chance_none = .5
@@ -110,6 +115,11 @@ func get_attack_type(players: Array[PlayerMovement]) -> State:
 		return State.ATTACK_LASER
 	return State.IDLE
 
+
+func set_target(player: Entity):
+	player_target = player
+	if eye:
+		eye.look_target = player
 
 ## recharge next attack
 func _idle_behavior(delta):

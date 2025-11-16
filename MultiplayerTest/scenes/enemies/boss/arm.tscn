@@ -57,7 +57,7 @@ material = SubResource("ShaderMaterial_pqnx6")
 
 [node name="BaseLine" type="Line2D" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup"]
 position = Vector2(256, 256)
-points = PackedVector2Array(0, 0, -6.35341, -5.44231, -12.2341, -11.3779, -17.914, -17.5025, -23.415, -23.7847, -28.8046, -30.1594, -34.1884, -36.5356, -39.6718, -42.8231, -45.3241, -48.9556, -51.1674, -54.9034, -57.1766, -60.6809, -63.2842, -66.3525, -69.395, -72.0192)
+points = PackedVector2Array(0, 0, -5.25252, -6.50754, -10.8061, -12.7475, -16.5533, -18.8064, -22.4902, -24.6761, -28.5688, -30.396, -34.7027, -36.0536, -40.7901, -41.7583, -46.7437, -47.5998, -52.5094, -53.6239, -58.077, -59.8293, -63.4874, -66.1702, -68.8317, -72.5651)
 width = 12.0
 width_curve = SubResource("Curve_pqnx6")
 default_color = Color(0.0745098, 0.619608, 0, 1)
