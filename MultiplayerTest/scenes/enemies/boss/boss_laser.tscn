@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b84svbtveklbb"]
+
+[ext_resource type="Script" uid="uid://c8u7p7aie51p0" path="res://scripts/enemy/boss/BossAttackLaser.gd" id="1_4q1rd"]
+
+[node name="boss_laser" type="Node2D" node_paths=PackedStringArray("line")]
+script = ExtResource("1_4q1rd")
+line = NodePath("Line2D")
+charge_color = Color(0.215462, 0.579095, 0.778159, 1)
+laser_color = Color(0.715446, 0, 0.222341, 1)
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(0.909512, 0.4714, 0.334693, 1)

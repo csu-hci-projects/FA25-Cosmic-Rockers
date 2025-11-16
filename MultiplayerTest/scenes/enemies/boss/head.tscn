@@ -29,14 +29,14 @@ width_curve = SubResource("Curve_yr4rn")
 material = SubResource("ShaderMaterial_no6qd")
 
 [node name="BaseLine" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup" index="0"]
-points = PackedVector2Array(0, 0, -6.03751, -5.4229, -11.8037, -11.266, -17.6364, -17.1003, -23.6, -22.8511, -29.7487, -28.4409, -36.0922, -33.8331, -42.5987, -39.0421, -49.1993, -44.1389, -55.8026, -49.2346, -62.3206, -54.4381, -68.6897, -59.8197, -74.8817, -65.3999)
+points = PackedVector2Array(0, 0, 0.791473, -8.34592, 1.78639, -16.6532, 3.03154, -24.9217, 4.43698, -33.1596, 5.86839, -41.3884, 7.18375, -49.6324, 8.27747, -57.9051, 9.10126, -66.2059, 9.67133, -74.5254, 10.0704, -82.8528, 10.4333, -91.1803, 10.903, -99.5012)
 width_curve = SubResource("Curve_yr4rn")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="1"]
 material = SubResource("ShaderMaterial_arm")
 
 [node name="eye" type="Node2D" parent="OutlinedSubViewportContainer/SubViewport/CanvasGroup" index="0" node_paths=PackedStringArray("arm")]
-position = Vector2(256, 256)
+position = Vector2(150, 150)
 script = ExtResource("3_no6qd")
 arm = NodePath("../../../..")
 eye_color = Color(1, 0.386676, 0.707693, 1)

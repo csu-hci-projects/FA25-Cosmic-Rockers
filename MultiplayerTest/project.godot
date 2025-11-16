@@ -97,6 +97,8 @@ show_player_info={
 2d_physics/layer_1="Terrain"
 2d_physics/layer_2="Entities"
 2d_physics/layer_4="Gun Hit Detection"
+2d_physics/layer_5="player hit detection"
+2d_physics/layer_9="Layer 9"
 
 [physics]
 

@@ -1,4 +1,4 @@
-extends Entity
+class_name EnemyBoss extends Entity
 
 enum State {
 	IDLE,
@@ -9,11 +9,20 @@ enum State {
 }
 
 var current_state : State = State.IDLE
-var player_target: Entity
+var player_target: PlayerMovement
+
+var _attack_timer: float
 
 @export_group("Attack")
+@export var attack_timer: float = 1
+var is_attacking = false
+var attack_scene: BossAttack
+
+var melee_attack_scene = preload("res://scenes/enemies/boss/boss_laser.tscn")
 @export var melee_range: float = 100
+var projectile_attack_scene = preload("res://scenes/enemies/boss/boss_laser.tscn")
 @export var projectile_range: float = 300
+var laser_attack_scene = preload("res://scenes/enemies/boss/boss_laser.tscn")
 @export var laser_range: float = 1000
 
 @export_group("Harp")
@@ -36,6 +45,8 @@ var eye: Eye
 var death_target_scene = preload("res://scenes/enemies/boss/death_target.tscn")
 @export var target_speed: float = 200.0
 @export var target_lifetime: float = 2.0
+
+signal on_attack_player(entity_id: String, target_id: String, damage: int)
 
 class ArmState:
 	var arm: Arm
@@ -60,13 +71,11 @@ func _ready():
 		eye.parent_entity = self
 	
 	for p in get_tree().get_nodes_in_group("player"):
-		set_target(p)
+		set_target(p as PlayerMovement)
 
 func _process(delta: float):
 	if is_dead:
 		return
-	
-	_process_state(delta)
 	
 	match current_state:
 		State.IDLE:
@@ -82,15 +91,19 @@ func _process(delta: float):
 
 
 func _process_state(delta: float):
+	if _attack_timer > 0:
+		return
+	
 	var players: Array[PlayerMovement] = []
 	for p in get_tree().get_nodes_in_group("player"):
 		players.append(p as PlayerMovement)
 	current_state = get_attack_type(players)
+	_attack_timer = attack_timer
 
 
 func get_attack_type(players: Array[PlayerMovement]) -> State:
 	var chance_none = .5
-	var chance_laser = 1
+	var chance_laser = 100
 	var chance_projectile = 1
 	var chance_melee = 0
 	
@@ -116,30 +129,58 @@ func get_attack_type(players: Array[PlayerMovement]) -> State:
 	return State.IDLE
 
 
-func set_target(player: Entity):
+func set_target(player: PlayerMovement):
 	player_target = player
 	if eye:
 		eye.look_target = player
 
 ## recharge next attack
 func _idle_behavior(delta):
-	pass
+	if !is_attacking:
+		_attack_timer -= delta
 
 
 ## slam tentacle on ground
 func _attack_melee_behavior(delta):
-	pass
+	_finish_attack()
 
 
 ## use eye to shoot laser
 func _attack_laser_behavior(delta):
-	pass
+	for arm_state in arms:
+		move_arm_target_along_path(arm_state, delta)
+	
+	if !is_attacking:
+		is_attacking = true
+		attack_scene = laser_attack_scene.instantiate()
+		
+		attack_scene.init([player_target])
+		attack_scene.attack_finished.connect(_finish_attack)
+		attack_scene.on_attack_player.connect(_attack_player)
+		
+		add_child(attack_scene)
+		attack_scene.global_position = Vector2.ZERO
+	
+	attack_scene.update(eye.get_real_global_position(), player_target.global_position)
 
 
 ## play the harp and shoot note projectiles
 func _attack_projectile_behavior(delta):
 	for arm_state in arms:
 		move_arm_target_along_path(arm_state, delta)
+	_finish_attack()
+
+
+func _finish_attack():
+	if attack_scene:
+		attack_scene.queue_free()
+		attack_scene = null
+	is_attacking = false
+	current_state = State.IDLE
+
+
+func _attack_player(target_id: String, damage: int):
+	emit_signal("on_attack_player", entity_id, target_id, damage)
 
 
 func move_arm_target_along_path(arm_state: ArmState, delta: float):
@@ -165,7 +206,9 @@ func move_arm_target_along_path(arm_state: ArmState, delta: float):
 
 func die():
 	super()
+	_finish_attack()
 	current_state = State.DEAD
+	eye.look_target = null
 	spawn_death_targets()
 
 

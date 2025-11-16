@@ -199,3 +199,7 @@ func get_segment_lengths() -> Array:
 
 func get_last_segment() -> Vector2:
 	return base_node.to_local(_segments[-1])
+
+
+func get_last_segment_global() -> Vector2:
+	return global_position + (_segments[-1] - _base_position)

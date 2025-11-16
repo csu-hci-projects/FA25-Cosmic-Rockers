@@ -12,12 +12,17 @@ var enemy_scene_2 = preload("res://scenes/enemies/enemy_brute.tscn")
 var enemies = {}
 var enabled_enemies: int = 0
 
+@export var boss: EnemyBoss
+
 func _ready() -> void:
 	Multiplayer.on_received_entity_spawn.connect(_spawn_enemy)
 	Multiplayer.on_received_entity_state.connect(_set_state)
 	Multiplayer.on_received_entity_positions.connect(_set_positions)
 	Multiplayer.on_received_entity_attack.connect(_attack_player)
 	Multiplayer.on_received_entity_hit.connect(_take_hit)
+	
+	if boss:
+		boss.on_attack_player.connect(attack_player)
 
 func _process(delta: float):
 	#CHUNKED ENEMY ENABLING
@@ -35,9 +40,14 @@ func _process(delta: float):
 		return
 	if !WorldState.level_loaded:
 		return
-	if enemies.size() == 0:
-		return
 	
+	if enemies.size() > 0:
+		process_enemies(delta)
+	
+	if boss:
+		boss._process_state(delta)
+
+func process_enemies(delta):
 	var entity_ids: Array = enemies.keys()
 	for key in entity_ids:
 		var enemy = enemies[key]

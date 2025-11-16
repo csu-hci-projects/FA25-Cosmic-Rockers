@@ -40,24 +40,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="OutlinedSubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+size = Vector2i(300, 300)
 render_target_update_mode = 4
 
 [node name="TwoToneCanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport"]
 material = SubResource("ShaderMaterial_pqnx6")
 
 [node name="BaseLine" type="Line2D" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup"]
-position = Vector2(256, 256)
-points = PackedVector2Array(0, 0, -5.25252, -6.50754, -10.8061, -12.7475, -16.5533, -18.8064, -22.4902, -24.6761, -28.5688, -30.396, -34.7027, -36.0536, -40.7901, -41.7583, -46.7437, -47.5998, -52.5094, -53.6239, -58.077, -59.8293, -63.4874, -66.1702, -68.8317, -72.5651)
+position = Vector2(150, 150)
+points = PackedVector2Array(0, 0, -6.32304, -5.46329, -12.8223, -10.7043, -19.2125, -16.0753, -25.4387, -21.6331, -31.4871, -27.3821, -37.3897, -33.2793, -43.2251, -39.2421, -49.0954, -45.1691, -55.0878, -50.971, -61.249, -56.5909, -67.5812, -62.0142, -74.0447, -67.2766)
 width = 12.0
 width_curve = SubResource("Curve_pqnx6")
 default_color = Color(0.0745098, 0.619608, 0, 1)
