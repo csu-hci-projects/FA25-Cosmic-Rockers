@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmihda84q488q"]
+
+[ext_resource type="Script" uid="uid://cx7p701dtua6w" path="res://scripts/player/PlayerMovement.gd" id="1_dd427"]
+[ext_resource type="SpriteFrames" uid="uid://duypje6j552l1" path="res://sprites/sprite_sheets/player/player_animation.tres" id="2_u3rb4"]
+[ext_resource type="Shader" uid="uid://bjia6mv01mius" path="res://shaders/WhiteReplace.gdshader" id="4_68xwl"]
+[ext_resource type="Texture2D" uid="uid://do7bxssgc1kyv" path="res://sprites/ui/pointer.png" id="5_wwvfn"]
+[ext_resource type="Script" uid="uid://cu5oe4ocbd8lq" path="res://scripts/player/Pointer.gd" id="6_wwvfn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
+radius = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8yk2"]
+resource_local_to_scene = true
+shader = ExtResource("4_68xwl")
+shader_parameter/target_color = Color(1, 1, 1, 1)
+shader_parameter/threshold = 0.5
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+script = ExtResource("1_dd427")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = ExtResource("2_u3rb4")
+animation = &"walk"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lbhrr")
+
+[node name="pointer" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_t8yk2")
+position = Vector2(0, -13)
+texture = ExtResource("5_wwvfn")
+script = ExtResource("6_wwvfn")

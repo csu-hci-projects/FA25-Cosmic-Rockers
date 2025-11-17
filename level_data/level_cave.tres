@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=8 format=3 uid="uid://dw1w2r5x23bny"]
+
+[ext_resource type="Texture2D" uid="uid://crmy7dplmnxmt" path="res://sprites/collectables/collectable_drum.png" id="1_b8go7"]
+[ext_resource type="Texture2D" uid="uid://dgnxojhovbn4f" path="res://sprites/background/cave/cave_0.png" id="1_wce7p"]
+[ext_resource type="Texture2D" uid="uid://cdb5rxgovnnhy" path="res://sprites/background/cave/cave_1.png" id="2_2wgxm"]
+[ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_n05vu"]
+[ext_resource type="Texture2D" uid="uid://cyv1grgw5prpp" path="res://sprites/background/cave/cave_2.png" id="3_fb2ss"]
+[ext_resource type="AudioStream" uid="uid://dtm8lkcg5qiul" path="res://audio/Moon Lander.wav" id="3_n05vu"]
+[ext_resource type="Texture2D" uid="uid://djk5m6dmhnksf" path="res://sprites/background/cave/cave_3.png" id="4_6mfkk"]
+
+[resource]
+script = ExtResource("2_n05vu")
+level_id = 0
+tileset = 0
+backgrounds = Array[Texture2D]([ExtResource("1_wce7p"), ExtResource("2_2wgxm"), ExtResource("3_fb2ss"), ExtResource("4_6mfkk")])
+collectable = ExtResource("1_b8go7")
+songs = Array[AudioStream]([ExtResource("3_n05vu")])
+level_name = "Drobbo"
+level_name_alien = "⎅⍀⎍⋔"
+floor_range = Vector2(0.2, 0.4)
+roof_range = Vector2(0, 0)
+x_offset_range = Vector2(-2, 2)
+y_offset_range = Vector2(0, 0)
+enemy_count = 20
+effects = Array[int]([5])
+metadata/_custom_type_script = "uid://c2bq8r37uevf6"

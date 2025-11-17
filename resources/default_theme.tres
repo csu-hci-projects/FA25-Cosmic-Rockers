@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://t3yhq5i1rmho"]
+
+[ext_resource type="Texture2D" uid="uid://dknl2p2qlb4nc" path="res://sprites/ui/arrows/arrow_down.png" id="1_cefca"]
+[ext_resource type="FontFile" uid="uid://dayofyq5s4xla" path="res://fonts/quicksand/Quicksand-Bold.otf" id="1_e7bfs"]
+[ext_resource type="Texture2D" uid="uid://dut71bikp2nxe" path="res://sprites/ui/arrows/arrow_down_disabled.png" id="2_ed8xq"]
+[ext_resource type="Texture2D" uid="uid://cmo6x7nqyncfn" path="res://sprites/ui/arrows/arrow_up.png" id="3_u7cj8"]
+[ext_resource type="Texture2D" uid="uid://tr3363rqbq0j" path="res://sprites/ui/arrows/arrow_up_disabled.png" id="4_uwdo0"]
+
+[resource]
+default_font = ExtResource("1_e7bfs")
+default_font_size = 20
+SpinBox/icons/down = ExtResource("1_cefca")
+SpinBox/icons/down_disabled = ExtResource("2_ed8xq")
+SpinBox/icons/down_hover = ExtResource("2_ed8xq")
+SpinBox/icons/down_pressed = ExtResource("2_ed8xq")
+SpinBox/icons/up = ExtResource("3_u7cj8")
+SpinBox/icons/up_disabled = ExtResource("4_uwdo0")
+SpinBox/icons/up_hover = ExtResource("4_uwdo0")
+SpinBox/icons/up_pressed = ExtResource("4_uwdo0")

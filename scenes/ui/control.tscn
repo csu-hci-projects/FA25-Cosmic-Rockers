@@ -1,0 +1,158 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6het52418hfo"]
+
+[ext_resource type="Script" uid="uid://3mwapkenvdo0" path="res://scripts/menu/Lobby.gd" id="1_2k4jl"]
+[ext_resource type="PackedScene" uid="uid://c2a6riwcgaqaa" path="res://scenes/ui/character_edit.tscn" id="2_bchhi"]
+[ext_resource type="Theme" uid="uid://t3yhq5i1rmho" path="res://resources/default_theme.tres" id="2_m5bgy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo0lp"]
+bg_color = Color(0.266575, 0.266575, 0.266575, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+
+[node name="lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2k4jl")
+
+[node name="menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="lobby_id" type="TextEdit" parent="menu"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+placeholder_text = "lobby id"
+
+[node name="join" type="Button" parent="menu"]
+layout_mode = 2
+text = "Join"
+
+[node name="host" type="Button" parent="menu"]
+layout_mode = 2
+text = "Host"
+
+[node name="lobby_menu" type="VBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -176.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="level_select" type="SpinBox" parent="lobby_menu"]
+layout_mode = 2
+theme = ExtResource("2_m5bgy")
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+rounded = true
+prefix = "Level"
+
+[node name="ready" type="Button" parent="lobby_menu"]
+layout_mode = 2
+toggle_mode = true
+text = "Ready"
+
+[node name="start" type="Button" parent="lobby_menu"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="invite" type="Button" parent="lobby_menu"]
+layout_mode = 2
+text = "Invite"
+
+[node name="disconnect" type="Button" parent="lobby_menu"]
+layout_mode = 2
+text = "Disconnect"
+
+[node name="chat" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="chatbox" type="Label" parent="chat"]
+layout_mode = 2
+
+[node name="chatinput" type="LineEdit" parent="chat"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+placeholder_text = "chat"
+
+[node name="send" type="Button" parent="chat"]
+layout_mode = 2
+text = "Send"
+
+[node name="players" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.085
+
+[node name="steam_error" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -29.0
+offset_right = 46.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yo0lp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="steam_error"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="steam_error/VBoxContainer"]
+layout_mode = 2
+text = "Steam Error"
+
+[node name="Button" type="Button" parent="steam_error/VBoxContainer"]
+layout_mode = 2
+text = "Retry"
+
+[node name="character_edit" parent="." instance=ExtResource("2_bchhi")]
+layout_mode = 1
+
+[connection signal="pressed" from="menu/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="menu/host" to="." method="_on_host_pressed"]
+[connection signal="value_changed" from="lobby_menu/level_select" to="." method="_on_level_select_value_changed"]
+[connection signal="toggled" from="lobby_menu/ready" to="." method="_on_ready_toggled"]
+[connection signal="pressed" from="lobby_menu/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="lobby_menu/invite" to="." method="_on_invite_pressed"]
+[connection signal="pressed" from="lobby_menu/disconnect" to="." method="_on_disconnect_pressed"]
+[connection signal="text_submitted" from="chat/chatinput" to="." method="_on_chatinput_text_submitted"]
+[connection signal="pressed" from="chat/send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="steam_error/VBoxContainer/Button" to="." method="_on_retry_pressed"]

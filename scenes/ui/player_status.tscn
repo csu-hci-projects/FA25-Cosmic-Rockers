@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn4667ejwdxj3"]
+
+[ext_resource type="Texture2D" uid="uid://d17bqkdfvx848" path="res://sprites/ui/health_large_bg.png" id="1_f1won"]
+[ext_resource type="Script" uid="uid://dwpbm6vkmrxuu" path="res://scripts/player/PlayerStatus.gd" id="1_kfqwc"]
+[ext_resource type="Texture2D" uid="uid://b8sdf7wu2m5km" path="res://sprites/ui/health_large_fill.png" id="2_kfqwc"]
+
+[node name="player_status" type="VBoxContainer"]
+script = ExtResource("1_kfqwc")
+
+[node name="name" type="Label" parent="."]
+layout_mode = 2
+text = "player name"
+
+[node name="health" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 100.0
+texture_under = ExtResource("1_f1won")
+texture_progress = ExtResource("2_kfqwc")

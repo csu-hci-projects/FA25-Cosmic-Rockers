@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=8 format=3 uid="uid://c6vrmdnhagih3"]
+
+[ext_resource type="Texture2D" uid="uid://tffkqw8686f4" path="res://sprites/background/grass/grass_0.png" id="1_385q0"]
+[ext_resource type="Texture2D" uid="uid://bthtkoko632qq" path="res://sprites/collectables/collectable_piano.png" id="1_klaaa"]
+[ext_resource type="Texture2D" uid="uid://c46n83pt50ufj" path="res://sprites/background/grass/grass_1.png" id="2_158qs"]
+[ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_rul72"]
+[ext_resource type="AudioStream" uid="uid://cuaeedrxmi1sk" path="res://audio/Nine Shot.wav" id="3_rul72"]
+[ext_resource type="Texture2D" uid="uid://bihd2w4v1jx30" path="res://sprites/background/grass/grass_2.png" id="3_ybhee"]
+[ext_resource type="Texture2D" uid="uid://cxvyurppek0ru" path="res://sprites/background/grass/grass_3.png" id="4_7w21s"]
+
+[resource]
+script = ExtResource("2_rul72")
+level_id = 2
+tileset = 3
+backgrounds = Array[Texture2D]([ExtResource("1_385q0"), ExtResource("2_158qs"), ExtResource("3_ybhee"), ExtResource("4_7w21s")])
+collectable = ExtResource("1_klaaa")
+songs = Array[AudioStream]([ExtResource("3_rul72")])
+level_name = "Symyt"
+level_name_alien = "⌇⊬⋏⏁⊑"
+floor_range = Vector2(0.3, 0.4)
+roof_range = Vector2(0.1, 0.3)
+x_offset_range = Vector2(0, 0)
+y_offset_range = Vector2(0, 0)
+enemy_count = 40
+effects = Array[int]([3])
+metadata/_custom_type_script = "uid://c2bq8r37uevf6"

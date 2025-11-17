@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1in742vr7rvf"]
+
+[ext_resource type="PackedScene" uid="uid://dp0b7x1o1ay41" path="res://scenes/particles/particle_effect.tscn" id="1_3sqip"]
+[ext_resource type="Texture2D" uid="uid://bvpwoby5fm1pv" path="res://sprites/particles/dust_4.png" id="2_3ajkw"]
+
+[sub_resource type="Gradient" id="Gradient_3ajkw"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.270492, 0.561475, 0.82377, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.152941, 0.211765, 1, 0.839216, 0.388235, 0.109804, 1, 1, 0.756863, 0.317647, 1, 1, 1, 1, 0)
+
+[node name="effect" instance=ExtResource("1_3sqip")]
+amount = 50
+texture = ExtResource("2_3ajkw")
+lifetime = 0.2
+explosiveness = 0.8
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 220.0
+initial_velocity_max = 250.0
+scale_amount_min = 0.2
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_3ajkw")

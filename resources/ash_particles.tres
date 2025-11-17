@@ -1,0 +1,23 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://dmictgo8105u6"]
+
+[sub_resource type="Curve" id="Curve_eotlu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.251163, 1), 0.0, 0.0, 0, 0, Vector2(0.744186, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_quwl1"]
+curve = SubResource("Curve_eotlu")
+
+[resource]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(500, 300, 1)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(40, 20, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 40.0
+scale_min = 0.1
+scale_max = 0.25
+color = Color(0.380363, 0.198874, 0.143027, 1)
+alpha_curve = SubResource("CurveTexture_quwl1")

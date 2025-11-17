@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=8 format=3 uid="uid://dghvt75aocf1w"]
+
+[ext_resource type="Texture2D" uid="uid://bte5or074kuke" path="res://sprites/background/lava/lava_0.png" id="1_1ar8v"]
+[ext_resource type="Texture2D" uid="uid://ccbome84klrlm" path="res://sprites/collectables/collectable_bass.png" id="1_7c3bj"]
+[ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_22nb1"]
+[ext_resource type="Texture2D" uid="uid://bih3jwcbonvka" path="res://sprites/background/lava/lava_1.png" id="2_uj3it"]
+[ext_resource type="AudioStream" uid="uid://c32o7dy7jfeml" path="res://audio/Crimsun Acid.wav" id="3_22nb1"]
+[ext_resource type="Texture2D" uid="uid://bt7qlykr07q3i" path="res://sprites/background/lava/lava_2.png" id="3_ha4dv"]
+[ext_resource type="Texture2D" uid="uid://g3wpixk01jdk" path="res://sprites/background/lava/lava_3.png" id="4_0ucfg"]
+
+[resource]
+script = ExtResource("2_22nb1")
+level_id = 1
+tileset = 2
+backgrounds = Array[Texture2D]([ExtResource("1_1ar8v"), ExtResource("2_uj3it"), ExtResource("3_ha4dv"), ExtResource("4_0ucfg")])
+collectable = ExtResource("1_7c3bj")
+songs = Array[AudioStream]([ExtResource("3_22nb1")])
+level_name = "Balorb"
+level_name_alien = "⏚⏃⌇⌇"
+floor_range = Vector2(0, 0)
+roof_range = Vector2(0, 0)
+x_offset_range = Vector2(-2, 2)
+y_offset_range = Vector2(-2, 2)
+enemy_count = 30
+effects = Array[int]([1, 2])
+metadata/_custom_type_script = "uid://c2bq8r37uevf6"
