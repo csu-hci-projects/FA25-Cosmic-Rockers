@@ -55,8 +55,8 @@ func get_next_level() -> int:
 func initialize(level: int = 0) -> Dictionary:
 	level_id = level
 	
-	map_width = 30
-	map_height = 30
+	map_width = 200
+	map_height = 100
 	spawn_room_position = Vector2i(randi_range(5, map_width - 10),5)
 	end_room_position = Vector2i(randi_range(5, map_width - 10), map_height - 10)
 	room_size = 5
@@ -85,6 +85,9 @@ func initialize(level: int = 0) -> Dictionary:
 		"room_size" : room_size, 
 		"level_id" : level_id
 	}
+
+func is_last_level() -> bool:
+	return level_id == LEVELS.size() - 1
 
 func get_tile_position(index: int) -> Vector2:
 	return Vector2(int(index % map_width), int(index / map_height)) * 16
@@ -135,6 +138,11 @@ func get_enemy_spawn_locations() -> Array:
 			enemy_spawns.append(get_random_room_tile(i))
 		enemy_count -= split
 	return enemy_spawns
+
+func get_boss_spawn() -> Vector2i:
+	var center_x: int = map_width / 2.0
+	var center_y: int = map_height - 7.0
+	return Vector2i(center_x, center_y)
 
 func get_random_room_tile(room_id: int) -> Vector2i:
 	var tile_count: int = room_data[room_id].size()

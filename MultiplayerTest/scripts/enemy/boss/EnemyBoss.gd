@@ -69,13 +69,20 @@ func _ready():
 	eye = find_child("eye") as Eye
 	if eye:
 		eye.parent_entity = self
-	
-	for p in get_tree().get_nodes_in_group("player"):
-		set_target(p as PlayerMovement)
+
+
+func _physics_process(delta: float) -> void:
+	move_and_slide()
+
 
 func _process(delta: float):
+	if !is_on_floor():
+		velocity.y += get_gravity().y * delta
+	
 	if is_dead:
 		return
+	
+	find_player()
 	
 	match current_state:
 		State.IDLE:
@@ -88,6 +95,12 @@ func _process(delta: float):
 			_attack_melee_behavior(delta)
 		State.DEAD:
 			pass
+
+
+func find_player():
+	for p in get_tree().get_nodes_in_group("player"):
+		if global_position.distance_to(p.global_position) < laser_range:
+			set_target(p as PlayerMovement)
 
 
 func _process_state(delta: float):
@@ -147,6 +160,10 @@ func _attack_melee_behavior(delta):
 
 ## use eye to shoot laser
 func _attack_laser_behavior(delta):
+	if !player_target:
+		_finish_attack()
+		return
+	
 	for arm_state in arms:
 		move_arm_target_along_path(arm_state, delta)
 	
@@ -159,7 +176,6 @@ func _attack_laser_behavior(delta):
 		attack_scene.on_attack_player.connect(_attack_player)
 		
 		add_child(attack_scene)
-		attack_scene.global_position = Vector2.ZERO
 	
 	attack_scene.update(eye.get_real_global_position(), player_target.global_position)
 

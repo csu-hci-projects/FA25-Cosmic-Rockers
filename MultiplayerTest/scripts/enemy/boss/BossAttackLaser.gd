@@ -16,7 +16,9 @@ var damage_timer: float = .2
 func _ready() -> void:
 	_charge_timer = charge_timer
 	_width = float(line.width)
+	global_position = Vector2.ZERO
 	audio_player.play()
+	audio_player.global_position = get_parent().global_position
 
 func _process(delta: float) -> void:
 	timer -= delta

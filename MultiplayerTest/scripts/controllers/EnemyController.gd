@@ -8,6 +8,7 @@ var position_chunk_offset: int = 0
 
 var enemy_scene_1 = preload("res://scenes/enemies/enemy.tscn")
 var enemy_scene_2 = preload("res://scenes/enemies/enemy_brute.tscn")
+var boss_scene = preload("res://scenes/enemies/boss/boss.tscn")
 @onready var game_controller = $".."
 var enemies = {}
 var enabled_enemies: int = 0
@@ -84,6 +85,23 @@ func spawn_enemies():
 		enemy.on_state_change.connect(send_state)
 		enemy.on_attack_player.connect(attack_player)
 		enemy._process_state(0)
+	
+	if WorldState.is_last_level():
+		var entity_id = "boss_"+str(0)
+		var spawn_location = WorldState.get_boss_spawn()
+		boss = _spawn_boss(entity_id, {"position":spawn_location})
+		#Multiplayer.boss_spawn(entity_id, spawn_location)
+		boss.on_attack_player.connect(attack_player)
+		boss._process_state(0)
+
+func _spawn_boss(entity_id: String, data: Dictionary) -> EnemyBoss:
+	var boss_instance = boss_scene.instantiate()
+	add_child(boss_instance)
+	boss_instance.name = entity_id
+	boss_instance.entity_id = entity_id
+	boss_instance.on_hit_taken.connect(take_hit)
+	game_controller.move_to_tile(boss_instance, data["position"])
+	return boss_instance
 
 func _spawn_enemy(entity_id: String, data: Dictionary) -> Enemy:
 	var enemy_scene = null

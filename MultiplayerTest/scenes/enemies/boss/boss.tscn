@@ -44,6 +44,7 @@ arm_1 = NodePath("visuals/arm")
 arm_1_target = NodePath("visuals/arm/path/target")
 arm_2 = NodePath("visuals/arm2")
 arm_2_target = NodePath("visuals/arm2/path/target")
+max_health = 2000
 
 [node name="visuals" type="Node2D" parent="."]
 

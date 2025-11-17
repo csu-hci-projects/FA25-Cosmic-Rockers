@@ -34,6 +34,9 @@ static func generate(width: int, height: int, \
 				row.append(CAVE_TILE)
 		data.append(row)
 	
+	if WorldState.is_last_level():
+		create_boss_room()
+	
 	add_border(5)
 	create_flat_rooms(floor_range, roof_range)
 	remove_islands(20)
@@ -165,3 +168,32 @@ static func get_connected_tiles(start: Vector2i, value) -> Array:
 					to_check.append(neighbor)
 
 	return connected
+
+static func create_boss_room():
+	var rows := data.size()
+	if rows == 0:
+		return data
+	var cols: float = data[0].size()
+
+	for x in range(cols):
+		data[rows - 1][x] = CAVE_TILE
+
+	var center_x: float = cols / 2.0
+	var center_y: float = rows - 1.0
+	var radius: float = rows * 0.5
+	if radius > 90:
+		radius = 90
+
+	for y in range(rows):
+		for x in range(cols):
+			var dx = x - center_x
+			var dy = y - center_y
+			var dist = sqrt(dx * dx + dy * dy)
+
+			if dy >= -radius:  
+				if dist > radius and dy < 0:
+					pass
+				elif dist <= radius:
+					data[y][x] = EMPTY_TILE
+
+	return data

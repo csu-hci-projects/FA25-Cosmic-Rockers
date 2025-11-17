@@ -14,7 +14,7 @@ outline_size = 8
 outline_color = Color(0.12549, 0.12549, 0.156863, 1)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 2
+collision_layer = 18
 script = ExtResource("1_dd427")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]

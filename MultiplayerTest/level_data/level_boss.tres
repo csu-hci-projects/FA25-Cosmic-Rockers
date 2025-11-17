@@ -1,25 +1,24 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=7 format=3 uid="uid://dl2kra6wyx52f"]
 
-[ext_resource type="Texture2D" uid="uid://ccbome84klrlm" path="res://sprites/collectables/collectable_bass.png" id="1_2thol"]
 [ext_resource type="Texture2D" uid="uid://b4sdjajy04htd" path="res://sprites/background/crystal/crystal_0.png" id="1_u4emq"]
 [ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_2dx5g"]
 [ext_resource type="Texture2D" uid="uid://bh17rclia14us" path="res://sprites/background/crystal/crystal_1.png" id="2_wne3v"]
 [ext_resource type="Texture2D" uid="uid://bihd2w4v1jx30" path="res://sprites/background/grass/grass_2.png" id="3_au3ds"]
 [ext_resource type="Texture2D" uid="uid://g3wpixk01jdk" path="res://sprites/background/lava/lava_3.png" id="4_ayrv8"]
+[ext_resource type="Texture2D" uid="uid://bsgow6a7x3hx2" path="res://sprites/collectables/collectable_eye.png" id="5_u4emq"]
 
 [resource]
 script = ExtResource("2_2dx5g")
 level_id = 4
 tileset = 0
 backgrounds = Array[Texture2D]([ExtResource("1_u4emq"), ExtResource("2_wne3v"), ExtResource("3_au3ds"), ExtResource("4_ayrv8")])
-collectable = ExtResource("1_2thol")
-songs = Array[AudioStream]([])
+collectable = ExtResource("5_u4emq")
 level_name = "Encroacher"
 level_name_alien = "⏚⏃⌇⌇"
 floor_range = Vector2(0, 0)
 roof_range = Vector2(0, 0)
 x_offset_range = Vector2(-2, 2)
 y_offset_range = Vector2(-2, 2)
-enemy_count = 30
+enemy_count = 0
 effects = Array[int]([1, 2])
 metadata/_custom_type_script = "uid://c2bq8r37uevf6"

@@ -102,4 +102,3 @@ load_on_ready = true
 
 [node name="boss" parent="." instance=ExtResource("13_44saj")]
 position = Vector2(303, 72)
-max_health = 2000
