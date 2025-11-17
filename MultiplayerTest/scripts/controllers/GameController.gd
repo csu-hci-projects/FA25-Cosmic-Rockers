@@ -52,7 +52,7 @@ func initialize_game() -> void:
 	await get_tree().create_timer(4).timeout
 	
 	WorldState.emit_signal("on_game_ready")
-	music_controller.play_music()
+	music_controller.play_intro()
 	start_drop_sequence()
 
 func _update_input(steam_id: int, data: Dictionary):
@@ -151,6 +151,7 @@ func start_drop_sequence():
 
 func _on_ship_dropped():
 	music_controller.disable_effects()
+	music_controller.play_music()
 	spawn_players()
 	var spawn_room_position = tilemap.map_to_local(Vector2i(
 		WorldState.spawn_room_position.x + WorldState.room_size / 2,

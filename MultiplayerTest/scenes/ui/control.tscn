@@ -119,7 +119,7 @@ placeholder_text = "chat"
 keep_editing_on_text_submit = true
 clear_button_enabled = true
 
-[node name="send" type="Button" parent="chat"]
+[node name="send" type="Button" parent="chat" groups=["Button"]]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Send"

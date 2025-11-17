@@ -8,6 +8,7 @@ var can_drop = false
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var drill_particles: CPUParticles2D = $drill_particles
 @onready var land_particles: CPUParticles2D = $land_particles
+@onready var audio_player: AudioStreamPlayer2D = $audio_player
 
 var rumble_strength = 2.0
 var rumble_speed = 30.0
@@ -39,6 +40,7 @@ func _process(delta: float) -> void:
 			land_particles.emitting = true
 			drill_particles.emitting = false
 			can_drop = false
+			audio_player.play()
 			emit_signal("on_dropped")
 
 func rumble(delta: float):

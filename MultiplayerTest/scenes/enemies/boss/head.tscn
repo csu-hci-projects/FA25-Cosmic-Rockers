@@ -29,7 +29,7 @@ width_curve = SubResource("Curve_yr4rn")
 material = SubResource("ShaderMaterial_no6qd")
 
 [node name="BaseLine" parent="OutlinedSubViewportContainer/SubViewport/TwoToneCanvasGroup" index="0"]
-points = PackedVector2Array(0, 0, -5.99522, -5.4875, -11.5406, -11.5513, -17.0083, -17.7378, -22.4584, -23.9843, -27.9951, -30.1858, -33.699, -36.2533, -39.6072, -42.1326, -45.7095, -47.8146, -51.9513, -53.344, -58.2431, -58.8152, -64.4852, -64.3409, -70.5946, -70.0102)
+points = PackedVector2Array(0, 0, 8.33333, 0, 16.6667, 0, 25, 0, 33.3333, 0, 41.6667, 0, 50, 0, 58.3333, 0, 66.6667, 0, 75, 0, 83.3333, 0, 91.6667, 0, 100, 0)
 width_curve = SubResource("Curve_yr4rn")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="OutlinedSubViewportContainer/SubViewport" index="1"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy836erei1ko5"]
+[gd_scene load_steps=11 format=3 uid="uid://cy836erei1ko5"]
 
 [ext_resource type="PackedScene" uid="uid://j3gcywxflkf1" path="res://scenes/enemies/boss/arm.tscn" id="1_1ex25"]
 [ext_resource type="Script" uid="uid://cw1iek3lmjg3q" path="res://scripts/enemy/boss/EnemyBoss.gd" id="1_ub7yk"]
@@ -30,6 +30,9 @@ point_count = 3
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ian0n"]
 radius = 8.0
 height = 34.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eig4w"]
+size = Vector2(53, 34)
 
 [node name="boss" type="CharacterBody2D" node_paths=PackedStringArray("harp", "head", "head_target", "arm_1", "arm_1_target", "arm_2", "arm_2_target")]
 collision_layer = 10
@@ -95,6 +98,11 @@ position = Vector2(-34, -77)
 position = Vector2(0, -8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ian0n")
+
+[node name="body2" type="CollisionShape2D" parent="."]
+position = Vector2(7.68761e-05, -34.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_eig4w")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -45)

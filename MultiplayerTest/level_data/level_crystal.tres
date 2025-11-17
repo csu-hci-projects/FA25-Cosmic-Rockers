@@ -1,14 +1,10 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=10 format=3 uid="uid://bn7cpphesh3yi"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=6 format=3 uid="uid://bn7cpphesh3yi"]
 
 [ext_resource type="Texture2D" uid="uid://cajjvc56y3dl" path="res://sprites/collectables/collectable_harp.png" id="1_fctfx"]
 [ext_resource type="Texture2D" uid="uid://b4sdjajy04htd" path="res://sprites/background/crystal/crystal_0.png" id="1_k35so"]
 [ext_resource type="Script" uid="uid://c2bq8r37uevf6" path="res://scripts/resources/LevelData.gd" id="2_hj2gu"]
 [ext_resource type="Texture2D" uid="uid://bh17rclia14us" path="res://sprites/background/crystal/crystal_1.png" id="2_qogq6"]
-[ext_resource type="AudioStream" uid="uid://dgir4mcousg35" path="res://audio/track_1_stems/track_1_bass.wav" id="3_w1pyr"]
 [ext_resource type="Texture2D" uid="uid://ddqlb735sj8we" path="res://sprites/background/crystal/crystal_2.png" id="3_wocd1"]
-[ext_resource type="AudioStream" uid="uid://bgjmybd6l03yo" path="res://audio/track_1_stems/track_1_drums.wav" id="4_4icpg"]
-[ext_resource type="AudioStream" uid="uid://8w4km8fbmkq5" path="res://audio/track_1_stems/track_1_keys.wav" id="5_56ux8"]
-[ext_resource type="AudioStream" uid="uid://busqfi2wqi2jw" path="res://audio/track_1_stems/track_1_lead.wav" id="6_k35so"]
 
 [resource]
 script = ExtResource("2_hj2gu")
@@ -16,7 +12,7 @@ level_id = 3
 tileset = 1
 backgrounds = Array[Texture2D]([ExtResource("1_k35so"), ExtResource("2_qogq6"), ExtResource("3_wocd1")])
 collectable = ExtResource("1_fctfx")
-songs = Array[AudioStream]([ExtResource("3_w1pyr"), ExtResource("4_4icpg"), ExtResource("5_56ux8"), ExtResource("6_k35so")])
+songs = Array[AudioStream]([])
 level_name = "Axtov"
 level_name_alien = "⌇⏃⌖⍜⌿⊑⍜⋏⟒"
 floor_range = Vector2(0, 0)

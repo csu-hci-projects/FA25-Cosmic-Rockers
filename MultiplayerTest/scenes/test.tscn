@@ -82,7 +82,7 @@ is_local_player = true
 [node name="gun_raycast" parent="player" node_paths=PackedStringArray("player_owner") instance=ExtResource("6_ghpyy")]
 player_owner = NodePath("..")
 
-[node name="music_controller" type="Node2D" parent="."]
+[node name="music_controller" type="AudioStreamPlayer" parent="."]
 script = ExtResource("9_fsiky")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -102,3 +102,4 @@ load_on_ready = true
 
 [node name="boss" parent="." instance=ExtResource("13_44saj")]
 position = Vector2(303, 72)
+max_health = 2000

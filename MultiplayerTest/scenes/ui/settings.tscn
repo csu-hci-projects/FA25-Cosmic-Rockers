@@ -105,7 +105,7 @@ text = "Brightness"
 [node name="brightness_box" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
 
-[node name="brightness_reset" type="TextureButton" parent="TabContainer/Graphics/MarginContainer/GridContainer/brightness_box"]
+[node name="brightness_reset" type="TextureButton" parent="TabContainer/Graphics/MarginContainer/GridContainer/brightness_box" groups=["Button"]]
 custom_minimum_size = Vector2(23, 23)
 layout_mode = 2
 texture_normal = ExtResource("4_ncfhn")
@@ -123,7 +123,7 @@ text = "Zoom"
 [node name="zoom_box" type="HBoxContainer" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
 layout_mode = 2
 
-[node name="zoom_reset" type="TextureButton" parent="TabContainer/Graphics/MarginContainer/GridContainer/zoom_box"]
+[node name="zoom_reset" type="TextureButton" parent="TabContainer/Graphics/MarginContainer/GridContainer/zoom_box" groups=["Button"]]
 custom_minimum_size = Vector2(23, 23)
 layout_mode = 2
 texture_normal = ExtResource("4_ncfhn")
@@ -138,7 +138,7 @@ layout_mode = 2
 layout_mode = 2
 text = "High Contrast Mode"
 
-[node name="highcontrast_toggle" type="CheckBox" parent="TabContainer/Graphics/MarginContainer/GridContainer"]
+[node name="highcontrast_toggle" type="CheckBox" parent="TabContainer/Graphics/MarginContainer/GridContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 0
 
@@ -179,12 +179,12 @@ text = "Primary"
 layout_mode = 2
 text = "Alternate"
 
-[node name="reset" type="Button" parent="TabContainer/Input/MarginContainer/VBoxContainer"]
+[node name="reset" type="Button" parent="TabContainer/Input/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Reset"
 
-[node name="back" type="Button" parent="."]
+[node name="back" type="Button" parent="." groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"

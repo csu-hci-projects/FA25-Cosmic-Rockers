@@ -52,7 +52,11 @@ func _unhandled_input(event):
 			open_settings()
 
 func open_settings():
-	if not settings:
+	if !get_tree().current_scene:
+		settings = null
+		return
+	
+	if !settings:
 		settings = settings_scene.instantiate()
 		
 		var canvas_layer := get_tree().current_scene.get_node_or_null("CanvasLayer")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxpv8j6aghgg1"]
+[gd_scene load_steps=15 format=3 uid="uid://cxpv8j6aghgg1"]
 
 [ext_resource type="Script" uid="uid://c1rwrfi4vlhud" path="res://scripts/controllers/GameController.gd" id="1_iywne"]
 [ext_resource type="TileSet" uid="uid://ylewfm81p8gu" path="res://sprites/tilesets/default_tile_map.tres" id="1_yqjtg"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://cevyadjutxs8l" path="res://scripts/player/PlayerStatusController.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://bfxhtocx83gf4" path="res://scripts/controllers/MusicPlayer.gd" id="8_87uf6"]
 [ext_resource type="Script" uid="uid://t8cfn5odscf5" path="res://scripts/game/Environment.gd" id="9_2a8rs"]
+[ext_resource type="AudioStream" uid="uid://83gt5n2i5uql" path="res://audio/effects/drill.wav" id="11_vaxfo"]
+[ext_resource type="PackedScene" uid="uid://c2qalw7axdloc" path="res://scenes/ui_audio.tscn" id="12_5jirj"]
 
 [sub_resource type="Environment" id="Environment_87uf6"]
 background_mode = 3
@@ -60,9 +62,13 @@ script = ExtResource("4_lbhrr")
 [node name="enemy_controller" type="Node2D" parent="."]
 script = ExtResource("5_iywne")
 
-[node name="music_controller" type="Node2D" parent="."]
+[node name="music_controller" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 script = ExtResource("8_87uf6")
+intro_clip = ExtResource("11_vaxfo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_87uf6")
 script = ExtResource("9_2a8rs")
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource("12_5jirj")]

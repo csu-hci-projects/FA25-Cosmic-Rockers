@@ -24,6 +24,7 @@ func _ready():
 		grid.add_child(label)
 		
 		var primary_btn = Button.new()
+		primary_btn.add_to_group("Button")
 		primary_btn.text = _get_key_name(action, 0)
 		primary_btn.pressed.connect(_on_primary_rebind_pressed.bind(action))
 		primary_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -33,6 +34,7 @@ func _ready():
 		primary_buttons[action] = primary_btn
 		
 		var alt_btn = Button.new()
+		alt_btn.add_to_group("Button")
 		alt_btn.text = _get_key_name(action, 1)
 		alt_btn.pressed.connect(_on_alternate_rebind_pressed.bind(action))
 		alt_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL

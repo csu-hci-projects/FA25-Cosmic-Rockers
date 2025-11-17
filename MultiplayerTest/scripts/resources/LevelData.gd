@@ -6,7 +6,7 @@ class_name LevelData
 @export var tileset: int
 @export var backgrounds: Array[Texture2D]
 @export var collectable: Texture2D
-@export var songs: Array[AudioStream]
+@export var song: AudioStream
 
 @export_group("Naming")
 @export var level_name: String

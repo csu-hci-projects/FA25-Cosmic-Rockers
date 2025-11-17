@@ -149,8 +149,8 @@ func get_tileset() -> int:
 func get_backgrounds() -> Array[Texture2D]:
 	return LEVELS[level_id]["backgrounds"]
 
-func get_music() -> Array[AudioStream]:
-	return LEVELS[level_id]["songs"]
+func get_music() -> AudioStream:
+	return LEVELS[level_id]["song"]
 
 func get_level_name() -> String:
 	return LEVELS[level_id]["level_name"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://brnb3gmeptra1"]
+[gd_scene load_steps=6 format=3 uid="uid://brnb3gmeptra1"]
 
 [ext_resource type="Script" uid="uid://crvqa07eyew1a" path="res://scripts/game/Ship.gd" id="1_lyiba"]
 [ext_resource type="SpriteFrames" uid="uid://ivjkxtd4behj" path="res://sprites/sprite_sheets/ship/ship_animation.tres" id="2_lyiba"]
 [ext_resource type="Texture2D" uid="uid://bcurxww8ub62d" path="res://sprites/particles/dust_2.png" id="3_0oc8y"]
+[ext_resource type="AudioStream" uid="uid://buof8v7xat61n" path="res://audio/effects/crash.wav" id="4_7gec2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lyiba"]
 size = Vector2(46, 40)
@@ -56,5 +57,9 @@ angular_velocity_min = -345.21
 angular_velocity_max = 364.93
 scale_amount_min = 0.8
 scale_amount_max = 1.2
+
+[node name="audio_player" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_7gec2")
+bus = &"Effects"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
