@@ -32,29 +32,30 @@ script = ExtResource("1_2k4jl")
 
 [node name="menu" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -56.0
-offset_right = 100.0
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -216.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="host" type="Button" parent="menu" groups=["Button"]]
 layout_mode = 2
+size_flags_vertical = 10
 text = "Host"
 
 [node name="join_open" type="Button" parent="menu" groups=["Button"]]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Join"
 
 [node name="join_panel" type="VBoxContainer" parent="menu"]
+visible = false
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 10
 theme_override_constants/separation = 0
 
 [node name="join" type="Button" parent="menu/join_panel" groups=["Button"]]
@@ -68,10 +69,12 @@ placeholder_text = "lobby id"
 
 [node name="settings" type="Button" parent="menu" groups=["Button"]]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Settings"
 
 [node name="quit" type="Button" parent="menu" groups=["Button"]]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Quit"
 
 [node name="lobby_menu" type="VBoxContainer" parent="."]
@@ -89,6 +92,7 @@ grow_vertical = 0
 
 [node name="level_select" type="SpinBox" parent="lobby_menu"]
 layout_mode = 2
+size_flags_vertical = 8
 theme = ExtResource("2_m5bgy")
 min_value = 1.0
 max_value = 4.0
@@ -98,6 +102,7 @@ prefix = "Level"
 
 [node name="ready" type="Button" parent="lobby_menu" groups=["Button"]]
 layout_mode = 2
+size_flags_vertical = 10
 toggle_mode = true
 text = "Ready"
 
@@ -145,10 +150,17 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Send"
 
-[node name="players" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.085
+[node name="players_margin" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="players" type="VBoxContainer" parent="players_margin"]
+layout_mode = 2
 
 [node name="steam_error" type="PanelContainer" parent="."]
 layout_mode = 1

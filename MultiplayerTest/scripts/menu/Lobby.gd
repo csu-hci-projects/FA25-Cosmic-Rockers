@@ -4,7 +4,7 @@ extends Control
 @onready var chat = $chat
 @onready var menu = $menu
 @onready var lobby_menu = $lobby_menu
-@onready var players = $players
+@onready var players = $players_margin/players
 @onready var error = $steam_error
 
 @onready var lobby_id = $menu/join_panel/lobby_id

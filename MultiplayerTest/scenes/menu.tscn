@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxr47xovyvcna"]
+[gd_scene load_steps=8 format=3 uid="uid://dxr47xovyvcna"]
 
+[ext_resource type="Script" uid="uid://bhxyha2cu3ojc" path="res://scripts/menu/Title.gd" id="1_g3eks"]
+[ext_resource type="Texture2D" uid="uid://dvuy7dpk8udlc" path="res://resources/title.png" id="1_mhnvy"]
 [ext_resource type="PackedScene" uid="uid://c6het52418hfo" path="res://scenes/ui/control.tscn" id="1_s6dok"]
 [ext_resource type="PackedScene" uid="uid://c2qalw7axdloc" path="res://scenes/ui_audio.tscn" id="2_con2f"]
 [ext_resource type="Script" uid="uid://dxoa8x65d768g" path="res://scripts/effects/UIAudio.gd" id="3_mhnvy"]
+[ext_resource type="AudioStream" uid="uid://dtm8lkcg5qiul" path="res://audio/Moon Lander.wav" id="5_4ytvr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ytvr"]
+font_size = 96
+font_color = Color(0.921569, 0.929412, 0.913725, 1)
+outline_size = 16
+outline_color = Color(0.0823529, 0.113725, 0.156863, 1)
+shadow_size = 10
+shadow_color = Color(0.0823529, 0.113725, 0.156863, 1)
+shadow_offset = Vector2(-5, 10)
 
 [node name="Node" type="CanvasLayer"]
 
@@ -12,11 +24,59 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.172416, 0.0183948, 0.0735537, 1)
+color = Color(0.532648, 0.126061, 0.27831, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g3eks")
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/Container"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mhnvy")
+
+[node name="cosmic" type="Label" parent="ColorRect/Container"]
+layout_mode = 2
+offset_left = 9.00001
+offset_top = 132.0
+offset_right = 362.0
+offset_bottom = 245.0
+rotation = -0.369821
+text = "Cosmic"
+label_settings = SubResource("LabelSettings_4ytvr")
+
+[node name="rockers" type="Label" parent="ColorRect/Container"]
+layout_mode = 2
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -357.0
+offset_top = -45.0
+offset_right = 14.0
+offset_bottom = 68.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.283696
+text = "Rockers"
+label_settings = SubResource("LabelSettings_4ytvr")
 
 [node name="Control" parent="." instance=ExtResource("1_s6dok")]
 metadata/_edit_use_anchors_ = true
 
-[node name="AudioStreamPlayer" parent="." instance=ExtResource("2_con2f")]
+[node name="effect_player" parent="." instance=ExtResource("2_con2f")]
 script = ExtResource("3_mhnvy")
+
+[node name="music_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4ytvr")
+autoplay = true
+bus = &"Music"
