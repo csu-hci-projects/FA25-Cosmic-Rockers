@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwm1b8kr276aq"]
+
+[ext_resource type="SpriteFrames" uid="uid://cvgnbl63hk153" path="res://sprites/sprite_sheets/player/weapons/slash.tres" id="1_lqhf8"]
+[ext_resource type="Script" uid="uid://cuo4jvlag55ym" path="res://scripts/effects/AnimationOneShot.gd" id="2_r6kqv"]
+
+[node name="Slash" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.556863)
+position = Vector2(22.105, -5.34)
+scale = Vector2(0.645, 2.065)
+sprite_frames = ExtResource("1_lqhf8")
+frame = 8
+frame_progress = 1.0
+script = ExtResource("2_r6kqv")

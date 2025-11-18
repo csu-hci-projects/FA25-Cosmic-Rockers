@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7m4b28gcn8fs"
-path="res://.godot/imported/aim_arrow.png-7bae27d4fa9e0cc219e74ff05692243b.ctex"
+uid="uid://cynt1brbnbyvd"
+path="res://.godot/imported/redninjaman.png-e5952597fe9c603bba29d7fb9b8b2c74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/aim_arrow.png"
-dest_files=["res://.godot/imported/aim_arrow.png-7bae27d4fa9e0cc219e74ff05692243b.ctex"]
+source_file="res://sprites/sprite_sheets/player/redninjaman.png"
+dest_files=["res://.godot/imported/redninjaman.png-e5952597fe9c603bba29d7fb9b8b2c74.ctex"]
 
 [params]
 

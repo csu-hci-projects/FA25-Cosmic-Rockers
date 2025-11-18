@@ -25,7 +25,8 @@ const CHARACTERS = [
 	preload("res://sprites/sprite_sheets/player/player_animation.tres"),
 	preload("res://sprites/sprite_sheets/player/player_black_animation.tres"),
 	preload("res://sprites/sprite_sheets/player/player_green_animation.tres"),
-	preload("res://sprites/sprite_sheets/player/player_ninja_animations.tres")
+	preload("res://sprites/sprite_sheets/player/player_ninja_animations.tres"),
+	preload("res://sprites/sprite_sheets/player/player_red_ninja_animations.tres")
 ]
 
 const COLORS = [

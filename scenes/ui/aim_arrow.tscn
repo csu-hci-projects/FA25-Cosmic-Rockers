@@ -1,9 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://dfqhwijpoi2as"]
 
-[ext_resource type="Texture2D" uid="uid://7m4b28gcn8fs" path="res://sprites/ui/aim_arrow.png" id="1_8whm3"]
+[ext_resource type="SpriteFrames" uid="uid://c7xkj2x7eqv1" path="res://sprites/sprite_sheets/player/weapons/aim_arrow.tres" id="1_8whm3"]
 
 [node name="AimArrow" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("1_8whm3")
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("1_8whm3")
+frame = 2
+frame_progress = 0.0199203

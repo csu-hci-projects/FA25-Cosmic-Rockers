@@ -10,7 +10,11 @@ dash_time = 0.02
 slash_arc_angle = 1.0
 slash_range = 30.0
 dash_momentum_time = 0.0
-active_slash_color = Color(1, 0.2, 0.2, 0.192157)
+preview_color = Color(1, 1, 1, 0)
+active_slash_color = Color(1, 0.2, 0.2, 0)
+aim_preview_color = Color(0.4, 0.8, 1, 0)
+aim_shake_power = 1.0
+aim_shake_frequency = 20.0
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_3pnln")
