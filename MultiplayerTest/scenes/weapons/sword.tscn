@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6aqba3yfkyi6"]
+[gd_scene load_steps=3 format=3 uid="uid://c5wflcjb1kco5"]
 
 [ext_resource type="Script" uid="uid://dwen1yhitjcxq" path="res://scripts/player/SwordSlash.gd" id="1_o616w"]
 [ext_resource type="Texture2D" uid="uid://brqcu77p4kwgv" path="res://sprites/sprite_sheets/player/weapons/Trumpet.png" id="2_3pnln"]
@@ -22,3 +22,5 @@ offset = Vector2(8.86, 0)
 
 [node name="ray_start" type="Node2D" parent="."]
 position = Vector2(10, 2)
+
+[node name="audio_player" type="AudioStreamPlayer2D" parent="."]
