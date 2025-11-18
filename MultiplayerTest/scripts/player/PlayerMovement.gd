@@ -12,20 +12,6 @@ var jump_buffer : float = 0.0
 var input_dir: float = 0
 var sync_timer: int = 0
 var last_vertical_velocity: float = 0
-class_name PlayerMovement
-extends Entity
-
-@export var move_speed : float = 200.0
-@export var jump_force : float = 400.0
-@export var coyote_time : float = 0.1
-@export var jump_buffer_time : float = 0.1
-@export var air_control : float = 0.9
-
-var coyote_timer : float = 0.0
-var jump_buffer : float = 0.0
-var input_dir: float = 0
-var sync_timer: int = 0
-var last_vertical_velocity: float = 0
 var is_dashing: bool = false
 var gravity_enabled := true
 
