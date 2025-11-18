@@ -8,7 +8,7 @@
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.556863)
 position = Vector2(22.105, -5.34)
-scale = Vector2(0.645, 2.065)
+scale = Vector2(2.055, 2.065)
 sprite_frames = ExtResource("1_lqhf8")
 frame = 8
 frame_progress = 1.0
