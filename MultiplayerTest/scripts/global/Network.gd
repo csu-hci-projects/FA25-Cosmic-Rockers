@@ -241,6 +241,8 @@ func read_p2p_packet():
 		"level_complete":
 			if is_host():
 				next_level()
+		"win_game":
+			win_game()
 		"set_tile":
 			var cell: Vector2i = readable_data["data"]["cell"]
 			var id: int = readable_data["data"]["id"]

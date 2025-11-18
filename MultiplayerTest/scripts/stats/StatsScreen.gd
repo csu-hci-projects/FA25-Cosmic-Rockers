@@ -33,7 +33,7 @@ func load_stats():
 	
 	var current_player_steam_id = all_player_data.keys()[current_player]
 	stat_player.text = all_player_data[current_player_steam_id]["steam_username"]
-	var player_stats = all_player_data[current_player_steam_id]["stats"]
+	var player_stats = all_player_data[current_player_steam_id].get("stats", {})
 	for player_stat in player_stats.keys():
 		var stat = stat_scene.instantiate()
 		stat_list.add_child(stat)

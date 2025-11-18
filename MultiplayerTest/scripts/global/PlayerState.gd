@@ -42,15 +42,15 @@ var players: Dictionary = {}  # Dictionary keyed by Steam ID
 func add_stat(key: STAT, value):
 	Multiplayer.update_player_stat(key, value)
 
-func add_stat_value(key: STAT, value):
-	if not players[Global.steam_id].has("stats"):
-		players[Global.steam_id]["stats"] = {}
+func add_stat_value(steam_id, key: STAT, value):
+	if not players[steam_id].has("stats"):
+		players[steam_id]["stats"] = {}
 	
-	if players[Global.steam_id]["stats"].has(key):
-		players[Global.steam_id]["stats"][key] += value
+	if players[steam_id]["stats"].has(key):
+		players[steam_id]["stats"][key] += value
 	else:
-		players[Global.steam_id]["stats"][key] = value
-	
+		players[steam_id]["stats"][key] = value
+
 
 func set_stat(steam_id: int, key: STAT, value):
 	if not players.has(steam_id):
@@ -75,7 +75,7 @@ func set_player_data(steam_id: int, data: Dictionary):
 		if data[key] is Dictionary:
 			if key == "player_stat":
 				var stat = data[key]["stats"]
-				add_stat_value(stat["key"], stat["value"])
+				add_stat_value(steam_id, stat["key"], stat["value"])
 				continue
 			
 			if !players[steam_id].has(key):
