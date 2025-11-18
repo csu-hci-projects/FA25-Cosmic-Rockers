@@ -6,7 +6,7 @@ extends HBoxContainer
 
 func load_player(steam_id: int, player_data: Dictionary):
 	username.text = player_data["steam_username"]
-	score.text = str(calculate_score(player_data["stats"]))
+	score.text = str(calculate_score(player_data.get("stats", {})))
 	load_avatar(steam_id)
 
 func calculate_score(stats: Dictionary) -> int:

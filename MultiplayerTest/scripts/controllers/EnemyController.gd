@@ -44,7 +44,6 @@ func _process(delta: float):
 	
 	if enemies.size() > 0:
 		process_enemies(delta)
-	
 	if boss:
 		boss._process_state(delta)
 
@@ -74,6 +73,9 @@ func send_state(entity_id: String, state: Enemy.State, target: String):
 	Multiplayer.update_entity_state(entity_id, {"state":state, "target":target})
 
 func spawn_enemies():
+	if !Multiplayer.is_host():
+		return
+	
 	var enemy_spawns = WorldState.get_enemy_spawn_locations()
 	var id: int = 0
 	for spawn_location in enemy_spawns:

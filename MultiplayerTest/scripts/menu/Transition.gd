@@ -55,6 +55,7 @@ func _on_fade_in_complete():
 	else:
 		var end_screen = end_screen_scene.instantiate()
 		add_child(end_screen)
+		end_screen.on_load_lobby.connect(queue_free)
 
 func fade_out_transition():
 	var tween = create_tween()

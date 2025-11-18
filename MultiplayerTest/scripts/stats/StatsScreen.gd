@@ -11,6 +11,8 @@ var lobby_scene = preload("res://scenes/menu.tscn")
 var current_player: int = 0
 var all_player_data: Dictionary
 
+signal on_load_lobby()
+
 func _ready():
 	all_player_data = PlayerState.get_all_players_data()
 	load_players()
@@ -66,3 +68,4 @@ func _on_lobby_pressed() -> void:
 func load_lobby():
 	WorldState.reset()
 	get_tree().change_scene_to_packed(lobby_scene)
+	emit_signal("on_load_lobby")

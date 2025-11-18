@@ -76,7 +76,6 @@ script = ExtResource("5_fqoh6")
 
 [node name="player" parent="." instance=ExtResource("10_yk7ts")]
 position = Vector2(195, 65)
-collision_layer = 18
 is_local_player = true
 
 [node name="gun_raycast" parent="player" node_paths=PackedStringArray("player_owner") instance=ExtResource("6_ghpyy")]

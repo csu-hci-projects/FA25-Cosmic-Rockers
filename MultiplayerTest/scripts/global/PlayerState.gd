@@ -39,9 +39,10 @@ const COLORS = [
 # Stores the latest data for each player
 var players: Dictionary = {}  # Dictionary keyed by Steam ID
 
-
-
 func add_stat(key: STAT, value):
+	Multiplayer.update_player_stat(key, value)
+
+func add_stat_value(key: STAT, value):
 	if not players[Global.steam_id].has("stats"):
 		players[Global.steam_id]["stats"] = {}
 	
@@ -72,6 +73,11 @@ func set_player_data(steam_id: int, data: Dictionary):
 		players[steam_id] = {}
 	for key in data.keys():
 		if data[key] is Dictionary:
+			if key == "player_stat":
+				var stat = data[key]["stats"]
+				add_stat_value(stat["key"], stat["value"])
+				continue
+			
 			if !players[steam_id].has(key):
 				players[steam_id][key] = {}
 			

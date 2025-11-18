@@ -7,7 +7,9 @@ extends Control
 @onready var players = $players
 @onready var error = $steam_error
 
-@onready var lobby_id = $menu/lobby_id
+@onready var lobby_id = $menu/join_panel/lobby_id
+@onready var join_open = $menu/join_open
+@onready var join_panel = $menu/join_panel
 
 @onready var chat_scroll = $chat/chat_scroll
 @onready var chatbox = $chat/chat_scroll/chatbox
@@ -23,10 +25,7 @@ extends Control
 var lobby_player = preload("res://scenes/ui/lobby_player.tscn")
 
 func _ready():
-	chat.visible = false
-	lobby_menu.visible = false
-	error.visible = false
-	character_edit.visible = false
+	reset_ui()
 	
 	Multiplayer.chat_received.connect(_add_chat_message)
 	Multiplayer.lobby_members_updated.connect(_update_lobby)
@@ -45,6 +44,16 @@ func _ready():
 	if Multiplayer.lobby_id != 0:
 		_on_lobby_joined()
 		Multiplayer.get_lobby_members()
+
+func reset_ui():
+	menu.visible = true
+	chat.visible = false
+	lobby_menu.visible = false
+	error.visible = false
+	character_edit.visible = false
+	join_open.visible = true
+	join_panel.visible = false
+	lobby_id.text = ""
 
 func _display_error(message: String):
 	error_message.text = "Steam Error:\n(" + message + ")\nPlease restart steam and try again."
@@ -130,10 +139,7 @@ func _on_lobby_left():
 	PlayerState.clear()
 	WorldState.clear()
 	
-	menu.visible = true
-	lobby_menu.visible = false
-	chat.visible = false
-	character_edit.visible = false
+	reset_ui()
 	chatbox.text = ""
 	ready_button.set_pressed_no_signal(false)
 	
@@ -146,9 +152,17 @@ func _on_retry_pressed() -> void:
 	error_message.text = ""
 	Global.initialize_steam()
 	
-	chat.visible = false
-	lobby_menu.visible = false
-	menu.visible = true
-	error.visible = false
-	character_edit.visible = false
-	
+	reset_ui()
+
+
+func _on_join_open_pressed() -> void:
+	join_panel.visible = true
+	join_open.visible = false
+
+
+func _on_settings_pressed() -> void:
+	Global.open_settings()
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
