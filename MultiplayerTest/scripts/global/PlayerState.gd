@@ -11,18 +11,22 @@ enum STAT {
 
 const WEAPONS = [
 	preload("res://scenes/weapons/gun_raycast.tscn"),
-	preload("res://scenes/weapons/gun_projectile.tscn")
+	preload("res://scenes/weapons/gun_projectile.tscn"),
+	preload("res://scenes/weapons/sword.tscn")
 ]
 
 const WEAPON_SPRITES = [
 	preload("res://sprites/sprite_sheets/player/weapons/gun.png"),
-	preload("res://sprites/sprite_sheets/player/weapons/gun_2.png")
+	preload("res://sprites/sprite_sheets/player/weapons/gun_2.png"),
+	preload("res://sprites/sprite_sheets/player/weapons/Trumpet.png")
 ]
 
 const CHARACTERS = [
 	preload("res://sprites/sprite_sheets/player/player_animation.tres"),
 	preload("res://sprites/sprite_sheets/player/player_black_animation.tres"),
-	preload("res://sprites/sprite_sheets/player/player_green_animation.tres")
+	preload("res://sprites/sprite_sheets/player/player_green_animation.tres"),
+	preload("res://sprites/sprite_sheets/player/player_ninja_animations.tres"),
+	preload("res://sprites/sprite_sheets/player/player_red_ninja_animations.tres")
 ]
 
 const COLORS = [
