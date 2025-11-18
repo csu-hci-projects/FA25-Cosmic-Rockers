@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://cvgnbl63hk153"]
+
+[ext_resource type="Texture2D" uid="uid://dmfu8tjkmkmdd" path="res://sprites/sprite_sheets/player/weapons/Slash.png" id="1_b6ti7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6ti7"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wvah"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqfi5"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdydr"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61c4i"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgign"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22itv"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j5sh"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i1x7"]
+atlas = ExtResource("1_b6ti7")
+region = Rect2(256, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6ti7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wvah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqfi5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdydr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61c4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgign")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22itv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j5sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i1x7")
+}],
+"loop": false,
+"name": &"default",
+"speed": 40.0
+}]

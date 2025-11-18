@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://c7xkj2x7eqv1"]
+
+[ext_resource type="Texture2D" uid="uid://7m4b28gcn8fs" path="res://sprites/sprite_sheets/player/weapons/aim_arrow.png" id="1_km5ck"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy202"]
+atlas = ExtResource("1_km5ck")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uer8"]
+atlas = ExtResource("1_km5ck")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t700"]
+atlas = ExtResource("1_km5ck")
+region = Rect2(14, 0, 7, 7)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy202")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uer8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t700")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
