@@ -12,7 +12,6 @@ var jump_buffer : float = 0.0
 var input_dir: float = 0
 var sync_timer: int = 0
 var last_vertical_velocity: float = 0
-
 var is_dashing: bool = false
 var gravity_enabled := true
 
@@ -21,16 +20,7 @@ var sync_frames: int = 20
 
 @onready var dust_particle_scene = preload("res://scenes/particles/particle_effect.tscn")
 @onready var teleport_particle_scene = preload("res://scenes/particles/teleport.tscn")
-
-@onready var pointer: Label = $pointer
-@onready var audio_player: AudioStreamPlayer2D = $audio_player
-
-var sfx_jump: AudioStream = preload("res://audio/effects/jump.wav")
-var sfx_land: AudioStream = preload("res://audio/effects/land.wav")
-var sfx_walk: AudioStream = preload("res://audio/effects/walk.wav")
-var sfx_damage: AudioStream = preload("res://audio/effects/damage.wav")
-var sfx_death: AudioStream = preload("res://audio/effects/death.wav")
-var walk_timer: float = 0
+@onready var pointer: Sprite2D = $pointer
 
 var collectable: Collectable = null
 
@@ -40,7 +30,6 @@ func _ready() -> void:
 	super()
 	set_animation("default")
 	sprite.animation_finished.connect(_animation_finished)
-	audio_player.finished.connect(_audio_finished)
 
 
 func _physics_process(delta: float) -> void:
@@ -60,7 +49,6 @@ func _physics_process(delta: float) -> void:
 			else:
 				dust_particle.queue_free()
 			set_animation("land")
-			set_sfx(sfx_land)
 		
 		coyote_timer = coyote_time
 		velocity.x = target_speed
@@ -68,17 +56,15 @@ func _physics_process(delta: float) -> void:
 		
 		if abs(velocity.x) > 0.1:
 			set_animation("walk")
-			set_sfx(sfx_walk)
 		else:
 			set_animation("default")
-			set_sfx(null)
 	else:
 		coyote_timer -= delta
 		velocity.x = lerp(velocity.x, target_speed, air_control * delta * 10.0)
-		velocity.y += get_gravity().y * delta
+		if not is_dashing:
+			velocity.y += get_gravity().y * delta
 		
 		set_animation("fall")
-		set_sfx(null)
 	
 	if velocity.x > 0:
 		sprite.flip_h = false
@@ -105,26 +91,6 @@ func set_animation(animation_name: String):
 		animation_name = "default"
 		
 	sprite.play(animation_name)
-
-func set_sfx(clip: AudioStream):
-	#if trying to play walk sound while walk is already playing
-	if clip == sfx_walk and audio_player.stream != null:
-		return
-	
-	#if trying to stop walk sound while walk is playing
-	if clip == null:
-		if audio_player.stream == sfx_walk:
-			walk_timer = audio_player.get_playback_position()
-			audio_player.stop()
-			audio_player.stream = null
-		return
-	
-	audio_player.stop()
-	audio_player.stream = clip
-	if clip == sfx_walk:
-		audio_player.play(walk_timer)
-	else:
-		audio_player.play()
 
 func _process(delta: float):
 	if !is_local_player: #only local player controls their player
@@ -156,7 +122,6 @@ func _process(delta: float):
 func jump():
 	jump_buffer = jump_buffer_time
 	set_animation("jump")
-	set_sfx(sfx_jump)
 
 
 func jump_release():
@@ -177,9 +142,6 @@ func _animation_finished():
 		set_animation("landed")
 
 
-func _audio_finished():
-	audio_player.stream = null
-
 func _update_input(data: Dictionary):
 	if data.has("jump"):
 		if data["jump"]:
@@ -196,25 +158,15 @@ func _update_position(data: Dictionary):
 		position = data["position"]
 
 func take_damage(amt: int):
-	if is_dead:
-		return
-	
 	if is_local_player:
 		PlayerState.add_stat(PlayerState.STAT.DAMAGE_TAKEN, amt)
 	super(amt)
-	
-	if !is_dead:
-		set_sfx(sfx_damage)
 
 func die():
-	if is_dead:
-		return
-		
 	PlayerState.add_stat(PlayerState.STAT.DEATHS, 1)
 	super()
 	input_dir = 0
 	set_animation("death")
-	set_sfx(sfx_death)
 	
 	if !is_local_player:
 		return

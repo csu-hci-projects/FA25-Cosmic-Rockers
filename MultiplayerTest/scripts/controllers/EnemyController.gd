@@ -130,9 +130,8 @@ func _set_state(entity_id: String, data: Dictionary):
 
 func _set_positions(entity_id: String, data: Dictionary):
 	for key in data.keys():
-		if enemies.has(key):
-			enemies[key].position = data[key]["position"]
-			enemies[key].set_health(data[key]["health"])
+		enemies[key].position = data[key]["position"]
+		enemies[key].set_health(data[key]["health"])
 
 
 func take_hit(entity_id: String, amt: int):

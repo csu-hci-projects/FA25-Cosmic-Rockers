@@ -154,7 +154,7 @@ func _process(delta: float) -> void:
 
 	if slash_timer > 0:
 		slash_timer -= delta
-		if slash_hitbox and slash_hitbox.monitoring:
+		if slash_hitbox:
 			var slash_angle = slash_start_angle + (1.0 - (slash_timer / slash_duration)) * deg_to_rad(slash_arc_angle)
 			var hitbox_offset = Vector2.RIGHT.rotated(slash_angle) * slash_range
 			slash_hitbox.global_position = global_position + hitbox_offset
