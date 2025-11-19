@@ -20,16 +20,7 @@ var sync_frames: int = 20
 
 @onready var dust_particle_scene = preload("res://scenes/particles/particle_effect.tscn")
 @onready var teleport_particle_scene = preload("res://scenes/particles/teleport.tscn")
-
-@onready var pointer: Label = $pointer
-@onready var audio_player: AudioStreamPlayer2D = $audio_player
-
-var sfx_jump: AudioStream = preload("res://audio/effects/jump.wav")
-var sfx_land: AudioStream = preload("res://audio/effects/land.wav")
-var sfx_walk: AudioStream = preload("res://audio/effects/walk.wav")
-var sfx_damage: AudioStream = preload("res://audio/effects/damage.wav")
-var sfx_death: AudioStream = preload("res://audio/effects/death.wav")
-var walk_timer: float = 0
+@onready var pointer: Sprite2D = $pointer
 
 var collectable: Collectable = null
 
