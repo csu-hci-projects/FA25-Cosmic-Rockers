@@ -183,11 +183,12 @@ func _create_out_of_bounds(tilemap: TileMapLayer) -> void:
 	var w: float = right - left
 	var h: float = bottom - top
 	var t: float = float(thickness_px)
+	var t2: float = t * 3
 
-	_make_boundary_zone(Rect2(Vector2(left - t, top - t),   Vector2(w + 2.0 * t, t))) # top
-	_make_boundary_zone(Rect2(Vector2(left - t, bottom),    Vector2(w + 2.0 * t, t))) # bottom
-	_make_boundary_zone(Rect2(Vector2(left - t, top),       Vector2(t, h)))           # left
-	_make_boundary_zone(Rect2(Vector2(right,  top),         Vector2(t, h)))           # right
+	_make_boundary_zone(Rect2(Vector2(left - t2, top - t), Vector2(w + 2.0 * t2, t))) # top
+	_make_boundary_zone(Rect2(Vector2(left - t2, bottom), Vector2(w + 2.0 * t2, t))) # bottom
+	_make_boundary_zone(Rect2(Vector2(left - t2, top), Vector2(t2, h))) # left
+	_make_boundary_zone(Rect2(Vector2(right,  top), Vector2(t2, h))) # right
 
 
 func _make_boundary_zone(rect: Rect2) -> void:
@@ -196,13 +197,14 @@ func _make_boundary_zone(rect: Rect2) -> void:
 	var shape: RectangleShape2D = RectangleShape2D.new()
 	var sprite: Sprite2D = Sprite2D.new()
 	
-	shape.size= rect.size
+	shape.size = rect.size
 	col.shape = shape
 	sprite.texture = cobblestone_texture
 	
 	sprite.region_enabled = true
 	sprite.region_rect = Rect2(Vector2.ZERO, rect.size)
 	sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	
 	sprite.centered = false
 	sprite.position = -rect.size * 0.5
 	wall.position = rect.position + rect.size * 0.5
