@@ -74,7 +74,6 @@ func set_cells(cell: Vector2i, tile_id: int, radius: int):
 	for y_offset in range(-radius, radius + 1):
 		for x_offset in range(-radius, radius + 1):
 			var c := cell + Vector2i(x_offset, y_offset)
-			# SKIP protected cells so they cannot be erased
 			if _is_protected(c):
 				continue
 			cells_to_erase.append(c)
@@ -90,7 +89,7 @@ func cells_in_range(cell: Vector2i, tile_id: int, radius: int) -> int:
 				cells += 1
 	return cells
 
-var _protected_cells := {} # Dictionary<String,bool>, keys "x,y"
+var _protected_cells := {} 
 
 func add_protected_cell(cell: Vector2i) -> void:
 	if not _in_bounds(cell):
