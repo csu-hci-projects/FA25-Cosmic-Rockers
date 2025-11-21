@@ -50,6 +50,31 @@ static func generate(width: int, height: int, \
 			flatten.append(value)
 	return {"map_data": flatten, "room_data": rooms}
 
+static func place_level_pools(
+		level: int,
+		target_tilemap: Tilemap,
+		seed_count: int = 4,
+		cover_fraction: float = 0.4,
+		min_seed_distance: int = 12
+	) -> void:
+	if level != 1 and level != 2:
+		return
+
+	var hazards_script: Script = load("res://scripts/game/LevelHazards.gd")
+	if hazards_script == null:
+		push_warning("TerrainGenerator.place_level_pools: LevelHazards.gd not found.")
+		return
+
+	var hazards: Node = hazards_script.new()
+	if hazards.has_variable("pools_count_range"):
+		hazards.pools_count_range = Vector2i(seed_count, seed_count)
+
+	if hazards.has_variable("enable_damage"):
+		hazards.enable_damage = (level == 2)
+
+	target_tilemap.add_child(hazards)
+
+
 static func create_room(size: int, position: Vector2i):
 	for x in range(size):
 		for y in range(size):
