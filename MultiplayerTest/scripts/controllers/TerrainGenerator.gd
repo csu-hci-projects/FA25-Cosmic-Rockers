@@ -57,7 +57,7 @@ static func place_level_pools(
 		cover_fraction: float = 0.4,
 		min_seed_distance: int = 12
 	) -> void:
-	if level != 1 and level != 2:
+	if level not in [1, 2, 4]:
 		return
 
 	var hazards_script: Script = load("res://scripts/game/LevelHazards.gd")

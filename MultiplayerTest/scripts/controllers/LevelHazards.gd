@@ -5,7 +5,7 @@ class_name LevelHazards extends Node2D
 
 # unbreakable bands (ONLY sides + bottom)
 @export var unbreakable_side_margin_tiles: int = 1
-@export var unbreakable_bottom_extra_tiles: int = 1
+@export var unbreakable_bottom_extra_tiles: int = 0
 
 # choose kind (visual only)
 @export var force_kind: int = -1   # -1 auto, 0 = water, 1 = lava
@@ -197,10 +197,7 @@ func _spawn_pools_for(is_lava: bool) -> void:
 			continue
 
 		var rect_world: Rect2 = _tile_rect_to_world(top_left_cell, Vector2i(w - 1, h - 1))
-		#var p = rect_world.position
-		#var a = rect_world.size
-		#rect_world = Rect2(Vector2(p.x, p.y), Vector2(a.x - 16, a.y - 16))
-	
+
 		if not _far_enough(rect_world, placed_rects):
 			continue
 
