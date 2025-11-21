@@ -1,14 +1,13 @@
 extends Node2D
 
-# ---------- CONFIG ----------
-@export var pools_count_range: Vector2i = Vector2i(10, 15)   # number of pools
-@export var min_distance_between_pools_tiles: int = 6        # min Chebyshev spacing between pools
 
-# unbreakable band around each pool (ONLY bottom & sides)
+@export var pools_count_range: Vector2i = Vector2i(10, 15)   # number of pools
+@export var min_distance_between_pools_tiles: int = 6        # min spacing between pools
+
+
 @export var unbreakable_side_margin_tiles: int = 1           # unbreakable thickness at left/right (in tiles)
 @export var unbreakable_bottom_extra_tiles: int = 1          # extra unbreakable thickness below bottom (in tiles)
 
-# water/lava selection (auto by level if -1)
 @export var force_kind: int = -1                             # -1 auto, 0 = water, 1 = lava
 @export var water_texture: Texture2D = preload("res://sprites/tilesets/Water.png")
 @export var lava_texture:  Texture2D = preload("res://sprites/tilesets/Lava.png")
@@ -25,14 +24,12 @@ extends Node2D
 @export var pool_height_min: int = 1
 @export var pool_height_max: int = 4
 
-# ---------- STATE ----------
 var _tilemap: TileMapLayer
 var _tile_size: int = 16
 var _unbreakable_rects_world: Array[Rect2] = []   # we keep this so Tilemap (or net guards) can ask is_cell_protected()
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _lava_ticks_remaining: Dictionary = {}        # instance_id -> ticks remaining
 
-# ---------- HELPERS ----------
 func _get_tile_size() -> int:
 	if _tilemap and _tilemap.tile_set:
 		return int(_tilemap.tile_set.tile_size.x)
@@ -99,7 +96,6 @@ func _has_support(top_left: Vector2i, w: int, h: int) -> bool:
 
 	return true
 
-# --- CARVE: clear the interior rect to air (so pools can exist in terrain)
 func _carve_rect_world_as_empty(rect_world: Rect2) -> void:
 	var tl: Vector2i = _tilemap.local_to_map(rect_world.position)
 	var br: Vector2i = _tilemap.local_to_map(rect_world.position + rect_world.size - Vector2(1,1))
@@ -110,7 +106,6 @@ func _carve_rect_world_as_empty(rect_world: Rect2) -> void:
 				cells_to_erase.append(Vector2i(x, y))
 	_tilemap.set_cells_terrain_connect(cells_to_erase, 0, -1, false)
 
-# --- UNBREAKABLE BANDS (bottom & sides ONLY)
 func _band_rects_for_pool(pool_rect_world: Rect2) -> Array:
 	var side_px: float = float(max(0, unbreakable_side_margin_tiles) * _tile_size)
 	var bottom_px: float = float(max(0, 1 + unbreakable_bottom_extra_tiles) * _tile_size)
@@ -174,7 +169,7 @@ func _place_sprite_and_area(pool_rect_world: Rect2, is_lava: bool) -> void:
 	area.body_entered.connect(Callable(self, "_area_body_entered").bind(is_lava))
 	area.body_exited.connect(Callable(self, "_area_body_exited").bind(is_lava))
 
-# ---------- POOL PLACEMENT (random; requires side & bottom support) ----------
+# POOL PLACEMENT 
 func _spawn_pools_for(is_lava: bool) -> void:
 	var want: int = _rng.randi_range(pools_count_range.x, pools_count_range.y)
 	var placed_rects: Array[Rect2] = []
@@ -224,7 +219,7 @@ func _spawn_pools_for(is_lava: bool) -> void:
 
 		placed_rects.append(rect_world)
 
-# ---------- LAVA DAMAGE ----------
+#  LAVA DAMAGE (doesnt work rn)
 func _start_lava_damage(p: PlayerMovement) -> void:
 	var id: int = p.get_instance_id()
 	if int(_lava_ticks_remaining.get(id, 0)) > 0:
@@ -261,7 +256,6 @@ func _do_lava_tick(p: PlayerMovement) -> void:
 func _on_lava_timer_timeout(p: PlayerMovement) -> void:
 	_do_lava_tick(p)
 
-# ---------- LIFECYCLE ----------
 func _ready() -> void:
 	_rng.randomize()
 	await get_tree().process_frame
@@ -288,7 +282,6 @@ func _ready() -> void:
 	self.z_index = 1  # mid-ground
 	_spawn_pools_for(is_lava)
 
-# ---------- AREA CALLBACKS ----------
 func _area_body_entered(b: Node, is_lava: bool) -> void:
 	if not (b is PlayerMovement):
 		return
