@@ -6,7 +6,7 @@ var collectable_scene = preload("res://scenes/game/collectable.tscn")
 var ship_scene = preload("res://scenes/game/ship.tscn")
 var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
 var cobblestone_texture = preload("res://sprites/tilesets/Cobblestone.png")
-var level_hazards_script = preload("res://scripts/controllers/LevelHazards.gd")
+var level_hazard_scene = preload("res://scenes/game/hazard.tscn")
 
 @export var pool_seed_count: int = 4
 
@@ -46,31 +46,9 @@ func initialize_game() -> void:
 	await get_tree().physics_frame # let physics finish
 	background.create_background()
 	foreground_particles.create_level_effects()
+
+	create_hazards()
 	
-	if WorldState.level_id == 0 or WorldState.level_id == 1:
-		var hazards := level_hazards_script.new()
-		hazards.pools_count_range = Vector2i(10, 15)
-
-		if WorldState.level_id == 0:
-			hazards.force_kind = 0  # WATER
-			hazards.enable_damage = false
-		else:
-			hazards.force_kind = 1  # LAVA
-			hazards.enable_damage = true
-
-		add_child(hazards)
-
-		var bg_z := 0
-		var fg_z := 5
-		if background is CanvasItem:
-			bg_z = background.z_index
-		if foreground_particles is CanvasItem:
-			fg_z = max(fg_z, foreground_particles.z_index)
-
-		hazards.z_as_relative = true
-		hazards.z_index = clamp(bg_z + 1, bg_z + 1, fg_z - 1)
-
-
 	spawn_collectable()
 	enemy_controller.spawn_enemies()
 	_create_out_of_bounds(tilemap)
@@ -104,6 +82,30 @@ func _update_shoot(steam_id: int, data: Dictionary):
 		for child in player.get_children():
 			if child is Gun:
 				child.on_shoot(data)
+
+func create_hazards():
+	if WorldState.level_id in [0, 1, 3]:
+		var hazards: LevelHazards = level_hazard_scene.instantiate()
+		hazards.pools_count_range = Vector2i(10, 15)
+
+		if WorldState.level_id in [0, 3]:
+			hazards.force_kind = 0  # WATER
+			#hazards.enable_damage = false
+		else:
+			hazards.force_kind = 1  # LAVA
+			#hazards.enable_damage = true
+
+		add_child(hazards)
+
+		var bg_z := 0
+		var fg_z := 5
+		if background is CanvasItem:
+			bg_z = background.z_index
+		if foreground_particles is CanvasItem:
+			fg_z = max(fg_z, foreground_particles.z_index)
+
+		hazards.z_as_relative = true
+		hazards.z_index = clamp(bg_z + 1, bg_z + 1, fg_z - 1)
 
 func spawn_players():
 	var players = PlayerState.get_all_players_data()

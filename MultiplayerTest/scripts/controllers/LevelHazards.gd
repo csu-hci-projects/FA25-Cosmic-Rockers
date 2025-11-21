@@ -1,4 +1,4 @@
-extends Node2D
+class_name LevelHazards extends Node2D
 
 @export var pools_count_range: Vector2i = Vector2i(10, 15)
 @export var min_distance_between_pools_tiles: int = 6
@@ -9,8 +9,8 @@ extends Node2D
 
 # choose kind (visual only)
 @export var force_kind: int = -1   # -1 auto, 0 = water, 1 = lava
-@export var water_texture: Texture2D = preload("res://sprites/tilesets/Water.png")
-@export var lava_texture:  Texture2D = preload("res://sprites/tilesets/Lava.png")
+@export var water_texture: Texture2D = preload("res://sprites/tilesets/water.png")
+@export var lava_texture:  Texture2D = preload("res://sprites/tilesets/lava.png")
 
 # rectangular pools
 @export var pool_width_min: int = 3
@@ -148,8 +148,10 @@ func _place_sprite_and_area(pool_rect_world: Rect2, is_lava: bool) -> void:
 	sprite.texture = tex
 	sprite.centered = false
 	sprite.z_as_relative = true
+	sprite.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	sprite.z_index = 0
-	sprite.scale = Vector2(pool_rect_world.size.x / base_w, pool_rect_world.size.y / base_h)
+	sprite.region_enabled = true
+	sprite.region_rect = Rect2(Vector2.ZERO, pool_rect_world.size)
 	sprite.position = pool_rect_world.position
 	add_child(sprite)
 
@@ -194,8 +196,11 @@ func _spawn_pools_for(is_lava: bool) -> void:
 		if not _has_support(top_left_cell, w, h):
 			continue
 
-		var rect_world: Rect2 = _tile_rect_to_world(top_left_cell, Vector2i(w, h))
-
+		var rect_world: Rect2 = _tile_rect_to_world(top_left_cell, Vector2i(w - 1, h - 1))
+		#var p = rect_world.position
+		#var a = rect_world.size
+		#rect_world = Rect2(Vector2(p.x, p.y), Vector2(a.x - 16, a.y - 16))
+	
 		if not _far_enough(rect_world, placed_rects):
 			continue
 

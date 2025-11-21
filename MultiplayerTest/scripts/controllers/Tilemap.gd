@@ -47,7 +47,7 @@ func update_tile(cell: Vector2i, tile_id: int, radius: int):
 		for x_offset in range(-radius, radius + 1):
 			var c := cell + Vector2i(x_offset, y_offset)
 			if _is_protected(c):
-				return
+				continue
 
 	Multiplayer.update_tile(cell, tile_id, radius)
 	_update_tile(cell, tile_id, radius)
