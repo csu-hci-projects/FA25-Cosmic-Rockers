@@ -89,7 +89,14 @@ func _handle_hit(object: Node2D, hit_position: Vector2):
 	if not player_owner.is_local_player:
 		return
 	
-	if object is Entity:
+	if object is EnemyBoss:
+		#PlayerState.add_stat(PlayerState.STAT.DAMAGE_DEALT, damage)
+		#object.take_damage(damage)
+		#if object.is_dead:
+		#	PlayerState.add_stat(PlayerState.STAT.ENEMIES_KILLED, 1)
+		pass
+	
+	if object is Enemy:
 		PlayerState.add_stat(PlayerState.STAT.DAMAGE_DEALT, damage)
 		object.take_damage(damage)
 		if object.is_dead:
