@@ -85,3 +85,40 @@ func cells_in_range(cell: Vector2i, tile_id: int, range: int) -> int:
 			if data != null and data.terrain != -1:
 				cells += 1
 	return cells
+
+var _protected_cells := {} # Dictionary<String, bool> — keys "x,y"
+
+func add_protected_cell(cell: Vector2i) -> void:
+	if not _in_bounds(cell):
+		return
+	_protected_cells["%d,%d" % [cell.x, cell.y]] = true
+
+func _is_protected(cell: Vector2i) -> bool:
+	return _protected_cells.has("%d,%d" % [cell.x, cell.y])
+
+func _cell_is_empty(c: Vector2i) -> bool:
+	if not _in_bounds(c):
+		return false
+	var td := get_cell_tile_data(c)
+	var terrain_empty: bool = (td == null or td.terrain == -1)
+	return terrain_empty and not _is_boundary_at_cell(c) and not _is_protected(c)
+
+
+func spawn_level_hazards(level: int, pools_count: int = 4) -> void:
+	if level != 1 and level != 2:
+		return
+
+	var hazards_script: Script = load("res://scripts/game/LevelHazards.gd")
+	if hazards_script == null:
+		push_warning("Tilemap.spawn_level_hazards: LevelHazards.gd not found.")
+		return
+
+	var hazards: Node = hazards_script.new()
+	# Set exact number of pools
+	if hazards.has_variable("pools_count_range"):
+		hazards.pools_count_range = Vector2i(pools_count, pools_count)
+	# enable lava damage only in level 2 (hazards also checks WorldState.level_id)
+	if hazards.has_variable("enable_damage"):
+		hazards.enable_damage = (level == 2)
+
+	add_child(hazards)
