@@ -69,7 +69,6 @@ func _far_enough(pool_rect: Rect2, placed_rects: Array[Rect2]) -> bool:
 			return false
 	return true
 
-# --- SUPPORT CHECK: require solid tiles at bottom and both sides around the rectangle
 func _has_support(top_left: Vector2i, w: int, h: int) -> bool:
 	var left_x: int = top_left.x
 	var top_y: int = top_left.y
@@ -137,7 +136,7 @@ func _mark_unbreakable_band_cells(pool_rect_world: Rect2) -> void:
 				if _in_bounds(c) and _tilemap.has_method("add_protected_cell"):
 					_tilemap.add_protected_cell(c)
 
-# --- VISUAL & AREA
+#VISUAL & AREA
 func _place_sprite_and_area(pool_rect_world: Rect2, is_lava: bool) -> void:
 	var tex: Texture2D
 	if is_lava:
@@ -206,11 +205,9 @@ func _spawn_pools_for(is_lava: bool) -> void:
 			Vector2(float(w * _tile_size), float(h * _tile_size))
 		)
 
-		# spacing check
 		if not _far_enough(rect_world, placed_rects):
 			continue
 
-		# carve interior, then make bottom & side bands unbreakable (tiles) and place visuals/area
 		_carve_rect_world_as_empty(rect_world)
 		for band in _band_rects_for_pool(rect_world):
 			_unbreakable_rects_world.append(band)  # lets is_cell_protected() work
