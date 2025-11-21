@@ -6,7 +6,7 @@ var collectable_scene = preload("res://scenes/game/collectable.tscn")
 var ship_scene = preload("res://scenes/game/ship.tscn")
 var end_screen_scene = preload("res://scenes/ui/end_screen.tscn")
 var cobblestone_texture = preload("res://sprites/tilesets/Cobblestone.png")
-var level_hazards_script = preload("res://scripts/game/LevelHazards.gd")
+var level_hazards_script = preload("res://scripts/controllers/LevelHazards.gd")
 
 @export var pool_seed_count: int = 4
 
