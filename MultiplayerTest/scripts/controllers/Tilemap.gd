@@ -86,7 +86,7 @@ func cells_in_range(cell: Vector2i, tile_id: int, range: int) -> int:
 				cells += 1
 	return cells
 
-var _protected_cells := {} # Dictionary<String, bool> — keys "x,y"
+var _protected_cells := {} 
 
 func add_protected_cell(cell: Vector2i) -> void:
 	if not _in_bounds(cell):
