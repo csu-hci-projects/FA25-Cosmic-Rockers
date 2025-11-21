@@ -12,13 +12,12 @@ extends Node2D
 @export var water_texture: Texture2D = preload("res://sprites/tilesets/Water.png")
 @export var lava_texture:  Texture2D = preload("res://sprites/tilesets/Lava.png")
 
-# lava damage ticks (enemy-like)
 @export var enable_damage: bool = true
 @export var lava_tick_damage: int = 5
 @export var lava_tick_count: int = 5
 @export var lava_tick_interval: float = 0.5
 
-# pool size limits (tiles) — rectangular look comes from wider-than-tall ranges
+
 @export var pool_width_min: int = 3
 @export var pool_width_max: int = 10
 @export var pool_height_min: int = 1
@@ -26,9 +25,9 @@ extends Node2D
 
 var _tilemap: TileMapLayer
 var _tile_size: int = 16
-var _unbreakable_rects_world: Array[Rect2] = []   # we keep this so Tilemap (or net guards) can ask is_cell_protected()
+var _unbreakable_rects_world: Array[Rect2] = []   
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
-var _lava_ticks_remaining: Dictionary = {}        # instance_id -> ticks remaining
+var _lava_ticks_remaining: Dictionary = {}        
 
 func _get_tile_size() -> int:
 	if _tilemap and _tilemap.tile_set:
